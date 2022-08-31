@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Base from "../layout/base";
 import Community from "../modules/Community";
 
-export default function community() {
+export default function Community() {
     return (
         <Fragment>  
             <Base>

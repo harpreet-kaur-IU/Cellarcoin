@@ -3,7 +3,7 @@ import BaseVendor from "../../layout/BaseVendor";
 import Listing from '../../modules/Vendors Panel/Listing'
 import {useRouter} from 'next/router'
 import { getOnBoardFromCookie } from "../../auth/userCookies";
-export default function home() {
+export default function Home() {
     const router = useRouter();
     var JWTtoken = getOnBoardFromCookie();
     useEffect(()=>{

@@ -4,7 +4,7 @@ import Newsletter from "../modules/Newsletter";
 import OwnedBy from "../modules/OwnedBy";
 
 
-export default function profile() {
+export default function Profile() {
     return (
         <>  
             <OwnedBy></OwnedBy>

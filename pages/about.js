@@ -10,7 +10,7 @@ import Newsletter from "../modules/Newsletter";
 import OurPillars from "../modules/OurPillars";
 
 
-export default function about() {
+export default function Home() {
     return (
         <Fragment>  
             <Base>

@@ -1,6 +1,6 @@
 import MyAccount from "../modules/MyAccount";
 
-export default function editProfile() {
+export default function EditProfile() {
     return (
         <>
             <MyAccount></MyAccount>

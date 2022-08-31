@@ -6,7 +6,7 @@ import Footer from "../modules/Footer";
 import Newsletter from "../modules/Newsletter";
 
 
-export default function brands() {
+export default function Brands() {
     return (
         <Fragment>  
             <Base>

@@ -4,7 +4,7 @@ import WineCard from "../modules/WineCard";
 import WineCollection from "../modules/WineCollection";
 
 
-export default function profile() {
+export default function Profile() {
     return (
         <>  
            <WineCollection></WineCollection>

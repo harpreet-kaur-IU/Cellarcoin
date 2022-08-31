@@ -4,7 +4,7 @@ import MyAccount from "../modules/MyAccount";
 import Newsletter from "../modules/Newsletter";
 
 
-export default function profile() {
+export default function Profile() {
     return (
         <>  
             <MyAccount></MyAccount>

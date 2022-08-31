@@ -4,7 +4,7 @@ import Base from "../layout/base";
 import PageNotFound from "../modules/PageNotFound";
 
 
-export default function page() {
+export default function Home() {
     return (
         <Fragment>  
             <Base>

@@ -3,7 +3,7 @@ import BaseVendor from "../../layout/BaseVendor";
 import CreateNFT from "../../modules/Vendors Panel/CreateNFT";
 import {useRouter} from 'next/router'
 import { getOnBoardFromCookie } from "../../auth/userCookies";
-export default function home() {
+export default function Home() {
     const router = useRouter();
     var JWTtoken = getOnBoardFromCookie();
     useEffect(()=>{
