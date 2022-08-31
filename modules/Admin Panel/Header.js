@@ -41,7 +41,7 @@ const Header = () => {
       </div>
       <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
         <div className='p-relative d-flex d-align-center gap-3'>
-          <Link href="/"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
+          <Link href="/adminnotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
           <div className={`cursor-pointer d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
             <h6 className='font-14 f-500 l-19'>{user}</h6>
             <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
