@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import Base from "../layout/base";
-import Community from "../modules/Community";
+import Communities from "../modules/Community";
 
-export default function Community() {
+export default function Home() {
     return (
         <Fragment>  
             <Base>
-                <Community></Community>
+                <Communities></Communities>
             </Base>
         </Fragment>
     );
