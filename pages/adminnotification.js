@@ -10,7 +10,7 @@ export default function Home() {
             router.push("/adminlogin")
         }
         else{
-            router.push("/admindashboard")
+            router.push("/adminnotification")
         }
     },[])
     return (
