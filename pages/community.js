@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Base from "../layout/base";
+import Base from "../layout/Base";
 import Communities from "../modules/Community";
 
 export default function Home() {

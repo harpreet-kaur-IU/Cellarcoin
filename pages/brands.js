@@ -1,6 +1,6 @@
 
 import { Fragment } from "react";
-import Base from "../layout/base";
+import Base from "../layout/Base";
 import Brand from "../modules/Brands";
 import Footer from "../modules/Footer";
 import Newsletter from "../modules/Newsletter";

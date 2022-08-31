@@ -1,6 +1,6 @@
 
 import { Fragment } from "react";
-import Base from "../layout/base";
+import Base from "../layout/Base";
 import PageNotFound from "../modules/PageNotFound";
 
 
