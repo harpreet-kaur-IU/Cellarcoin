@@ -1,9 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import styles from '.././css/Admin Panel/Notification.module.css'
+import {getAdminOnBoardFromCookie} from '../../auth/userCookies';
+import Loader from '../Vendors Panel/Loader';
 const Notification = () => {
+    const [data,setData] = useState("")
+    const[loading,setLoading] = useState(false)
+    var JWTtoken = getAdminOnBoardFromCookie();
+    useEffect(()=>{
+        if(JWTtoken){
+            var myHeaders = new Headers();
+            myHeaders.append("Authorization","Bearer "+JWTtoken);
+            myHeaders.append("Content-Type","application/json");
+
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders
+            };
+            setLoading(true)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getNotifications`, requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                setData(result.data)
+                console.log(result.data)
+                setLoading(false)
+            })
+            .catch(error => console.log('error', error));
+        }else{
+            router.push("/vendorlogin");
+        }
+    },[])
   return (
     <div>
+        {loading && <Loader></Loader>}
         <Header></Header>
         <div className='vendor-container'>
             <h4 className='l-50 f-600 text-primary mt-24'>Notification</h4>
