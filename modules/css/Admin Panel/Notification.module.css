@@ -1,0 +1,42 @@
+.notification-wrapper{
+    margin-top: 42px;
+    padding: 20px 55px 14px 19px;
+    background: #FFFFFF;
+    box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+}
+.notification-icon img{
+    width: 20px;
+    height: 16px;
+    margin-top: 5px;
+}
+.notification-body{
+    margin-left: 15px;
+}
+.notification-body h5{
+    font-size: 20px;
+    line-height: 30px;
+}
+.notification-body h6{
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 12px;
+}
+.notification-body span{
+
+    font-size: 16px;
+    line-height: 24px;
+}
+.delete-icon{
+    justify-content: flex-end;
+}
+.delete-icon img{
+    width: 20px;
+    height: 20px;
+}
+
+@media screen and (max-width:650px) {
+    .notification-wrapper{
+        padding: 20px 15px 14px 19px;
+    }
+}
