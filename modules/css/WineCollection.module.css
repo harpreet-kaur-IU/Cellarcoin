@@ -1,0 +1,15 @@
+.wine-collection-container{
+    margin-top:192px;
+}
+.wine-collection-bg{
+    background-image: url("/images/wine-collection-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 354px;
+}
+.wine-collection-container img{
+    top:195px;
+    left: 523px;
+}

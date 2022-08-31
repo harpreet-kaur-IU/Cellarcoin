@@ -1,0 +1,22 @@
+.pagenotfound-section{
+    padding-top:140px;
+}
+.back-home-btn{
+    padding: 20px 49px;
+}
+.page-col-1{
+    text-align: right;
+    margin-right: 32px;
+}
+.page-col-2{
+    text-align: left;
+    margin-left: 32px;
+}
+.vertical-line{
+    border-right: 1px solid #fff;
+    height: 246px;
+}
+.page-vector-3{
+    left: 0;
+    bottom:0;
+}

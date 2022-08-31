@@ -1,0 +1,11 @@
+.about-banner-bg{
+    background-image: url("/images/about-banner-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+.about-banner-container{
+    padding-top: 200px;
+    padding-bottom: 179px;
+}

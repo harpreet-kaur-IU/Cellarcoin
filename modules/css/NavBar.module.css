@@ -1,0 +1,61 @@
+.navbar{
+    top:0;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.navbar-site-logo{
+    padding: 35px 0px;
+}
+.navbar-search-input{
+    margin-left: 22px;
+    padding: 11px 24px;
+    width: 307px;
+}
+.navbar-search-input:focus{
+    outline: none;
+}
+.navbar-search-input::placeholder{
+    color:#6B5260;
+}
+.navbar-items-wrapper{
+    margin-left:40px;
+}
+.btn-connect-wallet{
+    padding: 14px 21px;
+}
+@media screen and (max-width:1440px) {
+    .navbar-search-input{
+        width:280px;
+    }
+    .navbar-items-wrapper{
+        margin-left:20px;
+    }
+}
+@media screen and (max-width:1250px) {
+    .navbar-search-input{
+        margin-left: 12px;
+    }
+    .navbar-items-wrapper{
+        margin-left: 0px;
+    }
+    .connect-wallet-icon{
+        display: block;
+    }
+    .btn-connect-wallet{
+        display: none;
+    }
+    .navbar-search-input{
+        width: 200px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .navbar-container{
+        display: none;
+    }
+    .bar-cross{
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+    }
+}

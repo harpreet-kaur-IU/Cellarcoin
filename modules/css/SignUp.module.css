@@ -1,0 +1,45 @@
+
+/* .signup-section-position{
+    right:0;
+    top: 90px;
+    background-color:transparent;
+    height: 100vh;
+    overflow: scroll;
+} */
+.sign-up-wrapper
+.sign-up-wrapper{
+    padding:  64px 64px 164px 64px;
+}
+.signup-input{
+    width: 100%;
+    border: none;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--very-light-gray);
+}
+.signup-input::placeholder{
+    color:var(--text-black);
+}
+.password-img{
+    bottom: 8px;
+    right: 0;
+}
+.password-warning{
+    padding-right: 30px;
+}
+.terms-wrapper{
+    margin-top:36px;
+}
+.terms-wrapper input{
+    margin-right: 24px;
+}
+.btn-continue{
+    margin-top:36px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    border:none;
+}
+.btn-google{
+    margin-top:32px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+}

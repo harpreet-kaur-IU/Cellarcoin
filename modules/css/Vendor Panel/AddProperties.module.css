@@ -1,0 +1,78 @@
+.wrapper{
+    width:clamp(21.25rem, 17.1375rem + 20.5625vw, 41.8125rem);
+    padding: 32px clamp(1rem, 0.7500rem + 1.2500vw, 2.25rem) clamp(5.3125rem, 4.4375rem + 4.3750vw, 9.6875rem) clamp(1.75rem, 1.5000rem + 1.2500vw, 3rem); 
+    background-color: #ffffff;
+    border-radius: 16px;
+    position: relative;
+}
+.btn-cross{
+    position: absolute;
+    top: -25px;
+    background: #ffffff;
+    box-shadow: 2.99102px 2.99102px 14.9551px rgb(0 0 0 / 20%);
+    width: 71.78px;
+    height: 71.78px;
+    border-radius: 100px;
+    right: -44px;
+    font-size: 30px;
+    font-weight: bold;
+    border:none;
+}
+.wrapper h5{
+    margin-top: 22px;
+
+}
+.properties-wrapper{
+    margin-top: 37px;
+    gap:16px;
+    align-items: end;
+}
+.properties-wrapper h6{
+    margin-bottom: 20px;
+}
+.properties-wrapper input{
+    border:none;
+    border-bottom: 1px solid #780543; 
+}
+.properties-wrapper input:focus{
+    outline: none;
+}
+.button-add{
+    margin-top: 46px;
+    padding: 14px 38px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 17px;
+    background-color: var(--primary);
+    color: #ffffff;
+    border-radius: 16px;
+    border: none;
+}
+.remove-properties{
+    width: 42px;
+    height: 42px;
+    background-color: var(--primary);
+    border: none;
+}
+.active-status-modal{
+    width: 468px;
+    height: 353px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 55px 42px;
+}
+.btn-wrapper{
+    margin-top:59px;
+    gap: 34px;
+}
+.crud-btn{
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+    border: none;
+}
+.crud-btn-no{
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+    border: 1px solid #780543;
+}
+

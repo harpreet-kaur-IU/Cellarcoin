@@ -1,0 +1,85 @@
+.brand-approval-modal-wrapper{
+    width: 669px;
+    height: 200px;
+    padding: 57px 58px 68px 58px;
+    background: #FFFFFF;
+    border-radius: 16px;
+}
+.modal-wrapper{
+    width: 669px;
+    height: 522px;
+    padding: 57px 58px 68px 58px;
+    background: #FFFFFF;
+    border-radius: 16px;
+}
+.modal-btns{
+    margin-top: 38px;
+}
+.yes-btn{
+    border: none;
+    padding: 10px;
+    width: 259px;
+    background:#780543;
+    border-radius: 16px;
+}
+.no-btn{
+    border: 1px solid #780543;
+    color: #780543;
+    padding: 10px;
+    width: 259px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+}
+.rejection-reason{
+    margin-top:36px;
+}
+.rejection-input{
+    margin-top: 22px;
+    padding: 18px 20px 163px 28px;
+    width: 552px;
+    border: 1px solid #780543;
+}
+.rejection-input:focus{
+    outline: none;
+}
+.rejection-input::placeholder{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #525252;
+}
+@media screen and (max-width:768px) {
+    .brand-approval-modal-wrapper{
+        width: 400px;
+        padding: 27px 28px 38px 28px;
+    }
+    .modal-wrapper{
+        width: 400px;
+        padding: 27px 28px 38px 28px;
+    }
+    .rejection-input{
+        width: 100%;
+    }
+    .yes-btn{
+        width: 200px;
+    }
+    .no-btn{
+        width: 200px;
+    }
+}
+@media screen and (max-width:768px) {
+    .brand-approval-modal-wrapper{
+        width: 300px;
+        padding: 27px 18px 38px 18px;
+    }
+    .modal-wrapper{
+        width: 300px;
+        padding: 27px 18px 38px 18px;
+    }
+    .yes-btn{
+        width: 130px;
+    }
+    .no-btn{
+        width: 130px;
+    }
+}

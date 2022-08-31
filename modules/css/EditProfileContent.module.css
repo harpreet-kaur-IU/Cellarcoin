@@ -1,0 +1,42 @@
+.edit-profile-wrapper{
+    padding-left: 40px;
+    margin-top: 28px;
+}
+.change-profile-pic{
+    margin-top: 48px;
+}
+.profile-img-wrapper{
+    background-color: #E7E7E7;
+    border-radius: 50%;
+    margin-top: 24px;
+}
+.editprofile-btn-wrapper{
+    margin-top:79px;
+}
+.editprofile-upload-btn{
+    padding: 20px 29px;
+    margin-left:34px;
+}
+.editprofile-delete-btn{
+    padding: 20px 66px;
+    margin-left:16px;
+}
+.change-cover-text{
+    margin-top: 56px;
+}
+.profile-user-name{
+    padding: 13px 40px;
+    margin-right: 41px;
+}
+.profile-user-name:focus{
+    outline: none;
+}
+.profile-user-name::placeholder{
+    color: var(--font-dark);
+}
+.profile-cover-pic{
+    margin-bottom: 40px;
+}
+.btn-save-profile{
+    padding: 20px 58px;
+}

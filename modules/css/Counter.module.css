@@ -1,0 +1,14 @@
+.counter-bg{
+    width: 100%;
+    background-image: url("/images/counter-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.counter-wrapper{
+    padding: 147px 208px 210px 208px;
+}
+.couter-row-2{
+    margin-top:57px;
+    gap:104px;
+}

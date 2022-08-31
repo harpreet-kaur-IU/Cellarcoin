@@ -1,0 +1,9 @@
+
+.faq-accordian-item-wrapper{
+    padding-bottom: 16px;
+    border-bottom:2px solid var(--very-light-gray);
+}
+.accordian-content-wrapper{
+    margin-top: 29px;
+    margin-bottom: 30px;
+}

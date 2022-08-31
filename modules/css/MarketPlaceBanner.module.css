@@ -1,0 +1,29 @@
+.market-banner-section{
+    margin-top:163px;
+    margin-bottom: 48px;
+}
+.market-grid-wrapper{
+    grid-template-columns:20% 33% 43%;
+    column-gap:5%;
+}
+.marketplace-image-wrapper img{
+    width: 100%;
+    margin: 49px 0px;
+}
+.marketplace-card-1{
+    margin: 34px 0px;
+}
+.marketplace-card-1-margin{
+    margin-left: 16px;
+    margin-right: 15px;
+    margin-top: 80px;
+    margin-bottom: 70px;
+}
+.marketplace-card-2{
+    margin-top:98px;
+    margin-bottom:173px
+}
+.marketplace-card-1-margin button{
+    padding: 14px 50px;
+    border: none;
+}

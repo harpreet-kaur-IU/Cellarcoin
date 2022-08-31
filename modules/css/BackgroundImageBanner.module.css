@@ -1,0 +1,10 @@
+.wine-bg-banner{
+    background-image: url("/images/bg-banner.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+.wine-bg-banner h1{
+    padding: 288px 0px;
+}

@@ -1,0 +1,30 @@
+.wine-ownedby-section{
+    padding-top: 136px;
+    padding-bottom: 80px;
+}
+.wine-ownedby-section::before{
+    content: url("/images/triangle.png");
+    position:absolute; 
+    top: 48px;
+}
+.wine-ownedby-section::after{
+    content: url("/images/triangle.png");
+    position:absolute; 
+    top: 256px;
+    right: 0;
+    transform: rotate(-180deg);
+}
+.wine-images-row{
+    gap:120px;
+    margin-left: 298px;
+}
+.wine-images-col-1{
+    margin-top:68px;   
+}
+.wine-images-col-2{
+    margin-top:233px;
+}
+.wine-image-top{
+    top: 89px;
+    left: 36px;
+}

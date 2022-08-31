@@ -1,0 +1,17 @@
+.myaccount-section{
+    padding-top: 136px;
+}
+.myaccount-heading{
+    padding-bottom: 30px;
+}
+.vertical-line{
+    height: 1300px;
+    border-right: 1px solid var(--very-light-gray);
+}
+/* {
+    margin-right:28px;
+    margin-left:40px;
+} */
+.sidebar-logout-btn{
+    padding:20px 81px;
+}

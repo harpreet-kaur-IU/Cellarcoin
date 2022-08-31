@@ -1,0 +1,47 @@
+.home-banner-container{
+    padding-top: 213px;
+    padding-bottom: 201px;
+}
+.home-banner-container h1{
+    padding-right: 50px;
+}
+.btn-home-explore{
+    padding: 14px 114px;
+}
+.home-banner-slider-img{
+    max-width: 100%;
+}
+/* .home-banner-container::after{
+    content: url('/images/com-shadow-banner.png');
+    position: absolute;
+    top:113px;
+    left:370px;
+} */
+@media screen and (max-width:1200px){
+    .home-banner-container{
+        width: 90%;
+    }
+    .home-banner-container::after{
+        left:250px;
+    }
+}
+@media screen and (max-width:992px){
+    .home-banner-container{
+        width: 90%;
+    }
+    .home-banner-container::after{
+        left:200px;
+    }
+}
+@media screen and (max-width:768px){
+    .home-banner-container::after{
+        display: none;
+    }
+    .home-banner-col-7{
+        width: 100%;
+    }
+    .home-banner-container{
+        padding-top: 130px;
+        padding-bottom: 100px;
+    }
+}

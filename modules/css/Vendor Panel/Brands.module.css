@@ -1,0 +1,133 @@
+.brands-outer-wrapper{
+    gap:45px;
+    margin-top: 40px;
+}
+
+.brands-wrapper{
+    padding: 45px 24px 213px 44px;  
+}
+.brands-input{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    height: 49px;
+    padding: 0px 20px;
+}
+.brands-input:focus{
+    outline: none;
+}
+.brands-scroll{
+    height: 100vh;
+    overflow-y: scroll;
+    border-radius: 16px;
+    padding-right: 18px;
+    padding-bottom: 20px;
+}
+.brand-table-wrapper{
+    overflow-x: scroll;
+    height: max-content;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, 0.0250765);
+    border-radius: 16px;
+    padding: 20px 74px 40px 61px;
+    margin-bottom: 100px;
+}
+.brand-table-header{
+    display: grid;
+    grid-template-columns:minmax(210px,400px) minmax(220px,400px) minmax(100px,400px);
+    word-break: break-all;
+    color: #0D0D0D;
+}
+.brand-table-body{
+    display: grid;
+    grid-template-columns:minmax(210px,400px) minmax(220px,400px) minmax(100px,400px);
+    word-break: break-all;
+    color: #0D0D0D;
+    padding: 30px 0px 20px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.brand-action{
+    gap: 30px;
+}
+.add-brand-wrapper{
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, 0.0250765);
+    border-radius: 16px;
+    padding: 40px 20px 40px 20px;
+}
+.brands-file-upload{
+    height: 94px;
+    border: 1px dashed #000000;
+    border-radius: 8px;
+    position: relative;
+}
+.brands-file-upload input{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+}
+.brands-file-upload span{
+    color: #78A9FF;
+    padding:10px 0px 0px 16px;
+}
+.add-brand-wrapper button{
+    background: #780543;
+    border-radius: 16px;
+    padding: 14px 0px;
+    width: 150px;
+    color: #FFFFFF;
+    border: none;
+}
+
+.brands-scroll::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+.brands-scroll::-webkit-scrollbar-track {
+    background: #f5f1ef;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.brands-scroll::-webkit-scrollbar-thumb {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: var(--primary);
+}
+.brands-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    border-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+@media screen and (max-width:833px) {
+    
+    .brand-table-wrapper{
+        width: 100%;
+    }
+    .add-brand-wrapper{
+        width: 100%;
+    }
+    .brands-outer-wrapper{
+        flex-direction: column;
+    }
+    .brands-wrapper{
+        padding: 45px 24px 213px 24px;
+    }
+    .brands-outer-wrapper{
+        gap:15px;
+    }
+    .add-brand-wrapper{
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width:564px) {
+    .brands-wrapper{
+        padding: 45px 14px 213px 14px;
+    }
+}

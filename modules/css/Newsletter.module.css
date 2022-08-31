@@ -1,0 +1,24 @@
+.wine-newsletter-join{
+    padding: 76px 50px;
+}
+.wine-newsletter-social-icon{
+    margin-right: 40px;
+}
+.wine-newsletter-subscribe input{
+    position: relative;
+    width: 400px;
+    padding:20px 100px;
+    padding-left: 24px;
+    outline: none;
+    border-radius: 12px 0 0 12px;
+    border:none;
+}
+.wine-newsletter-subscribe input::placeholder{
+    color: var(--font-dark);
+}
+.wine-newsletter-subscribe button{
+    padding: 20px 62px;
+    width: 200px;
+    border:none;
+    border-radius: 0 16px 16px 0;
+}

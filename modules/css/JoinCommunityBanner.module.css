@@ -1,0 +1,20 @@
+.community-banner-wrapper{
+    padding-top: 56px;
+    padding-bottom: 366px;
+}
+.community-banner-container{
+    margin-top:120px;
+    margin-bottom:88px;
+}
+.community-banner-para{
+    padding-right: 50px;
+}
+.btn-join-YT{
+    padding: 20px 38px;
+}
+.community-banner-container::after{
+    content: url('/images/com-shadow-banner.png');
+    position: absolute;
+    top:0;
+    left:476px;
+}
