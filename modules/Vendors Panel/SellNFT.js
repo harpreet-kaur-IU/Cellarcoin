@@ -25,6 +25,7 @@ const SellNFT = () => {
   const expireHandler = (value) =>{
     setExpire(value);
   }
+  
   useEffect(()=>{
     if(nftId){
       var myHeaders = new Headers();

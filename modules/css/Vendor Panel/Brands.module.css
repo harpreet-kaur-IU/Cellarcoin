@@ -2,7 +2,6 @@
     gap:45px;
     margin-top: 40px;
 }
-
 .brands-wrapper{
     padding: 45px 24px 213px 44px;  
 }
@@ -24,22 +23,23 @@
     padding-bottom: 20px;
 }
 .brand-table-wrapper{
+    overflow-x: scroll;
     height: max-content;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, 0.0250765);
     border-radius: 16px;
-    padding: 20px 74px 40px 61px;
+    padding: 20px 54px 40px 41px;
     margin-bottom: 100px;
 }
 .brand-table-header{
     display: grid;
-    grid-template-columns:minmax(210px,400px) minmax(220px,400px) minmax(100px,400px);
+    grid-template-columns:minmax(350px,850px) minmax(200px,850px);
     word-break: break-all;
     color: #0D0D0D;
 }
 .brand-table-body{
     display: grid;
-    grid-template-columns:minmax(210px,400px) minmax(220px,400px) minmax(100px,400px);
+    grid-template-columns:minmax(350px,850px) minmax(200px,850px);
     word-break: break-all;
     color: #0D0D0D;
     padding: 30px 0px 20px 0px;
@@ -49,6 +49,7 @@
     gap: 30px;
 }
 .add-brand-wrapper{
+    height: fit-content;
     background: #FFFFFF;
     box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, 0.0250765);
     border-radius: 16px;
@@ -82,7 +83,6 @@
     color: #FFFFFF;
     border: none;
 }
-
 .brands-scroll::-webkit-scrollbar {
     width: 3px;
     height: 5px;
@@ -103,11 +103,37 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+/* overflow-x */
+.brand-table-wrapper::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+.brand-table-wrapper::-webkit-scrollbar-track {
+    background: #f5f1ef;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.brand-table-wrapper::-webkit-scrollbar-thumb {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: var(--primary);
+}
+.brand-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    border-radius: 0;
+    border-bottom-left-radius: 8px;
+}
 
-@media screen and (max-width:833px) {
-    
-    .brand-table-wrapper{
+
+
+@media screen and (max-width:833px) {  
+    .brands-scroll{
         width: 100%;
+        height: auto;
+        padding-bottom:0px;
+    }  
+    .brand-table-wrapper{
+        margin-bottom: 0px;
     }
     .add-brand-wrapper{
         width: 100%;

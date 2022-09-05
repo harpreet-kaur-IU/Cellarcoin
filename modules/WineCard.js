@@ -1,10 +1,14 @@
 import React from 'react'
 import styles from './css/WineCard.module.css'
-
+import {useRouter} from 'next/router'
 const WineCard = (props) => {
+    const router = useRouter();
+    const navigationHandler = () =>{
+        router.push("/purple")
+    }
   return (
     <>
-        <div className='bg-card-dark rounded-16'>
+        <div onClick={navigationHandler} className={`bg-card-dark ${styles["wine-cards-container"]}`}>
             <img className={` ${styles["wine-bg-img"]}`} src={props.imageUrl}></img>
             <div className='p-16'>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>

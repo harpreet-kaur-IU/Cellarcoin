@@ -7,7 +7,7 @@ import Router from 'next/router'
 import useFirebaseAuth from '../../auth/useFirebaseAuth'
 import { ethers } from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
-import {getOnBoardFromCookie} from '../../auth/userCookies';
+import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
 const Header = (props) => {
   const [dropdown,setDropdown] = useState(false);
@@ -28,6 +28,7 @@ const Header = (props) => {
   const logOutHandler = () => {
     signOut()
     .then(()=>{
+      removeOnBoardCookie()
       Router.push("/vendorlogin");
     })
     .catch((error)=>console.log("error while logout"))
@@ -52,7 +53,6 @@ const Header = (props) => {
 
   //web3 modal
   let web3Modal;
-
   const providerOptions = {
     coinbasewallet: {
       package: CoinbaseWalletSDK, // Required

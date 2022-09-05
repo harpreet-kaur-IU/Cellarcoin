@@ -11,32 +11,42 @@ import Moment from 'react-moment';
 
 const Brands = () => {
   const [brand,setBrand] = useState("");
+  const [coverError,setCoverError] = useState(false);
   const [cover,setCover] = useState("");
   const [url,setUrl] = useState("");
   const [data,setData] = useState("")
   const [loading,setLoading] = useState(false);
   const [loadingImg,setLoadingImg] = useState(false);
-  const [isUrl, setIsUrl] = useState(false);
   const fileRef = useRef();
+  const [isUrl, setIsUrl] = useState(false);
+  const [isBrandError,setBrandError] = useState(false);
   var JWTtoken = getOnBoardFromCookie();
-
+  const regex = /^[^\s]+(\s+[^\s]+)*$/;
   const brandHandler = (e) =>{
     setBrand(e.target.value)
   }
   const coverHandler = (e) =>{
-    setCover(e.target.files[0])
+    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/))
+      setCoverError(true)
+    else
+      setCover(e.target.files[0])
   }
 
   const validator = () =>{
+    if(regex.test(brand)){
+      setBrandError(false);
+    }else{
+      setBrandError(true);
+    }
     if(url === ''){
-        setIsUrl(true);
+      setIsUrl(true);
     }else{
         setIsUrl(false);
     }
-    if(url === ' '){
-        return false;
+    if(!regex.test(brand) || url === ''){
+      return false;
     }else{
-        return true;
+      return true;
     }
 }
   const formSubmit = (e) =>{
@@ -67,16 +77,16 @@ const Brands = () => {
           .then(response => response.json())
           .then(results =>{
             setData(results.data)
+            var inputfile = document.getElementById("file-input-field");
+            inputfile.value = "";
+            setBrand(" ")
+            setCover(" ")
+            setUrl(" ")
+            setLoading(false)
           })
           toast.success("Brand Created Successfully",{
             toastId:"2"
           });
-          var inputfile = document.getElementById("file-input-field");
-          inputfile.value = "";
-          setBrand(" ")
-          setCover(" ")
-          setUrl(" ")
-          setLoading(false)
       })
       .catch(error => console.log('error', error));
     }
@@ -135,17 +145,17 @@ const Brands = () => {
               <div className={`${styles["brand-table-header"]}`}>
                 <span className='font-16 f-600'>Brands</span>
                 <span className='font-16 f-600'>Created On</span>
-                <span className='font-16 f-600'>Actions</span>
+                {/* <span className='font-16 f-600'>Actions</span> */}
               </div>
               {data && data.map((item)=>(
                 <div className={`${styles["brand-table-body"]}`}>
                   <span className='font-16 f-500 text-primary'>{item.brandName}</span>
                   <span className='font-16 f-500 '><Moment fromNow>{item.createdAt}</Moment></span>
-                  <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center ${styles["brand-action"]}`}>
+                  {/* <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center ${styles["brand-action"]}`}>
                     <Link href={`/vendorBrand`}>
                       <img src='images/edit-2.svg'></img>
                     </Link>
-                  </span>
+                  </span> */}
                 </div>
               ))}
             </div>
@@ -154,7 +164,8 @@ const Brands = () => {
             <h4 className='f-600 l-23 text-primary'>Add Brand</h4>
             <h5 className='f-500 l-23 mt-24'>Enter your Brand Name</h5>
             <form onSubmit={formSubmit} className='mt-16'>
-              <input value={brand} onChange={brandHandler} className={`col-12 ${styles["brands-input"]}`} type="text"></input>
+              <input value={brand} onChange={brandHandler} className={`col-12 ${styles["brands-input"]}`} type="text" required></input>
+              {isBrandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
               <h5 className='f-500 l-23 mt-24'>Upload Documents</h5>
               <h6 className='mt-16 f-400'>Accepted documents: ID Proof, Company ID Proof</h6>
               <div className={`mt-16 ${styles["brands-file-upload"]}`}>
@@ -166,11 +177,17 @@ const Brands = () => {
                   onChange={coverHandler}
                   required>
                 </input>
-                {loadingImg && <SmallLoader></SmallLoader>}
+                {loadingImg && !url && <SmallLoader></SmallLoader>}
                 {!loadingImg && !url && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
                 {url && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {url}</span>}
               </div>
-              <button className='mt-16'>Save</button>
+              {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select a file.</span>}
+              {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
+             
+              <div className='d-flex'>
+                <button className='mt-16'>Save</button>
+              </div>
+             
             </form>
           </div>
         </div>

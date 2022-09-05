@@ -2,3 +2,34 @@
     padding-top:48px;
     padding-bottom:56px;
 }
+.our-pillar-container{
+    margin-top: 32px;
+}
+@media screen and (max-width:1440px) {
+    .our-pillar-container{
+        width: 90%;
+    }
+}
+@media screen and (max-width:768px) {
+    .our-pillars-cards-wrapper{
+        gap:20px;
+    }
+    .our-pillar-container h2{
+        font-size: 32px;
+    }
+    .our-pillar-container{
+        margin-top: 22px;
+    }
+}
+@media screen and (max-width:425px) {
+    .our-pillars-cards-wrapper{
+        grid-template-columns: repeat(2,1fr);
+        gap:20px;
+    }
+    .our-pillar-container h2{
+        font-size: 26px;
+    }
+    .our-pillar-container{
+        margin-top: 16px;
+    }
+}

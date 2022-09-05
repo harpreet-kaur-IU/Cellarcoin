@@ -1,4 +1,4 @@
-import styles from '../css/Admin Panel/Modal.module.css';
+import styles from '../css/Vendor Panel/Modal.module.css';
 
 function Modal(props){
     return (

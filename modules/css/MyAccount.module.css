@@ -8,10 +8,16 @@
     height: 1300px;
     border-right: 1px solid var(--very-light-gray);
 }
-/* {
-    margin-right:28px;
-    margin-left:40px;
-} */
 .sidebar-logout-btn{
     padding:20px 81px;
+}
+
+@media screen and (max-width:1440px) {
+    .myaccount-section{
+        width: 90%;
+    }
+    .myaccount-heading{
+        font-size: 32px;
+        padding-bottom: 20px;
+    }
 }

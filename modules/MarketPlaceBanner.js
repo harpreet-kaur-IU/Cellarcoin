@@ -1,10 +1,15 @@
 import React from 'react'
 import style from './css/MarketPlaceBanner.module.css'
+import { useRouter } from 'next/router'
 const MarketPlaceBanner = () => {
+    const router = useRouter();
+    const navigationHandler = () =>{
+        router.push("/profile")
+    }
   return (
     <div className={`bg-pink ${style["market-banner-section"]}`}>
         <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
-            <div className={` ${style["marketplace-image-wrapper"]}`}>
+            <div className={`d-flex d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
                 <img src='images/marketplace-banner.png'></img>
             </div>
             <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>
@@ -16,8 +21,10 @@ const MarketPlaceBanner = () => {
                         <img src='images/eth.png'></img>
                         0.19 wETH($711)
                     </h5>
-                    <button className='mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
-                    <a className='f-500 font-25 l-137 mt-24 d-block text-primary a-underline' href=''>View Profile</a>
+                    <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
+                        <button className='mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
+                        <div onClick={navigationHandler} className='cursor-pointer f-500 font-25 l-137 mt-24 d-block text-primary a-underline' href=''>View Profile</div>
+                    </div>
                 </div>
             </div>
 

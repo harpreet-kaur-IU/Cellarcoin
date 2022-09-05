@@ -3,9 +3,10 @@
     margin-bottom: 48px;
 }
 .market-grid-wrapper{
-    grid-template-columns:20% 33% 43%;
+    grid-template-columns:20% 33% 37%;
     column-gap:5%;
 }
+
 .marketplace-image-wrapper img{
     width: 100%;
     margin: 49px 0px;
@@ -26,4 +27,49 @@
 .marketplace-card-1-margin button{
     padding: 14px 50px;
     border: none;
+}
+
+@media screen and (max-width:1440px) {
+    .purple-market-container{
+        width: 90%;
+    }
+    .market-grid-wrapper{
+        width: 90%;
+    }
+}
+@media screen and (max-width:1024px) {
+    .purple-market-card-wrapper{
+        grid-template-columns: repeat(2,1fr);
+        gap:30px;
+    }
+}
+@media screen and (max-width:768px) {
+    .marketplace-card-1{
+        margin-top: -204px;
+        background-color: var(--primary);
+        color: #ffffff;
+    }
+    .marketplace-card-1 button{
+        background-color: #ffffff;
+        color: var(--primary);
+    }
+    .marketplace-card-1 a{
+        color: #ffffff;
+    }
+    .marketplace-card-2{
+        margin-top: 32px;
+        margin-bottom: 73px;
+    }
+    .market-grid-wrapper{
+        grid-template-columns:100%;
+        column-gap:2%;
+    }
+    .marketplace-image-wrapper img{
+        width: auto;
+    }
+}
+@media screen and (max-width:650px){
+    .purple-market-card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
 }

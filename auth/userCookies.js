@@ -1,24 +1,8 @@
 import cookies from 'js-cookie';
 
-export const getUserFromCookie = () => {
-  const cookie = cookies.get('auth');
-  if (!cookie) {
-    var obj ={token:null}
-    return obj;
-  }
-  return cookie;
-};
-
-export const setUserCookie = user => {
-  cookies.set('auth', user, {
-    expires: 1 / 24
-  });
-};
-
-export const removeUserCookie = () => cookies.remove('auth');
-
+//onboard cookie
 export const getOnBoardFromCookie = () => {
-  const cookie = cookies.get('onboarding');
+  const cookie = cookies.get('onboardingVendor');
   if (!cookie) {
     return null;
   }
@@ -26,10 +10,10 @@ export const getOnBoardFromCookie = () => {
 };
 
 export const setOnBoardCookie = token => {
-  cookies.set('onboarding', token);
+  cookies.set('onboardingVendor', token);
 };
 
-export const removeOnBoardCookie = () => cookies.remove('onboarding');
+export const removeOnBoardCookie = () => cookies.remove('onboardingVendor');
 
 //admin cookies
 export const getAdminOnBoardFromCookie = () => {

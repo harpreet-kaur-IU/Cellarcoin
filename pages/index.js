@@ -14,10 +14,10 @@ export default function Home() {
         <BannerSlider></BannerSlider>
         <WineCardSlider></WineCardSlider>
         <HomeTopBrands></HomeTopBrands>
-        {/*<ComingSoon></ComingSoon>
-        <Newsletter></Newsletter> */}
+        <ComingSoon></ComingSoon>
+        <Newsletter></Newsletter>
       </Base>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </Fragment>
   )
 }

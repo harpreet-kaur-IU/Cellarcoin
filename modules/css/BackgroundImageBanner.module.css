@@ -8,3 +8,22 @@
 .wine-bg-banner h1{
     padding: 288px 0px;
 }
+
+@media screen and (max-width:1024px){
+    .wine-bg-banner h1{
+        padding:188px 0px;
+        font-size:52px;
+    }
+}
+@media screen and (max-width:768px){
+    .wine-bg-banner h1{
+        padding:88px 0px;
+        font-size:52px;
+    }
+}
+@media screen and (max-width:425px){
+    .wine-bg-banner h1{
+        font-size:32px;
+    }
+}
+

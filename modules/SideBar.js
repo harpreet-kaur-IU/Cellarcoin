@@ -1,5 +1,5 @@
 import React from 'react'
-
+import style from './css/MyAccount.module.css'
 const SideBar = ({id,setActiveTab, activeTab, title}) => {
   const handleClick = () => {
     setActiveTab(id);

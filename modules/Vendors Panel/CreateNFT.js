@@ -9,7 +9,8 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SmallLoader from './SmallLoader';
-
+import DropDown from './DropDown'
+import Nft_marketplace_ABI from './Nft_marketplace_ABI.json'
 const CreateNFT = () => {
     const Web3 = require('web3');
     const router = useRouter();
@@ -18,12 +19,12 @@ const CreateNFT = () => {
     const [fifth,setFifth] = useState({})
     const [data,setData] = useState("");
     const [add,setAdd] = useState(false);
-    const [name,setName] = useState(" ");
-    const [desc,setDesc] = useState(" ");
+    const [name,setName] = useState("");
+    const [desc,setDesc] = useState("");
+    const regex = /^[^\s]+(\s+[^\s]+)*$/;
+    const [bottle,setBottleSize] = useState("");
 
-    const [bottle,setBottleSize] = useState(" ");
-
-    const [volume,setVolumn] = useState(" ");
+    const [volume,setVolumn] = useState("");
 
     const [region,setRegion] = useState("")
 
@@ -42,6 +43,7 @@ const CreateNFT = () => {
     const [loadingImg,setLoadingImg] = useState(false);
     const [isUrl, setIsUrl] = useState(false);
     const [isNameError,setNameError] = useState(false);
+    const [isDescError,setDescError] = useState(false);
     var JWTtoken = getOnBoardFromCookie();
 
     const fileRef = useRef(); 
@@ -84,17 +86,22 @@ const CreateNFT = () => {
     }
 
     const validator = () =>{
-        if(name === ' '){
-            setNameError(true);
-        }else{
+        if(regex.test(name)){
             setNameError(false);
+        }else{
+            setNameError(true);
+        }
+        if(regex.test(desc)){
+            setDescError(false);
+        }else{
+            setDescError(true);
         }
         if(url === ''){
             setIsUrl(true);
         }else{
             setIsUrl(false);
         }
-        if(name === ' ' || url === ' '){
+        if(!regex.test(name) || !regex.test(desc) || url === ' '){
             return false;
         }else{
             return true;
@@ -186,23 +193,28 @@ const CreateNFT = () => {
         setAdd(!add);
     }
   
-    const formSubmit = (e) =>{
-        // const web3 = new Web3("https://bsc-dataseed1.defibit.io/");
-        // const contract = await new web3.eth.Contract(contractAbi, contractAddress);
+    const to = "0x58b522D3948a51B66b5C359c4AFaC4FA44D02765";
+    
+    const formSubmit = async(e) =>{
+        e.preventDefault();
+        //web 3 code starts here
+        // const web3 = new Web3("https://matic-mumbai.chainstacklabs.com/");
+        // const contract = await new web3.eth.Contract(Nft_marketplace_ABI,"0xDf00126C37EFB27e60F53c520364763fc99e7F2B");
 
         // await contract.methods
-        // .mint(/*All the arguments that are in the mint function in SC*/)
-        // .send({from : account /*acccount connected account*/})
+        // .nftMint(to,"https://wine-nft.s3.ap-south-1.amazonaws.com/6ada29b5b49e","new nft",2400,"external link","desc")
+        // .send({from : to})
         // .on("error", (error) => {
         //     console.log(error);
         // })
         // .then((receipt) => {
-		//     console.log(receipt)
+		//     console.log(receipt);
         // })
-
-        e.preventDefault();
+         //web 3 code ends here
+        // e.preventDefault();
         const result = validator();
         if(result){    
+            console.log(name)
             const attributes = [
                 {
                     "trait_type":"Bottle Size",
@@ -263,9 +275,6 @@ const CreateNFT = () => {
                 .then(response => response.json())
                 .then(result =>{ 
                     setLoading(false)
-                    toast.success("NFT Created Successfully",{
-                        toastId:"2"
-                    });
                     setName("")
                     setDesc("")
                     setWallet("")
@@ -276,6 +285,12 @@ const CreateNFT = () => {
                     setVolumn("")
                     setRegion("")
                     setSpirit("")
+                    setCover("")
+                    var inputfile = document.getElementById("file-input-field");
+                    inputfile.value = "";
+                })
+                .then(()=>toast.success("NFT created successfully"),{
+                    toastId:"2"
                 })
                 .catch(error => console.log('error', error));
             }  
@@ -294,6 +309,7 @@ const CreateNFT = () => {
                         <h6 className={`f-400 l-25 ${styles["create-nft-file-format"]}`}>File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</h6>
                         <div className={`d-flex d-flex-column d-align-center d-justify-center ${styles["image-input-wrapper"]}`}  style={{backgroundImage:`url(${url})`,backgroundRepeat: 'no-repeat',backgroundSize: 'cover',backgroundPosition: 'center'}}>
                             <input
+                                id='file-input-field'
                                 type='file'
                                 ref={fileRef}
                                 multiple={false}
@@ -307,7 +323,7 @@ const CreateNFT = () => {
                         {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>}
                         <div className={`d-flex d-flex-column ${styles["name-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Name</h5>
-                            <input value={name} onChange={nameHandler} type="text" required></input>
+                            <input value={name} onChange={nameHandler}  type="text" required></input>
                         </div>
                         {isNameError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Name.</span>}
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
@@ -315,6 +331,7 @@ const CreateNFT = () => {
                             <h6 className='font-18 f-400 l-25'>The description will be included on the item's detail page underneath its image. </h6>
                             <input value={desc} onChange={descHandler} type="text" required></input>
                         </div>
+                        {isDescError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Description.</span>}
                         <div className={`d-flex d-flex-column ${styles["properties-input"]}`}>
                             <div className='d-flex d-align-center d-justify-space-between'>
                                 <div className='d-flex d-flex-column'>
@@ -354,7 +371,8 @@ const CreateNFT = () => {
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Enter your Brand Name</h5>
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
-                            <input type="text" value={brand} onChange={brandHandler} required></input>
+                            {/* <input type="text" value={brand} onChange={brandHandler} required></input> */}
+                            <DropDown></DropDown>
                         </div>
                         <div className={`d-flex d-flex-column ${styles["post-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Post This to</h5>

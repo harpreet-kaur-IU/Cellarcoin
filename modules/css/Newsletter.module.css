@@ -22,3 +22,109 @@
     border:none;
     border-radius: 0 16px 16px 0;
 }
+
+@media screen and (max-width:1440px) {
+    .news-letter-container{
+        width: 90%;
+        gap:5%;
+    }
+    .news-letter-col-1{
+        width: 45%;
+    }
+    .wine-newsletter-join{
+        width: 50%;
+    }
+    .wine-newsletter-join{
+        padding: 76px 10px;
+    }
+    .wine-newsletter-social-icon{
+        margin-right: 15px;
+    }
+    .wine-newsletter-subscribe input{
+        width: 350px;
+    }
+    .wine-newsletter-subscribe button{
+        padding: 20px 42px;
+        width: 150px;
+    }
+}
+@media screen and (max-width:1174px) {
+    .news-letter-container{
+        width: 90%;
+    }
+    .wine-newsletter-subscribe input{
+        width: 300px;
+        padding: 20px 10px 20px 30px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .news-letter-container{
+        width: 90%;
+        flex-direction: column;
+    }
+    .news-letter-col-1{
+        width: 100%;
+    }
+    .wine-newsletter-subscribe input{
+        width: 50%;
+    }
+    .wine-newsletter-subscribe button{
+        width: 30%;
+    }
+    .wine-newsletter-join{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .wine-newsletter-social-wrapper{
+        gap:50px;
+    }
+    .newsletter-wrapper{
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .wine-newsletter-subscribe input{
+        width: 70%;
+        font-size: 16px;
+    }
+    .wine-newsletter-subscribe button{
+        width: 30%;
+        font-size: 16px;
+    }
+    .wine-newsletter-social-wrapper{
+        width: 100%;
+        justify-content: space-around;
+        gap:0px;
+    }
+    .newsletter-wrapper{
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width:600px) {
+    .wine-newsletter-subscribe input{
+        font-size: 12px;
+    }
+    .wine-newsletter-subscribe button{
+        font-size: 12px;
+        padding: 20px 2px;
+    }
+    .newsletter-wrapper{
+        margin-top: 0px;
+    }
+}
+@media screen and (max-width:475px) {
+    .wine-newsletter-subscribe input{
+        font-size: 12px;
+    }
+    .wine-newsletter-subscribe button{
+        font-size: 12px;
+        padding: 20px 2px;
+    }
+    .wine-newsletter-social-wrapper img{
+        width: 30px;
+        height: 23px;
+    }
+    .newsletter-wrapper{
+        margin-top: 0px;
+    }
+}

@@ -8,6 +8,9 @@
 .btn-home-explore{
     padding: 14px 114px;
 }
+.btn-home-explore:hover{
+    background-color: #740578;
+}
 .home-banner-slider-img{
     max-width: 100%;
 }

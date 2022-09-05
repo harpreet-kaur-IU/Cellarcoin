@@ -16,6 +16,12 @@ const MultiVendor = () => {
   const [loading,setLoading] = useState(false);
   const [user,setUser] = useState("")
   const [userEmail,setUserEmail] = useState("")
+  const [emailError,setEmailError] = useState(false)
+  const [passwordError,setPasswordError] = useState(false)
+  const [brandError,setBrandError] = useState(false)
+
+  const regex = /^[^\s]+(\s+[^\s]+)*$/;
+
   const createLoginHandler = (e) =>{
     setLogin(!login)
   }
@@ -31,6 +37,28 @@ const MultiVendor = () => {
     setBrand(e.target.value)
   }
 
+  const validator = ()=>{
+    if(regex.test(email)){
+      setEmailError(false);
+    }else{
+      setEmailError(true);
+    }
+    if(regex.test(password)){
+      setPasswordError(false);
+    }else{
+      setPasswordError(true);
+    }
+    if(regex.test(brand)){
+      setBrandError(false);
+    }else{
+      setBrandError(true);
+    }
+    if(!regex.test(email) || !regex.test(password) || !regex.test(brand)){
+      return false;
+    }else{
+      return true;
+    }
+  }
   useEffect(()=>{
       function parseJwt() {
         if (!JWTtoken) {return}
@@ -61,35 +89,47 @@ const MultiVendor = () => {
 
   const formSubmit = (e) =>{
       e.preventDefault()
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization","Bearer "+JWTtoken);
-      myHeaders.append("Content-Type","application/json");
+      var result = validator();
+      if(result){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTtoken);
+        myHeaders.append("Content-Type","application/json");
 
-      var raw = JSON.stringify({
-        "email":email,
-        "password":password,
-        "brand":brand
-      });
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw
-      };
-      setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addSubVendor`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        setData(result)
-        toast.success("Sub Vendor Created Successfully",{
-          toastId:"2"
+        var raw = JSON.stringify({
+          "email":email,
+          "password":password,
+          "brand":brand
         });
-        setLoading(false)
-        setEmail("")
-        setPassword("")
-        setBrand("")
-      })
-      .catch(error => console.log('error', error));
+
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addSubVendor`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getSubVendor`,{
+              method: 'GET', 
+              headers: myHeaders,
+          })
+          .then(response => response.json())
+          .then(results =>{
+              setData(results.data)
+              toast.success("Sub Vendor Created Successfully",{
+                  toastId:"2"
+              });
+          })
+          setEmail("")
+          setPassword("")
+          setBrand("")
+          setLoading(false)
+          setLogin(prev=>!prev)
+          .catch(error => console.log('error', error))
+        })
+        .catch(error => console.log('error', error));
+    }
   }
   return (
     <>
@@ -141,16 +181,19 @@ const MultiVendor = () => {
               <form onSubmit={formSubmit}>
                 <div className={`${styles["create-login-input-wrapper"]}`}>
                   <h6 className='font-18 f-500 l-22'>User ID/ Email</h6>
-                  <input value={email} onChange={emailHandler} type="email"></input>
+                  <input value={email} onChange={emailHandler} type="email" required></input>
                 </div>
+                {emailError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter User ID/ Email.</span>}
                 <div className={`${styles["create-login-input-wrapper"]}`}>
                   <h6 className='font-18 f-500 l-22'>Password</h6>
-                  <input value={password} onChange={passwordHandler} type="password"></input>
+                  <input value={password} onChange={passwordHandler} type="password" required></input>
                 </div>
+                {passwordError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Password.</span>}
                 <div className={`${styles["create-login-input-wrapper"]}`}>
                   <h6 className='font-18 f-500 l-22'>Brand</h6>
-                  <input value={brand} onChange={brandHandler} type="text"></input>
+                  <input value={brand} onChange={brandHandler} type="text" required></input>
                 </div>
+                {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
                 <button className={`d-flex d-align-center d-justify-center ${styles["save-btn"]}`}>
                     <h6>Save</h6>
                 </button>

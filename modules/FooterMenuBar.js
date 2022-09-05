@@ -1,8 +1,8 @@
 import React from 'react'
-
+import styles from './css/Footer.module.css'
 const FooterMenuBar = () => {
   return (
-    <div className='d-grid grid-col-3'>
+    <div className={`d-grid grid-col-3 ${styles["footer-menu-bar-grid"]}`}>
         <ul >
             <li>
                 <h3 className='font-25'>My Account</h3>

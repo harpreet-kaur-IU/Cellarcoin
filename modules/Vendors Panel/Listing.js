@@ -50,7 +50,7 @@ const Listing = () => {
         <Header></Header>
         {loading && <Loader></Loader>}
         <div className='vendor-container' style={{paddingTop:"24px",height:"100vh",overflow:"scroll"}}>
-            <h4 className='l-50 f-600 text-primary'>Listings</h4>
+            <h4 className='l-50 f-600 text-primary'>NFT</h4>
             {data && data.map((item)=>(
                 <div className={`mt-32 d-flex`}>
                     <img  loading='lazy' className={`${styles["listing-img"]}`} src={item.imageUrl}></img>

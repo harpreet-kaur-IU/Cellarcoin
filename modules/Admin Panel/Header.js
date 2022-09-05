@@ -17,10 +17,9 @@ const Header = () => {
     document.querySelector(`#sidebar-wrapper`).classList.toggle(styles["expand"])
     document.querySelector(`#sidebar-wrapper`).classList.toggle(styles["sidebar-wrapper"])
   }
-
   const logOutHandler = () => {
-      removeAdminOnBoardCookie();
-      Router.push("/adminlogin");
+    removeAdminOnBoardCookie();
+    Router.push("/adminlogin");
   }
   var JWTtoken = getAdminOnBoardFromCookie();
   useEffect(()=>{
@@ -36,8 +35,8 @@ const Header = () => {
   return (
     <div className={`p-relative d-flex d-align-center d-justify-space-between ${styles["header-wrapper"]}`}>
       <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>
-          <Menu></Menu>
-          <Close></Close>
+        <Menu></Menu>
+        <Close></Close>
       </div>
       <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
         <div className='p-relative d-flex d-align-center gap-3'>

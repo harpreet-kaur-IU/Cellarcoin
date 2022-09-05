@@ -94,14 +94,16 @@ const AllNFT = () => {
             .then(response => response.json())
             .then(results =>{
                 setData(results.data)
+                toast.success("NFT Deleted Successfully",{
+                    toastId:"2"
+                });
             })
             setDelete(prev => !prev)
             setLoading(false)
-            // .catch(error => console.log('error', error))
-            // toast.success("NFT Deleted Successfully",{
-            //     toastId:"2"
-            // });
+            .catch(error => console.log('error', error))
+            
         })
+
         .catch(error => console.log('error', error));
     }
 
