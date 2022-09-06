@@ -103,7 +103,7 @@ export default function Signup() {
             })
             .catch(error => console.log('error', error));
         }
-    })
+    },[cover])
     //to check that all the form fields are filled correctly without any error
     const validator = () =>{
         if(email === ''){
@@ -202,7 +202,6 @@ export default function Signup() {
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
                             <input type="text" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
                         </div>
-                    
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12  ${styles["input-wrapper"]} ${styles["password"]}`}>
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
                             <input type="text" placeholder="Password" onChange={passwordHandler} value={password} />
@@ -232,8 +231,7 @@ export default function Signup() {
                                         <img src='images/coin-base.png'></img>
                                     </div>
                                     <div className={`d-flex d-justify-space-between ${styles["connect-wallet-item-wrapper"]}`}>
-                                        <h6 className='f-500 l-27'>Show More Options</h6>
-                                       
+                                        <h6 className='f-500 l-27'>Show More Options</h6>         
                                     </div>
                                 </div>
                             }

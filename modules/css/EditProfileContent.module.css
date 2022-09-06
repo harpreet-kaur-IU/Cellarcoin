@@ -10,9 +10,6 @@
     border-radius: 50%;
     margin-top: 24px;
 }
-.editprofile-btn-wrapper{
-    margin-top:79px;
-}
 .editprofile-upload-btn{
     padding: 20px 29px;
     margin-left:34px;
@@ -39,4 +36,44 @@
 }
 .btn-save-profile{
     padding: 20px 58px;
+}
+@media screen and (max-width:1232px) {
+    .editprofile-upload-btn{
+        padding: 10px 20px;
+    }
+    .editprofile-delete-btn{
+        padding: 10px 56px;
+    }
+    .edit-profile-wrapper{
+        padding-left: 20px;
+    }
+    .btn-save-profile{
+        padding: 10px 48px;
+    }
+    .edit-profile-heading{
+        font-size: 32px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .edit-profile-wrapper h4{
+        font-size: 22px;
+    }
+    .change-profile-pic{
+        margin-top: 32px;
+    }
+    .profile-wrapper{
+        flex-direction: column;
+        align-items: self-start;
+    }
+    .editprofile-upload-btn{
+        margin-left: 0;
+    }
+    .editprofile-btn-wrapper{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width:802px){
+    .edit-profile-wrapper h4{
+        font-size: 20px;
+    }
 }

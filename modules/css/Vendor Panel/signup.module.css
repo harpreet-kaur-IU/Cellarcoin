@@ -257,6 +257,9 @@
     .signup-form-upload-text{
         height: 58px;
     }
+    .signup-form-upload-text span{
+        margin-top:4px;
+    }
     .signup-cover-input-wrapper{
         height: 146px;
     }

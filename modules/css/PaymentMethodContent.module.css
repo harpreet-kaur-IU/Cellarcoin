@@ -5,3 +5,11 @@
 .connect-wallet-btn{
     padding: 20px 36px;
 }
+@media screen and (max-width:1232px) {
+    .payment-method-h2{
+        font-size: 32px;
+    }
+    .connect-wallet-btn{
+        padding: 10px 30px;
+    }
+}

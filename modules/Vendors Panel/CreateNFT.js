@@ -30,7 +30,7 @@ const CreateNFT = () => {
 
     const [spirit,setSpirit] = useState("")
 
-    const [brand,setBrand] = useState("");
+    const [brand,setBrand] = useState("630876f617ccd2bbd82d9b05");
     const [wallet,setWallet] = useState("");
     
     const [premiumDrops,setPremiumDrops] = useState(false);
@@ -68,7 +68,7 @@ const CreateNFT = () => {
         setSpirit(e.target.value);
     }
     const brandHandler = (e) =>{
-        setBrand(e.target.value);
+        setBrand("630876f617ccd2bbd82d9b05");
     }
     const walletHandler = (e) =>{
         setWallet(e.target.value)
@@ -368,12 +368,12 @@ const CreateNFT = () => {
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
                             <input type="text" value={wallet} onChange={walletHandler}></input>
                         </div> */}
-                        <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
+                        {/* <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Enter your Brand Name</h5>
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
-                            {/* <input type="text" value={brand} onChange={brandHandler} required></input> */}
+                             <input type="text" value={brand} onChange={brandHandler} required></input> 
                             <DropDown></DropDown>
-                        </div>
+                        </div> */}
                         <div className={`d-flex d-flex-column ${styles["post-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Post This to</h5>
                             <div className={`d-flex d-align-center ${styles["checkbox-text"]}`}>
