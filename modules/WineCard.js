@@ -3,8 +3,8 @@ import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
 const WineCard = (props) => {
     const router = useRouter();
-    const navigationHandler = () =>{
-        router.push("/purple")
+    const navigationHandler = (e) =>{
+        router.push(`/purple/${props.id}`)
     }
   return (
     <>

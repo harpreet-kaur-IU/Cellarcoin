@@ -1,11 +1,11 @@
 import React, { Fragment,useEffect, useState } from 'react'
-import Base from "../layout/Base";
-import BackgroundImageBanner from "../modules/BackgroundImageBanner";
-import Footer from "../modules/Footer";
-import MarketPlaceBanner from "../modules/MarketPlaceBanner";
-import Newsletter from "../modules/Newsletter";
-import WineCard from "../modules/WineCard";
-import styles from '../modules/css/MarketPlaceBanner.module.css'
+import Base from "../../layout/Base";
+import BackgroundImageBanner from "../../modules/BackgroundImageBanner";
+import Footer from "../../modules/Footer";
+import MarketPlaceBanner from "../../modules/MarketPlaceBanner";
+import Newsletter from "../../modules/Newsletter";
+import WineCard from "../../modules/WineCard";
+import styles from '../../modules/css/MarketPlaceBanner.module.css'
 export default function Purple() {
     const [data,setData] = useState("")
     useEffect(()=>{

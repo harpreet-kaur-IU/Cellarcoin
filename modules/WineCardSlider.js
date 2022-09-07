@@ -46,6 +46,8 @@ const WineCardSlider = () => {
         {data && data.map((item)=>(
           
             <WineCard
+              key={item.key}
+              id={item._id}
               price={item.price}
               favourites={item.favourites}
               views={item.views}

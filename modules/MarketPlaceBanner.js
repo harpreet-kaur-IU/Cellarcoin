@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './css/MarketPlaceBanner.module.css'
 import { useRouter } from 'next/router'
 const MarketPlaceBanner = () => {
@@ -6,6 +6,9 @@ const MarketPlaceBanner = () => {
     const navigationHandler = () =>{
         router.push("/profile")
     }
+    useEffect(()=>{
+
+    },[])
   return (
     <div className={`bg-pink ${style["market-banner-section"]}`}>
         <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
@@ -14,7 +17,7 @@ const MarketPlaceBanner = () => {
             </div>
             <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>
                 <div className={` ${style["marketplace-card-1-margin"]}`}>
-                    <h3 className='font-31 f-500 l-137 '>Purple Malbec Wine 2016 Lorem ipsum dolor #08</h3>
+                    <h3 className='font-31 f-500 l-137'>Purple Malbec Wine 2016 Lorem ipsum dolor #08</h3>
                     <p className='mt-16 font-20 f-400 l-137'>Lorem ipsum dolor sit amet,consectetur adipiscing elit. Quis pretium dui, commodo sed id nunc vel pharetra. Tellus pretium egestas in massa dapibus et non commodo dui.</p>
                     <h5 className='mt-16 font-25 l-137 f-500'>Price</h5>
                     <h5 className='mt-16 font-24 l-137 f-500'>
