@@ -417,7 +417,6 @@ const CreateNFT = () => {
                         </div>
                     </div>
                 </form>
-                
             </div>
         </div>
         <ToastContainer />

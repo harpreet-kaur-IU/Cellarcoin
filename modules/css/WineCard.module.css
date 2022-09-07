@@ -1,15 +1,17 @@
 /* .wine-card-slider-container{
     margin-left: 64px;
 } */
+.wine-card-container{
+    gap:23px;
+}
 .wine-cards-container{
     border-radius: 16px;
 }
 .wine-cards-container:hover{
     box-shadow: 5px 7px 5px 5px rgb(0 0 0 / 5%);
     opacity: 0.8;
-    transform: scale(1.01);
     transition: transform 1s;
-    
+    transform: scale(1.01);
 }
 .wine-card-wrapper{
     margin-bottom: 26px;
@@ -62,6 +64,11 @@
     .wine-card-wrapper{
         grid-template-columns: repeat(2,1fr);
         gap:30px;
+    }
+}
+@media screen and (max-width:768px) {
+    .wine-card-container{
+        flex-direction: column;
     }
 }
 @media screen and (max-width:650px){

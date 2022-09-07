@@ -31,24 +31,31 @@ const WineCardSlider = () => {
         grabCursor={true}
         loop={true}
         modules={[FreeMode]}
-        breakpoints={{
-          768: {
-            slidesPerView:2,
-          },
-          1024: {
-            slidesPerView:3,
-          },
-        }}
+        // breakpoints={{
+        //   768: {
+        //     slidesPerView:2,
+        //   },
+        //   1024: {
+        //     slidesPerView:3,
+        //   },
+        // }}
       >
+        
+        <SwiperSlide>
+        <div className={`d-flex ${style["wine-card-container"]}`}>
         {data && data.map((item)=>(
-          <SwiperSlide>
+          
             <WineCard
               price={item.price}
               favourites={item.favourites}
               views={item.views}
               imageUrl={item.imageUrl}
-            ></WineCard></SwiperSlide>
-        ))}
+            ></WineCard>
+            
+         ))}
+         </div>
+        </SwiperSlide>
+        
       </Swiper>
     </div>
   )
