@@ -140,15 +140,15 @@ export default function Signup() {
         if(result){    
             createUserWithEmailAndPassword(email,password)
             .then(async(authUser) =>{
-                var data = formatAuthUser(authUser.user);
+                console.log(authUser.user.multiFactor.user.accessToken)
                 var myHeaders = new Headers();
-                myHeaders.append("Authorization","Bearer "+data.token);
+                myHeaders.append("Authorization","Bearer "+authUser.user.multiFactor.user.accessToken);
                 var raw = {
                     "name":name,
                     "documentUrl":url
                 };
                 setLoading(true)
-                axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/signup`,raw,{headers:{"Authorization":"Bearer "+data.token}})
+                axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.multiFactor.user.accessToken}})
                 .then(response => {
                     if(response.data.message === "Signed up successfully!"){
                         authUser.user.sendEmailVerification();

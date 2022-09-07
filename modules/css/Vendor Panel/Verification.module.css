@@ -21,6 +21,16 @@
     box-shadow: 0px 6px 12px rgba(255, 184, 222, 0.32);
     border-radius: 16px;
 }
+.congrats-container{
+    gap:30px;
+}
+.congrats-visit-btn{
+    padding: 10px 79px;
+}
+.congrats-nft-img{
+    width: 400px;
+    height: 400px;
+}
 @media screen and (max-width:773px) {
     .verification-wrapper{
         width:100%;

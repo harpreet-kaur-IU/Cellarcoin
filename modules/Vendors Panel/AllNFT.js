@@ -138,7 +138,7 @@ const AllNFT = () => {
                                 <img loading='lazy' className={`${styles["dashboard-table-column-product"]}`} src={item.imageUrl}></img>
                             </span>                     
                             <span className='font-14 f-500 d-flex word-break'>{item.name}</span>
-                            <span className='font-14 f-600 text-primary text-underline d-flex'>{item.brand}</span>
+                            <span className='font-14 f-600 text-primary text-underline d-flex'>{item.brand.brandName}</span>
                             <span className={`font-14 f-500 d-flex d-align-center d-justify-center ${styles["nft-status"]}`}>{item.status}</span>
                             {item.price === 0?<span className={`p-relative font-14 f-500 d-flex d-align-center`}>
                                 --

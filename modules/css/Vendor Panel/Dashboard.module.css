@@ -64,7 +64,10 @@
 }
 .dashboard-table-section-scroll{
     border-radius: 16px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    height: max-content;
+    padding-right: 20px;
 }
 .nft-status{
     background: #F1FFEA;

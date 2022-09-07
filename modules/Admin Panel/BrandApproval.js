@@ -3,14 +3,14 @@ import styles from '.././css/Admin Panel/ApprovalModal.module.css'
 
 const BrandApproval = (props) => {
   const[reason,setReason] = useState("")
-  var status = "approved";
+  var status = "rejected";
   const reasonHandler = (e) =>{
     setReason(e.target.value)
   }
   const formSubmit = (e) =>{
     e.preventDefault();
     props.submithandler(reason,status)
-    props.handler()
+    props.handler();
   }
   return (
     <div className={`${styles["modal-wrapper"]}`}>

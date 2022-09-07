@@ -12,6 +12,9 @@
     height: 300px;
     object-fit: contain;
 }
+.sell-nft-content{
+    margin-top: 30px;
+}
 .sell-nft-content h3{
     line-height: 42.59px;
 }

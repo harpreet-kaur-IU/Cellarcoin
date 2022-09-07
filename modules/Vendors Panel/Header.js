@@ -15,6 +15,9 @@ const Header = (props) => {
   const dropdownHandler = () =>{
     setDropdown(!dropdown)
   }
+  const createNftNavigation = ()=>{
+    Router.push("/createnft")
+  }
   const sideBarHandler = (e) => {
     e.currentTarget.classList.toggle(styles["open"]);
     console.log("Sidebar = "+styles["sidebar-wrapper"]);
@@ -157,8 +160,8 @@ const Header = (props) => {
                 )}
                 {isConnected ? <button onClick={() => execute()}>Execute</button> : ""}
               </div>
-            <button className={`cursor-pointer ${styles["header-buttons"]}`}>
-              <Link href="/createnft">Create NFT</Link>
+            <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
+              Create NFT
             </button>
             <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
             <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>

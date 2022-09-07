@@ -50,7 +50,7 @@ const Brands = () => {
         .then(result =>{
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getAllBrands`,{
                 method: 'GET', 
-                headers: myHeaders,
+                headers: myHeaders
             })
             .then(response => response.json())
             .then(results =>{

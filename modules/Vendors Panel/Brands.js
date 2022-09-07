@@ -26,9 +26,9 @@ const Brands = () => {
     setBrand(e.target.value)
   }
   const coverHandler = (e) =>{
-    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/))
-      setCoverError(true)
-    else
+    // if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/))
+    //   setCoverError(true)
+    // else
       setCover(e.target.files[0])
   }
 
@@ -41,7 +41,7 @@ const Brands = () => {
     if(url === ''){
       setIsUrl(true);
     }else{
-        setIsUrl(false);
+      setIsUrl(false);
     }
     if(!regex.test(brand) || url === ''){
       return false;
@@ -91,8 +91,6 @@ const Brands = () => {
       .catch(error => console.log('error', error));
     }
   }
-
-
   useEffect(()=>{
     if(cover){
       var formdata = new FormData();
