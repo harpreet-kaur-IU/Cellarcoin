@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from '../css/Vendor Panel/DropDown.module.css'
-
-export default function BrandDropDown(props){
-
+const BrandDropDown = (props) => {
     const [value, setValue] = useState("Select Brand");
     const handler = (e) => {
         e.currentTarget.classList.toggle(styles["open"]);
@@ -35,3 +33,4 @@ export default function BrandDropDown(props){
         </div>
     )
 }
+export default BrandDropDown

@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Header from './Header'
-import styles from '../css/Vendor Panel/CreateNFT.module.css'
-import AddProperties from './AddProperties'
-import Modal from './Modal'
+import React, { useEffect, useRef, useState } from 'react';
+import Header from './Header';
+import styles from '../css/Vendor Panel/CreateNFT.module.css';
+import AddProperties from './AddProperties';
+import Modal from './Modal';
 import {getOnBoardFromCookie} from '../../auth/userCookies';
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/router';
 import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SmallLoader from './SmallLoader';
-import BrandDropDown from './BrandDropDown'
+import BrandDropDown from './BrandDropdown';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json'
 const CreateNFT = () => {
     const Web3 = require('web3');
