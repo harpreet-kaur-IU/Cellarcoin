@@ -3,7 +3,7 @@
     margin-top: 28px;
 }
 .connect-wallet-btn{
-    padding: 20px 36px;
+    padding: 10px 36px;
 }
 @media screen and (max-width:1232px) {
     .payment-method-h2{
@@ -11,5 +11,13 @@
     }
     .connect-wallet-btn{
         padding: 10px 30px;
+    }
+}
+@media screen and (max-width:600px) {
+    .payment-method-h2{
+        font-size: 26px;
+    }
+    .connect-wallet-btn{
+        font-size: 14px;
     }
 }

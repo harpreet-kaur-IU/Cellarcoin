@@ -8,14 +8,13 @@ const NavBar = () => {
   const [toggle, setToggle] = useState(false);
   const [toggle2, setToggle2] = useState(false);
   const handleClick = () =>{
-      setToggle(prev => !prev);
+    setToggle(prev => !prev);
   }
   const handleClick2 = () =>{
     setToggle2(prev => !prev);
-}
+  }
   return (
     <>
-     
       <nav className={`p-fixed col-12 ${style["navbar"]}`}>
         <div role="button" className={`d-none ${style["bar-cross"]}`}>
           <Menu></Menu>

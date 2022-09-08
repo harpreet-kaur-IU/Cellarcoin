@@ -11,11 +11,11 @@
     margin-top: 24px;
 }
 .editprofile-upload-btn{
-    padding: 20px 29px;
+    padding: 10px 29px;
     margin-left:34px;
 }
 .editprofile-delete-btn{
-    padding: 20px 66px;
+    padding: 10px 66px;
     margin-left:16px;
 }
 .change-cover-text{
@@ -35,7 +35,7 @@
     margin-bottom: 40px;
 }
 .btn-save-profile{
-    padding: 20px 58px;
+    padding: 10px 58px;
 }
 @media screen and (max-width:1232px) {
     .editprofile-upload-btn{
@@ -55,6 +55,7 @@
     }
 }
 @media screen and (max-width:1024px) {
+
     .edit-profile-wrapper h4{
         font-size: 22px;
     }
@@ -71,9 +72,72 @@
     .editprofile-btn-wrapper{
         margin-top: 10px;
     }
+    .profile-user-name{
+        margin-right: 0px;
+    }
 }
 @media screen and (max-width:802px){
     .edit-profile-wrapper h4{
         font-size: 20px;
+    }
+
+}
+@media screen and (max-width:768px) {
+    .edit-profile-wrapper{
+        padding-left: 0px;
+    }
+}
+@media screen and (max-width:600px) {
+    
+    .edit-profile-wrapper h4{
+        font-size: 15px;
+    }
+    .editprofile-upload-btn{
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    .editprofile-delete-btn{
+        font-size: 14px;
+        padding: 10px 46px;
+    }
+    .btn-save-profile{
+        font-size: 14px;
+    }
+    .profile-user-name{
+        font-size: 14px;
+    }
+    .edit-profile-heading{
+        font-size: 26px;
+    }
+}
+@media screen and (max-width:426px) {
+    .edit-profile-wrapper h4{
+        font-size: 12px;
+    }
+    .editprofile-upload-btn{
+        font-size: 12px;
+        padding: 9px 10px;
+    }
+    .editprofile-delete-btn{
+        font-size: 14px;
+        padding: 8px 36px;
+    }
+    .btn-save-profile{
+        font-size: 14px;
+    }
+    .profile-user-name{
+        font-size: 14px;
+    }
+    .edit-profile-heading{
+        font-size: 26px;
+    }
+    .change-cover-text{
+        margin-top: 26px;
+    }
+    .profile-cover-pic{
+        margin-bottom: 20px;
+    }
+    .change-profile-pic{
+        margin-top: 22px;
     }
 }

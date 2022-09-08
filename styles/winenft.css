@@ -165,10 +165,7 @@
 .home-banner-page-bars .swiper-pagination-bullet-active{
     background: var(--primary);
 }
-.active{
-    font-weight: 500;
-    color: var(--primary);
-}
+
 .vendor-container{
     padding: 0px clamp(0.625rem, -0.6667rem + 5.7407vw, 4.5rem) 0px clamp(0.625rem, 0.0208rem + 2.6852vw, 2.4375rem);
 }

@@ -27,7 +27,7 @@ export default function Explore() {
             <Base>
                 <div className={`container mt-144 ${styles["wine-card-page-container"]}`}>
                     <Filter></Filter>
-                    <div className={`d-flex gap-3 ${styles["wine-card-wrapper"]}`}>
+                    <div className={`d-grid grid-col-3 gap-3 ${styles["wine-card-wrapper"]}`}>
                     {data && data.map((item)=>(
                         <WineCard
                             key={item.key}

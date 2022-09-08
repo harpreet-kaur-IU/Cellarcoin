@@ -10,7 +10,6 @@ const WineCardSlider = () => {
   useEffect(()=>{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type","application/json");
-
     var requestOptions = {
       method: 'GET',
       headers: myHeaders,
@@ -40,11 +39,9 @@ const WineCardSlider = () => {
         //   },
         // }}
       >
-        
         <SwiperSlide>
-        <div className={`d-flex ${style["wine-card-container"]}`}>
-        {data && data.map((item)=>(
-          
+          <div className={`d-grid grid-col-3 gap-3 ${style["wine-card-container"]}`}>
+          {data && data.map((item)=>(
             <WineCard
               key = {item.key}
               id= {item._id}
@@ -53,11 +50,9 @@ const WineCardSlider = () => {
               views={item.views}
               imageUrl={item.imageUrl}
             ></WineCard>
-            
-         ))}
-         </div>
+          ))}
+          </div>
         </SwiperSlide>
-        
       </Swiper>
     </div>
   )

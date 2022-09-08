@@ -2,29 +2,56 @@
     padding-top: 136px;
     padding-bottom: 80px;
 }
-.wine-ownedby-section::before{
+.wine-images-row::before{
     content: url("/images/triangle.png");
     position:absolute; 
     top: 48px;
+    left: -75px;
+    z-index:-1;
+    opacity: 0.4;
 }
-.wine-ownedby-section::after{
+.wine-images-row::after{
     content: url("/images/triangle.png");
     position:absolute; 
-    top: 256px;
+    top: 185px;
     right: 0;
     transform: rotate(-180deg);
+    z-index:-1;
+    opacity: 0.4;
 }
 .wine-images-row{
-    gap:120px;
-    margin-left: 298px;
+    gap:48px;
 }
 .wine-images-col-1{
-    margin-top:68px;   
+    margin-top: 38px; 
 }
 .wine-images-col-2{
-    margin-top:233px;
+    margin-top: 148px;
+    border-right: 1px solid #8C8C8C;
+}
+.wine-images-col-3{
+    margin-top: 33px;  
 }
 .wine-image-top{
     top: 89px;
     left: 36px;
+}
+.includes-ul{
+    padding:0px 0px 0px 40px;
+}
+.includes-ul li{
+    list-style: disc;
+}
+.meta-mask-btn{
+    padding: 13px 117px;
+}
+.cancel-btn{
+    padding: 13px 132px;
+}
+.continue-btn{
+    padding: 13px 124px;
+}
+.checkout-details{
+    padding: 15px 52px;
+    width: 80%;
 }

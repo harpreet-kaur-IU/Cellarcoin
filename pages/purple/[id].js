@@ -28,7 +28,7 @@ export default function Purple() {
             <Base>
                 <MarketPlaceBanner></MarketPlaceBanner>
                 <div className={`container ${styles["purple-market-container"]}`}>
-                    <div className={`d-flex gap-3 ${styles["purple-market-card-wrapper"]}`}>
+                    <div className={`d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
                         {data && data.map((item)=>(
                             <WineCard
                                 key={item.key}

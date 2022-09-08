@@ -30,7 +30,7 @@ const CreateNFT = () => {
 
     const [spirit,setSpirit] = useState("")
 
-    const [brand,setBrand] = useState("630876f617ccd2bbd82d9b05");
+    const [brand,setBrand] = useState("");
     const [wallet,setWallet] = useState("");
     
     const [premiumDrops,setPremiumDrops] = useState(false);
@@ -46,6 +46,7 @@ const CreateNFT = () => {
     const [isDescError,setDescError] = useState(false);
     const [brandData,setBrandData] = useState("");
     const [coverError,setCoverError] = useState(false);
+    const [brandError,setBrandError] = useState(false);
     var JWTtoken = getOnBoardFromCookie();
 
     const fileRef = useRef(); 
@@ -109,7 +110,12 @@ const CreateNFT = () => {
         }else{
             setIsUrl(false);
         }
-        if(!regex.test(name) || !regex.test(desc) || url === ' '){
+        if(brand === ''){
+            setBrandError(true);
+        }else{
+            setBrandError(false);
+        }
+        if(!regex.test(name) || !regex.test(desc) || url === '' || brand === ''){
             return false;
         }else{
             return true;
@@ -243,7 +249,6 @@ const CreateNFT = () => {
         // e.preventDefault();
         const result = validator();
         if(result){    
-            console.log(name)
             const attributes = [
                 {
                     "trait_type":"Bottle Size",
@@ -309,6 +314,7 @@ const CreateNFT = () => {
                     setWallet("")
                     setBrand("")
                     setUrl("")
+                    setBrand("")
                     setPremiumDrops(false)
                     setBottleSize("")
                     setVolumn("")
@@ -404,6 +410,7 @@ const CreateNFT = () => {
                              {/* <input type="text" value={brand} onChange={brandHandler} required></input>  */}
                             <BrandDropDown data={brandData} handler={brandHandler}></BrandDropDown>
                         </div>
+                        {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Brand.</span>}
                         <div className={`d-flex d-flex-column ${styles["post-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Post This to</h5>
                             <div className={`d-flex d-align-center ${styles["checkbox-text"]}`}>

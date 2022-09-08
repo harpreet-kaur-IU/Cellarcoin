@@ -1,0 +1,61 @@
+.wine-collection-container{
+    margin-top:192px;
+}
+.wine-collection-bg{
+    background-image: url("/images/wine-collection-bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 354px;
+    border-radius: 16px;
+    padding-left: 41px;
+    margin-bottom: 120px;
+}
+.wine-collection-circle-img{
+    margin-top:200px;
+}
+.img-content-wrapper{
+    padding-right: 140px;
+}
+.eth-wrapper{
+    gap:10px;
+}
+.tabs-wrapper{
+    gap:61px;
+    padding-bottom: 27px;
+    border-bottom: 2px solid #DEDEDE;
+}
+.active{
+    color: #030303;
+    font-weight: 700;
+}
+@media screen and (max-width:1440px) {
+    .wine-collection-container{
+        width: 90%;
+    }
+    .profile-card-container{
+        width: 90%;
+    }
+}
+@media screen and (max-width:1024px) {
+    .profile-card-wrapper{
+        grid-template-columns: repeat(2,1fr);
+        gap:30px;
+    }
+}
+@media screen and (max-width:650px){
+    .profile-card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media screen and (max-width:425px){
+    .wine-collection-bg{
+        height: 300px;
+    }
+    .wine-collection-bg img{
+        margin-top: 250px;
+        width: 200px;
+        height: 200px;
+    }
+}

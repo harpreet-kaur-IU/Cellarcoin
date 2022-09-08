@@ -20,10 +20,12 @@
     top:113px;
     left:370px;
 } */
-@media screen and (max-width:1200px){
+@media screen and (max-width:1440px){
     .home-banner-container{
         width: 90%;
     }
+}
+@media screen and (max-width:1200px){
     .home-banner-container::after{
         left:250px;
     }
