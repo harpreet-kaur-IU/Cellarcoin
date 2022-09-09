@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Base from "../layout/Base";
-import Congrats from "../modules/congrats";
+import Congrats from "../modules/Congrats";
 
 export default function Home() {
     return (
