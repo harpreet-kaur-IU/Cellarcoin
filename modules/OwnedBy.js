@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from './css/OwnedBy.module.css'
+import { useRouter } from 'next/router'
+import Modal from './Modal'
+import Congrats from './Congrats'
 const OwnedBy = () => {
+    const [add,setAdd] = useState(false)
+    const router = useRouter();
+    const continueHandler = () =>{
+        setAdd(prev=>!prev)
+    }
   return (
     <div className={`p-relative col-12 ${style["wine-ownedby-section"]}`}>
         <div className='container'>
@@ -37,7 +45,7 @@ const OwnedBy = () => {
                     <h3 className='mt-48 f-500 l-137'>Payment method</h3>
                     <button className={`cursor-pointer mt-32 font-20 f-500 l-137 btn-secondary ${style["meta-mask-btn"]}`}>Metamask</button>
                     <button className={`cursor-pointer mt-108 font-20 f-500 l-137 btn-secondary ${style["cancel-btn"]}`}>Cancel</button>
-                    <button className={`cursor-pointer mt-24 font-20 f-500 l-137 btn-primary b-none ${style["continue-btn"]}`}>Continue</button>
+                    <button onClick={continueHandler} className={`cursor-pointer mt-24 font-20 f-500 l-137 btn-primary b-none ${style["continue-btn"]}`}>Continue</button>
                 </div>
                 {/* <div className={`col-3 p-relative ${style["wine-images-col-2"]}`}>
                     <img className='p-relative' src='images/owned-bg.png'></img>
@@ -45,6 +53,11 @@ const OwnedBy = () => {
                 </div>  */}
             </div>
         </div>
+        {add && 
+            <Modal modalClass="modal-verify">
+                <Congrats handler={continueHandler}></Congrats>
+            </Modal>
+        }
     </div>
   )
 }

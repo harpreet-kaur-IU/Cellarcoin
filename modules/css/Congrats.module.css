@@ -1,0 +1,15 @@
+.congrats-container{
+    gap:30px;
+    margin-top: 120px;
+}
+.congrats-visit-btn{
+    padding: 15px 79px;
+}
+.congrats-nft-img-wrapper{
+    border-radius: 16px;
+}
+.congrats-nft-img{
+    object-fit: contain;
+    width: 400px;
+    height: 400px;
+}

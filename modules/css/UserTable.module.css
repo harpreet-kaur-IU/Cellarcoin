@@ -27,24 +27,25 @@
     flex-direction: column;
     flex-wrap: wrap;
     background: #FFFFFF;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     border-radius: 16px;
     /* box-shadow: 0px 2px 4px 3px rgba(0, 0, 0, 0.0250765); */
 }
 .dashboard-table-column{
     display: grid;
-    grid-template-columns:minmax(100px,300px) minmax(180px,380px) minmax(140px,340px) minmax(140px,340px) minmax(150px,350px) minmax(150px,350px);
+    grid-template-columns:280px 180px 180px 180px 180px 180px;
     word-break: break-all;
-    padding: 5px;
+    padding: 5px 5px 10px 5px;
     gap:14px;
     margin: 25px 10px 15px 10px;
+    border-bottom: 2px solid #DEDEDE;
 }
 .dashboard-table-column-data{
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin: 18px 10px 25px 10px;
 }
 .dashboard-table-column-product{
-    object-fit:contain;
+    object-fit:cover;
     width: 71px;
     height: 48px;
     border-radius: 8px;
@@ -65,9 +66,9 @@
 .dashboard-table-section-scroll{
     border-radius: 16px;
     margin-bottom: 20px;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     height: max-content;
-    padding-right: 20px;
+    /* padding-right: 20px; */
 }
 .nft-status{
     background: #F1FFEA;
@@ -125,7 +126,7 @@
         border-bottom-right-radius: 8px;
     } 
     /* table scroll y-axis*/
-    .dashboard-table-section-scroll::-webkit-scrollbar {
+    /* .dashboard-table-section-scroll::-webkit-scrollbar {
         width: 3px;
     }
     .dashboard-table-section-scroll::-webkit-scrollbar-track {
@@ -143,7 +144,7 @@
         border-radius: 0;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
-    }
+    } */
 
 .nfts-wrapper{
     margin-top: 32px;
@@ -171,7 +172,7 @@
 }
 .dashboard-table-column-top-nft{
     display: grid;
-    grid-template-columns:minmax(50px,300px) minmax(240px,480px) minmax(100px,340px) minmax(100px,340px);
+    grid-template-columns:280px 180px 180px 180px 180px 180px;
     word-break: break-all;
     gap:14px;
     color: #898989;

@@ -17,7 +17,9 @@ const SellNFT = () => {
   const [loading, setLoading] = useState(false);
   const [dropdown,setDropdown] = useState(false);
   const [expire,setExpire] = useState("")
-
+  const [isPrice,setPriceError] = useState(false)
+  const [isExpire,setExpireError] = useState(false)
+  const regex = /^[0-9]*$/;
   const priceHandler  = (e) =>{
     setPrice(e.target.value)
   }
@@ -25,7 +27,23 @@ const SellNFT = () => {
   const expireHandler = (value) =>{
     setExpire(value);
   }
-  
+  const validator = () =>{
+    if(regex.test(price)){
+      setPriceError(false);
+    }else{
+      setPriceError(true);
+    }
+    if(expire === ''){
+      setExpireError(true);
+    }else{
+      setExpireError(false);
+    }
+    if(!regex.test(price) || expire === ''){
+      return false;
+    }else{
+      return true;
+    }
+  }
   useEffect(()=>{
     if(nftId){
       var myHeaders = new Headers();
@@ -48,32 +66,36 @@ const SellNFT = () => {
   },[nftId])
 
   const formSubmit = (e) =>{
-    e.preventDefault();
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization","Bearer "+JWTtoken);
-    myHeaders.append("Content-Type","application/json");
+    e.preventDefault()
+    var result = validator();
+    if(result){
+      e.preventDefault();
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization","Bearer "+JWTtoken);
+      myHeaders.append("Content-Type","application/json");
 
-    var raw = JSON.stringify({
-      "price": price,
-      "currency": currency,
-      "expireAfter":expire
-    })
+      var raw = JSON.stringify({
+        "price": price,
+        "currency": currency,
+        "expireAfter":expire
+      })
 
-    var requestOptions = {
-      method: 'PATCH',
-      headers: myHeaders,
-      body:raw,
-      redirect: 'follow'
-    };
+      var requestOptions = {
+        method: 'PATCH',
+        headers: myHeaders,
+        body:raw,
+        redirect: 'follow'
+      };
 
-    setLoading(true)
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-      Router.push("/allnftlist");
-      setLoading(false)
-    })
-    .catch(error => console.log('error', error));
+      setLoading(true)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        Router.push("/allnftlist");
+        setLoading(false)
+      })
+      .catch(error => console.log('error', error));
+    }
   }
   return (
     <>
@@ -106,6 +128,7 @@ const SellNFT = () => {
                   {/* <img src='images/arrow-down-white.svg'></img> */}
                 </div>
               </div>
+              {isPrice && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Price.</span>}
             </div>
 
             <div className={`${styles["expire-date"]}`}>
@@ -119,12 +142,13 @@ const SellNFT = () => {
                   <div></div>
                 } */                
               /* </div> */}
-              <DropDown handler={expireHandler} placeholder="7 Days"></DropDown>
+              <DropDown handler={expireHandler} placeholder="Select Expiry Date"></DropDown>
+              {isExpire && <span className={`mt-32 mb-8 font-14 f-700 text-danger`}>Please Select Expiry Date.</span>}
               <div className={`${styles["expire-instructions"]}`}>
                 <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not more than 7 days</h4>
                 <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-2"]}`}>*Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
               </div>
-
+              
               <div className={`d-flex d-flex-column ${styles["royalty-fee"]}`}>
                 <h3 className={`font-31 f-600 l-39 ${styles["royalty-fee-h3"]}`}>Royalty Fee</h3>
                 <h4 className={`font-24 f-400 l-33 ${styles["royalty-fee-h4"]}`}>A royalty payment gives a percentage of of the sale price to the orginal creator/ beneficiary each time the NFT is sold on our platform/Marketplace</h4>

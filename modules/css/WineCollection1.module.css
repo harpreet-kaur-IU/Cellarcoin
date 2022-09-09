@@ -26,6 +26,9 @@
     padding-bottom: 27px;
     border-bottom: 2px solid #DEDEDE;
 }
+.tabs-wrapper h3{
+    font-size: 20px;
+}
 .active{
     color: #030303;
     font-weight: 700;
@@ -43,19 +46,85 @@
         grid-template-columns: repeat(2,1fr);
         gap:30px;
     }
+    .wine-tabs-col{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .wine-tab-1{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .wine-tab-2{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .wine-tab-3{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .wine-collection-container{
+        margin-top:130px;
+    }
+    .user-details{
+        flex-direction: column;
+    }
+    .user-details-col-3{
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .user-name-wallet-address{
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .user-details-col-3 h5{
+        text-align: left;
+    }
 }
+@media screen and (max-width:810px) {
+    .user-name-wallet-address{
+        flex-direction: column;
+    }
+    .user-name-wallet-address h3{
+        text-align: left;
+    }
+    .wine-tabs-col{
+        margin-bottom: 32px;
+    }
+}
+
 @media screen and (max-width:650px){
     .profile-card-wrapper{
         grid-template-columns: repeat(1,1fr);
     }
+    .wine-tab-1{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .wine-tab-2{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .tabs-wrapper{
+        gap:31px;
+    }
+    .tabs-wrapper h3{
+        font-size: 20px;
+    }
 }
-@media screen and (max-width:425px){
+@media screen and (max-width:426px){
     .wine-collection-bg{
         height: 300px;
     }
     .wine-collection-bg img{
-        margin-top: 250px;
+        margin-top: 0px;
         width: 200px;
         height: 200px;
+    }
+    .tabs-wrapper h3{
+        font-size:16px;
+    }
+}
+@media screen and (max-width:375px){
+    .tabs-wrapper h3{
+        font-size:12px;
     }
 }

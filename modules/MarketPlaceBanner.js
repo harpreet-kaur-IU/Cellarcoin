@@ -1,12 +1,16 @@
 import React, { useState,useEffect } from 'react'
 import style from './css/MarketPlaceBanner.module.css'
 import { useRouter } from 'next/router'
+
 const MarketPlaceBanner = () => {
     const [data,setData] = useState("")
     const router = useRouter();
     const nftId = router.query["id"];
     const navigationHandler = () =>{
         router.push("/profile")
+    }
+    const buyNowHandler = () =>{
+        router.push("/ownedby")
     }
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
@@ -21,7 +25,6 @@ const MarketPlaceBanner = () => {
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}`, requestOptions)
             .then(response => response.json())
             .then(result =>{
-                console.log(result.nft)
                 setData(result.nft)
                 var arr2 = result.nft.expiryDate.split('/');
                 var month = "";
@@ -90,7 +93,7 @@ const MarketPlaceBanner = () => {
                             {data.price} wETH
                         </h5>
                         <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
-                            <button className='mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
+                            <button onClick={buyNowHandler} className='cursor-pointer mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
                             <div onClick={navigationHandler} className={`cursor-pointer f-500 font-25 l-137 mt-24 d-block text-primary a-underline ${style["marketplace-view-profile"]}`}>View Profile</div>
                         </div>
                     </div>
@@ -115,6 +118,7 @@ const MarketPlaceBanner = () => {
                 </div>
             </div>
         }
+        
     </div>
   )
 }

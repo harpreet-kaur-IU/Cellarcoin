@@ -57,7 +57,7 @@ const Listing = () => {
                     <div className={`col-5 ${styles["listing-content-wrapper"]}`}>
                         <h4 className='f-500 l-39'>{item.name}</h4>
                         <h5 className={`f-500 ${styles["listing-content-brands"]}`}>Brand</h5>
-                        <h4 className={`text-primary f-600 ${styles["listing-content-wine-name"]}`}>{item.brand}</h4>
+                        <h4 className={`text-primary f-600 ${styles["listing-content-wine-name"]}`}>{item.brand.brandName}</h4>
                     
                         {item.price === 0 &&  
                             <button className={`${styles["sell-now-btn"]}`}>

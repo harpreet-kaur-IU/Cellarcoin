@@ -6,6 +6,7 @@ import MarketPlaceBanner from "../../modules/MarketPlaceBanner";
 import Newsletter from "../../modules/Newsletter";
 import WineCard from "../../modules/WineCard";
 import styles from '../../modules/css/MarketPlaceBanner.module.css'
+import ActivityTable from '../../modules/ActivityTable';
 export default function Purple() {
     const [data,setData] = useState("")
     useEffect(()=>{
@@ -27,6 +28,7 @@ export default function Purple() {
         <Fragment>  
             <Base>
                 <MarketPlaceBanner></MarketPlaceBanner>
+                <ActivityTable></ActivityTable>
                 <div className={`container ${styles["purple-market-container"]}`}>
                     <div className={`d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
                         {data && data.map((item)=>(
