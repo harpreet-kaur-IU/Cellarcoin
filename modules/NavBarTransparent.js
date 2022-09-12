@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Menu from '../icons/menu';
-import style from './css/NavBarTransparent.module.css'
+import style from './css/NavBarTransparent.module.css';
 import SignUp from './SignUp';
 import WalletModal from './WalletModal';
 import {useRouter} from 'next/router';
