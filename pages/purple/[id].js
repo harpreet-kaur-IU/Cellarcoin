@@ -7,8 +7,10 @@ import Newsletter from "../../modules/Newsletter";
 import WineCard from "../../modules/WineCard";
 import styles from '../../modules/css/MarketPlaceBanner.module.css'
 import ActivityTable from '../../modules/ActivityTable';
+import Loader from '../../modules/Vendors Panel/Loader';
 export default function Purple() {
     const [data,setData] = useState("")
+    const [loading,setLoading] = useState(false)
     useEffect(()=>{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type","application/json");
@@ -17,15 +19,18 @@ export default function Purple() {
         method: 'GET',
         headers: myHeaders,
       };
+      setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
       .then(response => response.json())
       .then(result =>{
         setData(result.data)
+        setLoading(false)
       })
       .catch(error => console.log('error', error));
     },[])
     return (
         <Fragment>  
+            {loading && <Loader></Loader>}
             <Base>
                 <MarketPlaceBanner></MarketPlaceBanner>
                 <ActivityTable></ActivityTable>

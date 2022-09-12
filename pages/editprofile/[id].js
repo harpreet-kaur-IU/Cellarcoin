@@ -1,9 +1,9 @@
 import { Fragment } from "react";
-import Base from "../layout/Base";
-import Footer from "../modules/Footer";
-import MyAccount from "../modules/MyAccount";
+import Base from "../../layout/Base";
+import Footer from "../../modules/Footer";
+import MyAccount from "../../modules/MyAccount";
 
-export default function EditProfile() {
+export default function Home() {
     return (
         <Fragment>
             <Base>

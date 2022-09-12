@@ -1,0 +1,16 @@
+.modal-wrapper{
+    width: 700px;
+    right:0;
+    top: 90px;
+    padding: 12px 32px 100px 12px;
+}
+.notification-item-wrapper{
+    gap:16px;
+    border-bottom: 1px solid #D5D5D5;
+    padding: 8px 0px;
+}
+.noti-img-wrapper img{
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+}

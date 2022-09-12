@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import SmallLoader from './SmallLoader';
 import BrandDropDown from './BrandDropdown';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json'
+import { ethers } from 'ethers';
 const CreateNFT = () => {
     const Web3 = require('web3');
     const router = useRouter();
@@ -229,9 +230,40 @@ const CreateNFT = () => {
     }
   
     const to = "0x58b522D3948a51B66b5C359c4AFaC4FA44D02765";
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://polygon-mumbai.g.alchemy.com/v2/hqj9FnTht1P0gYdzJJhW1wgAKmHlFQbG"
+    );
+    const signer = new ethers.Wallet(
+      "30bff7d603f44ec3202b777daf2c99d6bb2269e8fcda59d045a3c19df60210dc",
+      provider
+    );
     
     const formSubmit = async(e) =>{
         e.preventDefault();
+          if (typeof window.ethereum !== "undefined") {
+            const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+            const contract = new ethers.Contract(
+              contractAddress,
+              Nft_marketplace_ABI,
+              signer
+            );
+            try {
+              await contract.nftMint(
+                to,
+                "abb",
+                "Cellarcoin",
+                "2400",
+                "Heloo",
+                "Nothing"
+              );
+            } catch (error) {
+              console.log(error);
+            }
+          } else {
+            console.log("Please install MetaMask");
+          }
+        
+        
         //web 3 code starts here
         // const web3 = new Web3("https://matic-mumbai.chainstacklabs.com/");
         // const contract = await new web3.eth.Contract(Nft_marketplace_ABI,"0xDf00126C37EFB27e60F53c520364763fc99e7F2B");
@@ -247,6 +279,7 @@ const CreateNFT = () => {
         // })
          //web 3 code ends here
         // e.preventDefault();
+        
         const result = validator();
         if(result){    
             const attributes = [

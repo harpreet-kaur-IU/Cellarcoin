@@ -9,7 +9,6 @@ export default function DropDown(props){
     }
 
     const selectHandler = (e) => {
-
         setValue(e.currentTarget.getAttribute("value"));
         var value = e.currentTarget.getAttribute("value");
         if(value === "7 days"){

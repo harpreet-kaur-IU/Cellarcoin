@@ -3,6 +3,7 @@ import styles from '.././css/Admin Panel/Listing.module.css'
 import {useRouter} from 'next/router'
 import {getAdminOnBoardFromCookie} from '../../auth/userCookies';
 import Loader from '../Vendors Panel/Loader'
+import Header from './Header'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -40,6 +41,7 @@ const Listing = () => {
   return (
     <>
         {loading && <Loader></Loader>}
+        <Header></Header>
         <div className='vendor-container' style={{paddingTop:"24px",height:"100vh",overflow:"scroll"}}>
             <h4 className='l-50 f-600 text-primary'>Listings</h4>
             

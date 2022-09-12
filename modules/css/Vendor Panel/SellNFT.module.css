@@ -173,3 +173,12 @@
         font-size: 20px;
     }
 }
+
+/* UI sell nft */
+.sell-nftimg-wrapper{
+    width: 500px;
+    height: 500px;
+}
+.sell-nft-UI-img{
+    object-fit: contain;
+}

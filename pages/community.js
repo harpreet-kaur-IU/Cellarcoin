@@ -1,13 +1,13 @@
 import { Fragment } from "react";
-import Base from "../layout/Base";
+import BaseUser from "../layout/BaseUser";
 import Communities from "../modules/Community";
 
 export default function Home() {
     return (
         <Fragment>  
-            <Base>
+            <BaseUser>
                 <Communities></Communities>
-            </Base>
+            </BaseUser>
         </Fragment>
     );
 }

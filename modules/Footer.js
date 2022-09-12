@@ -12,10 +12,10 @@ const Footer = () => {
                     <img src='images/logo.png'></img>
                     <p className='mt-54 f-400 l-137 font-16'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo at risus proin placerat sit. Lacus, leo eleifend consequat, placerat imperdiet sed.</p> 
                 </div>
-                <div className={`col-3 ${styles["footer-explore-wrapper"]}`}>
+                {/* <div className={`col-3 ${styles["footer-explore-wrapper"]}`}>
                     <FooterExplore></FooterExplore>
-                </div>
-                <div className={`col-6 ${styles["footer-menu-bar"]}`}>
+                </div> */}
+                <div className={`col-9 ${styles["footer-menu-bar"]}`}>
                     <FooterMenuBar></FooterMenuBar>
                 </div>
             </div>

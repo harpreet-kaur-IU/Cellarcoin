@@ -24,18 +24,23 @@
 }
 .wine-images-col-1{
     margin-top: 38px; 
+    overflow: hidden;
+    height: 558px;
+    background-color: #ECECEC;
+    border-radius: 16px;
 }
 .wine-images-col-2{
-    margin-top: 148px;
+    padding-top: 100px;
     border-right: 1px solid #8C8C8C;
+    margin-top: 48px;
 }
 .wine-images-col-3{
     margin-top: 33px;  
 }
-.wine-image-top{
-    top: 89px;
-    left: 36px;
-}
+/* .wine-image-top{
+    top: 0px;
+    left: 0px;
+} */
 .includes-ul{
     padding:0px 0px 0px 40px;
 }
@@ -52,6 +57,36 @@
     padding: 13px 124px;
 }
 .checkout-details{
-    padding: 15px 52px;
+    padding: 15px 0px;
     width: 80%;
+}
+@media screen and (max-width:1440px) {
+    .wine-ownedby-container{
+        width: 90%;
+    }
+    .checkout-btn-wrapper{
+        justify-content: center;
+    }
+    .checkout-details{
+        width: 100%;
+    }
+    .includes-ul{
+        padding: 0px 0px 0px 20px;
+    }
+    .includes-ul li{
+        font-size: 16px;
+    }
+    .buy-nft-h2{
+        font-size: 32px;
+    }
+    .wine-images-row{
+        gap:32px;
+    }
+    .wine-ownedby-section{
+        padding-top: 120px;
+    }
+    
+}
+@media screen and (max-width:1024px){
+    
 }

@@ -2,7 +2,16 @@ import React from 'react'
 import styles from './css/Footer.module.css'
 const FooterMenuBar = () => {
   return (
-    <div className={`d-grid grid-col-3 ${styles["footer-menu-bar-grid"]}`}>
+    <div className={`d-grid grid-col-4 ${styles["footer-menu-bar-grid"]}`}>
+        <ul >
+            <li>
+                <h3 className='font-25'>Explore</h3>
+                <ul className='mt-24'>
+                    <li className='mt-16 f-500'><a className="text-white font-16" href="">Community</a></li>
+                    <li className='mt-16 f-500'><a className="text-white font-16" href="">Brands</a></li>
+                </ul>
+            </li>
+        </ul>
         <ul >
             <li>
                 <h3 className='font-25'>My Account</h3>

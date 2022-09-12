@@ -175,6 +175,11 @@ export default function Signup() {
                         toastId:"2"
                     });
                 }
+                if(error.message == 'Firebase: Password should be at least 6 characters (auth/weak-password).'){
+                    toast.error("Password Should be atleast 6 characters",{
+                        toastId:"2"
+                    });
+                }
             })
         }
     }

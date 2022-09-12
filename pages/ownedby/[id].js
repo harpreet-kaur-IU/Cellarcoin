@@ -1,11 +1,10 @@
-
 import { Fragment } from "react";
-import Footer from "../modules/Footer";
-import Newsletter from "../modules/Newsletter";
-import OwnedBy from "../modules/OwnedBy";
-import Base from "../layout/Base";
+import Base from "../../layout/Base";
+import Footer from "../../modules/Footer";
+import Newsletter from "../../modules/Newsletter";
+import OwnedBy from "../../modules/OwnedBy";
 
-export default function Profile() {
+export default function Home() {
     return (
         <Fragment>  
             <Base>

@@ -1,18 +1,64 @@
+.profile-wrapper{
+    gap:34px;
+}
 .edit-profile-wrapper{
     padding-left: 40px;
     margin-top: 28px;
+   
+}
+.small-loader{
+    position: absolute;
+    top: 80px;
+    left: 350px;
+}
+.small-loader-profile{
+    position: absolute;
+    top: 20px;
+    left: -140px;
+}
+.cover-img-wrapper-opacity{
+    opacity: 0.8;
+}
+.cover-img-wrapper{
+    height: 192px;
+    background-color: #E7E7E7;
+    border-radius: 16px;
+}
+.cover-img-wrapper input{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.profile-cover-pic{
+    height: 192px;
+    width: 100%;
+    object-fit:cover;
+    border-radius: 16px;
 }
 .change-profile-pic{
     margin-top: 48px;
 }
+.input-wrapper{
+    margin-top: 40px;
+}
 .profile-img-wrapper{
+    overflow: hidden;
     background-color: #E7E7E7;
     border-radius: 50%;
     margin-top: 24px;
+    height: 176px;
+    width: 176px;
+}
+.profile-img-wrapper img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }
 .editprofile-upload-btn{
     padding: 10px 29px;
-    margin-left:34px;
 }
 .editprofile-delete-btn{
     padding: 10px 66px;
@@ -31,12 +77,19 @@
 .profile-user-name::placeholder{
     color: var(--font-dark);
 }
-.profile-cover-pic{
-    margin-bottom: 40px;
-}
+
 .btn-save-profile{
     padding: 10px 58px;
 }
+.editprofile-btn-wrapper input{
+    position: absolute;
+    opacity: 0;
+    top:0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 @media screen and (max-width:1232px) {
     .editprofile-upload-btn{
         padding: 10px 20px;

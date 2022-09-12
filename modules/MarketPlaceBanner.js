@@ -1,17 +1,45 @@
 import React, { useState,useEffect } from 'react'
 import style from './css/MarketPlaceBanner.module.css'
 import { useRouter } from 'next/router'
-
+import { getUserOnBoardFromCookie } from '../auth/userCookies'
+import Modal from './Modal'
+import SignUp from './SignUp'
+import Loader from './Vendors Panel/Loader'
 const MarketPlaceBanner = () => {
+    var JWTToken =  getUserOnBoardFromCookie()
     const [data,setData] = useState("")
     const router = useRouter();
     const nftId = router.query["id"];
+    const [toggle,setToggle] = useState(false)
+    const [loading,setLoading] = useState(false)
+
     const navigationHandler = () =>{
         router.push("/profile")
     }
     const buyNowHandler = () =>{
-        router.push("/ownedby")
+        if(JWTToken){
+            router.push(`/ownedby/${data._id}`)
+        }
+        else{
+            handleClick()
+        }
     }
+   
+    const handleClick = () =>{
+        setToggle(prev => !prev);
+      }
+    const confirmationHandler = () =>{
+        
+        toast.success("User Signed In Successfully",{
+          toastId:"2"
+        });
+        if(JWTToken){
+            router.push(`/ownedby/${data._id}`)
+        }
+        else{
+            handleClick()
+        }
+      }
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
         if(nftId){
@@ -22,6 +50,7 @@ const MarketPlaceBanner = () => {
             method: 'GET',
             headers: myHeaders,
             };
+            setLoading(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}`, requestOptions)
             .then(response => response.json())
             .then(result =>{
@@ -66,6 +95,7 @@ const MarketPlaceBanner = () => {
                 }
                 var date = `${month} ${arr2[0]},${arr2[2]}`;
                 setDate(date)
+                setLoading(false)
             })
             .catch(error => console.log('error', error));
         }
@@ -73,53 +103,60 @@ const MarketPlaceBanner = () => {
 
     
   return (
-    <div className={`bg-pink ${style["market-banner-section"]}`}>
-        {data &&
-            <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
-                <div className={`d-flex d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
-                    <img src={data.imageUrl}></img>
-                </div>
-                <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>
-                    <div className={`${style["marketplace-card-1-margin"]}`}>
-                        <h3 className='font-31 f-500 l-137'>{data.name}</h3>
-                        <p className={`mt-16 font-20 f-400 l-137 ${style["marketplace-card-desc"]}`}>{data.description}</p>
-                        <h5 className='mt-16 font-25 l-137 f-500'>Wallet Address</h5>
-                        <h5 className='mt-16 font-24 l-137 f-500'>
-                            {data.walletAddress===""?"--n.a--":data.walletAddress}
-                        </h5>
-                        <h5 className='mt-16 font-25 l-137 f-500'>Price</h5>
-                        <h5 className='mt-16 font-24 l-137 f-500'>
-                            <img src='images/eth.png'></img>
-                            {data.price} wETH
-                        </h5>
-                        <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
-                            <button onClick={buyNowHandler} className='cursor-pointer mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
-                            <div onClick={navigationHandler} className={`cursor-pointer f-500 font-25 l-137 mt-24 d-block text-primary a-underline ${style["marketplace-view-profile"]}`}>View Profile</div>
+    <>
+        {loading && <Loader></Loader>}
+        <div className={`bg-pink ${style["market-banner-section"]}`}>
+            {data &&
+                <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
+                    <div className={`d-flex d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
+                        <img src={data.imageUrl}></img>
+                    </div>
+                    <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>
+                        <div className={`${style["marketplace-card-1-margin"]}`}>
+                            <h3 className='font-31 f-500 l-137'>{data.name}</h3>
+                            <p className={`mt-16 font-20 f-400 l-137 ${style["marketplace-card-desc"]}`}>{data.description}</p>
+                            <h5 className='mt-16 font-25 l-137 f-500'>Wallet Address</h5>
+                            <h5 className='mt-16 font-24 l-137 f-500'>
+                                {data.walletAddress===""?"--n.a--":data.walletAddress}
+                            </h5>
+                            <h5 className='mt-16 font-25 l-137 f-500'>Price</h5>
+                            <h5 className='mt-16 font-24 l-137 f-500'>
+                                <img src='images/eth.png'></img>
+                                {data.price} wETH
+                            </h5>
+                            <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
+                                <button onClick={buyNowHandler} className='cursor-pointer mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
+                                <div onClick={navigationHandler} className={`cursor-pointer f-500 font-25 l-137 mt-24 d-block text-primary a-underline ${style["marketplace-view-profile"]}`}>View Profile</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className={` ${style["marketplace-card-2"]}`}>
-                
-                    <h5 className='mt-16 f-400 l-137 text-dark-gray'>Region</h5>
-                    <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[2].value===''? "--n.a--":data.attributes[2].value}</h5>
-                    <h5 className='mt-16 f-400 l-137 text-dark-gray'>Volume by Alcohol</h5>
-                    <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[1].value===''? "--n.a--":data.attributes[1].value}</h5>
-                    <h5 className='mt-16 f-400 l-137 text-dark-gray'>Bottle Size</h5>
-                    <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[0].value===''? "--n.a--":data.attributes[0].value}</h5>
-                    <h5 className='mt-16 f-400 l-137 text-dark-gray'>Spirit</h5>
-                    <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[3].value===''? "--n.a--":data.attributes[3].value}</h5>
-                    <h5 className='mt-16 f-400 l-137 text-dark-gray'>Available to Redeem:</h5>
-                    <h5 className='mt-8 font-25 f-500 l-137 text-black'>
+                    <div className={` ${style["marketplace-card-2"]}`}>
                     
-                        On {expirydate}
-                    
-                    </h5>
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Region</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[2].value===''? "--n.a--":data.attributes[2].value}</h5>
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Volume by Alcohol</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[1].value===''? "--n.a--":data.attributes[1].value}</h5>
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Bottle Size</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[0].value===''? "--n.a--":data.attributes[0].value}</h5>
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Spirit</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[3].value===''? "--n.a--":data.attributes[3].value}</h5>
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Available to Redeem:</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>
+                        
+                            On {expirydate}
+                        
+                        </h5>
+                    </div>
                 </div>
-            </div>
-        }
-        
-    </div>
+            }
+            {toggle &&
+            <Modal modalClass="modal-verify">
+                <SignUp confirm={confirmationHandler} handler={handleClick}></SignUp>
+            </Modal>
+            }
+        </div>
+    </>
   )
 }
 
