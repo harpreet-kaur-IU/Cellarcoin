@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import BaseUser from "../layout/BaseUser";
+import BaseUser from '../layout/BaseUser'
 import Brand from "../modules/Brands";
 import Footer from "../modules/Footer";
 import Newsletter from "../modules/Newsletter";
