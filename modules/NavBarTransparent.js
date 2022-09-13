@@ -14,6 +14,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Hamburger from '../icons/Hamburger'
 import SiteLogo from '../icons/SiteLogo';
+import { ethers } from "ethers";
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
+import Web3Modal from "web3modal";
+import ProfileIcon from '../icons/ProfileIcon';
 const NavBarTransparent = () => {
 
     const {signOut} = useFirebaseAuth(); 
@@ -95,6 +99,79 @@ const NavBarTransparent = () => {
         toastId:"2"
       });
     }
+      // connect wallet web3 code starts here
+  let web3Modal;
+  const providerOptions = {
+    coinbasewallet: {
+      package: CoinbaseWalletSDK, // Required
+      options: {
+        appName: "My Awesome App", // Required
+        infuraId: "INFURA_ID", // Required
+        rpc: "", // Optional if `infuraId` is provided; otherwise it's required
+        chainId: 1, // Optional. It defaults to 1 if not provided
+        darkMode: false // Optional. Use dark theme, defaults to false
+      }
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    web3Modal = new Web3Modal({
+      cacheProvider: false,
+      providerOptions, // required
+    });
+  }
+
+
+  const [isConnected, setIsConnected] = useState(false);
+  const [hasMetamask, setHasMetamask] = useState(false);
+  const [signer, setSigner] = useState(false);
+
+  useEffect(() => {
+    if (typeof window.ethereum !== "undefined") {
+      setHasMetamask(true);
+    }
+  });
+
+  // useEffect(()=>{
+  //   if(signer){
+  //     props.signerData(signer)
+  //   }
+  // },[signer])
+  async function connect() {
+    if(JWTToken){
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          const web3ModalProvider = await web3Modal.connect();
+          setIsConnected(true);
+          const provider = new ethers.providers.Web3Provider(web3ModalProvider);
+          setSigner(provider.getSigner());
+          // localStorage.removeItem('signerWeb3');
+          // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        setIsConnected(false);
+      }
+    }else{
+      handleClick()
+    }
+  }
+
+  async function execute() {
+    if (typeof window.ethereum !== "undefined") {
+      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+      try {
+        await contract.store(42)
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Please install MetaMask");
+    }
+  }
+// connect wallet web3 code ends here
     return (
       <>
         <nav className={`p-fixed col-12 ${style["navbar"]}`}>
@@ -120,19 +197,38 @@ const NavBarTransparent = () => {
               {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
             </ul>
   
-            <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}>
+            {/* <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}>
               <img src="images/web3-wallet-icon.svg"></img>
+            </div> */}
+            <div>
+              {hasMetamask ? (
+                isConnected ? (
+                  ""
+                ) : (
+                  <>
+                    <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connect()}>Connect Wallet</button>
+                    <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
+                      <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
+                    </div>
+                  </>
+                )
+              ) : (
+                "Please install metamask"
+              )}
+              {isConnected ? <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => execute()}>Connected</button> : ""}
             </div>
-            <div className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div>
+            {/* <div className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div> */}
             <div onClick={notificationHandler} className={`cursor-pointer ml-32 ${style["bell-icon"]}`}><img src='images/bell-icon-white.svg'></img></div>
-            <div onClick ={dropdownHandler} className={`cursor-pointer ml-24 ${style["profile-icon"]}`}><img src='images/user-logo-white.svg'></img></div>
+            <div onClick ={dropdownHandler} className={`cursor-pointer ml-24 ${style["profile-icon"]}`}>
+              <ProfileIcon color="#ffffff"></ProfileIcon>
+            </div>
             <div onClick={navBarHandler} role="button" className={`d-flex d-align-center cursor-pointer d-none ml-24 ${style["bar-cross"]}`}>
               <Hamburger color="#ffffff"></Hamburger>
             </div>
             {dropdown && 
               <div className={`p-absolute d-flex d-flex-column d-align-center ${style["profile-dropdown"]}`}>
                 <h6 onClick={profileHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
-                <h6 onClick={paymentHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Payment Method</h6>
+                {/* <h6 onClick={paymentHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Payment Method</h6> */}
                 <h6 onClick={collectionHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Collection</h6>
                 {token && <h6 onClick={logHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>}
               </div>

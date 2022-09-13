@@ -17,11 +17,11 @@ const Newsletter = () => {
             <div className={`col-6 d-flex d-flex-column d-align-center d-justify-center bg-primary rounded-12 ${styles["wine-newsletter-join"]}`}>
                 <h3 className='text-white mb-48'>Join the community</h3>
                 <div className={`d-flex d-flex-row ${styles["wine-newsletter-social-wrapper"]}`}>
-                    <img className={` ${styles["wine-newsletter-social-icon"]}`} src='images/discord.png'></img>
-                    <img className={` ${styles["wine-newsletter-social-icon"]}`} src='images/twitter.png'></img>
-                    <img className={` ${styles["wine-newsletter-social-icon"]}`} src='images/instagram.png'></img>
-                    <img className={` ${styles["wine-newsletter-social-icon"]}`} src='images/facebook.png'></img>
-                    <img className={` ${styles["wine-newsletter-social-icon"]}`} src='images/telegram.png'></img>
+                    <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/discord.png'></img>
+                    <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/twitter.png'></img>
+                    <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/instagram.png'></img>
+                    <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/facebook.png'></img>
+                    <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/telegram.png'></img>
                     <img src='images/youtube.png'></img>
                 </div>
             </div>  

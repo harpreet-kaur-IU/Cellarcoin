@@ -6,6 +6,7 @@ import HomeTopBrands from "../modules/HomeTopBrands"
 import BannerSlider from "../modules/BannerSlider"
 import WineCardSlider from "../modules/WineCardSlider"
 import Base from "../layout/Base"
+import Partner from "../modules/Partner"
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
          <WineCardSlider></WineCardSlider>
         <HomeTopBrands></HomeTopBrands>
         <ComingSoon></ComingSoon>
+        <Partner></Partner>
         <Newsletter></Newsletter>
       </Base>
       <Footer></Footer>

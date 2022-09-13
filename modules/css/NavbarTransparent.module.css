@@ -25,6 +25,13 @@
 }
 .btn-connect-wallet{
     padding: 14px 21px;
+    border: 1px solid var(--primary);
+}
+.btn-connect-wallet:hover{
+    background: #FFFFFF;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
 }
 .expand{
     left: 0% !important;

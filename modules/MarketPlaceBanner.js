@@ -101,7 +101,34 @@ const MarketPlaceBanner = () => {
         }
     },[nftId])
 
-    
+    const favoriteHandler = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+        myHeaders.append("Content-Type","application/json");
+        
+        var raw = JSON.stringify({
+            "favourites":true
+        })
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: raw
+        }
+
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${nftId}`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+            console.log(result)
+            setLoading(false)
+        })
+        .catch(error => console.log('error', error));
+    }
+
+
+
+
   return (
     <>
         {loading && <Loader></Loader>}
@@ -109,7 +136,7 @@ const MarketPlaceBanner = () => {
             {data &&
                 <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
                     <div className={`d-flex d-flex-column d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
-                        <div className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
+                        <div onClick={favoriteHandler} className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
                             <img src="images/heart.png"></img>
                         </div>
                         <img src={data.imageUrl}></img>

@@ -25,9 +25,14 @@
 }
 .btn-connect-wallet{
     padding: 14px 21px;
+    transition: 0.8s;
 }
-.profile-icon:hover{
-    color: linear-gradient(135deg, #780543 7.08%, #F851AB 92.92%);
+.btn-connect-wallet:hover{
+    background: #740578;
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
+}
+.profile-icon-svg{
+    fill:#780543;
 }
 @media screen and (max-width:1440px) {
     .navbar-search-input{

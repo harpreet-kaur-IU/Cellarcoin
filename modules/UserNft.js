@@ -2,6 +2,9 @@ import {useState} from 'react'
 import style from './css/WineCollection1.module.css'
 import Filter from './Filter';
 import NFTCard from './NFTCard';
+import UserNftCards from './UserNftCards';
+import UserTable from './UserTable';
+import WineCard from './WineCard';
 const UserNft = () => {
     const [activeTab, setActiveTab] = useState("tab1");
     const handleClick = (e) => {
@@ -32,6 +35,8 @@ const UserNft = () => {
                     <div className={`d-flex ${style["tabs-wrapper"]}`}>
                         <h3 onClick={handleClick} id="tab1" className={`cursor-pointer text-dark-gray font-24 f-500 l-137 ${activeTab === "tab1" ? style["active"] : ""} `}>Collection</h3>
                         <h3 onClick={handleClick} id="tab2" className={`cursor-pointer text-dark-gray font-24 f-500 l-137 ${activeTab === "tab2" ? style["active"] : ""} `}>On Sale</h3>
+                        <h3 onClick={handleClick} id="tab3" className={`cursor-pointer text-dark-gray font-24 f-500 l-137 ${activeTab === "tab3" ? style["active"] : ""} `}>Favourites</h3>
+                        <h3 onClick={handleClick} id="tab4" className={`cursor-pointer text-dark-gray font-24 f-500 l-137 ${activeTab === "tab4" ? style["active"] : ""} `}>Activity</h3>
                     </div>
                 </div>
             </div>
@@ -40,14 +45,32 @@ const UserNft = () => {
                 {activeTab == "tab1" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-1"]}`}>
                        <NFTCard status="Sell NFT"></NFTCard>
-                       <NFTCard status="List NFT"></NFTCard>
+                       <NFTCard status="Sell NFT"></NFTCard>
                     </div>
                 }
                 {activeTab == "tab2" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
-                        <NFTCard status="Sell NFT"></NFTCard>
-                        <NFTCard status="Sell NFT"></NFTCard>
+                       <WineCard></WineCard>
+                       <WineCard></WineCard>
+                       <WineCard></WineCard>
+                       <WineCard></WineCard>
                     </div>
+                }
+                {activeTab == "tab3" &&
+                    <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
+                        <WineCard></WineCard>
+                       <WineCard></WineCard>
+                       <WineCard></WineCard>
+                       <WineCard></WineCard>
+                    </div>
+                }
+                {activeTab == "tab4" &&
+                     <>
+                     <div className={`offset-4 col-8 ${style["wine-tab-3"]}`}>
+                         <UserNftCards></UserNftCards>
+                     </div>
+                     <UserTable></UserTable>
+                 </>
                 }
             </>
         </div>

@@ -103,6 +103,10 @@
     .top-brands-gallery-img-6{
         margin: 20px;
     }
+    .text {
+        font-size: 42px;
+        line-height:49px;
+    }
 }
 @media screen and (max-width:425px) {
     .top-brands-gallery-img-1{
@@ -122,5 +126,9 @@
     }
     .top-brands-gallery-img-6{
         margin:5px 20px;
+    }
+    .text {
+        font-size: 28px;
+        line-height:33px;
     }
 }

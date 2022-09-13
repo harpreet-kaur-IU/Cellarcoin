@@ -8,7 +8,6 @@
 }
 .marketplace-image-wrapper{
     width: 100%;
-   
 }
 .marketplace-image-wrapper img{
     overflow: hidden;
@@ -95,6 +94,3 @@
         grid-template-columns: repeat(1,1fr);
     }
 }
-
-
-
