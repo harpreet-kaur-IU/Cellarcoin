@@ -12,7 +12,7 @@ export default function Home() {
     <Fragment>
       <Base>
         <BannerSlider></BannerSlider>
-        <WineCardSlider></WineCardSlider>
+         <WineCardSlider></WineCardSlider>
         <HomeTopBrands></HomeTopBrands>
         <ComingSoon></ComingSoon>
         <Newsletter></Newsletter>

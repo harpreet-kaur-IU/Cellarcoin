@@ -9,7 +9,7 @@ const Congrats = () => {
   return (
     <div className={`vendor-container d-flex d-flex-column d-align-center d-justify-center ${style["congrats-container"]}`}>
       <h3 className='text-primary'>Congratulations!!</h3>
-      <h5>Your NFT has been successfully listed in the platform</h5>
+      <h5>Your purchase of THE WINE NFT was successful</h5>
       <div className={`bg-common ${style["congrats-nft-img-wrapper"]}`}>
         <img className={`${style["congrats-nft-img"]}`} src='images/marketplace-banner.png' alt='Uploaded NFT Image'></img>
       </div>

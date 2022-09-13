@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pagination } from 'swiper';
+import { Autoplay, Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -7,21 +7,26 @@ import HomePageBanner from './HomePageBanner';
 
 const BannerSlider = () => {
   return (
-    <Swiper
+      <Swiper
         slidesPerView={1}
         spaceBetween={10}
         loop={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
         pagination={{
           clickable: true,
         }}
-
-        modules={[Pagination]}
-        className={`home-banner-page-bars`}
-    >
-      <SwiperSlide className='swiper-slide'><HomePageBanner></HomePageBanner></SwiperSlide>
-      <SwiperSlide className='swiper-slide'><HomePageBanner></HomePageBanner></SwiperSlide>
-      <SwiperSlide className='swiper-slide'><HomePageBanner></HomePageBanner></SwiperSlide>
+        className={`home-banner-page-bars mySwiper`}
+      >
+      <SwiperSlide><HomePageBanner></HomePageBanner></SwiperSlide>
+      <SwiperSlide><HomePageBanner></HomePageBanner></SwiperSlide>
+      <SwiperSlide><HomePageBanner></HomePageBanner></SwiperSlide>
     </Swiper>
+    // <div>swiper</div>
   )
 }
 

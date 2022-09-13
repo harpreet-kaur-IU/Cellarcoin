@@ -19,7 +19,7 @@ const WineCard = (props) => {
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
                     <h5 className='l-137 f-500'>
                         <img src='images/eth.png'></img>
-                        {props.price} {/* wETH($711) */}
+                        {props.price} 
                     </h5>
                     <h5 className='l-137 f-500'>@Odule</h5>
                 </div>
@@ -28,7 +28,7 @@ const WineCard = (props) => {
                     <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
                         <span className='d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{props.views}</span>
-                            <img src="images/eye.png"></img>
+                            <img src="images/view-primary.svg"></img>
                         </span>
                         <span className='d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{props.favourites}</span>

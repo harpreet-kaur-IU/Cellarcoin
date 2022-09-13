@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Autoplay, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode} from "swiper";
 import 'swiper/css';
 import WineCard from './WineCard';
-import WineBottleHeader from './WineBottleHeader'
-import style from './css/WineCard.module.css'
+import WineBottleHeader from './WineBottleHeader';
+import style from './css/WineCard.module.css';
 import Loader from './Vendors Panel/Loader';
 const WineCardSlider = () => {
   const [data,setData] = useState("")
@@ -31,34 +31,49 @@ const WineCardSlider = () => {
       <div className={`container ${style["wine-card-slider-container"]}`}>
         <WineBottleHeader></WineBottleHeader>
         <Swiper
-          slidesPerView="auto"
+          slidesPerView={3}
           spaceBetween={24}
           grabCursor={true}
           loop={true}
-          modules={[FreeMode]}
-          // breakpoints={{
-          //   768: {
-          //     slidesPerView:2,
-          //   },
-          //   1024: {
-          //     slidesPerView:3,
-          //   },
-          // }}
+           autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+           breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 24,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+          }}
+          className="mySwiper"
         >
-          <SwiperSlide>
-            <div className={`d-grid grid-col-3 gap-3 ${style["wine-card-container"]}`}>
-            {data && data.map((item)=>(
-              <WineCard
-                key = {item.key}
-                id= {item._id}
-                price={item.price}
-                favourites={item.favourites}
-                views={item.views}
-                imageUrl={item.imageUrl}
-              ></WineCard>
-            ))}
-            </div>
-          </SwiperSlide>
+          {data && data.map((item)=>(
+            <SwiperSlide>
+                <WineCard
+                
+                  key = {item.key}
+                  id= {item._id}
+                  price={item.price}
+                  favourites={item.favourites}
+                  views={item.views}
+                  imageUrl={item.imageUrl}
+                ></WineCard>
+            </SwiperSlide>
+           ))}
+          {/* <SwiperSlide>slide 2</SwiperSlide>
+          <SwiperSlide>slide 3</SwiperSlide>
+          <SwiperSlide>slide 4</SwiperSlide>
+          <SwiperSlide>slide 5</SwiperSlide> */}
         </Swiper>
       </div>
     </>

@@ -4,8 +4,21 @@ import SideBar from './SideBar'
 import EditProfileTab from './EditProfileTab'
 import PaymentMethod from './PaymentMethod'
 import ChangePassword from './ChangePassword'
+import { removeUserOnBoardCookie } from '../auth/userCookies';
+import useFirebaseAuth from '../auth/useFirebaseAuth';
+import {useRouter} from 'next/router';
 const MyAccount = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("tab1");
+  const {signOut} = useFirebaseAuth(); 
+  const logoutNavigation = ()=>{
+    signOut()
+    .then(()=>{
+      removeUserOnBoardCookie()
+      router.push("/")
+    })
+    .catch((error)=>console.log(error))
+  }
   return (
     <div className={`container ${style["myaccount-section"]}`}>
       <h2 className={`text-black font-49 f-500 l-137 ${style["myaccount-heading"]}`}>My Account</h2>
@@ -17,11 +30,11 @@ const MyAccount = () => {
             {/* <SideBar title="Password" id="tab2" activeTab={activeTab} setActiveTab={setActiveTab}></SideBar> */}
             <SideBar title="Payment Method" id="tab3" activeTab={activeTab} setActiveTab={setActiveTab}></SideBar>
           </div>
-          <button className={`cursor-pointer mb-40 font-20 f-500 l-137 btn-secondary ${style["sidebar-logout-btn"]}`}>Logout</button>
+          <button onClick={logoutNavigation} className={`cursor-pointer mb-40 font-20 f-500 l-137 btn-secondary ${style["sidebar-logout-btn"]}`}>Logout</button>
         </div>
         <div className={`${style["vertical-line"]}`}></div>
         <div className={`col-9 ${style["side-bar-content-wrapper"]}`}>
-          {activeTab === "tab1" && <EditProfileTab heading="Edit Profile"></EditProfileTab> }
+          {activeTab === "tab1" && <EditProfileTab heading="Edit Profile"></EditProfileTab>}
           {/* {activeTab === "tab2" && <ChangePassword heading="Change Password" id="tab3" activeTab={activeTab}></ChangePassword>} */}
           {activeTab === "tab3" && <PaymentMethod heading="Payment Method"></PaymentMethod>}
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Header from './Header';
 import styles from '../css/Vendor Panel/CreateNFT.module.css';
 import AddProperties from './AddProperties';
@@ -48,6 +48,7 @@ const CreateNFT = () => {
     const [brandData,setBrandData] = useState("");
     const [coverError,setCoverError] = useState(false);
     const [brandError,setBrandError] = useState(false);
+    const [signerResult1,setSignerResult] = useState(false);
     var JWTtoken = getOnBoardFromCookie();
 
     const fileRef = useRef(); 
@@ -204,6 +205,10 @@ const CreateNFT = () => {
         }
     },[data])
 
+    const signerResult = (val) =>{
+        console.log(val)
+        // setSignerResult(val)
+    }
     useEffect(()=>{
         if(JWTtoken){
             var myHeaders = new Headers();
@@ -217,7 +222,6 @@ const CreateNFT = () => {
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrands`, requestOptions)
             .then(response => response.json())
             .then(result =>{
-                console.log(result.data)
                 setBrandData(result.data)
             })
             .catch(error => console.log('error', error));
@@ -240,134 +244,125 @@ const CreateNFT = () => {
     
     const formSubmit = async(e) =>{
         e.preventDefault();
-          if (typeof window.ethereum !== "undefined") {
-            const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
-            const contract = new ethers.Contract(
-              contractAddress,
-              Nft_marketplace_ABI,
-              signer
-            );
-            try {
-              await contract.nftMint(
-                to,
-                "abb",
-                "Cellarcoin",
-                "2400",
-                "Heloo",
-                "Nothing"
-              );
-            } catch (error) {
-              console.log(error);
+    
+        if(signerResult1){
+            if (typeof window.ethereum !== "undefined") {
+                const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+                const contract = new ethers.Contract(
+                contractAddress,
+                Nft_marketplace_ABI,
+                signer
+                );
+                try {
+                await contract.nftMint(
+                    to,
+                    "abb",
+                    "Cellarcoin",
+                    "2400",
+                    "Heloo",
+                    "Nothing"
+                )
+                .then(response=> console.log(response))
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                console.log("Please install MetaMask");
             }
-          } else {
-            console.log("Please install MetaMask");
-          }
         
-        
-        //web 3 code starts here
-        // const web3 = new Web3("https://matic-mumbai.chainstacklabs.com/");
-        // const contract = await new web3.eth.Contract(Nft_marketplace_ABI,"0xDf00126C37EFB27e60F53c520364763fc99e7F2B");
+            const result = validator();
+            if(result){    
+                const attributes = [
+                    {
+                        "trait_type":"Bottle Size",
+                        "value":bottle
+                    },
+                    {
+                        "trait_type":"Alcohol by volume",
+                        "value":volume
+                    },
+                    {
+                        "trait_type":"Region",
+                        "value":region
+                    },
+                    {
+                        "trait_type":"Spirit",
+                        "value":spirit
+                    },
+                    {...additionalProps},
+                    {...additionalProps1}
+                ]
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization","Bearer "+JWTtoken);
+                myHeaders.append("Content-Type","application/json");
 
-        // await contract.methods
-        // .nftMint(to,"https://wine-nft.s3.ap-south-1.amazonaws.com/6ada29b5b49e","new nft",2400,"external link","desc")
-        // .send({from : to})
-        // .on("error", (error) => {
-        //     console.log(error);
-        // })
-        // .then((receipt) => {
-		//     console.log(receipt);
-        // })
-         //web 3 code ends here
-        // e.preventDefault();
-        
-        const result = validator();
-        if(result){    
-            const attributes = [
-                {
-                    "trait_type":"Bottle Size",
-                    "value":bottle
-                },
-                {
-                    "trait_type":"Alcohol by volume",
-                    "value":volume
-                },
-                {
-                    "trait_type":"Region",
-                    "value":region
-                },
-                {
-                    "trait_type":"Spirit",
-                    "value":spirit
-                },
-                {...additionalProps},
-                {...additionalProps1}
-            ]
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization","Bearer "+JWTtoken);
-            myHeaders.append("Content-Type","application/json");
-
-            var raw = JSON.stringify({
-                "name":name,
-                "imageUrl":url,
-                "description":desc,
-                "attributes":attributes,
-                "walletAddress":wallet,
-                "brand":brand,
-                "isPremiumDrop":premiumDrops
-            });
-            if(nftId){
-                var requestOptions = {
-                    method: 'PATCH',
-                    headers: myHeaders,
-                    body: raw
-                };
-                setLoading(true)
-                fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
-                .then(response => response.json())
-                .then(result =>{ 
-                    setData(result.data)
-                    setLoading(false)
-                    router.push("/allnftlist")
-                })
-                .catch(error => console.log('error', error));
+                var raw = JSON.stringify({
+                    "name":name,
+                    "imageUrl":url,
+                    "description":desc,
+                    "attributes":attributes,
+                    "walletAddress":wallet,
+                    "brand":brand,
+                    "isPremiumDrop":premiumDrops
+                });
+                if(nftId){
+                    var requestOptions = {
+                        method: 'PATCH',
+                        headers: myHeaders,
+                        body: raw
+                    };
+                    setLoading(true)
+                    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
+                    .then(response => response.json())
+                    .then(result =>{ 
+                        setData(result.data)
+                        setLoading(false)
+                        router.push("/allnftlist")
+                    })
+                    .catch(error => console.log('error', error));
+                }
+                else{
+                    var requestOptions = {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: raw
+                    };
+                    setLoading(true)
+                    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
+                    .then(response => response.json())
+                    .then(result =>{ 
+                        setLoading(false)
+                        setName("")
+                        setDesc("")
+                        setWallet("")
+                        setBrand("")
+                        setUrl("")
+                        setBrand("")
+                        setPremiumDrops(false)
+                        setBottleSize("")
+                        setVolumn("")
+                        setRegion("")
+                        setSpirit("")
+                        setCover("")
+                        var inputfile = document.getElementById("file-input-field");
+                        inputfile.value = "";
+                    })
+                    .then(()=>toast.success("NFT created successfully"),{
+                        toastId:"2"
+                    })
+                    .catch(error => console.log('error', error));
+                }  
             }
-            else{
-                var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw
-                };
-                setLoading(true)
-                fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
-                .then(response => response.json())
-                .then(result =>{ 
-                    setLoading(false)
-                    setName("")
-                    setDesc("")
-                    setWallet("")
-                    setBrand("")
-                    setUrl("")
-                    setBrand("")
-                    setPremiumDrops(false)
-                    setBottleSize("")
-                    setVolumn("")
-                    setRegion("")
-                    setSpirit("")
-                    setCover("")
-                    var inputfile = document.getElementById("file-input-field");
-                    inputfile.value = "";
-                })
-                .then(()=>toast.success("NFT created successfully"),{
-                    toastId:"2"
-                })
-                .catch(error => console.log('error', error));
-            }  
+        }else{
+            toast.error("Please Connect Your Walllet"),{
+                toastId:"2"
+            }
         }
     }
   return (
     <div>
         {loading && <Loader></Loader>}
-        <Header></Header>
+        <Header signerData = {signerResult}></Header>
         <div style={{height:"100vh",overflow:"scroll"}}>
             <div className={`col-9 vendor-container ${styles["vendor-container"]}`}>
                 <h4 className='l-50 f-600 text-primary mt-24'>Create NFT</h4>

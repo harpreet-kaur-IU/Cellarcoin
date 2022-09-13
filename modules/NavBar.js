@@ -29,12 +29,12 @@ const NavBar = () => {
   const [userId,setUserId] = useState("")
   var JWTToken = getUserOnBoardFromCookie();
   useEffect(()=>{
-      if(!JWTToken){
-        setToken(false)
-      }
-      else{
-        setToken(true)
-      }
+    if(!JWTToken){
+      setToken(false)
+    }
+    else{
+      setToken(true)
+    }
   },[toggle])
   useEffect(()=>{
     if(JWTToken){
@@ -50,7 +50,7 @@ const NavBar = () => {
     }else{
         // Router.push("/vendorlogin")
     }
-},[])
+  },[])
   const handleClick = () =>{
     setToggle(prev => !prev);
   }
@@ -81,6 +81,7 @@ const NavBar = () => {
     signOut()
     .then(()=>{
       removeUserOnBoardCookie()
+      router.push("/")
       setToken(false)
       setConfirm(false)
     })
@@ -100,24 +101,24 @@ const NavBar = () => {
       <nav className={`p-fixed col-12 ${style["navbar"]}`}>
         <div className={`p-relative container d-flex d-align-center d-justify-center ${style["navbar-container"]}`}>
           <Link href="/">
-            <img className={`d-flex d-align-center d-justify-center ${style["navbar-site-logo"]}`} src='images/site-logo.png'></img>
+            <img className={`cursor-pointer d-flex d-align-center d-justify-center ${style["navbar-site-logo"]}`} src='images/site-logo.png'></img>
           </Link>
           <Link href="/">
           <div className={`d-none  d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
                 <SiteLogo color="#780543"></SiteLogo>
               </div>
           </Link>
-          <input className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or collection'></input>
+          <input className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
           <ul id="ul-navbar" className={`d-flex d-flex-row text-dark-gray ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
             <NavItems name="not-transparent" path="/explore" value="Explore"></NavItems>
             <NavItems name="not-transparent" path="/community" value="Community"></NavItems>
             <NavItems name="not-transparent" path="/brands" value="Brands"></NavItems>
-            <NavItems name="not-transparent" path="/about" value="About us"></NavItems>
+            <NavItems name="not-transparent" path="/about" value="About Us"></NavItems>
             {/* <li className='ml-32 font-16 f-700 l-124 text-black'><Link href="/explore">Explore</Link></li>
             <li className='ml-32 font-16 f-500 l-137'><Link href="/community">Community</Link></li>
             <li className='ml-32 font-16 f-500 l-137'><Link href="/brands">Brands</Link></li>
             <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
-            {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>SignIn</li>}
+            {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
           </ul>
 
           <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}>

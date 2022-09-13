@@ -9,7 +9,9 @@ import { ethers } from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
+
 const Header = (props) => {
+
   const [dropdown,setDropdown] = useState(false);
   const [user,setUser] = useState("")
   const dropdownHandler = () =>{
@@ -79,7 +81,7 @@ const Header = (props) => {
 
   const [isConnected, setIsConnected] = useState(false);
   const [hasMetamask, setHasMetamask] = useState(false);
-  const [signer, setSigner] = useState(undefined);
+  const [signer, setSigner] = useState(false);
 
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
@@ -87,6 +89,11 @@ const Header = (props) => {
     }
   });
 
+  useEffect(()=>{
+    if(signer){
+      props.signerData(signer)
+    }
+  },[signer])
   async function connect() {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -94,6 +101,8 @@ const Header = (props) => {
         setIsConnected(true);
         const provider = new ethers.providers.Web3Provider(web3ModalProvider);
         setSigner(provider.getSigner());
+        // localStorage.removeItem('signerWeb3');
+        // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
       } catch (e) {
         console.log(e);
       }
@@ -107,7 +116,7 @@ const Header = (props) => {
       const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
       const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
-        await contract.store(42);
+        await contract.store(42)
       } catch (error) {
         console.log(error);
       }

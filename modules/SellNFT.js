@@ -20,21 +20,24 @@ const SellNFT = () => {
     const expireHandler = (value) =>{
         setExpire(value);
     }
+    const listNavigationHandler = ()=>{
+      router.push("/purple")
+    }
     const validator = () =>{
         if(regex.test(price)){
-        setPriceError(false);
+          setPriceError(false);
         }else{
-        setPriceError(true);
+          setPriceError(true);
         }
         if(expire === ''){
-        setExpireError(true);
+          setExpireError(true);
         }else{
-        setExpireError(false);
+          setExpireError(false);
         }
         if(!regex.test(price) || expire === ''){
-        return false;
+          return false;
         }else{
-        return true;
+          return true;
         }
     }
     const formSubmit = (e) =>{
@@ -109,7 +112,7 @@ const SellNFT = () => {
           <DropDown handler={expireHandler} placeholder="Select Expiry Date"></DropDown>
           {isExpire && <span className={`mt-32 mb-8 font-14 f-700 text-danger`}>Please Select Expiry Date.</span>}
           <div className={`${styles["expire-instructions"]}`}>
-            <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not more than 7 days</h4>
+            <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not less than 7 days</h4>
             <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-2"]}`}>*Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
           </div>
           
@@ -119,7 +122,7 @@ const SellNFT = () => {
           </div>
 
           <div className={`d-flex d-justify-end ${styles["list-btn"]}`}>
-            <button className='font-20 f-500'>List</button>
+            <button onClick={listNavigationHandler} className='font-20 f-500'>List</button>
           </div>
         </div>
       </form>

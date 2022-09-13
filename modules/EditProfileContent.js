@@ -153,6 +153,7 @@ const EditProfileContent = () => {
       <form onSubmit={formSubmit}>
         <div className={`p-relative ${style["cover-img-wrapper"]} ${imgLoading ? style["cover-img-wrapper-opacity"]:"" }`}>
           <input 
+            className='cursor-pointer'
             id='file-input-field'
             type='file'
             ref={fileRef}
@@ -175,6 +176,7 @@ const EditProfileContent = () => {
               {imgLoading2 && <SmallLoader></SmallLoader>}
             </div>
             <input 
+              className='cursor-pointer'
               id='profile-input-field'
               type='file'
               ref={fileRef2}

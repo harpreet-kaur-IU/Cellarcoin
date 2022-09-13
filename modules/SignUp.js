@@ -37,7 +37,7 @@ const SignUp = (props) => {
     const[email2,setEmail2] = useState('');
     const [password2, setPassword2] = useState('');
    
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
     const nameHandler = (e) =>{
         setName(e.target.value)
     }
@@ -85,7 +85,6 @@ const SignUp = (props) => {
                         method: 'POST',
                         headers: myHeaders,
                     };
-
                     console.log(requestOptions)
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
                     .then(response => response.json()) 
@@ -133,13 +132,13 @@ const SignUp = (props) => {
     }
 
     const validator = () =>{
-        if(name == ""){
+        if(name === ""){
             setErrorName(true)
         }
         else{
             setErrorName(false)
         }
-        if(username == ""){
+        if(username === ""){
             setErrorUserName(true)
         }
         else{
@@ -248,8 +247,6 @@ const SignUp = (props) => {
                 method: 'POST',
                 headers: myHeaders,
             };
-
-
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
             .then(response => response.json()) 
             .then(result => {
@@ -273,6 +270,11 @@ const SignUp = (props) => {
                     toastId:"2"
                 });
             }
+            else if(error.message == "Firebase: Error (auth/wrong-password)."){
+                toast.error("Password Invalid",{
+                    toastId:"2"
+                });
+            }
             else if(error.message == "Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found)."){
                 toast.error("Invalid Email",{
                     toastId:"2"
@@ -283,6 +285,7 @@ const SignUp = (props) => {
                     toastId:"2"
                 });
             }
+            console.log(error)
         })
     }
   return (
@@ -291,7 +294,7 @@ const SignUp = (props) => {
         <>
             <div className='d-flex d-align-center d-justify-space-between'>
                 <h3 className='f-500 l-137'>Sign Up</h3>
-                <img onClick={props.handler} src='images/cross.png'></img>
+                <img className='cursor-pointer' onClick={props.handler} src='images/cross.png'></img>
             </div>
             <form onSubmit={formSubmit}>
                 <input type="text" className={`bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={name} onChange={nameHandler} placeholder='Name' required></input>
@@ -317,8 +320,8 @@ const SignUp = (props) => {
                 </div>
                 {errorPolicy && <span className={`mb-8 font-14 f-700 text-danger`}>Please check the terms and conditions</span>}
                 <button className={`mt-16 col-12 font-18 f-500 l-137 btn-primary cursor-pointer ${style["btn-continue"]}`}>Continue</button>
-                <div onClick={googleSignIn} className={`d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary cursor-pointer ${style["btn-google"]}`}>Sign in with Google</div>
-                <h5 className='f-400 font-18 l-137 mt-16 text-center'>Already a member? <a onClick={handleClick} className='cursor-pointer text-primary'>Sign in</a></h5>
+                <div onClick={googleSignIn} className={`cursor-pointer d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary cursor-pointer ${style["btn-google"]}`}>Sign in with Google</div>
+                <h5 className='f-400 font-18 l-137 mt-16 text-center'>Already a member? <a onClick={handleClick} className='cursor-pointer text-primary f-500'>Sign in</a></h5>
             </form>
         </>
         }
@@ -330,7 +333,7 @@ const SignUp = (props) => {
                 <img onClick={props.handler} src='images/cross.png'></img>
             </div>
             <form onSubmit={formSubmit2}>
-                <input type="email" value={email2} onChange={emailHandler2} className={`bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder='Email'></input>
+                <input type="email" value={email2} onChange={emailHandler2} className={`bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder='Email' required></input>
                 <div className={`p-relative ${style["password"]}`}>
                     <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={password2} onChange={passwordHandler2} placeholder="Password" required/>
                     <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={passwordHandler2} value={password2} required/>
@@ -338,8 +341,8 @@ const SignUp = (props) => {
                 </div>
                 <button className={`mt-16 col-12 font-18 f-500 l-137 btn-primary ${style["btn-continue"]}`}>Continue</button>
             </form>
-            <div className={`d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary ${style["btn-google"]}`}>Sign in with Google</div>
-            <h5 className='f-400 font-18 l-137 mt-16 text-center'>Not a member? <a onClick={handleClick} className='text-primary'>Sign Up</a></h5>
+            <div onClick={googleSignIn} className={`cusror-pointer d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary ${style["btn-google"]}`}>Sign in with Google</div>
+            <h5 className='f-400 font-18 l-137 mt-16 text-center'>Not a member? <a onClick={handleClick} className='cursor-pointer text-primary f-500'>Sign Up</a></h5>
         </>
 
         }

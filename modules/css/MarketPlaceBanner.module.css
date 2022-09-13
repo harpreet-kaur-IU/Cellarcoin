@@ -36,6 +36,9 @@
 .marketplace-card-desc{
     height: max-content;
 }
+.marketplace-view-profile{
+    font-size: 16px;
+}
 @media screen and (max-width:1440px) {
     .purple-market-container{
         width: 90%;

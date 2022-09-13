@@ -22,7 +22,9 @@
     border:none;
     border-radius: 0 16px 16px 0;
 }
-
+.wine-newsletter-subscribe button:hover{
+    background: #740578;
+}
 @media screen and (max-width:1440px) {
     .news-letter-container{
         width: 90%;

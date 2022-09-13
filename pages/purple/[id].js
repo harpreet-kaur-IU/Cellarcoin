@@ -34,18 +34,21 @@ export default function Purple() {
             <Base>
                 <MarketPlaceBanner></MarketPlaceBanner>
                 <ActivityTable></ActivityTable>
-                <div className={`container ${styles["purple-market-container"]}`}>
-                    <div className={`d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
-                        {data && data.map((item)=>(
-                            <WineCard
-                                key={item.key}
-                                id={item._id}
-                                price={item.price}
-                                favourites={item.favourites}
-                                views={item.views}
-                                imageUrl={item.imageUrl}
-                            ></WineCard>
-                        ))}
+                <div>
+                    <h3 className='f-600 l-137 text-center'>You may also like</h3>
+                    <div className={`container ${styles["purple-market-container"]}`}>
+                        <div className={`mt-32 d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
+                            {data && data.map((item)=>(
+                                <WineCard
+                                    key={item.key}
+                                    id={item._id}
+                                    price={item.price}
+                                    favourites={item.favourites}
+                                    views={item.views}
+                                    imageUrl={item.imageUrl}
+                                ></WineCard>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <BackgroundImageBanner></BackgroundImageBanner>

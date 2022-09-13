@@ -1,12 +1,12 @@
 /* .wine-card-slider-container{
     margin-left: 64px;
 } */
-.wine-card-container{
+/* .wine-card-container{
     gap:23px;
-}
+} */
 .wine-cards-container{
     border-radius: 16px;
-    width: 100%;
+    /* width: 100%; */
 }
 .wine-cards-container:hover{
     box-shadow: 5px 7px 5px 5px rgb(0 0 0 / 5%);

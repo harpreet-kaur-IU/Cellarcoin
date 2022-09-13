@@ -549,10 +549,10 @@ li{
     width: 768px;
   }
 }
-@media screen and (min-width: 320px) {
+/* @media screen and (min-width: 320px) {
   .swiper-pagination{
     display: flex;
     align-items: center;
     justify-content: center;
   }
-}
+} */
