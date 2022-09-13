@@ -9,8 +9,8 @@ const WineCard = (props) => {
     }
   return (
     <>
-        <div onClick={navigationHandler} className={`bg-card-dark ${styles["wine-cards-container"]}`}>
-            <img className={`${styles["wine-bg-img"]}`} src={props.imageUrl}></img>
+        <div className={`bg-card-dark ${styles["wine-cards-container"]}`}>
+            <img  onClick={navigationHandler} className={`${styles["wine-bg-img"]}`} src={props.imageUrl}></img>
             <div className='p-16'>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
                     <h6 className='l-137 f-500'>Listing Price</h6>

@@ -8,14 +8,14 @@
 }
 .marketplace-image-wrapper{
     width: 100%;
-}
-.marketplace-image-wrapper img{
     overflow: hidden;
+    gap: 24px;
 }
-/* .marketplace-image-wrapper img{
-    width: 100%;
-    margin: 49px 0px;
-} */
+.nft-image{
+    height: 500px;
+    width: inherit;
+    object-fit: contain;
+}
 .marketplace-card-1{
     margin: 34px 0px;
 }
@@ -62,6 +62,10 @@
     }
 }
 @media screen and (max-width:768px) {
+    .nft-image{
+        width: 90%;
+    }
+
     .marketplace-view-profile{
         color: #ffffff;
     }

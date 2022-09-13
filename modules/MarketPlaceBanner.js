@@ -139,7 +139,7 @@ const MarketPlaceBanner = () => {
                         <div onClick={favoriteHandler} className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
                             <img src="images/heart.png"></img>
                         </div>
-                        <img src={data.imageUrl}></img>
+                        <img className={`${style["nft-image"]}`} src={data.imageUrl}></img>
                     </div>
                     <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>
                         <div className={`${style["marketplace-card-1-margin"]}`}>
