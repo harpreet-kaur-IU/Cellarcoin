@@ -26,7 +26,9 @@
 .btn-connect-wallet{
     padding: 14px 21px;
 }
-
+.profile-icon:hover{
+    color: linear-gradient(135deg, #780543 7.08%, #F851AB 92.92%);
+}
 @media screen and (max-width:1440px) {
     .navbar-search-input{
         width:280px;
@@ -119,6 +121,7 @@
     .profile-icon{
         margin-left: 12px;
     }
+   
     .bar-cross{
         margin-left: 12px; 
     }

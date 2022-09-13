@@ -15,7 +15,31 @@
     height: 56px;
     padding: 17px 24px;
 }
-
+.sort-position-absolute{
+    right: 0;
+    width: 422px;
+    height: auto;
+}
+.sort-col-1{
+    padding: 16px 22px 14px 22px;
+}
+.sort-col-2{
+    padding:22px 16px;
+}
+.min-wrapper{
+    padding: 10px 36px;
+}
+.max-wrapper{
+    padding: 10px 36px;
+}
+.btn-continue{
+    margin:21px 0px 14px 0px;
+}
+.btn-continue button{
+    padding: 5px 56px;
+    background: var(--primary);
+    color: var(--white);
+}
 @media screen  and (max-width:476px){
     .filter-margin{
         display:none;
