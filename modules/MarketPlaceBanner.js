@@ -108,7 +108,10 @@ const MarketPlaceBanner = () => {
         <div className={`bg-pink ${style["market-banner-section"]}`}>
             {data &&
                 <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
-                    <div className={`d-flex d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
+                    <div className={`d-flex d-flex-column d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
+                        <div className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
+                            <img src="images/heart.png"></img>
+                        </div>
                         <img src={data.imageUrl}></img>
                     </div>
                     <div className={`rounded-16 bg-active text-black ${style["marketplace-card-1"]}`}>

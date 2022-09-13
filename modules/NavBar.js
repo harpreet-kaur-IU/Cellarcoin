@@ -127,7 +127,7 @@ const NavBar = () => {
           <div className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div>
           <div onClick={notificationHandler} className={`cursor-pointer ml-32 ${style["bell-icon"]}`}><img src='images/bell.png'></img></div>
           <div onClick ={dropdownHandler} className={`cursor-pointer ml-24 ${style["profile-icon"]}`}><img src='images/profile-icon.png'></img></div>
-          <div  onClick={navBarHandler} role="button" className={`cursor-pointer d-none ml-24 ${style["bar-cross"]}`}>
+          <div onClick={navBarHandler} role="button" className={`cursor-pointer d-none ml-24 ${style["bar-cross"]}`}>
             <Hamburger color="#000000"></Hamburger>
           </div>
           {dropdown && 

@@ -8,6 +8,7 @@
 }
 .marketplace-image-wrapper{
     width: 100%;
+   
 }
 .marketplace-image-wrapper img{
     overflow: hidden;
@@ -38,6 +39,14 @@
 }
 .marketplace-view-profile{
     font-size: 16px;
+}
+.favorite-icon{
+   width: 100%;
+}
+.favorite-icon img{
+    padding: 13px;
+    background-color:var(--inactive-pink);
+    border-radius: 50%;
 }
 @media screen and (max-width:1440px) {
     .purple-market-container{
@@ -77,9 +86,9 @@
         grid-template-columns:100%;
         column-gap:2%;
     }
-    /* .marketplace-image-wrapper img{
-        width: auto;
-    } */
+    .marketplace-image-wrapper{
+        margin-top: 20px;
+    }
 }
 @media screen and (max-width:650px){
     .purple-market-card-wrapper{
