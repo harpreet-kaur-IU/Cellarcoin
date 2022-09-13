@@ -3,7 +3,10 @@ import styles from './css/ActivityTable.module.css'
 const ActivityTable = () => {
   return (
     <div className={`container ${styles["activity-container"]}`}>
-         <h3 className={`f-600 text-primary ${styles["table-heading"]}`}>Activity</h3>
+        <div className={`d-flex d-align-center d-justify-space-between ${styles["table-heading"]}`}>
+            <h3 className={`f-600 text-primary `}>Activity</h3>
+            <button className='cursor-pointer btn-secondary font-14 f-500 l-137'>Filter</button>
+        </div>
         <div className={`${styles["table-section-scroll"]}`} style={{overflow:"hidden",marginBottom:"100px",height:"auto"}}>
             <div className={`${styles["table-wrapper"]}`}>
                 <div className={` ${styles["table-headers"]}`}>

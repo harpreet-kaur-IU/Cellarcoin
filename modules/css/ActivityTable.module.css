@@ -67,9 +67,12 @@
     flex-wrap: wrap;
 }
 .table-heading{
-    padding: 19px 38px 0px 35px;
+    padding: 0px 38px 0px 35px;
     font-size: 30px;
     line-height: 42px;
+}
+.table-heading button{
+    padding: 10px 37px;
 }
 .table-headers{
     display: grid;
