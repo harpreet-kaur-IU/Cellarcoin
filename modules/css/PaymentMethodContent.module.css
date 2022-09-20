@@ -4,6 +4,11 @@
 }
 .connect-wallet-btn{
     padding: 10px 36px;
+    transition: 0.8s;
+}
+.connect-wallet-btn:hover{
+    background-color: var(--hover-color);
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
 }
 @media screen and (max-width:1232px) {
     .payment-method-h2{

@@ -59,9 +59,7 @@
 }
 .table-wrapper{
     background: #FFFFFF;
-
     width:100%;
-    overflow-x: scroll;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -76,14 +74,14 @@
 }
 .table-headers{
     display: grid;
-    grid-template-columns: minmax(200px,400px) minmax(200px,400px) minmax(200px,400px) minmax(200px,400px) minmax(160px,360px);
+    grid-template-columns:300px 250px 250px 250px 150px;
     word-break: break-all;
     padding: 21px 38px 40px 46px;
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
 }
 .table-column{
     display: grid;
-    grid-template-columns: minmax(200px,400px) minmax(200px,400px) minmax(200px,400px) minmax(200px,400px) minmax(160px,360px);
+    grid-template-columns:300px 250px 250px 250px 150px;
     word-break: break-all;
     padding: 21px 38px 9px 46px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -149,8 +147,51 @@
             width: 90%;
             margin:0 auto;
         }
+        .table-headers{
+            grid-template-columns:280px 230px 230px 230px 130px;
+        }
+        .table-column{
+            grid-template-columns:280px 230px 230px 230px 130px;
+        }
     }
-    @media screen and (max-width:600px) {
+    @media screen and (max-width:1317px) {
+        .table-headers{
+            grid-template-columns:250px 200px 200px 200px 100px;
+        }
+        .table-column{
+            grid-template-columns:250px 200px 200px 200px 100px;
+        }
+    }
+    @media screen and (max-width:1145px) {
+        .table-headers{
+            grid-template-columns:200px 170px 170px 170px 100px;
+        }
+        .table-column{
+            grid-template-columns:200px 170px 170px 170px 100px;
+        }
+    }
+    @media screen and (max-width:1024px) {
+        .table-wrapper{
+            background-color: var(--inactive-pink);
+        }
+        .table-headers{
+            display: none;
+        }
+        .table-column{
+            grid-template-columns:repeat(3,1fr);
+            gap: 24px
+        }
+    }
+    @media screen and (max-width:606px) {
+        .table-section-scroll{
+            padding-right: 0px;
+        }
+        .table-column{
+            display:none;
+        }
+        .table-column-sm{
+            display: flex;
+        }
         .listing-content-brands{
             margin-top: 10px;
         }
@@ -172,8 +213,8 @@
         .listing-content-wrapper h4{
             font-size: 24px;
         }
-        .table-section-scroll{
-            padding-right: 8px;
+        .table-column-sm{
+            padding: 26px 27px;
         }
     }
     

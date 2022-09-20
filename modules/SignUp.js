@@ -14,7 +14,7 @@ import { async } from '@firebase/util';
 
 const SignUp = (props) => {
     const {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} = useFirebaseAuth(); 
-
+    const [loading,setLoading] = useState(false);
     //signup states
     const [name,setName] = useState("")
     const [username,setUserName] = useState("")
@@ -76,6 +76,7 @@ const SignUp = (props) => {
                 "name": authUser.user.displayName,
                 "userName": authUser.user.displayName
             };
+            setLoading(true)
             axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}user/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.accessToken}})
             .then(response => {
                 if(response.data.message === "User added successfully!"){
@@ -100,6 +101,7 @@ const SignUp = (props) => {
                             setUserOnBoardCookie(result.token);
                             props.confirm()
                             props.handler()
+                            setLoading(false)
                         }
                     })
                     .catch(error => console.log('error', error));
@@ -196,20 +198,24 @@ const SignUp = (props) => {
                     "name": name,
                     "userName": username
                 };
+                setLoading(true)
                 axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}user/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.multiFactor.user.accessToken}})
                 .then(response => {
                     if(response.data.message === "User added successfully!"){
                         authUser.user.sendEmailVerification();
                         signOut();
                         handleClick();
+                        setLoading(false)
                         return response;
                     }
                     else if(response.data.message === 'Email already exist!'){
                         toast.error("Email Already Exists",{
                             toastId:"2"
                         });
+                        setLoading(false)
                     }
                     else{
+                        setLoading(false)
                         throw new Error(response);
                     }
                 })
@@ -241,28 +247,37 @@ const SignUp = (props) => {
         e.preventDefault()
         signInWithEmailAndPassword(email2,password2)
         .then(authUser => {
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization","Bearer "+authUser.user.multiFactor.user.accessToken);
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-            };
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
-            .then(response => response.json()) 
-            .then(result => {
-                if(result.message == "This email is not registered with us"){
-                    toast.error("Email is not registered",{
-                        toastId:"2"
-                    });
-                }
-                else{
-                    removeUserOnBoardCookie();
-                    setUserOnBoardCookie(result.token);
-                    props.confirm()
-                    props.handler()
-                }
-            })
-            .catch(error => console.log('error', error));
+            if(authUser.user.multiFactor.user.emailVerified){
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization","Bearer "+authUser.user.multiFactor.user.accessToken);
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                };
+                setLoading(true)
+                fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
+                .then(response => response.json()) 
+                .then(result => {
+                    if(result.message == "This email is not registered with us"){
+                        toast.error("Email is not registered",{
+                            toastId:"2"
+                        });
+                        setLoading(false)
+                    }
+                    else{
+                        removeUserOnBoardCookie();
+                        setUserOnBoardCookie(result.token);
+                        props.confirm()
+                        props.handler()
+                        setLoading(false)
+                    }
+                })
+                .catch(error => console.log('error', error));
+            }else{
+                toast.error("User Not Verified",{
+                    toastId:"2"
+                });
+            }
         })
         .catch(error => {
             if(error.message == "Firebase: Error (auth/user-not-found)."){
@@ -290,6 +305,7 @@ const SignUp = (props) => {
     }
   return (
     <div className={`p-absolute bg-pink text-black ${style["signup-section-position"]}`}>
+        {loading && <Loader></Loader>}
         {!toggle &&
         <>
             <div className='d-flex d-align-center d-justify-space-between'>
@@ -320,7 +336,7 @@ const SignUp = (props) => {
                 </div>
                 {errorPolicy && <span className={`mb-8 font-14 f-700 text-danger`}>Please check the terms and conditions</span>}
                 <button className={`mt-16 col-12 font-18 f-500 l-137 btn-primary cursor-pointer ${style["btn-continue"]}`}>Continue</button>
-                <div onClick={googleSignIn} className={`cursor-pointer d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary cursor-pointer ${style["btn-google"]}`}>Sign in with Google</div>
+                <div onClick={googleSignIn} className={`d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary cursor-pointer ${style["btn-google"]}`}>Sign in with Google</div>
                 <h5 className='f-400 font-18 l-137 mt-16 text-center'>Already a member? <a onClick={handleClick} className='cursor-pointer text-primary f-500'>Sign in</a></h5>
             </form>
         </>
@@ -341,7 +357,7 @@ const SignUp = (props) => {
                 </div>
                 <button className={`mt-16 col-12 font-18 f-500 l-137 btn-primary ${style["btn-continue"]}`}>Continue</button>
             </form>
-            <div onClick={googleSignIn} className={`cusror-pointer d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary ${style["btn-google"]}`}>Sign in with Google</div>
+            <div onClick={googleSignIn} className={`cursor-pointer d-flex d-align-center d-justify-center mt-16 col-12 font-18 f-500 l-137 btn-secondary ${style["btn-google"]}`}>Sign in with Google</div>
             <h5 className='f-400 font-18 l-137 mt-16 text-center'>Not a member? <a onClick={handleClick} className='cursor-pointer text-primary f-500'>Sign Up</a></h5>
         </>
 

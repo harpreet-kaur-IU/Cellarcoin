@@ -66,7 +66,7 @@ const Listing = () => {
                                         <h5 className='f-400'>{data.walletAddress}</h5>
                                     }
                                     {!data.walletAddress && 
-                                        <h5 className='f-400'>not addded</h5>
+                                        <h5 className='f-400'>not added</h5>
                                     }
                                 </div>
                             </div>

@@ -4,7 +4,6 @@
 .edit-profile-wrapper{
     padding-left: 40px;
     margin-top: 28px;
-   
 }
 .small-loader{
     position: absolute;
@@ -77,19 +76,21 @@
 .profile-user-name::placeholder{
     color: var(--font-dark);
 }
-
 .btn-save-profile{
     padding: 10px 58px;
 }
 .editprofile-btn-wrapper input{
     position: absolute;
-    opacity: 0;
+    opacity:0;
     top:0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    bottom:0;
+    right:0;
+    left:0;
 }
-
+.btn-save-profile:hover{
+    background: #740578;
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
+}
 @media screen and (max-width:1232px) {
     .editprofile-upload-btn{
         padding: 10px 20px;
@@ -107,8 +108,7 @@
         font-size: 32px;
     }
 }
-@media screen and (max-width:1024px) {
-
+@media screen and (max-width:1024px){
     .edit-profile-wrapper h4{
         font-size: 22px;
     }
@@ -133,15 +133,13 @@
     .edit-profile-wrapper h4{
         font-size: 20px;
     }
-
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:768px){
     .edit-profile-wrapper{
         padding-left: 0px;
     }
 }
-@media screen and (max-width:600px) {
-    
+@media screen and (max-width:600px){
     .edit-profile-wrapper h4{
         font-size: 15px;
     }
@@ -163,7 +161,7 @@
         font-size: 26px;
     }
 }
-@media screen and (max-width:426px) {
+@media screen and (max-width:426px){
     .edit-profile-wrapper h4{
         font-size: 12px;
     }

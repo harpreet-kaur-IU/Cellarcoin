@@ -7,11 +7,21 @@ const Community = () => {
         <h1 className='font-48 f-700 l-65'>Connect with us, Join our Community Today</h1>
         <p className='f-500 l-140 mt-32'>Follow our social media page for more updates</p>
         <div className={`mt-40 d-flex d-flex-row d-justify-center gap-5 ${style["community-images-wrapper"]}`}>
-          <img src="images/com-fb.png"></img>
-          <img src="images/com-insta.png"></img>
-          <img src="images/com-twit.png"></img>
-          <img src="images/com-dis.png"></img>
-          <img src="images/com-tele.png"></img>
+          <div className={`d-flex d-align-center d-justify-center ${style["community-fb"]}`}>
+            <img src="images/c-fb.svg"></img>
+          </div>
+          <div className={`d-flex d-align-center d-justify-center ${style["community-insta"]}`}>
+            <img src="images/c-insta.svg"></img>
+          </div>
+          <div className={`d-flex d-align-center d-justify-center ${style["community-twitter"]}`}>
+            <img src="images/c-twitter.svg"></img>
+          </div>
+          <div className={`d-flex d-align-center d-justify-center ${style["community-discord"]}`}>
+            <img src="images/c-discord.svg"></img>
+          </div>
+          <div className={`d-flex d-align-center d-justify-center ${style["community-telegram"]}`}>
+            <img src="images/c-telegram.svg"></img>
+          </div>
         </div>
       </div>
     </div>

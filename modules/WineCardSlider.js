@@ -36,7 +36,7 @@ const WineCardSlider = () => {
           grabCursor={true}
           loop={true}
            autoplay={{
-            delay: 2000,
+            delay: 10000,
             disableOnInteraction: false,
           }}
           navigation={true}
@@ -63,6 +63,7 @@ const WineCardSlider = () => {
                 
                   key = {item.key}
                   id= {item._id}
+                  name={item.name}
                   price={item.price}
                   favourites={item.favourites}
                   views={item.views}

@@ -8,7 +8,31 @@
 .community-banner-padding{
     padding: 348px 241px 161px 241px;
 }
-
+.community-fb{
+    padding: 16px 28px 16px 22px;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
+.community-insta{
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
+.community-twitter{
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
+.community-discord{
+    padding:16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
+.community-telegram{
+    padding: 16px;
+    background: #FFFFFF;
+    border-radius: 50%;
+}
 @media screen and (max-width:1440px) {
     .community-banner-padding{
         padding: 348px 180px 161px 180px;

@@ -55,46 +55,46 @@ const MarketPlaceBanner = () => {
             .then(response => response.json())
             .then(result =>{
                 setData(result.nft)
-                var arr2 = result.nft.expiryDate.split('/');
-                var month = "";
-                if(arr2[1] === "01"){
-                    month="Jan";
-                }
-                else if(arr2[1] === "02"){
-                    month="Feb";
-                }
-                else if(arr2[1] === "03"){
-                    month="March";
-                }
-                else if(arr2[1] === "04"){
-                    month="Apr";
-                }
-                else if(arr2[1] === "05"){
-                    month="May";
-                }
-                if(arr2[1] === "06"){
-                    month="June";
-                }
-                else if(arr2[1] === "07"){
-                    month="July";
-                }
-                else if(arr2[1] === "08"){
-                    month="Aug";
-                }
-                else if(arr2[1] === "09"){
-                    month="Sept";
-                }
-                else if(arr2[1] === "10"){
-                    month="Oct";
-                }
-                else if(arr2[1] === "11"){
-                    month="Nov";
-                }
-                else if(arr2[1] === "12"){
-                    month="Dec";
-                }
-                var date = `${month} ${arr2[0]},${arr2[2]}`;
-                setDate(date)
+                // var arr2 = result.nft.expiryDate.split('/');
+                // var month = "";
+                // if(arr2[1] === "01"){
+                //     month="Jan";
+                // }
+                // else if(arr2[1] === "02"){
+                //     month="Feb";
+                // }
+                // else if(arr2[1] === "03"){
+                //     month="March";
+                // }
+                // else if(arr2[1] === "04"){
+                //     month="Apr";
+                // }
+                // else if(arr2[1] === "05"){
+                //     month="May";
+                // }
+                // if(arr2[1] === "06"){
+                //     month="June";
+                // }
+                // else if(arr2[1] === "07"){
+                //     month="July";
+                // }
+                // else if(arr2[1] === "08"){
+                //     month="Aug";
+                // }
+                // else if(arr2[1] === "09"){
+                //     month="Sept";
+                // }
+                // else if(arr2[1] === "10"){
+                //     month="Oct";
+                // }
+                // else if(arr2[1] === "11"){
+                //     month="Nov";
+                // }
+                // else if(arr2[1] === "12"){
+                //     month="Dec";
+                // }
+                // var date = `${month} ${arr2[0]},${arr2[2]}`;
+                // setDate(date)
                 setLoading(false)
             })
             .catch(error => console.log('error', error));
@@ -125,10 +125,6 @@ const MarketPlaceBanner = () => {
         })
         .catch(error => console.log('error', error));
     }
-
-
-
-
   return (
     <>
         {loading && <Loader></Loader>}
@@ -155,14 +151,15 @@ const MarketPlaceBanner = () => {
                                 {data.price} wETH
                             </h5>
                             <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
-                                <button onClick={buyNowHandler} className='cursor-pointer mt-32 font-20 f-500 l-137 btn-primary'>Buy Now</button>
+                                <button onClick={buyNowHandler} className={`cursor-pointer mt-32 font-20 f-500 l-137 btn-primary ${style["buy-now-btn"]}`}>Buy Now</button>
                                 <div onClick={navigationHandler} className={`cursor-pointer f-500 font-25 l-137 mt-24 d-block text-primary a-underline ${style["marketplace-view-profile"]}`}>View Profile</div>
                             </div>
                         </div>
                     </div>
 
                     <div className={` ${style["marketplace-card-2"]}`}>
-                    
+                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>WineMaker</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.brand.brandName}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Region</h5>
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[2].value===''? "--n.a--":data.attributes[2].value}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Volume by Alcohol</h5>
@@ -171,12 +168,10 @@ const MarketPlaceBanner = () => {
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[0].value===''? "--n.a--":data.attributes[0].value}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Spirit</h5>
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[3].value===''? "--n.a--":data.attributes[3].value}</h5>
-                        <h5 className='mt-16 f-400 l-137 text-dark-gray'>Available to Redeem:</h5>
+                        {/* <h5 className='mt-16 f-400 l-137 text-dark-gray'>Available to Redeem:</h5>
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>
-                        
                             On {expirydate}
-                        
-                        </h5>
+                        </h5> */}
                     </div>
                 </div>
             }

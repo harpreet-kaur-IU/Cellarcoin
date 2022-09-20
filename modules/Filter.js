@@ -46,7 +46,7 @@ const Filter = () => {
                                 <h6 className='f-400 l-137'>to</h6>
                             </div>
                             <div className={`bg-pink rounded-8 d-flex ${style["max-wrapper"]}`}>
-                                <h6 className='f-400 l-137'>Min</h6>
+                                <h6 className='f-400 l-137'>Max</h6>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@
   --background-pink:#FFF4FA;
   --alternative-grey-dark:#ECECEC;
   --alternative-grey-light:#F3F3F3;
+  --hover-color:#740578;
   --font-dark:#030303;
   --white:#FFFFFF;
   --box-bg:#EBE0E6;
@@ -559,3 +560,4 @@ li{
     justify-content: center;
   }
 } */
+

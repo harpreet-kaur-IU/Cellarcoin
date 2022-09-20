@@ -77,7 +77,7 @@ const NavBarTransparent = () => {
       router.push("/editprofile")
     }
     const collectionHandler = () =>{
-      router.push("/usercollection")
+      router.push("/usernft")
     }
     
     const logHandler = () =>{
@@ -229,7 +229,9 @@ const NavBarTransparent = () => {
               <div className={`p-absolute d-flex d-flex-column d-align-center ${style["profile-dropdown"]}`}>
                 <h6 onClick={profileHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
                 {/* <h6 onClick={paymentHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Payment Method</h6> */}
-                <h6 onClick={collectionHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Collection</h6>
+                <h6 className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>
+                  <a href='/usernft'>Collection</a>
+                </h6>
                 {token && <h6 onClick={logHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>}
               </div>
             }

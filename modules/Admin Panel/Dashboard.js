@@ -99,7 +99,11 @@ const Dashboard = () => {
                 </span>                     
                 <span className='font-14 f-500 d-flex word-break'>{item.name}</span>
                 <span className='font-14 f-500 d-flex'>{item.brand}</span>
-                <span className={`font-14 f-500 d-flex ${styles["nft-status"]}`}>{item.status}</span>
+                <div className={`d-flex d-justify-center d-align-center ${styles["nft-status"]}`}>
+                  <span className={`font-14 f-500 `}>
+                    {item.status}
+                  </span>
+                </div>
                 {item.price === 0?<span className={`p-relative font-14 f-500 d-flex d-align-center`}>
                     --
                 </span>

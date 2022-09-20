@@ -26,6 +26,9 @@
     font-size: 61px;
     line-height: 137.4%;
 }
+.top-brands-gallery-hover{
+    transition: 0.58;
+}
 .top-brands-gallery-hover:hover .image{
     opacity: 0.3;
 }

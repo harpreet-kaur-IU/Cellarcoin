@@ -13,6 +13,22 @@ const WineCard = (props) => {
             <img  onClick={navigationHandler} className={`${styles["wine-bg-img"]}`} src={props.imageUrl}></img>
             <div className='p-16'>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
+                    <h6 className='f-500'>Name</h6>
+                    <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
+                        <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
+                            <span>{props.views}</span>
+                            <img src="images/view-primary.svg"></img>
+                        </span>
+                        <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
+                            <span>{props.favourites}</span>
+                            <img src="images/heart.png"></img>
+                        </span>
+                    </h6>
+                </div>
+                <div className={`d-flex d-justify-space-between ${styles["nft-name"]}`}>
+                    <h6 className='word-break l-137 f-500'>{props.name}</h6>
+                </div>
+                <div className='d-flex d-align-center d-justify-space-between text-light-gray mt-16 mb-16'>
                     <h6 className='l-137 f-500'>Listing Price</h6>
                     <h6 className='l-137 f-500'>Owned by</h6>
                 </div>
@@ -22,22 +38,6 @@ const WineCard = (props) => {
                         {props.price} 
                     </h5>
                     <h5 className='l-137 f-500'>@Odule</h5>
-                </div>
-                <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
-                    <h6 className='f-500'>Brand</h6>
-                    <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
-                        <span className='d-flex d-align-center l-137 f-500 bg-white'>
-                            <span>{props.views}</span>
-                            <img src="images/view-primary.svg"></img>
-                        </span>
-                        <span className='d-flex d-align-center l-137 f-500 bg-white'>
-                            <span>{props.favourites}</span>
-                            <img src="images/heart.png"></img>
-                        </span>
-                    </h6>
-                </div>
-                <div className='d-flex d-justify-space-between'>
-                    <h5 className='l-137 f-500'>PURPLE MALBEC</h5>
                 </div>
             </div>
         </div>

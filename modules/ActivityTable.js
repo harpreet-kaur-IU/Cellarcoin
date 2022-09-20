@@ -30,6 +30,22 @@ const ActivityTable = () => {
                     <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
                     <span className='font-18 f-500 d-flex'>21/06/2022</span>
                 </div> 
+                <div className={`d-none d-flex-column ${styles["table-column-sm"]}`}>
+                    <span className='font-12 f-400 text-dark-gray l-137'>Sale 21/06/2022</span>
+                    <span className='text-primary font-24 f-500 mt-8 l-137'>$15,008</span>
+                    <div className='d-flex d-justify-space-between'>
+                        <div className='d-flex d-flex-column gap-1 mt-8'>
+                            <span className='font-12 f-400 text-dark-gray l-137'>From</span>
+                            <span className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
+                        </div>
+                        <div className='d-flex d-flex-column gap-1 mt-8'>
+                            <span className='font-12 f-400 text-dark-gray l-137'>To</span>
+                            <span className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
+                        </div>
+                    </div>
+                    {/* <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
+                    <span className='font-18 f-500 d-flex'>21/06/2022</span> */}
+                </div> 
             </div>
         </div>
     </div>

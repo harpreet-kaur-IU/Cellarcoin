@@ -5,15 +5,18 @@ import {getAdminOnBoardFromCookie,removeAdminOnBoardCookie} from '../../auth/use
 import styles from '.././css/Admin Panel/SideBar.module.css'
 import Link from 'next/link';
 import Router from 'next/router'
+import onClickOutside from "react-onclickoutside";
 const Header = () => {
   const [dropdown,setDropdown] = useState(false);
   const [user,setUser] = useState("")
   const dropdownHandler = () =>{
-    setDropdown(!dropdown)
+    setDropdown(prev=>!prev)
+  }
+  Header.handleClickOutside  = () =>{
+    setDropdown(false)
   }
   const sideBarHandler = (e) => {
     e.currentTarget.classList.toggle(styles["open"]);
-    // console.log("Sidebar = "+styles["sidebar-wrapper"]);
     document.querySelector(`#sidebar-wrapper`).classList.toggle(styles["expand"])
     document.querySelector(`#sidebar-wrapper`).classList.toggle(styles["sidebar-wrapper"])
   }
@@ -56,4 +59,8 @@ const Header = () => {
   )
 }
 
-export default Header
+const clickOutsideConfig = {
+  handleClickOutside: () => Header.handleClickOutside,
+}
+
+export default onClickOutside(Header, clickOutsideConfig);

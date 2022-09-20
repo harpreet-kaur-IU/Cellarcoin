@@ -93,8 +93,8 @@ const Notification = () => {
                     {item.vendorId===null?
                         <>
                             <div className={`col-11 ${styles["notification-body"]}`}>
-                                <h5 className='f-600'>New Brand Added</h5>
-                                <h6 className='f-500'>New {item.brandId.brandName} has been added to the platform</h6>
+                                <h5 className='f-600'>Brand Added</h5>
+                                <h6 className='f-500'>{item.brandId.brandName} has been added to the platform</h6>
                                 <span className='f-400'>Received <Moment fromNow>{item.brandId.createdAt}</Moment></span>
                             </div>
                             <div onClick={deleteIdHandler} id={item._id} className={`col-1 d-flex d-align-center ${styles["delete-icon"]}`}>

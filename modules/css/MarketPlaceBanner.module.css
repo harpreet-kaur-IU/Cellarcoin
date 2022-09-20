@@ -47,6 +47,13 @@
     background-color:var(--inactive-pink);
     border-radius: 50%;
 }
+.buy-now-btn{
+    transition: 0.8s;
+}
+.buy-now-btn:hover{
+    background: #740578;
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
+}
 @media screen and (max-width:1440px) {
     .purple-market-container{
         width: 90%;

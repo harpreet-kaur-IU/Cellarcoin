@@ -7,6 +7,7 @@
 }
 .btn-home-explore{
     padding: 14px 114px;
+    transition: 0.8s;
 }
 .btn-home-explore:hover{
     background-color: #740578;

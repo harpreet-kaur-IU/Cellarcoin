@@ -1,3 +1,9 @@
+.partner-container{
+    background-image:url('/images/partner_bg.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .partner-wrapper{
     padding: 37px 127px 0px 127px;
 }
@@ -6,6 +12,12 @@
 }
 .get-in-touch-btn{
     padding: 11px 51px;
+    transition: 0.8s;
+}
+.get-in-touch-btn:hover{
+    background:var(--primary);
+    color: #ffffff;
+    border: 1px solid #ffffff;
 }
 @media screen and (max-width:1440px) {
     .partner-container{

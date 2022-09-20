@@ -78,13 +78,12 @@ const Header = (props) => {
     });
   }
 
-
   const [isConnected, setIsConnected] = useState(false);
   const [hasMetamask, setHasMetamask] = useState(false);
   const [signer, setSigner] = useState(false);
 
   useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
+    if (typeof window.ethereum !== "undefined"){
       setHasMetamask(true);
     }
   });
@@ -94,19 +93,20 @@ const Header = (props) => {
       props.signerData(signer)
     }
   },[signer])
-  async function connect() {
-    if (typeof window.ethereum !== "undefined") {
-      try {
+
+  async function connect(){
+    if(typeof window.ethereum !== "undefined"){
+      try{
         const web3ModalProvider = await web3Modal.connect();
         setIsConnected(true);
         const provider = new ethers.providers.Web3Provider(web3ModalProvider);
-        setSigner(provider.getSigner());
+        setSigner(provider.Signer());
         // localStorage.removeItem('signerWeb3');
         // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
-      } catch (e) {
+      }catch(e){
         console.log(e);
       }
-    } else {
+    }else{
       setIsConnected(false);
     }
   }
@@ -167,7 +167,7 @@ const Header = (props) => {
                 ) : (
                   "Please install metamask"
                 )}
-                {isConnected ? <button onClick={() => execute()}>Execute</button> : ""}
+                {/* {isConnected ? <button onClick={() => execute()}>Execute</button> : ""} */}
               </div>
             <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
               Create NFT

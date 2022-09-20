@@ -38,9 +38,11 @@
     }
 }
 @media screen and (max-width:768px){
+
     .footer-company-logo-wrapper{
         padding-right: 26px;
-        width: 50%;
+        width: 100%;
+        margin-bottom: 20px;
     }
     .footer-explore-wrapper{
         width: 50%;
@@ -55,7 +57,7 @@
         font-size: 16px;
     }
     .footer-menu-bar-grid{
-        margin-top: 40px;
+        margin-top: 10px;
     }
     .footer-menu-bar-grid ul li a{
         font-size: 16px;

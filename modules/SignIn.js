@@ -37,9 +37,9 @@ const SignIn = (props) => {
         <form onSubmit={formSubmit}>
           <input value={email} onChange={emailHandler} className={`bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder='Email'></input>
           <div className={`p-relative ${style["password"]}`}>
-              <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={password} onChange={passwordHandler} placeholder="Password" required/>
-              <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={passwordHandler} value={password} />
-              <img onClick={viewPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src='images/eye-2.png'></img>
+            <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={password} onChange={passwordHandler} placeholder="Password" required/>
+            <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={passwordHandler} value={password} />
+            <img onClick={viewPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src='images/eye-2.png'></img>
           </div>
           <button className={`mt-16 col-12 font-18 f-500 l-137 btn-primary ${style["btn-continue"]}`}>Continue</button>
         </form>

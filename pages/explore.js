@@ -36,6 +36,7 @@ export default function Explore() {
                     {data && data.map((item)=>(
                         <WineCard
                             key={item.key}
+                            name={item.name}
                             id={item._id}
                             price={item.price}
                             favourites={item.favourites}

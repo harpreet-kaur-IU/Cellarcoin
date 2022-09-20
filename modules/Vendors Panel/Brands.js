@@ -58,9 +58,10 @@ const Brands = () => {
       myHeaders.append("Content-Type","application/json");
 
       var raw = JSON.stringify({
-          "brandName":brand,
-          "documentUrl":url
+        "brandName":brand,
+        "documentUrl":url
       });
+
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -95,7 +96,6 @@ const Brands = () => {
     if(cover){
       var formdata = new FormData();
       formdata.append("image",cover);
-      
       var requestOptions = {
         method: 'POST',
         body: formdata,
@@ -105,9 +105,9 @@ const Brands = () => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
       .then(response => response.text())
       .then(result => {
-          var results = (JSON.parse(result))
-          setUrl(results.imageUrl)
-          setLoadingImg(false)
+        var results = (JSON.parse(result))
+        setUrl(results.imageUrl)
+        setLoadingImg(false)
       })
       .catch(error => console.log('error', error));
     }
@@ -143,17 +143,24 @@ const Brands = () => {
               <div className={`${styles["brand-table-header"]}`}>
                 <span className='font-16 f-600'>Brands</span>
                 <span className='font-16 f-600'>Created On</span>
-                {/* <span className='font-16 f-600'>Actions</span> */}
+                <span className='font-16 f-600 text-center'>Actions</span>
               </div>
               {data && data.map((item)=>(
                 <div className={`${styles["brand-table-body"]}`}>
                   <span className='font-16 f-500 text-primary'>{item.brandName}</span>
-                  <span className='font-16 f-500 '><Moment fromNow>{item.createdAt}</Moment></span>
-                  {/* <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center ${styles["brand-action"]}`}>
-                    <Link href={`/vendorBrand`}>
-                      <img src='images/edit-2.svg'></img>
-                    </Link>
-                  </span> */}
+                  <span className='font-16 f-500'><Moment fromNow>{item.createdAt}</Moment></span>
+                    {item.status === "approved"? 
+                      <div className={`cusror-pointer font-14 f-500 d-flex d-justify-center ${styles["brand-approved"]}`}>
+                        <span>
+                          Approved
+                        </span>
+                      </div> : 
+                      <div className={`cusror-pointer font-14 f-500 d-flex d-justify-center ${styles["brand-rejected"]}`}>
+                        <span>
+                          Rejected
+                        </span>
+                      </div>
+                    }
                 </div>
               ))}
             </div>
@@ -181,11 +188,9 @@ const Brands = () => {
               </div>
               {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select a file.</span>}
               {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
-             
               <div className='d-flex'>
                 <button className='mt-16'>Save</button>
               </div>
-             
             </form>
           </div>
         </div>

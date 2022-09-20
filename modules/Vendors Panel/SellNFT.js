@@ -69,7 +69,6 @@ const SellNFT = () => {
     e.preventDefault()
     var result = validator();
     if(result){
-      e.preventDefault();
       var myHeaders = new Headers();
       myHeaders.append("Authorization","Bearer "+JWTtoken);
       myHeaders.append("Content-Type","application/json");

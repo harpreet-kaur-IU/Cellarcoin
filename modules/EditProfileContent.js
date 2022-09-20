@@ -3,6 +3,8 @@ import style from './css/EditProfileContent.module.css'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 import SmallLoader from './Vendors Panel/SmallLoader';
 import {useRouter} from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const EditProfileContent = () => {
   const router = useRouter();
   const userId = router.query["id"];
@@ -18,6 +20,7 @@ const EditProfileContent = () => {
   const [userName,setUserName] = useState("");
   const [location,setLocation] = useState("")
   var JWTToken = getUserOnBoardFromCookie();
+
   useEffect(()=>{
     if(JWTToken){
       function parseJwt() {
@@ -42,13 +45,16 @@ const EditProfileContent = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getProfile`, requestOptions)
     .then(response => response.json())
     .then(result =>{
+      setCover(result.user.coverImage)
       setUrl(result.user.coverImage)
       setProfileUrl(result.user.profileImage)
+      setProfile(result.user.profileImage)
       setUserName(result.user.userName)
       setLocation(result.user.location)
     })
     .catch(error => console.log('error', error));
   },[])
+
   const coverHandler = (e) =>{
     setCover(e.target.files[0]);
   }
@@ -62,7 +68,6 @@ const EditProfileContent = () => {
     setLocation(e.target.value)
   }
   //cover upload
-
   useEffect(()=>{
     if(cover || !url){
       var formdata = new FormData();
@@ -77,10 +82,9 @@ const EditProfileContent = () => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
       .then(response => response.text())
       .then(result => {
-          var results = (JSON.parse(result))
-          setUrl(results.imageUrl)
-          setLoadingImg(false)
-          
+        var results = (JSON.parse(result))
+        setUrl(results.imageUrl)
+        setLoadingImg(false)
       })
       .catch(error => console.log('error', error));
     }
@@ -100,9 +104,9 @@ const EditProfileContent = () => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
       .then(response => response.text())
       .then(result => {
-          var results = (JSON.parse(result))
-          setProfileUrl(results.imageUrl)
-          setLoadingImg2(false)
+        var results = (JSON.parse(result))
+        setProfileUrl(results.imageUrl)
+        setLoadingImg2(false)
       })
       .catch(error => console.log('error', error));
     }
@@ -140,6 +144,9 @@ const EditProfileContent = () => {
         setProfileUrl(results.user.profileImage)
         setUserName(results.user.userName)
         setLocation(results.user.location)
+        toast.success("User Updated Successfully"),{
+          toastId:"2"
+        }
       })
       .catch(error=>console.log("error "+error))
     })
@@ -159,7 +166,7 @@ const EditProfileContent = () => {
             ref={fileRef}
             multiple={false}
             onChange={coverHandler}
-            required>
+            >
           </input>
           <div className={`${style["small-loader"]}`}>
             {imgLoading && <SmallLoader></SmallLoader>}
@@ -172,7 +179,7 @@ const EditProfileContent = () => {
             <img loading="lazy" src={profileUrl?profileUrl:"images/profile.png"}></img>
           </div>
           <div className={`p-relative ${style["editprofile-btn-wrapper"]}`}>
-          <div className={`${style["small-loader-profile"]}`}>
+            <div className={`${style["small-loader-profile"]}`}>
               {imgLoading2 && <SmallLoader></SmallLoader>}
             </div>
             <input 
@@ -182,9 +189,8 @@ const EditProfileContent = () => {
               ref={fileRef2}
               multiple={false}
               onChange={profileHandler}
-              required>
+              >
             </input>
-           
             <button className={`cursor-pointer font-20 f-500 l-137 btn-primary b-none ${style["editprofile-upload-btn"]}`}>Upload new picture</button>
             {/* <button className={`cursor-pointer font-20 f-500 l-137 btn-secondary ${style["editprofile-delete-btn"]}`}>Delete</button> */}
           </div>
@@ -196,6 +202,7 @@ const EditProfileContent = () => {
         </div>
         <button className={`cursor-pointer font-20 f-500 l-137 btn-primary b-none ${style["btn-save-profile"]}`}>Save Profile</button>
       </form>
+      <ToastContainer />
     </div>
   )
 }
