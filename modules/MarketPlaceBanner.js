@@ -3,8 +3,10 @@ import style from './css/MarketPlaceBanner.module.css'
 import { useRouter } from 'next/router'
 import { getUserOnBoardFromCookie } from '../auth/userCookies'
 import Modal from './Modal'
-import SignUp from './SignUp'
+import SignUp from './SignUp';
 import Loader from './Vendors Panel/Loader'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const MarketPlaceBanner = () => {
     var JWTToken =  getUserOnBoardFromCookie()
     const [data,setData] = useState("")
@@ -27,18 +29,13 @@ const MarketPlaceBanner = () => {
    
     const handleClick = () =>{
         setToggle(prev => !prev);
-      }
+    }
     const confirmationHandler = () =>{
         
         toast.success("User Signed In Successfully",{
           toastId:"2"
         });
-        if(JWTToken){
-            router.push(`/ownedby/${data._id}`)
-        }
-        else{
-            handleClick()
-        }
+        
       }
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
@@ -176,11 +173,12 @@ const MarketPlaceBanner = () => {
                 </div>
             }
             {toggle &&
-            <Modal modalClass="modal-verify">
-                <SignUp confirm={confirmationHandler} handler={handleClick}></SignUp>
-            </Modal>
+                <Modal modalClass="modal-verify">
+                    <SignUp confirm={confirmationHandler} handler={handleClick}></SignUp>
+                </Modal>
             }
         </div>
+        <ToastContainer />
     </>
   )
 }
