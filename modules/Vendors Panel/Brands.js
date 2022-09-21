@@ -11,14 +11,23 @@ import Moment from 'react-moment';
 
 const Brands = () => {
   const [brand,setBrand] = useState("");
+  //cover states
   const [coverError,setCoverError] = useState(false);
   const [cover,setCover] = useState("");
   const [url,setUrl] = useState("");
-  const [data,setData] = useState("")
-  const [loading,setLoading] = useState(false);
   const [loadingImg,setLoadingImg] = useState(false);
   const fileRef = useRef();
   const [isUrl, setIsUrl] = useState(false);
+
+  //profile states
+  const [profile,setProfile] = useState("");
+  const [profileUrl,setProfileUrl] = useState("");
+  const [loadingProfileImage,setLoadingProfileImage] = useState(false);
+  const profileRef = useRef();
+
+  const [data,setData] = useState("")
+  const [loading,setLoading] = useState(false);
+  
   const [isBrandError,setBrandError] = useState(false);
   var JWTtoken = getOnBoardFromCookie();
   const regex = /^[^\s]+(\s+[^\s]+)*$/;
@@ -32,6 +41,9 @@ const Brands = () => {
       setCover(e.target.files[0])
   }
 
+  const profileHandler = (e) =>{
+    setProfile(e.target.files[0])
+  }
   const validator = () =>{
     if(regex.test(brand)){
       setBrandError(false);
@@ -143,7 +155,7 @@ const Brands = () => {
               <div className={`${styles["brand-table-header"]}`}>
                 <span className='font-16 f-600'>Brands</span>
                 <span className='font-16 f-600'>Created On</span>
-                <span className='font-16 f-600 text-center'>Actions</span>
+                <span className='font-16 f-600 text-center'>Status</span>
               </div>
               {data && data.map((item)=>(
                 <div className={`${styles["brand-table-body"]}`}>
@@ -171,6 +183,8 @@ const Brands = () => {
             <form onSubmit={formSubmit} className='mt-16'>
               <input value={brand} onChange={brandHandler} className={`col-12 ${styles["brands-input"]}`} type="text" required></input>
               {isBrandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
+             
+              {/* upload Documents */}
               <h5 className='f-500 l-23 mt-24'>Upload Documents</h5>
               <h6 className='mt-16 f-400'>Accepted documents: ID Proof, Company ID Proof</h6>
               <div className={`mt-16 ${styles["brands-file-upload"]}`}>
@@ -188,6 +202,41 @@ const Brands = () => {
               </div>
               {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select a file.</span>}
               {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
+              
+              {/* upload Profile Image */}
+              <h5 className='f-500 l-23 mt-24'>Upload Profile Image</h5>
+              <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB.</h6>
+              <div className={`mt-16 ${styles["brands-file-upload"]}`}>
+                <input 
+                  id='file-input-field'
+                  type='file'
+                  ref={profileRef}
+                  multiple={false}
+                  onChange={profileHandler}
+                  required>
+                </input>
+                {loadingProfileImage && !profileUrl && <SmallLoader></SmallLoader>}
+                {!loadingProfileImage && !profileUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
+                {profileUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {profileUrl}</span>}
+              </div>
+
+              {/* upload cover */}
+              <h5 className='f-500 l-23 mt-24'>Upload Cover Image Image</h5>
+              <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB. Dim.(800*200)</h6>
+              <div className={`mt-16 ${styles["brands-file-upload"]}`}>
+                <input 
+                  id='file-input-field'
+                  type='file'
+                  ref={profileRef}
+                  multiple={false}
+                  onChange={profileHandler}
+                  required>
+                </input>
+                {loadingProfileImage && !profileUrl && <SmallLoader></SmallLoader>}
+                {!loadingProfileImage && !profileUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
+                {profileUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {profileUrl}</span>}
+              </div>
+              {/* save button */}
               <div className='d-flex'>
                 <button className='mt-16'>Save</button>
               </div>
