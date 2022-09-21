@@ -1,15 +1,13 @@
 .community-bg{
+    height: 100vh;
     width: 100%;
     background-image: url("/images/community-banner.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
-.community-banner-padding{
-    padding: 348px 241px 161px 241px;
-}
 .community-fb{
-    padding: 16px 28px 16px 28px;
+    padding: 16px 26px 16px 26px;
     background: #FFFFFF;
     border-radius: 50%;
     transition: 0.5s;
@@ -30,35 +28,40 @@
     padding: 16px;
     background: #FFFFFF;
     border-radius: 50%;
+    transition: 0.5s;
+}
+.community-twitter:hover{
+    box-shadow: 2px 2px 16px rgba(120, 101, 255, 0.56);
 }
 .community-discord{
     padding:16px;
     background: #FFFFFF;
     border-radius: 50%;
+    transition: 0.5s;
+}
+.community-discord:hover{
+    box-shadow: 2px 2px 16px rgba(120, 101, 255, 0.56);
 }
 .community-telegram{
     padding: 16px;
     background: #FFFFFF;
     border-radius: 50%;
+    transition: 0.5s;
 }
-@media screen and (max-width:1440px) {
-    .community-banner-padding{
-        padding: 348px 180px 161px 180px;
-    }
+.community-telegram:hover{
+    box-shadow: 2px 2px 16px rgba(120, 101, 255, 0.56);
+}
+.community-banner-padding{
+    padding:200px 0px 0px 0px;
 }
 @media screen and (max-width:1024px) {
-    .community-banner-padding{
-        padding: 320px 140px 121px 140px;
-    }
     .community-banner-padding h1{
         font-size: 36px;
         line-height: 42px;
     }
 }
 @media screen and (max-width:768px) {
-    .community-banner-padding{
-        padding: 320px 60px 121px 60px;
-    }
+
     .community-banner-padding h1{
         font-size: 32px;
         line-height: 52px;
@@ -67,29 +70,49 @@
         gap:20px
     }
 }
-@media screen and (max-width:645px) {
+@media screen and (max-width:645px){
     .community-banner-padding{
-        padding: 250px 60px 100px 60px;
+        padding: 0px 10px;
     }
     .community-banner-padding h1{
-        font-size: 30px;
-        line-height: 42px;
+        font-size: 24px;
+        line-height: 39px;
     }
     .community-banner-padding p{
         margin-top: 16px;
         font-size: 18px;
     }
     .community-images-wrapper{
-        gap:20px
+        gap:10px
     }
     .community-images-wrapper img{
         height: 52px;
         width: 52px;
     }
 }
-@media screen and (max-width:425px) {
+@media screen and (max-width:425px){
+    .community-fb{
+        height: 60px;
+        width: 60px;
+    }
+    .community-insta{
+        height: 60px;
+        width: 60px;
+    }
+    .community-twitter{
+        height: 60px;
+        width: 60px;
+    }
+    .community-discord{
+        height: 60px;
+        width: 60px;
+    }
+    .community-telegram{
+        height: 60px;
+        width: 60px;
+    }
     .community-banner-padding{
-        padding: 200px 30px 50px 30px;
+        padding: 0px 0px;
     }
     .community-banner-padding h1{
         font-size: 16px;
@@ -100,7 +123,7 @@
         font-size: 12px;
     }
     .community-images-wrapper{
-        gap:10px
+        gap:5px
     }
     .community-images-wrapper img{
         height: 42px;

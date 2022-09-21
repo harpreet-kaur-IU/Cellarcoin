@@ -5,22 +5,22 @@ import SmallLoader from './Vendors Panel/SmallLoader';
 import {useRouter} from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 const EditProfileContent = () => {
   const router = useRouter();
   const userId = router.query["id"];
-  const [email,setEmail] = useState("")
+  const [email,setEmail] = useState("");
   const [url,setUrl] = useState("");
-  const [cover,setCover] = useState("")
-  const [profile,setProfile] = useState("")
-  const [profileUrl,setProfileUrl] = useState("")
+  const [cover,setCover] = useState("");
+  const [profile,setProfile] = useState("");
+  const [profileUrl,setProfileUrl] = useState("");
   const fileRef = useRef();
   const fileRef2 = useRef();
-  const [imgLoading,setLoadingImg] = useState(false)
-  const [imgLoading2,setLoadingImg2] = useState(false)
+  const [imgLoading,setLoadingImg] = useState(false);
+  const [imgLoading2,setLoadingImg2] = useState(false);
   const [userName,setUserName] = useState("");
   const [location,setLocation] = useState("")
   var JWTToken = getUserOnBoardFromCookie();
-
   useEffect(()=>{
     if(JWTToken){
       function parseJwt() {

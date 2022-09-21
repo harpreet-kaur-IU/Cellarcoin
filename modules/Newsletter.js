@@ -30,7 +30,7 @@ const Newsletter = () => {
                 <div className={`d-flex d-flex-row ${styles["wine-newsletter-social-wrapper"]}`}>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/discord.png'></img> */}
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Discord></Discord>
+                        <Discord width="63" height="48" color="white"></Discord>
                     </div>
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
                         <Twitter color="#ffffff" height="48" width="61"></Twitter>
@@ -38,15 +38,15 @@ const Newsletter = () => {
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/twitter.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/instagram.png'></img> */}
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Instagram color="#ffffff"></Instagram>
+                        <Instagram color="#ffffff" width="49" height="48"></Instagram>
                     </div>
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Facebook color="white"></Facebook>
+                        <Facebook color="white" width="26" height="48"></Facebook>
                     </div>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/facebook.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/telegram.png'></img> */}
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Telegram></Telegram>
+                        <Telegram width="56" height="48" color="white"></Telegram>
                     </div>
                     <div className={`${styles["wine-newsletter-YT"]}`}>
                         <Youtube></Youtube>
