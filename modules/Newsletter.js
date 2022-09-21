@@ -33,15 +33,15 @@ const Newsletter = () => {
                         <Discord></Discord>
                     </div>
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Twitter></Twitter>
+                        <Twitter color="#ffffff" height="48" width="61"></Twitter>
                     </div>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/twitter.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/instagram.png'></img> */}
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Instagram></Instagram>
+                        <Instagram color="#ffffff"></Instagram>
                     </div>
                     <div className={`${styles["wine-newsletter-social-icon"]}`}>
-                        <Facebook></Facebook>
+                        <Facebook color="white"></Facebook>
                     </div>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/facebook.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/telegram.png'></img> */}

@@ -48,17 +48,16 @@ const AllNFT = () => {
                 var myHeaders = new Headers();
                 myHeaders.append("Authorization","Bearer "+JWTtoken);
                 myHeaders.append("Content-Type","application/json");
-
                 var requestOptions = {
                     method: 'GET',
-                    headers: myHeaders,
+                    headers: myHeaders
                 };
                 setLoading(true)
                 fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftByName?search=${e.target.value}`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    setData(result.data)
-                    setLoading(false)
+                    setData(result.data);
+                    setLoading(false);
                 })
                 .catch(error => console.log('error', error));
             }, "1000");

@@ -9,14 +9,22 @@
     padding: 348px 241px 161px 241px;
 }
 .community-fb{
-    padding: 16px 28px 16px 22px;
+    padding: 16px 28px 16px 28px;
     background: #FFFFFF;
     border-radius: 50%;
+    transition: 0.5s;
+}
+.community-fb:hover{
+    box-shadow: 2px 2px 16px rgba(120, 101, 255, 0.56);
 }
 .community-insta{
     padding: 16px;
     background: #FFFFFF;
     border-radius: 50%;
+    transition: 0.5s;
+}
+.community-insta:hover{
+    box-shadow: 2px 2px 16px rgba(120, 101, 255, 0.56);
 }
 .community-twitter{
     padding: 16px;

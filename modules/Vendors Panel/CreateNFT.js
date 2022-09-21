@@ -83,12 +83,12 @@ const CreateNFT = () => {
     }
     const coverHandler = (e) =>{
         if(!e.target.files[0].name.match(/\.(jpg|png|gif)$/)){
-            setCoverError(true)
+            setCoverError(true);
             var inputfile = document.getElementById("file-input-field");
             inputfile.value = "";
         }   
         else
-        setCover(e.target.files[0])
+            setCover(e.target.files[0]);
     }
     const additionalPropertyHandler = (data,data1) =>{
         setAdd(!add);
@@ -123,8 +123,6 @@ const CreateNFT = () => {
             return true;
         }
     }
-
-
     useEffect(()=>{
         if(JWTtoken){
             if(nftId){
