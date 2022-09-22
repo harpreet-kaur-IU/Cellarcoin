@@ -393,7 +393,7 @@ const CreateNFT = () => {
                         {isNameError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Name.</span>}
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Description</h5>
-                            <h6 className='font-18 f-400 l-25'>The description will be included on the item's detail page underneath its image. </h6>
+                            <h6 className='font-18 f-400 l-25'>The description will be included on the item's detail page underneath its image.</h6>
                             <input value={desc} onChange={descHandler} type="text" required></input>
                         </div>
                         {isDescError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Description.</span>}

@@ -116,10 +116,10 @@ const MultiVendor = () => {
           })
           .then(response => response.json())
           .then(results =>{
-              setData(results.data)
-              toast.success("Sub Vendor Created Successfully",{
-                  toastId:"2"
-              });
+            setData(results.data)
+            toast.success("Sub Vendor Created Successfully",{
+              toastId:"2"
+            });
           })
           setEmail("")
           setPassword("")

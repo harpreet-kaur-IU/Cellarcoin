@@ -5,6 +5,41 @@
 .our-pillar-container{
     margin-top: 32px;
 }
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+.text{
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 137.4%;
+}
+.our-pillars-cards-img-hover{
+    transition: 0.58s;
+}
+.our-pillars-cards-img-hover img{
+    width: 100%;
+    height: 100%;
+}
+.our-pillars-cards-img-hover:hover .image{
+    opacity: 0.3;
+}
+.our-pillars-cards-img-hover:hover .middle{
+    opacity: 1;
+}
+.our-pillars-cards-img-hover:hover{
+    opacity: 0.9;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    border-radius: 13.8507px;
+    transition: transform 0.6s;
+}
 @media screen and (max-width:1440px) {
     .our-pillar-container{
         width: 90%;
