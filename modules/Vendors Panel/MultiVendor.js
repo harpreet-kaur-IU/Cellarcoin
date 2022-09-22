@@ -205,7 +205,7 @@ const MultiVendor = () => {
               <div className={`d-flex ${styles["login-creds-wrapper"]}`}>
                 <h4 className='font-24 f-500'>{index+1}.</h4>
                 <div className={`d-flex d-flex-column ${styles["login-cred-details"]}`}>
-                  <h4 className='font-24 f-500'>Log IN Credentials for {item.brand}</h4>
+                  <h4 className='font-24 f-500'>Login Credentials for {item.brand}</h4>
                   <h6 className='f-500'>{item.email}</h6>
                   {/* <div className={`d-flex d-align-center d-justify-space-between ${styles["login-cred-password-wrapper"]}`}>
                     <input className='font-32' type="password" readOnly value={item.password}></input>

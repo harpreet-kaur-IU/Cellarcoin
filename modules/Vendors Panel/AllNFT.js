@@ -12,12 +12,17 @@ import {useRouter} from 'next/router'
 const AllNFT = () => {
     const[data,setData] = useState('');
     const[searchData,setSearchData] = useState('');
-    const [isDelete,setDelete] = useState(false);
-    const [deleteUserId,setDeleteUserId] = useState("")
-    const [loading,setLoading] = useState(false);
+    const[isDelete,setDelete] = useState(false);
+    const[deleteUserId,setDeleteUserId] = useState("");
+    const[loading,setLoading] = useState(false);
+
     const router = useRouter();
     var JWTtoken = getOnBoardFromCookie();
     
+    const createHandler = () =>{
+        router.push("/createnft")
+    }
+
     useEffect(()=>{
         if(JWTtoken){
             var myHeaders = new Headers();
@@ -69,7 +74,7 @@ const AllNFT = () => {
     const DeleteModal = () =>{
         setDelete(prev => !prev)
     }
-    const deleteModalClicked = (e)=>{
+    const deleteModalClicked = (e) =>{
         setDelete(prev => !prev);
         setDeleteUserId(e.target.id);
     }
@@ -118,6 +123,9 @@ const AllNFT = () => {
                         <input onChange={searchHandler}  className='col-12' type="text" placeholder='Search' />
                     </form>
                 </div>
+                <div className={`d-none d-flex d-align-center d-justify-center ${styles["create-nft-div"]}`}>
+                    <button onClick={createHandler} className='font-12 f-600 b-none'>Create NFT</button>
+                </div>
             </div>
             <div className={`${styles["dashboard-table-section-scroll"]}`}>
                 <div className={`${styles["dashboard-table-wrapper"]}`}>
@@ -150,7 +158,6 @@ const AllNFT = () => {
                                     <h6 className='l-22 f-400'>ETH</h6>
                                 </div>
                             </span>}
-                            
                             <span className='font-14 f-500 d-flex'>{item.createdTime}</span>
                             <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center`} style={{gap:"37px"}}>
                                 <Link href={`/vendorListing/${item._id}`}>

@@ -54,7 +54,7 @@
     width: 153px;
     height: 102px;
     top: 56px;
-    left: 350px;
+    right: 0;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 0px 0px 8px 8px;
@@ -208,5 +208,7 @@
         height: 24px;
         width: 24px;
     }
+    .profile-dropdown{
+        top: 50px;
+    }
 }
-

@@ -85,10 +85,13 @@
 }
 .property-add-btn{
     border: none;
-    width: 80px;
-    height: 50px;
+    padding: 14px 24px;
     background-color: var(--primary);
     border-radius: 16px;
+}
+.property-add-btn img{
+    height: 24px;
+    width: 24px;
 }
 .submit-btn{
     margin-top:26px;

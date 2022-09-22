@@ -81,18 +81,27 @@ export default function Signup() {
 
     //document upload handler
     const urlHandler = (e)=>{
-       setCover(e.target.files[0])
+         if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|pdf)$/)){
+            // setCoverError(true)
+            setCover(e.target.files[0])
+         }
+        else{
+            // setCoverError(false)
+            setCover(e.target.files[0])
+        }
     }
+
     useEffect(()=>{
         if(cover){
             var formdata = new FormData();
             formdata.append("image",cover);
-            
+
             var requestOptions = {
                 method: 'POST',
                 body: formdata,
                 redirect: 'follow'
             };
+
             setLoadingImg(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
             .then(response => response.text())
@@ -153,7 +162,7 @@ export default function Signup() {
                     if(response.data.message === "Signed up successfully!"){
                         authUser.user.sendEmailVerification();
                         signOut();
-                        router.push("/vendorlogin")
+                        router.push("/vendorlogin");
                         setLoading(false)
                         return response.json();
                     }
@@ -207,7 +216,7 @@ export default function Signup() {
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
                             <input type="text" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
                         </div>
-                        <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12  ${styles["input-wrapper"]} ${styles["password"]}`}>
+                        <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]} ${styles["password"]}`}>
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
                             <input type="text" placeholder="Password" onChange={passwordHandler} value={password} />
                             <span className='d-flex d-align-center d-justify-center cursor-pointer user-select-none' onClick={viewPassword}>

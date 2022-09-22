@@ -282,3 +282,17 @@
         width: 100%;
     }
 }
+@media screen and (max-width:640px) {
+    .header-search-box{
+        display:none;
+    }
+    .create-nft-div{
+        display: block;
+    }
+    .create-nft-div button{
+        background: var(--primary);
+        color: var(--white);
+        padding: 10px;
+        border-radius: 8px;
+    }
+}

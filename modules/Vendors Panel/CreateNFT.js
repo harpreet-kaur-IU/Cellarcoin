@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SmallLoader from './SmallLoader';
 import BrandDropDown from './BrandDropdown';
-import Nft_marketplace_ABI from './Nft_marketplace_ABI.json'
+import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
 import { ethers } from 'ethers';
 const CreateNFT = () => {
     const Web3 = require('web3');
@@ -87,8 +87,10 @@ const CreateNFT = () => {
             var inputfile = document.getElementById("file-input-field");
             inputfile.value = "";
         }   
-        else
+        else{
+            setCoverError(false);
             setCover(e.target.files[0]);
+        }   
     }
     const additionalPropertyHandler = (data,data1) =>{
         setAdd(!add);
@@ -353,7 +355,7 @@ const CreateNFT = () => {
                 }  
             }
         }else{
-            toast.error("Please Connect Your Walllet"),{
+            toast.error("Please Connect Your Wallet"),{
                 toastId:"2"
             }
         }
