@@ -23,6 +23,7 @@ export default function Purple() {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
       .then(response => response.json())
       .then(result =>{
+        console.log(result.data)
         setData(result.data)
         setLoading(false)
       })

@@ -28,7 +28,7 @@ const WineCard = (props) => {
                 <div className={`d-flex d-justify-space-between ${styles["nft-name"]}`}>
                     <h6 className='word-break l-137 f-500'>{props.name}</h6>
                 </div>
-                <div className='d-flex d-align-center d-justify-space-between text-light-gray mt-16 mb-16'>
+                <div className='d-flex d-align-center d-justify-space-between text-light-gray'>
                     <h6 className='l-137 f-500'>Listing Price</h6>
                     <h6 className='l-137 f-500'>Owned by</h6>
                 </div>

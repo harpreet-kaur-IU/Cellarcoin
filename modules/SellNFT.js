@@ -20,9 +20,9 @@ const SellNFT = () => {
     const expireHandler = (value) =>{
         setExpire(value);
     }
-    const listNavigationHandler = ()=>{
-      router.push("/purple")
-    }
+    // const listNavigationHandler = ()=>{
+    //   router.push("/purple")
+    // }
     const validator = () =>{
         if(regex.test(price)){
           setPriceError(false);
@@ -34,19 +34,17 @@ const SellNFT = () => {
         }else{
           setExpireError(false);
         }
-        if(!regex.test(price) || expire === ''){
+        if(!regex.test(price) || expire===""){
           return false;
         }else{
           return true;
         }
     }
     const formSubmit = (e) =>{
-        router.push("/purple")
         e.preventDefault()
-        // var result = validator();
-        // if(result){
-           
-        //   e.preventDefault();
+        var result = validator();
+        if(result){
+          router.push("/purple")
         //   var myHeaders = new Headers();
         //   myHeaders.append("Authorization","Bearer "+JWTtoken);
         //   myHeaders.append("Content-Type","application/json");
@@ -72,24 +70,24 @@ const SellNFT = () => {
         //     setLoading(false)
         //   })
         //   .catch(error => console.log('error', error));
-        // }
+        }
     }
   return (
     <div className={`${styles["sell-nft-wrapper"]}`}>
     <h2 className={`f-500 l-65 ${styles["sell-nft-main-heading"]}`}>Select your sell method</h2>
     
     <div className={`d-flex ${styles["sell-nft-img-content-wrapper"]}`}>
-        <div className={`d-flex d-justify-center bg-common rounded-16 ${styles["sell-nftimg-wrapper"]}`}>
-            <img className={`col-6 ${styles["sell-nft-UI-img"]}`} src="images/marketplace-banner.png"></img>
-        </div>
-        <div className={`col-6 ${styles["sell-nft-content"]}`}>
-            <h4 className='f-500'>Purple Malbec Wine 2016 Lorem ipsum dolor #08</h4>
-            <h5 className={`f-400 l-27 ${styles["nft-desc"]}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis pretium dui, commodo sed id nunc vel pharetra. Tellus pretium egestas in massa dapibus </h5>
-            <h5 className={`f-600 l-27 ${styles["contract-address-heading"]}`}>Contract Address</h5>
-            <h5 className={`f-400 l-27 ${styles["contract-address"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
-            <h5 className={`f-600 l-27 ${styles["token-heading"]}`}>Token</h5>
-            <h5 className={`f-400 l-27 ${styles["token"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
-        </div>
+      <div className={`d-flex d-justify-center bg-common rounded-16 ${styles["sell-nftimg-wrapper"]}`}>
+        <img className={`col-6 ${styles["sell-nft-UI-img"]}`} src="images/marketplace-banner.png"></img>
+      </div>
+      <div className={`col-6 ${styles["sell-nft-content"]}`}>
+        <h4 className='f-500'>Purple Malbec Wine 2016 Lorem ipsum dolor #08</h4>
+        <h5 className={`f-400 l-27 ${styles["nft-desc"]}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis pretium dui, commodo sed id nunc vel pharetra. Tellus pretium egestas in massa dapibus </h5>
+        <h5 className={`f-600 l-27 ${styles["contract-address-heading"]}`}>Contract Address</h5>
+        <h5 className={`f-400 l-27 ${styles["contract-address"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
+        <h5 className={`f-600 l-27 ${styles["token-heading"]}`}>Token</h5>
+        <h5 className={`f-400 l-27 ${styles["token"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
+      </div>
     </div>
     
     <div className={`${styles["set-price-wrapper"]}`}>
@@ -122,7 +120,7 @@ const SellNFT = () => {
           </div>
 
           <div className={`d-flex d-justify-end ${styles["list-btn"]}`}>
-            <button onClick={listNavigationHandler} className='font-20 f-500'>List</button>
+            <button className='font-20 f-500'>List</button>
           </div>
         </div>
       </form>

@@ -29,26 +29,26 @@ const Newsletter = () => {
                 <h3 className='text-white mb-48'>Join the community</h3>
                 <div className={`d-flex d-flex-row ${styles["wine-newsletter-social-wrapper"]}`}>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/discord.png'></img> */}
-                    <div className={`${styles["wine-newsletter-social-icon"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-social-icon"]}`}>
                         <Discord width="63" height="48" color="white"></Discord>
                     </div>
-                    <div className={`${styles["wine-newsletter-social-icon"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-social-icon"]}`}>
                         <Twitter color="#ffffff" height="48" width="61"></Twitter>
                     </div>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/twitter.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/instagram.png'></img> */}
-                    <div className={`${styles["wine-newsletter-social-icon"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-social-icon"]}`}>
                         <Instagram color="#ffffff" width="49" height="48"></Instagram>
                     </div>
-                    <div className={`${styles["wine-newsletter-social-icon"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-social-icon"]}`}>
                         <Facebook color="white" width="26" height="48"></Facebook>
                     </div>
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/facebook.png'></img> */}
                     {/* <img className={`${styles["wine-newsletter-social-icon"]}`} src='images/telegram.png'></img> */}
-                    <div className={`${styles["wine-newsletter-social-icon"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-social-icon"]}`}>
                         <Telegram width="56" height="48" color="white"></Telegram>
                     </div>
-                    <div className={`${styles["wine-newsletter-YT"]}`}>
+                    <div className={`cursor-pointer ${styles["wine-newsletter-YT"]}`}>
                         <Youtube></Youtube>
                     </div>
                     {/* <img src='images/youtube.png'></img> */}

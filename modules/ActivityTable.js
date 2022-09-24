@@ -1,11 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './css/ActivityTable.module.css'
 const ActivityTable = () => {
+    const[toggle,setToggle] = useState(false)
+    const filterHandler = () =>{
+        setToggle(prev => !prev)
+    }
   return (
     <div className={`container ${styles["activity-container"]}`}>
         <div className={`d-flex d-align-center d-justify-space-between ${styles["table-heading"]}`}>
-            <h3 className={`f-600 text-primary `}>Activity</h3>
-            <button className='cursor-pointer btn-secondary font-14 f-500 l-137'>Filter</button>
+            <h3 className={`f-600 text-primary`}>Activity</h3>
+            <div className='p-relative'>
+                <button onClick={filterHandler} className='cursor-pointer btn-secondary font-14 f-500 l-137'>Filter</button>
+                {toggle &&
+                    <div className={`d-flex d-flex-column ${styles["filter-dropdown"]}`}>
+                        <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
+                            <input type="checkbox"></input>
+                            <h6 className='font-12 f-500 l-22'>Sales</h6>
+                        </div>
+                        <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
+                            <input type="checkbox"></input>
+                            <h6 className='font-12 f-500 l-22'>Transfer</h6>
+                        </div>
+                        <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
+                            <input type="checkbox"></input>
+                            <h6 className='font-12 f-500 l-22'>Offers</h6>
+                        </div>
+                        <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
+                            <input type="checkbox"></input>
+                            <h6 className='font-12 f-500 l-22'>Listings</h6>
+                        </div>
+                    </div>
+                }
+            </div>
+            
         </div>
         <div className={`${styles["table-section-scroll"]}`} style={{overflow:"hidden",marginBottom:"100px",height:"auto"}}>
             <div className={`${styles["table-wrapper"]}`}>
