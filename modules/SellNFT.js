@@ -120,7 +120,7 @@ const SellNFT = () => {
           </div>
 
           <div className={`d-flex d-justify-end ${styles["list-btn"]}`}>
-            <button className='font-20 f-500'>List</button>
+            <button className='font-20 f-500'>Sell</button>
           </div>
         </div>
       </form>
