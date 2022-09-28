@@ -191,9 +191,9 @@ const NavBar = () => {
             <img className={`cursor-pointer d-flex d-align-center d-justify-center ${style["navbar-site-logo"]}`} src='images/site-logo.png'></img>
           </Link>
           <Link href="/">
-          <div className={`d-none  d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
-                <SiteLogo color="#780543"></SiteLogo>
-              </div>
+            <div className={`d-none d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
+              <SiteLogo color="#780543"></SiteLogo>
+            </div>
           </Link>
           <input className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
           <ul id="ul-navbar" className={`d-flex d-flex-row text-dark-gray ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>

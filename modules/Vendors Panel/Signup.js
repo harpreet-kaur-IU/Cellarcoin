@@ -21,6 +21,7 @@ export default function Signup() {
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPass, setErrorPass] = useState(false);
     const [errorRePass, setErrorRePass] = useState(false);
+    const [coverError,setCoverError] = useState(false);
     const [passMatch, setPassMatch] = useState(false);
     const [policyAccepted, setPolicyAccepted] = useState(false);
     const [toggle,setToggle] = useState(false);
@@ -81,12 +82,12 @@ export default function Signup() {
 
     //document upload handler
     const urlHandler = (e)=>{
-         if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|pdf)$/)){
-            // setCoverError(true)
-            setCover(e.target.files[0])
+         if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|heiv|pdf)$/)){
+            setCoverError(true)
+            // setCover(e.target.files[0])
          }
         else{
-            // setCoverError(false)
+            setCoverError(false)
             setCover(e.target.files[0])
         }
     }
@@ -101,7 +102,6 @@ export default function Signup() {
                 body: formdata,
                 redirect: 'follow'
             };
-
             setLoadingImg(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
             .then(response => response.text())
@@ -125,17 +125,12 @@ export default function Signup() {
         }else{
             setErrorPass(false);
         }
-        if(confirmPassword === ''){
-            setErrorRePass(true);
-        }else{
-            setErrorRePass(false);
-        }
         if(url === ''){
             setIsUrl(true);
         }else{
             setIsUrl(false);
         }
-        if(!errorEmail && !errorPass && !errorRePass && policyAccepted && !isUrl){
+        if(!errorEmail && !errorPass && policyAccepted && !isUrl){
             return true;
         }else{
             return false;
@@ -149,16 +144,17 @@ export default function Signup() {
         if(result){    
             createUserWithEmailAndPassword(email,password)
             .then(async(authUser) =>{
-                console.log(authUser.user.multiFactor.user.accessToken)
                 var myHeaders = new Headers();
                 myHeaders.append("Authorization","Bearer "+authUser.user.multiFactor.user.accessToken);
                 var raw = {
                     "name":name,
                     "documentUrl":url
                 };
+
                 setLoading(true)
                 axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.multiFactor.user.accessToken}})
                 .then(response => {
+                    console.log(response)
                     if(response.data.message === "Signed up successfully!"){
                         authUser.user.sendEmailVerification();
                         signOut();
@@ -265,14 +261,14 @@ export default function Signup() {
                         <div className={`mt-8 rounded-6 ${styles["signup-cover-input-wrapper"]}`} >
                             <h4 className={`font-20 f-600 l-28 ${styles["signup-upload-docs"]}`}>Upload Documents</h4>
                             <h4 className={`f-400 ${styles["signup-accepted-docs"]}`}>Accepted documents: <span className='f-600'>ID Proof, Company ID Proof</span></h4>
-                            <input 
+                            <input
                                 type="file" 
                                 ref={fileRef}
                                 onChange={urlHandler}
                                 multiple={false}
                                 className={`col-12 d-block mt-8 ${styles["signup-form-upload-field"]}`}
                             />
-                        
+                            {coverError && <span className={`mb-8 font-14 f-700 text-danger`}>Please Select jpg,jpeg,png,heiv,pdf file format</span>}
                             {!url && <div className={`d-flex d-flex-column f-500 l-28 ${styles["signup-form-upload-text"]}`}>
                                 {/* <img src="images/upload.png"></img> */}
                                 {loadingImg && <SmallLoader></SmallLoader>}

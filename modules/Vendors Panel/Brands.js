@@ -35,10 +35,13 @@ const Brands = () => {
     setBrand(e.target.value)
   }
   const coverHandler = (e) =>{
-    // if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|gif)$/))
-    //   setCoverError(true)
-    // else
-      setCover(e.target.files[0])
+    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|heiv|pdf)$/)){
+      setCoverError(true)
+    }
+    else{
+      setCoverError(false)
+      setCover(e.target.files[0]);
+    }
   }
 
   const profileHandler = (e) =>{
@@ -180,7 +183,8 @@ const Brands = () => {
           <div className={`col-5 ${styles["add-brand-wrapper"]}`}>
             <h4 className='f-600 l-23 text-primary'>Add Brand</h4>
             <h5 className='f-500 l-23 mt-24'>Enter your Brand Name</h5>
-            <form onSubmit={formSubmit} className='mt-16'>
+            <h6 className='mt-16 f-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. .</h6>
+            <form className={`${styles["brand-form"]}`} onSubmit={formSubmit}>
               <input value={brand} onChange={brandHandler} className={`col-12 ${styles["brands-input"]}`} type="text" required></input>
               {isBrandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
              

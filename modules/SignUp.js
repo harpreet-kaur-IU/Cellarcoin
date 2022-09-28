@@ -79,6 +79,29 @@ const SignUp = (props) => {
                     toastId:"1"
                 });
             })
+            .catch(error => {
+                if(error.message == "Firebase: Error (auth/user-not-found)."){
+                    toast.error("User Not Found",{
+                        toastId:"1"
+                    });
+                }
+                else if(error.message == "Firebase: Error (auth/wrong-password)."){
+                    toast.error("Password Invalid",{
+                        toastId:"1"
+                    });
+                }
+                else if(error.message == "Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found)."){
+                    toast.error("Invalid Email",{
+                        toastId:"1"
+                    });
+                }
+                else if(error.message == "Firebase: The password is invalid or the user does not have a password. (auth/wrong-password)."){
+                    toast.error("Incorrect Password",{
+                        toastId:"1"
+                    });
+                }
+                console.log(error)
+            })
         }
     }
     
@@ -164,11 +187,6 @@ const SignUp = (props) => {
         else{
             setErrorUserName(true)
         }
-        // if(email === ''){
-        //     setErrorEmail(true);
-        // }else{
-        //     setErrorEmail(false);
-        // }
         if(password === ''){
             setErrorPass(true);
         }else{
@@ -185,7 +203,7 @@ const SignUp = (props) => {
         else{
             setErrorPolicy(false)
         }
-        if(password === confirmPassword ){
+        if(password === confirmPassword){
             setPassMatch(false);
         }else{
             setPassMatch(true);

@@ -42,10 +42,10 @@ const NavBarTransparent = () => {
     useEffect(()=>{
       if(JWTToken){
           function parseJwt() {
-          if (!JWTToken) {return}
-          const base64Url = JWTToken.split('.')[1];
-          const base64 = base64Url.replace('-', '+').replace('_', '/');
-          return JSON.parse(window.atob(base64));
+            if (!JWTToken) {return}
+            const base64Url = JWTToken.split('.')[1];
+            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse(window.atob(base64));
           }
           var user = parseJwt();
           setUserId(user.user._id)
@@ -71,7 +71,7 @@ const NavBarTransparent = () => {
       }
     }
     const profileHandler = () =>{
-        router.push(`/editprofile/${userId}`)
+      router.push(`/editprofile/${userId}`)
     }
     const paymentHandler = () =>{
       router.push("/editprofile")
@@ -114,7 +114,7 @@ const NavBarTransparent = () => {
     }
   };
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined"){
     web3Modal = new Web3Modal({
       cacheProvider: false,
       providerOptions, // required
@@ -147,10 +147,10 @@ const NavBarTransparent = () => {
           setSigner(provider.getSigner());
           // localStorage.removeItem('signerWeb3');
           // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
-        } catch (e) {
+        }catch(e){
           console.log(e);
         }
-      } else {
+      }else{
         setIsConnected(false);
       }
     }else{
@@ -213,7 +213,7 @@ const NavBarTransparent = () => {
                   </>
                 )
               ) : (
-                "Please install metamask"
+                "Install metamask"
               )}
               {isConnected ? <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => execute()}>Connected</button> : ""}
             </div>
@@ -225,7 +225,7 @@ const NavBarTransparent = () => {
             <div onClick={navBarHandler} role="button" className={`d-flex d-align-center cursor-pointer d-none ml-24 ${style["bar-cross"]}`}>
               <Hamburger color="#ffffff"></Hamburger>
             </div>
-            {dropdown && 
+            {dropdown &&
               <div className={`p-absolute d-flex d-flex-column d-align-center ${style["profile-dropdown"]}`}>
                 <h6 onClick={profileHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
                 {/* <h6 onClick={paymentHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Payment Method</h6> */}

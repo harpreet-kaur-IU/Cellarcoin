@@ -1,11 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import styles from './css/ActivityTable.module.css'
+import { getUserOnBoardFromCookie } from '../auth/userCookies'
+import { useRouter } from 'next/router'
 const ActivityTable = () => {
-    const[toggle,setToggle] = useState(false)
+    const[toggle,setToggle] = useState(false);
+    const router = useRouter();
+    var JWTToken = getUserOnBoardFromCookie();
     const filterHandler = () =>{
         setToggle(prev => !prev)
     }
-  return (
+
+    const navigationHandler = () =>{
+        if(JWTToken){
+            router.push("/usernft")
+        }
+    }
+
+ return (
     <div className={`container ${styles["activity-container"]}`}>
         <div className={`d-flex d-align-center d-justify-space-between ${styles["table-heading"]}`}>
             <h3 className={`f-600 text-primary`}>Activity</h3>
@@ -46,15 +57,15 @@ const ActivityTable = () => {
                 <div className={`${styles["table-column"]}`}>
                     <span className='font-18 f-500 d-flex'>Transfer</span>
                     <span className='text-primary font-18 f-600 d-flex'>Price</span>
-                    <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
-                    <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
+                    <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>LK. Davidson</span>
+                    <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>LK. Davidson</span>
                     <span className='font-18 f-500 d-flex'>21/06/2022</span>
                 </div> 
                 <div className={`${styles["table-column"]}`}>
                     <span className='font-18 f-500 d-flex'>Transfer</span>
                     <span className='text-primary font-18 f-600 d-flex'>Price</span>
-                    <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
-                    <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
+                    <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>LK. Davidson</span>
+                    <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>LK. Davidson</span>
                     <span className='font-18 f-500 d-flex'>21/06/2022</span>
                 </div> 
                 <div className={`d-none d-flex-column ${styles["table-column-sm"]}`}>
@@ -63,11 +74,11 @@ const ActivityTable = () => {
                     <div className='d-flex d-justify-space-between'>
                         <div className='d-flex d-flex-column gap-1 mt-8'>
                             <span className='font-12 f-400 text-dark-gray l-137'>From</span>
-                            <span className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
+                            <span onClick={navigationHandler} className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
                         </div>
                         <div className='d-flex d-flex-column gap-1 mt-8'>
                             <span className='font-12 f-400 text-dark-gray l-137'>To</span>
-                            <span className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
+                            <span onClick={navigationHandler} className='a-underline text-black font-16 f-500 l-137'>LK. Davidson</span>
                         </div>
                     </div>
                     {/* <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>

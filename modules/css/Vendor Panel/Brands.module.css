@@ -73,8 +73,9 @@
     cursor: pointer;
 }
 .brands-file-upload span{
+    position: absolute;
     color: #78A9FF;
-    padding:10px 0px 0px 16px;
+    padding:10px 0px 0px 6px;
 }
 .add-brand-wrapper button{
     background: #780543;
@@ -141,9 +142,12 @@
     border-bottom-left-radius: 8px;
 }
 @media screen and (max-width:833px) {  
+    .brand-form{
+        margin-top: 16px;
+    }
     .brands-scroll{
         width: 100%;
-        height: auto;
+        height: 400px;
         padding-bottom:0px;
         margin-bottom: 0px;
     }  

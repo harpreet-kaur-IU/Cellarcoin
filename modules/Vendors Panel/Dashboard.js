@@ -104,7 +104,7 @@ const Dashboard = () => {
               </h5>
               <img src="images/ic_trending_up.png" className={`${styles["dashboard-cards-icon"]}`}></img>
             </div>
-            <h6 className={`f-400 font-14 ${styles["dashboard-cards-title"]}`}>Visitor Frequency</h6>
+            <h6 className={`f-400 font-14 ${styles["dashboard-cards-title"]}`}>Monthy Sales</h6>
           </div>
 
           <div className={`${styles["dashboard-cards-wrapper"]}`}>
@@ -118,7 +118,7 @@ const Dashboard = () => {
         <div className={`d-flex ${styles["nfts-wrapper"]}`}>
           <div className={`col-8 ${styles["top-nfts-wrapper"]}`}>
             <div className={` ${styles["top-nfts"]}`}>
-              <h5 className='f-600'>Top Performing NFTs</h5>
+              <h5 className='f-500'>Top Performing NFTs</h5>
               <h6 className='font-14 f-400'>Last 2 weeks</h6>
             </div>
             <div className={`${styles["dashboard-table-section-scroll"]} ${styles["dashboard-table-scroll-nft"]}`}>

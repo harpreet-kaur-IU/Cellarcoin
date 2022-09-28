@@ -32,6 +32,7 @@ export default function Login() {
             router.push("/vendorDashboard")
         }
     },[])
+    
     const formSubmit = (e) =>{
         e.preventDefault()
         signInWithEmailAndPassword(email,password)

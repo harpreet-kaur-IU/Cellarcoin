@@ -82,6 +82,7 @@ const CreateNFT = () => {
         setPremiumDrops(prev => !prev);
     }
     const coverHandler = (e) =>{
+        
         if(!e.target.files[0].name.match(/\.(jpg|png|gif)$/)){
             setCoverError(true);
             var inputfile = document.getElementById("file-input-field");
@@ -89,7 +90,20 @@ const CreateNFT = () => {
         }   
         else{
             setCoverError(false);
-            setCover(e.target.files[0]);
+            var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+            var fSize =  e.target.files[0].size; 
+            var i=0;
+            while(fSize>900){
+              fSize/=1024;
+              i++;
+            }
+            var file = (Math.round(fSize*100)/100);
+            if(i<=2 && file<10){
+              setCover(e.target.files[0])
+            }
+            else{
+                setCoverError(true);
+            }
         }   
     }
     const additionalPropertyHandler = (data,data1) =>{
@@ -104,34 +118,38 @@ const CreateNFT = () => {
         }else{
             setNameError(true);
         }
+
         if(regex.test(desc)){
             setDescError(false);
         }else{
             setDescError(true);
         }
+
         if(url === ''){
             setIsUrl(true);
         }else{
             setIsUrl(false);
         }
+
         if(brand === ''){
             setBrandError(true);
         }else{
             setBrandError(false);
         }
+
         if(!regex.test(name) || !regex.test(desc) || url === '' || brand === ''){
             return false;
         }else{
             return true;
         }
     }
+
     useEffect(()=>{
         if(JWTtoken){
             if(nftId){
                 var myHeaders = new Headers();
                 myHeaders.append("Authorization","Bearer "+JWTtoken);
                 myHeaders.append("Content-Type","application/json");
-
                 var requestOptions = {
                     method: 'GET',
                     headers: myHeaders
@@ -145,11 +163,9 @@ const CreateNFT = () => {
                 })
                 .catch(error => console.log('error', error));
             }
-            
             if(cover){
                 var formdata = new FormData();
                 formdata.append("image",cover);
-                
                 var requestOptions = {
                     method: 'POST',
                     body: formdata,
@@ -245,29 +261,28 @@ const CreateNFT = () => {
     
     const formSubmit = async(e) =>{
         e.preventDefault();
-    
         if(signerResult1){
-            if (typeof window.ethereum !== "undefined") {
+            if(typeof window.ethereum !== "undefined"){
                 const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
                 const contract = new ethers.Contract(
-                contractAddress,
-                Nft_marketplace_ABI,
-                signer
+                    contractAddress,
+                    Nft_marketplace_ABI,
+                    signer
                 );
-                try {
-                await contract.nftMint(
-                    to,
-                    "abb",
-                    "Cellarcoin",
-                    "2400",
-                    "Heloo",
-                    "Nothing"
-                )
-                .then(response=> console.log(response))
-                } catch (error) {
+                try{
+                    await contract.nftMint(
+                        to,
+                        "abb",
+                        "Cellarcoin",
+                        "2400",
+                        "Heloo",
+                        "Nothing"
+                    )
+                    .then(response => console.log(response))
+                }catch(error){
                     console.log(error);
                 }
-            } else {
+            }else{
                 console.log("Please install MetaMask");
             }
         
@@ -347,6 +362,7 @@ const CreateNFT = () => {
                         setCover("")
                         var inputfile = document.getElementById("file-input-field");
                         inputfile.value = "";
+                        router.push("/success")
                     })
                     .then(()=>toast.success("NFT created successfully"),{
                         toastId:"2"
@@ -383,12 +399,12 @@ const CreateNFT = () => {
                             {!loadingImg && !url && <img src="images/nft-image-icon.png"></img>}
                             {loadingImg && <SmallLoader></SmallLoader>}
                             {/* {url && <p className='l-22 f-600 mt-14 text-primary'>Image Uploaded Successfully</p>} */}
-                            {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
+                            {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</span>}
                         </div>
                         {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>}
                         <div className={`d-flex d-flex-column ${styles["name-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Name</h5>
-                            <input value={name} onChange={nameHandler}  type="text" required></input>
+                            <input value={name} onChange={nameHandler} type="text" required></input>
                         </div>
                         {isNameError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Name.</span>}
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
@@ -433,10 +449,11 @@ const CreateNFT = () => {
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
                             <input type="text" value={wallet} onChange={walletHandler}></input>
                         </div> */}
+
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Enter your Brand Name</h5>
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
-                             {/* <input type="text" value={brand} onChange={brandHandler} required></input>  */}
+                            {/* <input type="text" value={brand} onChange={brandHandler} required></input>  */}
                             <BrandDropDown data={brandData} handler={brandHandler}></BrandDropDown>
                         </div>
                         {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Brand.</span>}
@@ -447,7 +464,6 @@ const CreateNFT = () => {
                                 <h5 className='f-500 l-28'>Premium Drops</h5>
                             </div>
                         </div>
-                      
                         <div className='d-flex d-justify-end'>
                             <button className={`font-18 f-700 l-27 bg-primary ${styles["submit-btn"]}`}>Submit</button>
                         </div>

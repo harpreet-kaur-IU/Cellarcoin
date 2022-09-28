@@ -76,3 +76,25 @@
     border: 1px solid #780543;
 }
 
+@media screen and (max-width:470px) {
+    .active-status-modal{
+        padding: 35px 22px;
+        width: 370px;
+        height: 300px;
+    }
+    .btn-wrapper{
+        margin-top: 39px;
+        gap:24px;
+    }
+}
+@media screen and (max-width:374px) {
+    .active-status-modal{
+        padding: 35px 18px;
+        width: 315px;
+        height: 300px;
+    }
+    .btn-wrapper{
+        margin-top: 39px;
+        gap:24px;
+    }
+}

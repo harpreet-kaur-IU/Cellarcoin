@@ -54,6 +54,12 @@
 .nft-name{
     height: 50px;
 }
+.nft-name h6{
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media screen and (max-width:1440px){
     .wine-card-slider-container{
         width: 90%;
