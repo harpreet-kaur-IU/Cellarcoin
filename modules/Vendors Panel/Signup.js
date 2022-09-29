@@ -226,7 +226,7 @@ export default function Signup() {
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
                             <input type="text" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
                         </div>
-                        <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]} ${styles["password"]}`}>
+                        <div className={`col-12 col-xl-12 c ol-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]} ${styles["password"]}`}>
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
                             <input type="text" placeholder="Password" onChange={passwordHandler} value={password} />
                             <span className='d-flex d-align-center d-justify-center cursor-pointer user-select-none' onClick={viewPassword}>
@@ -236,7 +236,9 @@ export default function Signup() {
                         {/* <div className='col-12 p-relative'>
                             <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex d-align-center d-justify-space-between ${styles["input-wrapper"]} `}>
                                 <span className={`font-20 f-400 l-28 ${styles["connect-wallet-text"]}`}>Connect your Wallet</span>
-                                <span onClick={dropdownHandler} className='d-flex d-align-center d-justify-center cursor-pointer user-select-none'>
+                                <span onClick={dropdownHandler} className='d-flex d-ali
+                                
+                                gn-center d-justify-center cursor-pointer user-select-none'>
                                     <img className={`${styles["arrow-down"]}`} src="images/arrow-down.png"/>
                                 </span>
                             </div>
