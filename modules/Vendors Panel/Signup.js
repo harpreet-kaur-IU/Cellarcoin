@@ -20,6 +20,7 @@ export default function Signup() {
     const [errorName,setErrorName] = useState(false)
     const [isUrl, setIsUrl] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
+    const [errorPolicy,setPolicyError] = useState(false)
     const [errorPass, setErrorPass] = useState(false);
     const [errorRePass, setErrorRePass] = useState(false);
     const [coverError,setCoverError] = useState(false);
@@ -137,6 +138,11 @@ export default function Signup() {
         }else{
             setIsUrl(false);
         }
+        if(policyAccepted){
+            setPolicyError(false)
+        }else{
+            setPolicyError(true)
+        }
         if(!errorEmail && !errorPass && policyAccepted && !isUrl && regex.test(name)){
             return true;
         }else{
@@ -207,7 +213,10 @@ export default function Signup() {
             </div>
             <div className={`col-d-none col-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 ${styles["signup"]} d-flex d-flex-column `}>
                 <div className={`d-flex d-justify-end ${styles["log-in-tag"]}`}>
-                    <h6 className='f-400'><span onClick={logHandler} className='cursor-pointer f-700 text-primary'>Log In</span></h6>
+                    <h6 className='f-400'><span onClick={logHandler} className='curso
+                    
+                    
+                    r-pointer f-700 text-primary'>Log In</span></h6>
                 </div>
                 <div className={`d-flex d-flex-column d-justify-center ${styles["login-right"]}`}>
                     {/* <h1 className='h1-vendore'>Welcome</h1> */}
@@ -296,6 +305,7 @@ export default function Signup() {
                             {!policyAccepted && <input type='checkbox' ref={policy} ></input>}
                             <h4 className='font-20 f-400 ml-10'>I accept the <span className='f-700 text-primary'>Terms & Conditions</span></h4>
                         </div>
+                        {errorPolicy && <span className={`mb-8 font-14 f-700 text-danger`}>Please check the Terms and Conditions.</span>}
                         <button className={`cursor-pointer font-20 f-700 ${styles["btn-primary"]}`}>Sign Up</button>
                     </form>
                 </div>
