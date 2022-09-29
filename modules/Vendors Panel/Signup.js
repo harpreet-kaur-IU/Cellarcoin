@@ -17,6 +17,7 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const[url,setUrl] = useState('');
 
+    const [errorName,setErrorName] = useState(false)
     const [isUrl, setIsUrl] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorPass, setErrorPass] = useState(false);
@@ -32,7 +33,7 @@ export default function Signup() {
     const [loadingImg, setLoadingImg] = useState(false);
     const [cover,setCover] = useState("")
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
+    const regex = /^[^\s]+(\s+[^\s]+)*$/;
     const dropdownHandler = () =>{
         setToggle(!toggle);
     }
@@ -115,6 +116,12 @@ export default function Signup() {
     },[cover])
     //to check that all the form fields are filled correctly without any error
     const validator = () =>{
+        if(regex.test(name)){
+            setErrorName(false)
+        }
+        else{
+            setErrorName(true)
+        }
         if(email === ''){
             setErrorEmail(true);
         }else{
@@ -130,7 +137,7 @@ export default function Signup() {
         }else{
             setIsUrl(false);
         }
-        if(!errorEmail && !errorPass && policyAccepted && !isUrl){
+        if(!errorEmail && !errorPass && policyAccepted && !isUrl && regex.test(name)){
             return true;
         }else{
             return false;
@@ -209,6 +216,7 @@ export default function Signup() {
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
                             <input type="text" placeholder='Name' value={name} onChange={nameHandler} required/>   
                         </div>
+                        {errorName && <span className={`mb-8 font-14 f-700 text-danger`}>Please Enter Valid Name.</span>}
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
                             <input type="text" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
                         </div>
