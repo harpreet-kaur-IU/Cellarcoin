@@ -46,37 +46,37 @@ const Reports = () => {
         <div className='vendor-container'>
             {/* <h4 className='l-50 f-600 text-primary mt-24'>Dashboard</h4> */}
             <div className='d-flex d-flex-wrap gap-2 mt-24'>
-                <div className={`${styles["dashboard-cards-wrapper"]}`}>
-                    <div className='d-flex d-justify-space-between'>
-                        <h5 className='f-600 l-29'>{dashboard.totalNft}</h5>
-                        <img src="images/ic_deals.png" className={`${styles["dashboard-cards-icon"]}`}></img>
-                    </div>
-                    <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total NFTs</h6>
+              <div className={`${styles["dashboard-cards-wrapper"]}`}>
+                <div className='d-flex d-justify-space-between'>
+                  <h5 className='f-600 l-29'>{dashboard.totalNft}</h5>
+                  <img src="images/ic_deals.png" className={`${styles["dashboard-cards-icon"]}`}></img>
                 </div>
+                <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total NFTs</h6>
+              </div>
 
-                <div className={`${styles["dashboard-cards-wrapper"]}`}>
-                    <div className='d-flex d-justify-space-between'>
-                        <h5 className='f-600 l-29'>{dashboard.totalVolume}</h5>
-                        <img src="images/ic_account.png" className={`${styles["dashboard-cards-icon"]}`}></img>
-                    </div>
-                    <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total Volume</h6>
+              <div className={`${styles["dashboard-cards-wrapper"]}`}>
+                <div className='d-flex d-justify-space-between'>
+                  <h5 className='f-600 l-29'>{dashboard.totalVolume}</h5>
+                  <img src="images/ic_account.png" className={`${styles["dashboard-cards-icon"]}`}></img>
                 </div>
+                <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total Volume</h6>
+              </div>
 
-                <div className={`${styles["dashboard-cards-wrapper"]}`}>
-                    <div className='d-flex d-justify-space-between'>
-                        <h5 className='f-600 l-29'>{dashboard.visitorFrequency}</h5>
-                        <img src="images/ic_trending_up.png" className={`${styles["dashboard-cards-icon"]}`}></img>
-                    </div>
-                    <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Visitor Frequency</h6>
+              <div className={`${styles["dashboard-cards-wrapper"]}`}>
+                <div className='d-flex d-justify-space-between'>
+                  <h5 className='f-600 l-29'>0</h5>
+                  <img src="images/ic_trending_up.png" className={`${styles["dashboard-cards-icon"]}`}></img>
                 </div>
+                <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Visitor Frequency</h6>
+              </div>
 
-                <div className={`${styles["dashboard-cards-wrapper"]}`}>
-                    <div className='d-flex d-justify-space-between'>
-                        <h5 className='f-600 l-29'>{dashboard.totalEarnings}</h5>
-                        <img src="images/ic_send.png" className={`${styles["dashboard-cards-icon"]}`}></img>
-                    </div>
-                    <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total Earnings</h6>
+              <div className={`${styles["dashboard-cards-wrapper"]}`}>
+                <div className='d-flex d-justify-space-between'>
+                  <h5 className='f-600 l-29'>{dashboard.totalEarnings}</h5>
+                  <img src="images/ic_send.png" className={`${styles["dashboard-cards-icon"]}`}></img>
                 </div>
+                <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total Earnings</h6>
+              </div>
             </div>
             <div>
 

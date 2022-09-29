@@ -6,7 +6,7 @@
 } */
 .wine-cards-container{
     border-radius: 16px;
-    /* width: 100%; */
+    width: 422px;
     transition: 0.5s;
 }
 .wine-cards-container:hover{
