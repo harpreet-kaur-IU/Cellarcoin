@@ -71,6 +71,21 @@
         gap:14px;
     }
 }
+@media screen and (max-width:1440px) {
+    .wine-cards-container{
+        width: 400px;
+    }
+}
+@media screen and (max-width:1347px) {
+    .wine-cards-container{
+        width:365px;
+    }
+}
+@media screen and (max-width:1245px) {
+    .wine-cards-container{
+        width: auto;
+    }
+}
 @media screen and (max-width:1024px) {
     .wine-card-container{
         display: grid;
