@@ -213,10 +213,7 @@ export default function Signup() {
             </div>
             <div className={`col-d-none col-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 ${styles["signup"]} d-flex d-flex-column `}>
                 <div className={`d-flex d-justify-end ${styles["log-in-tag"]}`}>
-                    <h6 className='f-400'><span onClick={logHandler} className='curso
-                    
-                    
-                    r-pointer f-700 text-primary'>Log In</span></h6>
+                    <h6 className='f-400'><span onClick={logHandler} className='cursor-pointer f-700 text-primary'>Log In</span></h6>
                 </div>
                 <div className={`d-flex d-flex-column d-justify-center ${styles["login-right"]}`}>
                     {/* <h1 className='h1-vendore'>Welcome</h1> */}
