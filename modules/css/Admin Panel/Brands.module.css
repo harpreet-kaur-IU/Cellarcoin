@@ -21,8 +21,6 @@
     margin-top: 8px;
 }
 .dashboard-table-wrapper{
-    height: 100vh;
-    overflow-y: scroll;
     width:100%;
     overflow-x: scroll;
     display: flex;
