@@ -68,12 +68,19 @@
     padding-right: 38px;
     padding-bottom: 20px;
 }
-.nft-status{
+.nft-status-green{
     background: #F1FFEA;
     border-radius: 3px;
     padding: 5px 15px;
-    width: 90px;
     color: #24B117;
+    font-weight: 500;
+    font-size: 14px;
+}
+.nft-status-expired{
+    background: #FFEBEA;
+    border-radius: 3px;
+    padding: 5px 15px;
+    color: #BD4038;
     font-weight: 500;
     font-size: 14px;
 }

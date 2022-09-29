@@ -248,7 +248,7 @@ const Header = (props) => {
               </button>
               <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
               <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
-                {/* <img className='cursor-pointer rounded-16' src='\``mages/our-pillars-1.png'></img> */}
+                {/* <img className='cursor-pointer rounded-16' src='images/our-pillars-1.png'></img> */}
                 <h6 className='font-14 f-500 l-19'>{user}</h6>
                 <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
               </div>

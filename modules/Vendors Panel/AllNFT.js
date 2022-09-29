@@ -152,16 +152,18 @@ const AllNFT = () => {
                                     <span className={`font-14 f-500 ${styles["nft-status-green"]}`}>{item.status}</span>
                                 }
                             </div>
-                            {item.price === 0?<span className={`p-relative font-14 f-500 d-flex d-align-center`}>
-                                --
-                            </span>
-                            :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
-                                <img src='images/eth-sm.png'></img>
-                                {item.price}
-                                <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
-                                    <h6 className='l-22 f-400'>ETH</h6>
-                                </div>
-                            </span>}
+                            {item.price === 0?
+                                <span className={`p-relative font-14 f-500 d-flex d-align-center`}>
+                                    --
+                                </span>
+                                :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
+                                    <img src='images/eth-sm.png'></img>
+                                    {item.price}
+                                    <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
+                                        <h6 className='l-22 f-400'>ETH</h6>
+                                    </div>
+                                </span>
+                            }
                             <span className='font-14 f-500 d-flex'>{item.createdTime}</span>
                             <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center`} style={{gap:"37px"}}>
                                 <Link href={`/vendorListing/${item._id}`}>
