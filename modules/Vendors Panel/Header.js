@@ -235,11 +235,11 @@ const Header = (props) => {
                 {isConnected ? <button onClick={() => execute()}>Execute</button> : ""}
               </div> */}
               {connectedWallet ?
-                <div className="text-center mt-8">
+                <div className="text-center">
                   <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connected</button>
                 </div>
                 :
-                <div className="text-center mt-8">
+                <div className="text-center">
                   <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
                 </div>
               }
