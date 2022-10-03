@@ -43,6 +43,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin: 18px 10px 25px 10px;
 }
+
 .dashboard-table-column-product{
     object-fit:contain;
     width: 71px;
@@ -109,6 +110,11 @@
 .header-search-box img{
     height: 15px;
     width: 15px;
+}
+.active-filter{
+    padding: 10px 23px 10px 36px;
+    border: 1px solid var(--primary);
+    border-radius: 16px;
 }
 /* scroller style */
     .dashboard-table-wrapper::-webkit-scrollbar {

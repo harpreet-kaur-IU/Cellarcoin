@@ -83,7 +83,7 @@ const Dashboard = () => {
         </div>
         <div className={`${styles["dashboard-table-section-scroll"]}`}>
           <div className={`${styles["dashboard-table-wrapper"]}`}>
-            <div className={`${styles["dashboard-table-column"]}  bg-orange d-flex d-align-center`}>
+            <div className={`${styles["dashboard-table-column"]} bg-orange d-flex d-align-center`}>
               <span className='font-16 f-600 d-flex'>NFT</span>
               <span className='font-16 f-600 d-flex'>Name</span>
               <span className='font-16 f-600 d-flex'>Brand</span>
@@ -106,22 +106,23 @@ const Dashboard = () => {
                 </div> */}
                 <div className='d-flex'>
                   {item.status === "expired" ?
-                      <span className={`font-14 f-500 ${styles["nft-status-expired"]}`}>expired</span>
+                    <span className={`font-14 f-500 ${styles["nft-status-expired"]}`}>expired</span>
                   :
-                      <span className={`font-14 f-500 ${styles["nft-status-green"]}`}>{item.status}</span>
+                    <span className={`font-14 f-500 ${styles["nft-status-green"]}`}>{item.status}</span>
                   }
                 </div>
-                {item.price === 0?<span className={`p-relative font-14 f-500 d-flex d-align-center`}>
+                {item.price === 0 ?
+                  <span className={`p-relative font-14 f-500 d-flex d-align-center`}>
                     --
-                </span>
-                :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
+                  </span>
+                  :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
                     <img src='images/eth-sm.png'></img>
                     {item.price}
                     <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
                       <h6 className='l-22 f-400'>ETH</h6>
                     </div>
-                </span>}
-                
+                  </span>
+                }
                 <span className='font-14 f-500 d-flex'>{item.createdTime}</span>
                 <span className={`cusror-pointer font-14 f-500 d-flex text-primary d-align-center d-justify-center`} style={{textDecoration:"underline"}}>
                   <Link href={`/adminlisting/${item._id}`}>View</Link>

@@ -117,14 +117,20 @@ const AllNFT = () => {
         <div className='vendor-container'>
             <div className='d-flex d-align-center d-justify-space-between'>
                 <h4 className='f-600 text-primary mt-24 mb-24'>NFT List</h4>
-                <div className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}>
-                    <img src='images/search-icon-v.png'></img>
-                    <form>
-                        <input onChange={searchHandler}  className='col-12' type="text" placeholder='Search' />
-                    </form>
-                </div>
-                <div className={`d-none d-flex d-align-center d-justify-center ${styles["create-nft-div"]}`}>
-                    <button onClick={createHandler} className='font-12 f-600 b-none'>Create NFT</button>
+                <div className='d-flex d-align-center gap-4'>
+                    <div className={`d-flex d-align-center gap-2 ${styles["active-filter"]}`}>
+                        <h6 className='text-primary l-19 font-14 f-500'>Active</h6>
+                        <img className='cursor-pointer' src='images/arrow-down-primary.png'></img>
+                    </div>
+                    <div className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}>
+                        <img src='images/search-icon-v.png'></img>
+                        <form>
+                            <input onChange={searchHandler} className='col-12' type="text" placeholder='Search' />
+                        </form>
+                    </div>
+                    <div className={`d-none d-flex d-align-center d-justify-center ${styles["create-nft-div"]}`}>
+                        <button onClick={createHandler} className='font-12 f-600 b-none'>Create NFT</button>
+                    </div>
                 </div>
             </div>
             <div className={`${styles["dashboard-table-section-scroll"]}`}>

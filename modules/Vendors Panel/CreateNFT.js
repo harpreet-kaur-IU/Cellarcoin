@@ -22,7 +22,12 @@ const CreateNFT = () => {
     const [add,setAdd] = useState(false);
     const [name,setName] = useState("");
     const [desc,setDesc] = useState("");
+    //regex starts
     const regex = /^[^\s]+(\s+[^\s]+)*$/;
+    const pattern = /[0-9]/g;
+    const decimal = /^\d+(\.\d{1,2})?$/;
+    const string = /^[a-zA-Z]*$/;
+    //regex ends
     const [bottle,setBottleSize] = useState("");
 
     const [volume,setVolumn] = useState("");
@@ -43,11 +48,17 @@ const CreateNFT = () => {
     const [loading,setLoading] = useState(false);
     const [loadingImg,setLoadingImg] = useState(false);
     const [isUrl, setIsUrl] = useState(false);
+    //error states starts
     const [isNameError,setNameError] = useState(false);
     const [isDescError,setDescError] = useState(false);
     const [brandData,setBrandData] = useState("");
     const [coverError,setCoverError] = useState(false);
     const [brandError,setBrandError] = useState(false);
+    const [isBottle,setBottleError] = useState(false);
+    const [isVolumn,setVolumnError] = useState(false);
+    const [isRegion,setRegionError] = useState(false);
+    const [isSpirit,setSpiritError] = useState(false);
+    //error states ends
     const [signerResult1,setSignerResult] = useState(false);
     var JWTtoken = getOnBoardFromCookie();
 
@@ -118,7 +129,6 @@ const CreateNFT = () => {
         }else{
             setNameError(true);
         }
-
         if(regex.test(desc)){
             setDescError(false);
         }else{
@@ -137,7 +147,30 @@ const CreateNFT = () => {
             setBrandError(false);
         }
 
-        if(!regex.test(name) || !regex.test(desc) || url === '' || brand === ''){
+        if(pattern.test(bottle)){
+            setBottleError(false);
+        }else{
+            setBottleError(true);
+        }
+
+        if(decimal.test(volume)){
+            setVolumnError(false);
+        }else{
+            setVolumnError(true);
+        }
+
+        if(string.test(region)){
+            setRegionError(false);
+        }else{
+            setRegionError(true);
+        }
+
+        if(string.test(spirit)){
+            setSpiritError(false);
+        }else{
+            setSpiritError(true);
+        }
+        if(!regex.test(name) || !regex.test(desc) || url === '' || brand === '' || !pattern.test(bottle) || !decimal.test(volume) || !string.test(region) || !string.test(spirit)){
             return false;
         }else{
             return true;
@@ -261,7 +294,7 @@ const CreateNFT = () => {
     
     const formSubmit = async(e) =>{
         e.preventDefault();
-        if(signerResult1){
+        // if(signerResult1){
             if(typeof window.ethereum !== "undefined"){
                 const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
                 const contract = new ethers.Contract(
@@ -327,6 +360,7 @@ const CreateNFT = () => {
                         headers: myHeaders,
                         body: raw
                     };
+                    
                     setLoading(true)
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
                     .then(response => response.json())
@@ -370,11 +404,11 @@ const CreateNFT = () => {
                     .catch(error => console.log('error', error));
                 }  
             }
-        }else{
-            toast.error("Please Connect Your Wallet"),{
-                toastId:"2"
-            }
-        }
+        // }else{
+        //     toast.error("Please Connect Your Wallet"),{
+        //         toastId:"2"
+        //     }
+        // }
     }
   return (
     <div>
@@ -427,20 +461,26 @@ const CreateNFT = () => {
                                 <div className={`col-5 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Bottle Size</h5>
                                     <input value={bottle} onChange={bottleHandler} className='col-12'></input>
+                                    {isBottle && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter numbers only.</h6>}
                                 </div>
+                                
                                 <div className={`col-5 offset-2 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Alcohol by volume(ABV)</h5>
                                     <input value={volume} onChange={volumeHandler} className='col-12'></input>
+                                    {isVolumn && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter numbers only.</h6>}
                                 </div>
                             </div>
+                            
                             <div className={`d-flex d-flex-wrap ${styles['properties-wrapper']}`}>
                                 <div className={`col-5 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Region</h5>
                                     <input value={region} onChange={regionHandler} className='col-12'></input>
+                                    {isRegion && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter string only.</h6>}
                                 </div>
                                 <div className={`col-5 offset-2 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Spirit</h5>
                                     <input value={spirit} onChange={spiritHandler} className='col-12'></input>
+                                    {isSpirit && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter string only.</h6>}
                                 </div>
                             </div>
                         </div>
