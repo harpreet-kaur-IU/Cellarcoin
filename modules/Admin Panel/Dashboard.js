@@ -58,7 +58,6 @@ const Dashboard = () => {
             </div>
             <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Total Volume</h6>
           </div>
-
           <div className={`${styles["dashboard-cards-wrapper"]}`}>
             <div className='d-flex d-justify-space-between'>
               <h5 className='f-600 l-29'>
@@ -69,7 +68,6 @@ const Dashboard = () => {
             </div>
             <h6 className={`f-400 font-13 ${styles["dashboard-cards-title"]}`}>Visitor Frequency</h6>
           </div>
-
           <div className={`${styles["dashboard-cards-wrapper"]}`}>
             <div className='d-flex d-justify-space-between'>
               <h5 className='f-600 l-29'>{dashboard.totalEarnings}</h5>
@@ -117,7 +115,7 @@ const Dashboard = () => {
                   </span>
                   :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
                     <img src='images/eth-sm.png'></img>
-                    {item.price}
+                      {item.price}
                     <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
                       <h6 className='l-22 f-400'>ETH</h6>
                     </div>

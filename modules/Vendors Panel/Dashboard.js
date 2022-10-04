@@ -121,7 +121,7 @@ const Dashboard = () => {
               <h5 className='f-500'>Top Performing NFTs</h5>
               <h6 className='font-14 f-400'>Last 2 weeks</h6>
             </div>
-            <div className={`${styles["dashboard-table-section-scroll"]} ${styles["dashboard-table-scroll-nft"]}`}>
+            <div className={`${styles["dashboard-table-scroll-nft"]}`}>
               <div className={`${styles["dashboard-table-wrapper"]}`}>
                 <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-border-bottom"]} d-flex d-align-center`}>
                   <span className='font-16 f-600 d-flex'>No.</span>

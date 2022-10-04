@@ -36,7 +36,7 @@ const CreateNFT = () => {
 
     const [spirit,setSpirit] = useState("")
 
-    const [brand,setBrand] = useState("");
+    const [brand,setBrand] = useState("Select Brand");
     const [wallet,setWallet] = useState("");
     
     const [premiumDrops,setPremiumDrops] = useState(false);
@@ -48,6 +48,7 @@ const CreateNFT = () => {
     const [loading,setLoading] = useState(false);
     const [loadingImg,setLoadingImg] = useState(false);
     const [isUrl, setIsUrl] = useState(false);
+    const [edit,setEdit] = useState(false)
     //error states starts
     const [isNameError,setNameError] = useState(false);
     const [isDescError,setDescError] = useState(false);
@@ -59,6 +60,7 @@ const CreateNFT = () => {
     const [isRegion,setRegionError] = useState(false);
     const [isSpirit,setSpiritError] = useState(false);
     //error states ends
+    
     const [signerResult1,setSignerResult] = useState(false);
     var JWTtoken = getOnBoardFromCookie();
 
@@ -218,14 +220,17 @@ const CreateNFT = () => {
             router.push("/vendorlogin")
         }
     },[cover,nftId])
+
+
     useEffect(()=>{
         if(JWTtoken){
             if(data){
+                setEdit(true);
                 setUrl(data[0].imageUrl)
                 setName(data[0].name)
                 setDesc(data[0].description)
                 setWallet(data[0].walletAddress)
-                setBrand(data[0].brand)
+                setBrand(data[0].brand.brandName)
                 setPremiumDrops(data[0].isPremiumDrop)
                 const attributes = data[0].attributes;
                 for(var i=0;i<attributes.length;i++){
@@ -433,8 +438,9 @@ const CreateNFT = () => {
                             {!loadingImg && !url && <img src="images/nft-image-icon.png"></img>}
                             {loadingImg && <SmallLoader></SmallLoader>}
                             {/* {url && <p className='l-22 f-600 mt-14 text-primary'>Image Uploaded Successfully</p>} */}
-                            {coverError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</span>}
+                            
                         </div>
+                        {coverError && <h6 className={`mt-24 font-14 f-700 text-danger`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</h6>}
                         {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>}
                         <div className={`d-flex d-flex-column ${styles["name-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Name</h5>
@@ -494,7 +500,7 @@ const CreateNFT = () => {
                             <h5 className='font-24 f-600 l-33'>Enter your Brand Name</h5>
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
                             {/* <input type="text" value={brand} onChange={brandHandler} required></input>  */}
-                            <BrandDropDown data={brandData} handler={brandHandler}></BrandDropDown>
+                            <BrandDropDown data={brandData} handler={brandHandler} tracker={edit} value={brand}></BrandDropDown>
                         </div>
                         {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Brand.</span>}
                         <div className={`d-flex d-flex-column ${styles["post-input"]}`}>

@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styles from '../css/Vendor Panel/DropDown.module.css'
 const BrandDropDown = (props) => {
-    const [value, setValue] = useState("Select Brand");
+    const router = useRouter();
+    const [value, setValue] = useState(props.value);
+    const nftId = router.query["id"];
+
+    useEffect(()=>{
+        setValue(props.value)
+    },[props.tracker])
     const handler = (e) => {
         e.currentTarget.classList.toggle(styles["open"]);
     }

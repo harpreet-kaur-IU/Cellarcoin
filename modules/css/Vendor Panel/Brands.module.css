@@ -101,6 +101,14 @@
     font-weight: 500;
     font-size: 14px;
 }
+.brand-pending span{
+    border-radius: 3px;
+    padding: 5px 15px;
+    color:#BD9738;
+    background-color:#FFF9EA;
+    font-weight: 500;
+    font-size: 14px;
+}
 .brands-scroll::-webkit-scrollbar {
     width: 3px;
     height: 5px;

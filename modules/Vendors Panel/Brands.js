@@ -164,15 +164,24 @@ const Brands = () => {
                 <div className={`${styles["brand-table-body"]}`}>
                   <span className='font-16 f-500 text-primary'>{item.brandName}</span>
                   <span className='font-16 f-500'><Moment fromNow>{item.createdAt}</Moment></span>
-                    {item.status === "approved"? 
+                    {item.status === "approved" &&
                       <div className={`cusror-pointer font-14 f-500 d-flex d-justify-center ${styles["brand-approved"]}`}>
                         <span>
                           Approved
                         </span>
-                      </div> : 
+                      </div> 
+                    }
+                    {item.status === "rejected" &&
                       <div className={`cusror-pointer font-14 f-500 d-flex d-justify-center ${styles["brand-rejected"]}`}>
                         <span>
                           Rejected
+                        </span>
+                      </div>
+                    }
+                    {item.status === "pending" &&
+                      <div className={`cusror-pointer font-14 f-500 d-flex d-justify-center ${styles["brand-pending"]}`}>
+                        <span>
+                          Pending
                         </span>
                       </div>
                     }

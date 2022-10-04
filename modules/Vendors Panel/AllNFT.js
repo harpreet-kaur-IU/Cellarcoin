@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useRef } from 'react'
 import Header from './Header'
 import styles from '.././css/Vendor Panel/Dashboard.module.css'
 import Link from 'next/link'
@@ -9,13 +9,40 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useRouter} from 'next/router'
+
+function useOutsideAlerter(ref,handler) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          handler();
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
 const AllNFT = () => {
+
+
+
     const[data,setData] = useState('');
     const[searchData,setSearchData] = useState('');
     const[isDelete,setDelete] = useState(false);
     const[deleteUserId,setDeleteUserId] = useState("");
     const[loading,setLoading] = useState(false);
+    const[dropdown,setDropdown] = useState(false);
 
+    //dropdown collapse
+    const wrapperRef = useRef(null);
+    const handler = ()=>{
+      setDropdown(false);
+    }
+    useOutsideAlerter(wrapperRef,handler);
+    const dropdownHandler = () =>{
+        setDropdown(!dropdown);
+    }
     const router = useRouter();
     var JWTtoken = getOnBoardFromCookie();
     
@@ -118,9 +145,18 @@ const AllNFT = () => {
             <div className='d-flex d-align-center d-justify-space-between'>
                 <h4 className='f-600 text-primary mt-24 mb-24'>NFT List</h4>
                 <div className='d-flex d-align-center gap-4'>
-                    <div className={`d-flex d-align-center gap-2 ${styles["active-filter"]}`}>
-                        <h6 className='text-primary l-19 font-14 f-500'>Active</h6>
-                        <img className='cursor-pointer' src='images/arrow-down-primary.png'></img>
+                    <div className='p-relative'>
+                        <div className={`d-flex d-align-center gap-2 ${styles["active-filter"]}`}>
+                            <h6 className='text-primary l-19 font-14 f-500'>Minted</h6>
+                            <img onClick={dropdownHandler} className='cursor-pointer' src='images/arrow-down-primary.png'></img>
+                        </div>
+                        {dropdown && 
+                            <div ref={wrapperRef} className={`p-absolute d-flex d-flex-column ${styles["nft-status-filter"]}`}>
+                                <h6 className='cursor-pointer f-500'>Minted</h6>
+                                <h6 className='cursor-pointer f-500'>Expired</h6>
+                                <h6 className='cursor-pointer f-500'>Listed</h6>
+                            </div>
+                        }
                     </div>
                     <div className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}>
                         <img src='images/search-icon-v.png'></img>
@@ -171,14 +207,14 @@ const AllNFT = () => {
                                 </span>
                             }
                             <span className='font-14 f-500 d-flex'>{item.createdTime}</span>
-                            <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center`} style={{gap:"37px"}}>
+                            <span className={`font-14 f-500 d-flex d-align-center d-justify-center`} style={{gap:"37px"}}>
                                 <Link href={`/vendorListing/${item._id}`}>
-                                    <img src='images/Eye Icon.png'></img>
+                                    <img className='cursor-pointer' src='images/Eye Icon.png'></img>
                                 </Link>
                                 <Link href={`/createnft/${item._id}`}>
-                                    <img src='images/edit-2.svg'></img>
+                                    <img className='cursor-pointer' src='images/edit-2.svg'></img>
                                 </Link>
-                                <img id={item._id} onClick={deleteModalClicked} src='images/Delete.png'></img>
+                                <img className='cursor-pointer' id={item._id} onClick={deleteModalClicked} src='images/Delete.png'></img>
                             </span>
                         </div>
                     ))}

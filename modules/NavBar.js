@@ -1,20 +1,18 @@
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import Menu from '../icons/menu';
+import React, {useEffect,useState} from 'react'
 import style from './css/NavBar.module.css'
 import SignUp from './SignUp';
-import WalletModal from './WalletModal';
 import {useRouter} from 'next/router';
 import Modal from './Modal';
 import useFirebaseAuth from '../auth/useFirebaseAuth';
 import NotificationModal from './NotificationModal';
-import {  getUserOnBoardFromCookie,removeUserOnBoardCookie } from '../auth/userCookies';
+import {getUserOnBoardFromCookie,removeUserOnBoardCookie} from '../auth/userCookies';
 import NavItems from './NavItems';
-import { ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Hamburger from '../icons/Hamburger';
 import SiteLogo from '../icons/SiteLogo';
-import { ethers } from "ethers";
+import {ethers} from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
@@ -41,15 +39,16 @@ const NavBar = () => {
   },[toggle])
   useEffect(()=>{
     if(JWTToken){
-        function parseJwt() {
-        if (!JWTToken) {return}
+      function parseJwt() {
+        if(!JWTToken){
+          return
+        }
         const base64Url = JWTToken.split('.')[1];
         const base64 = base64Url.replace('-', '+').replace('_', '/');
         return JSON.parse(window.atob(base64));
-        }
-        var user = parseJwt();
-        setUserId(user.user._id)
-        
+      }
+      var user = parseJwt();
+      setUserId(user.user._id)
     }else{
         // Router.push("/vendorlogin")
     }
@@ -228,7 +227,6 @@ const NavBar = () => {
             )}
             {isConnected ? <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => execute()}>Connected</button> : ""}
           </div>
-
           {/* <div onClick={walletHandler} className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div> */}
           <div onClick={notificationHandler} className={`cursor-pointer ml-32 ${style["bell-icon"]}`}><img src='images/bell.png'></img></div>
           <div onClick ={dropdownHandler} className={`cursor-pointer ml-24 ${style["profile-icon"]}`}>
