@@ -9,6 +9,7 @@ const BrandDropDown = (props) => {
     useEffect(()=>{
         setValue(props.value)
     },[props.tracker])
+
     const handler = (e) => {
         e.currentTarget.classList.toggle(styles["open"]);
     }
@@ -24,7 +25,7 @@ const BrandDropDown = (props) => {
             {props.data && <ul>
                 {props.data.map((item,index) => { 
                     return (
-                        <li value={item.brandName} id={item._id} onClick={selectHandler} key={index}>
+                        <li value={item.brandName} id={item._id} on Click={selectHandler} key={index}>
                             {item.brandName}
                         </li>
                     )

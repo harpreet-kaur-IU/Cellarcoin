@@ -109,6 +109,10 @@
     height: 15px;
     width: 15px;
 }
+.polygon-icon-img{
+    width: 22px;
+    height: 22px;
+}
 /* scroller style */
     .dashboard-table-wrapper::-webkit-scrollbar {
         width:3px;

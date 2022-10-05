@@ -1,12 +1,8 @@
 import React, { useEffect, useState }  from 'react'
 import Header from './Header'
-import DashboardCards from './DashboardCards'
 import styles from '.././css/Vendor Panel/Dashboard.module.css'
-import Link from 'next/link'
 import {getOnBoardFromCookie} from '../../auth/userCookies';
 import Loader from './Loader';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {useRouter} from 'next/router'
 const Dashboard = () => {
   const[data,setData] = useState('')
@@ -186,8 +182,8 @@ const Dashboard = () => {
                     <img className={`${styles["dashboard-new-nft-img"]}`} src={item.imageUrl}></img>
                     <span className='font-14 f-500 d-flex d-align-center'>{item.name}</span>
                   </span> 
-                  <span className='font-14 f-600 d-flex d-align-center'>
-                    {item.price === 0?"-":<img src='images/eth-sm.png'></img>}
+                  <span className='font-14 f-600 d-flex d-align-center gap-1'>
+                    {item.price === 0?"-":<img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>}
                     {item.price === 0?"-" : item.price}
                   </span>
                 </div>

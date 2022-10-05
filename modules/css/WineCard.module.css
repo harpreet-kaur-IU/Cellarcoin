@@ -29,6 +29,14 @@
 .wine-card-content-view span{
     padding: 4px;
 }
+.wine-card-content-row-2 img{
+    width: 27px;
+    height: 27px;
+}
+.polygon-icon-img{
+    width: 27px;
+    height: 27px;
+}
 /* .wine-card-content-row-2{
     margin-bottom: 34px;
 } */

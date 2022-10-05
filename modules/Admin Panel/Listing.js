@@ -55,7 +55,7 @@ const Listing = () => {
                             <div className={`d-flex d-flex-column`}>
                                 <h5 className={`f-500 ${styles["listing-price-h5"]}`}>Price</h5>
                                 <div className={`d-flex d-align-center ${styles["listing-price-img-and-content"]}`}>
-                                    <img src='images/eth-sm.png'></img>
+                                    <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                                     <h5 className='f-500'>{data.price}</h5>
                                 </div>
                             </div>

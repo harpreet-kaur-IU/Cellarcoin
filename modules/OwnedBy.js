@@ -106,8 +106,8 @@ const OwnedBy = () => {
                         <div className={`col-4 ${style["wine-images-col-2"]}`}>
                             <h3 className='f-500 l-137'>{data.name}</h3>
                             <h5 className='mt-16 text-dark-gray f-400'>Price</h5>
-                            <div className='mt-8 d-flex d-align-center'>
-                                <img src='images/eth.png'></img>
+                            <div className='mt-8 d-flex d-align-center gap-1'>
+                                <img className={`${style["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                                 <h5 className={`font-24 l-137 f-500 ${style["wine-price"]}`}>
                                     {data.price} wETH
                                 </h5>

@@ -23,7 +23,7 @@ const UserNft = () => {
                     <div className={`d-flex d-flex-column gap-2 ${style["user-name-wallet-address"]}`}>
                         <h3 className={`text-center cursor-pointer f-700 l-137`}>User Name User Name</h3>
                         <div className={`d-flex d-align-center gap-1`}>
-                            <img src='images/eth-sm.png'></img>
+                            <img src='images/polygon-icon.svg'></img>
                             <h5 className='font-16 f-400 l-137 word-break'>0x8B5db879e1E2207DdA833aF136edD224aDf4DA19</h5>
                         </div>
                     </div>
@@ -50,24 +50,24 @@ const UserNft = () => {
                 }
                 {activeTab == "tab2" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
-                       <WineCard></WineCard>
-                       <WineCard></WineCard>
-                       <WineCard></WineCard>
-                       <WineCard></WineCard>
+                        <WineCard></WineCard>
+                        <WineCard></WineCard>
+                        <WineCard></WineCard>
+                        <WineCard></WineCard>
                     </div>
                 }
                 {activeTab == "tab3" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
                         <WineCard></WineCard>
-                       <WineCard></WineCard>
-                       <WineCard></WineCard>
-                       <WineCard></WineCard>
+                        <WineCard></WineCard>
+                        <WineCard></WineCard>
+                        <WineCard></WineCard>
                     </div>
                 }
                 {activeTab == "tab4" &&
                      <>
                      <div className={`offset-4 col-8 ${style["wine-tab-3"]}`}>
-                         <UserNftCards></UserNftCards>
+                        <UserNftCards></UserNftCards>
                      </div>
                      <UserTable></UserTable>
                  </>

@@ -143,8 +143,8 @@ const MarketPlaceBanner = () => {
                                 {data.walletAddress===""?"--n.a--":data.walletAddress}
                             </h5>
                             <h5 className='mt-16 font-25 l-137 f-500'>Price</h5>
-                            <h5 className='mt-16 font-24 l-137 f-500'>
-                                <img src='images/eth.png'></img>
+                            <h5 className='d-flex d-align-center gap-1 mt-16 font-24 l-137 f-500'>
+                                <img className={`${style["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                                 {data.price} wETH
                             </h5>
                             <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>

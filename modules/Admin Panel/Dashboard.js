@@ -114,7 +114,7 @@ const Dashboard = () => {
                     --
                   </span>
                   :<span className={`p-relative font-14 f-500 d-flex d-align-center ${styles["nft-price-wrapper"]}`}>
-                    <img src='images/eth-sm.png'></img>
+                    <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                       {item.price}
                     <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
                       <h6 className='l-22 f-400'>ETH</h6>

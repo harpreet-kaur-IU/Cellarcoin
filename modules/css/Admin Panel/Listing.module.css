@@ -107,6 +107,10 @@
 .listing-name{
     height: 39px;
 }
+.polygon-icon-img{
+    width: 27px;
+    height: 27px;
+}
 /* scroller style */
 .table-wrapper::-webkit-scrollbar {
     width:3px;

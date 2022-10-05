@@ -34,7 +34,7 @@ const NFTCard = (props) => {
                 </div>
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
                     <h5 className='l-137 f-500'>
-                        <img src='images/eth.png'></img>
+                        <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                         {props.price} 
                     </h5>
                     <h5 className='l-137 f-500'>@Odule</h5>

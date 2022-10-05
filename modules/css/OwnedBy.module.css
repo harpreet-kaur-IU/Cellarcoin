@@ -60,6 +60,10 @@
     padding: 15px 0px;
     width: 80%;
 }
+.polygon-icon-img{
+    width: 27px;
+    height: 27px;
+}
 @media screen and (max-width:1440px) {
     .wine-ownedby-container{
         width: 90%;
