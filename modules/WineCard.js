@@ -21,7 +21,7 @@ const WineCard = (props) => {
                         </span>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{props.favourites}</span>
-                            <img src="images/heart.png"></img>
+                            <img className='cursor-pointer' src="images/heart.png"></img>
                         </span>
                     </h6>
                 </div>

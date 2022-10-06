@@ -98,7 +98,7 @@ const SellNFT = () => {
           <div className={`d-flex d-align-center d-justify-space-between ${styles["price-input"]}`}>
             <input value={price} onChange={priceHandler} className='col-10' type="text" required></input>
             <div className={`d-flex d-align-center d-justify-center col-2 ${styles["price-unit"]}`}>
-              <h6 className='font-24 f-500 l-33'>ETH</h6>
+              <h6 className='font-24 f-500 l-33'>Polygon</h6>
               {/* <img src='images/arrow-down-white.svg'></img> */}
             </div>
           </div>
@@ -120,7 +120,7 @@ const SellNFT = () => {
           </div>
 
           <div className={`d-flex d-justify-end ${styles["list-btn"]}`}>
-            <button className='font-20 f-500'>Sell</button>
+            <button className='cursor-pointer font-20 f-500'>Sell</button>
           </div>
         </div>
       </form>

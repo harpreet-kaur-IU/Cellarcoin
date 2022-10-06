@@ -19,12 +19,14 @@ const Filter = () => {
                 </div>
                 <div className={`p-absolute rounded-8 bg-pink ${style["filter-dropdown-menu"]} ${toggle ? "d-block" : "d-none"}`}>
                     <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Recently Sold</a>
-                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Recently Sold</a>
-                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Recently Sold</a>
+                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Most Popular</a>
+                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Most Favorited</a>
+                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Price: Low to High</a>
+                    <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Price: High to Low</a>
                 </div>
             </div>
-            <div className={`p-absolute `}>
-                <div className={`rounded-8 bg-pink mb-8 d-flex d-align-center d-justify-space-between  ${style["sort-heading-wrapper"]}`}>
+            <div className={`p-absolute`}>
+                <div className={`rounded-8 bg-pink mb-8 d-flex d-align-center d-justify-space-between ${style["sort-heading-wrapper"]}`}>
                     <a className='f-500 font-16 l-134'>Sort</a>
                     <img onClick={sortHandler} src='images/arrow-down.png'></img>
                 </div>

@@ -42,12 +42,12 @@ const NFTCard = (props) => {
             </div>
             {props.status==="Sell NFT" &&
                 <div className='p-16'>
-                    <button onClick={sellNftHandler} className={`col-12 b-none btn-primary font-18 f-600 l-137 ${styles["usernft-list-nft-btn"]}`}>Sell NFT</button>
+                    <button onClick={sellNftHandler} className={`cursor-pointer col-12 b-none btn-primary font-18 f-600 l-137 ${styles["usernft-list-nft-btn"]}`}>Sell NFT</button>
                 </div>
             }
             {props.status==="List NFT" &&
                 <div className='p-16'>
-                    <button className={`col-12 b-none btn-primary font-18 f-600 l-137 ${styles["usernft-list-nft-btn"]}`}>List NFT</button>
+                    <button className={`cursor-pointer col-12 b-none btn-primary font-18 f-600 l-137 ${styles["usernft-list-nft-btn"]}`}>List NFT</button>
                 </div>
             }
         </div>
