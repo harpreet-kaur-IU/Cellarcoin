@@ -15,6 +15,7 @@ export default function Signup() {
     const[email,setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [img,setImg] = useState(false);
     const[url,setUrl] = useState('');
 
     const [errorName,setErrorName] = useState(false)
@@ -33,8 +34,10 @@ export default function Signup() {
     const [loading, setLoading] = useState(false);
     const [loadingImg, setLoadingImg] = useState(false);
     const [cover,setCover] = useState("")
+
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     const regex = /^[^\s]+(\s+[^\s]+)*$/;
+
     const dropdownHandler = () =>{
         setToggle(!toggle);
     }
@@ -48,6 +51,7 @@ export default function Signup() {
         setEmail(e.target.value);
     }
     const viewPassword = (e) => {
+        setImg(prev => !prev)
         e.currentTarget.parentElement.classList.toggle(styles["show"]);
     }
     const passwordHandler = (e) =>{
@@ -230,7 +234,7 @@ export default function Signup() {
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
                             <input type="text" placeholder="Password" onChange={passwordHandler} value={password} />
                             <span className='d-flex d-align-center d-justify-center cursor-pointer user-select-none' onClick={viewPassword}>
-                                <img src="images/eye.png"/>
+                                {img ? <img src="images/eye2.svg"/> :<img src="images/eye.png"/>}
                             </span>
                         </div>
                         {/* <div className='col-12 p-relative'>

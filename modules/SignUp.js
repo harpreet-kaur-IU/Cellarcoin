@@ -389,7 +389,10 @@ const SignUp = (props) => {
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={password} onChange={passwordHandler} placeholder="Password" required/>
                         <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={passwordHandler} value={password} />
-                        <img onClick={viewPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src='images/eye-2.png'></img>
+                        <img 
+                            onClick={viewPassword} 
+                            className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
+                            src='images/eye-2.png'></img>
                     </div>
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]} `} placeholder='Confirm Password' onChange={confirmPasswordHandler} value={confirmPassword} required></input>

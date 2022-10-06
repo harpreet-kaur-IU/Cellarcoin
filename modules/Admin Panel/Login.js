@@ -9,12 +9,14 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [email,setEmail] = useState('')
     const [loading, setLoading] = useState(false)
+    const [img,setImg] = useState(false)
     const router = useRouter();
 
     const emailHandler = (e)=>{
         setEmail(e.target.value);
     }
     const viewPassword = (e) => {
+        setImg(prev => !prev);
         e.currentTarget.parentElement.classList.toggle(styles["show"]);
     }
     const passwordHandler = (e) =>{
@@ -75,7 +77,7 @@ const Login = () => {
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
                             <input type="text" placeholder="Password" onChange={passwordHandler} value={password} required />
                             <span className='d-flex d-align-center d-justify-center cursor-pointer user-select-none' onClick={viewPassword}>
-                                <img src="images/eye.png"/>
+                                {img ? <img src="images/eye2.svg"/> :<img src="images/eye.png"/>}
                             </span> 
                         </div>
                         <button className={`cursor-pointer mt-32 ${styles["btn-primary"]}`}>Log In</button>
