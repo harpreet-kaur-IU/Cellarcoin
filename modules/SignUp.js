@@ -17,6 +17,8 @@ const SignUp = (props) => {
     const [loading,setLoading] = useState(false);
     
     //signup states
+    const [img,setImg] = useState(false)
+    const [img2,setImg2] = useState(false)
     const [name,setName] = useState("")
     const [username,setUserName] = useState("")
     const[email,setEmail] = useState('');
@@ -59,9 +61,11 @@ const SignUp = (props) => {
         setConfirmPassword(e.target.value)
     }
     const viewPassword = (e) => {
+        setImg(prev => !prev)
         e.currentTarget.parentElement.classList.toggle(style["show"]);
     }
     const viewConfirmPassword = (e) => {
+        setImg2(prev => !prev)
         e.currentTarget.parentElement.classList.toggle(style["show"]);
     }
     const policyAcceptedHandler = () =>{
@@ -308,7 +312,7 @@ const SignUp = (props) => {
     }
     
     const formSubmit2 = (e) =>{
-        // e.preventDefault()
+        e.preventDefault()
         const result2 = validator2();
         if(result2){
             signInWithEmailAndPassword(email2,password2)
@@ -392,12 +396,13 @@ const SignUp = (props) => {
                         <img 
                             onClick={viewPassword} 
                             className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
-                            src='images/eye-2.png'></img>
+                            src={img?"images/eye2.svg":"images/eye-2.png"}></img>
                     </div>
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]} `} placeholder='Confirm Password' onChange={confirmPasswordHandler} value={confirmPassword} required></input>
                         <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={confirmPasswordHandler} value={confirmPassword} />
-                        <img onClick={viewConfirmPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src='images/eye-2.png'></img>
+                        <img onClick={viewConfirmPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
+                        src={img2?"images/eye2.svg":"images/eye-2.png"}></img>
                     </div>
                     {passMatch && <span className={`mb-8 font-14 f-700 text-danger`}>Password doesn't match.</span>}
                     {errorRePass && <span className={`mb-8 font-14 f-700 text-danger `}>Please re-enter password.</span>}
