@@ -132,8 +132,8 @@ const Dashboard = () => {
                     <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
                     <span className='font-14 f-500'>Mathilda Bell</span>
                   </span> 
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
                   <span className='font-14 f-400 d-flex'>100%</span>
                 </div>
                 <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>             
@@ -142,8 +142,8 @@ const Dashboard = () => {
                     <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
                     <span className='font-14 f-500'>Mathilda Bell</span>
                   </span> 
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
                   <span className='font-14 f-400 d-flex'>100%</span>
                 </div>
                 <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>                
@@ -152,8 +152,8 @@ const Dashboard = () => {
                     <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
                     <span className='font-14 f-500'>Mathilda Bell</span>
                   </span> 
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
                   <span className='font-14 f-400 d-flex'>100%</span>
                 </div>
                 <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>               
@@ -162,8 +162,8 @@ const Dashboard = () => {
                     <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
                     <span className='font-14 f-500'>Mathilda Bell</span>
                   </span> 
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
-                  <span className='font-14 f-400 d-flex'>ETH 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
                   <span className='font-14 f-400 d-flex'>100%</span>
                 </div>
               </div>
@@ -183,7 +183,7 @@ const Dashboard = () => {
                     <span className='font-14 f-500 d-flex d-align-center'>{item.name}</span>
                   </span> 
                   <span className='font-14 f-600 d-flex d-align-center gap-1'>
-                    {item.price === 0?"-":<img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>}
+                    {item.price === 0?"-":<img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img> }
                     {item.price === 0?"-" : item.price}
                   </span>
                 </div>

@@ -15,7 +15,7 @@ const NFTList = () => {
                             <h6 className='f-600 text-primary'>Lorem ipsum dolor sit amet, </h6>
                             <div className={`d-flex d-flex-wrap d-align-center ${styles["pricing-details"]}`}>
                                 <span className='f-500'>Created on</span>
-                                <h6 className='f-600'>ETH 2.03</h6>
+                                <h6 className='f-600'>MATIC 2.03</h6>
                             </div>
                         </div>
                     </div>

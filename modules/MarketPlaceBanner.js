@@ -37,13 +37,13 @@ const MarketPlaceBanner = () => {
     const handleClick = () =>{
         setToggle(prev => !prev);
     }
-    const confirmationHandler = () =>{
+    // const confirmationHandler = () =>{
         
-        toast.success("User Signed In Successfully",{
-          toastId:"2"
-        });
+    //     toast.success("User Signed In Successfully",{
+    //       toastId:"2"
+    //     });
         
-      }
+    //   }
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
         if(nftId){
@@ -51,8 +51,8 @@ const MarketPlaceBanner = () => {
             myHeaders.append("Content-Type","application/json");
         
             var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
+                method: 'GET',
+                headers: myHeaders,
             };
             setLoading(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}`, requestOptions)
@@ -152,7 +152,7 @@ const MarketPlaceBanner = () => {
                             <h5 className='mt-16 font-25 l-137 f-500'>Price</h5>
                             <h5 className='d-flex d-align-center gap-1 mt-16 font-24 l-137 f-500'>
                                 <img className={`${style["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
-                                {data.price} wETH
+                                {data.price} MATIC
                             </h5>
                             <div className='d-flex d-flex-wrap d-align-center d-justify-space-between'>
                                 <button onClick={buyNowHandler} className={`cursor-pointer mt-32 font-20 f-500 l-137 btn-primary ${style["buy-now-btn"]}`}>Buy Now</button>

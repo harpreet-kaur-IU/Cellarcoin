@@ -109,7 +109,7 @@ const OwnedBy = () => {
                             <div className='mt-8 d-flex d-align-center gap-1'>
                                 <img className={`${style["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                                 <h5 className={`font-24 l-137 f-500 ${style["wine-price"]}`}>
-                                    {data.price} wETH
+                                    {data.price} MATIC
                                 </h5>
                             </div>
                             <div className='mt-16'>
