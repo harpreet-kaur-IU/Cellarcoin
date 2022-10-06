@@ -140,9 +140,10 @@ const SignUp = (props) => {
                         else{
                             removeUserOnBoardCookie();
                             setUserOnBoardCookie(result.token);
-                            props.confirm()
+                            // props.confirm()
                             props.handler()
-                            setLoading(false)
+                            window.location.reload(true);
+                            setLoading(false);
                         }
                     })
                     .catch(error => console.log('error', error));
@@ -159,8 +160,8 @@ const SignUp = (props) => {
                         removeUserOnBoardCookie();
                         setUserOnBoardCookie(result.token);
                         props.handler();
-                        props.confirm();
-                        
+                        // props.confirm();
+                        window.location.reload(true);
                     })
                     .catch(error => console.log('error', error));
                     return response();
@@ -307,7 +308,7 @@ const SignUp = (props) => {
     }
     
     const formSubmit2 = (e) =>{
-        e.preventDefault()
+        // e.preventDefault()
         const result2 = validator2();
         if(result2){
             signInWithEmailAndPassword(email2,password2)
@@ -332,8 +333,9 @@ const SignUp = (props) => {
                         else{
                             removeUserOnBoardCookie();
                             setUserOnBoardCookie(result.token);
-                            props.confirm()
+                            // props.confirm()
                             props.handler()
+                            window.location.reload(true);
                             setLoading(false)
                         }
                     })

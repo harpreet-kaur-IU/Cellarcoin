@@ -1,7 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import style from './css/Filter.module.css'
 
+function useOutsideAlerter(ref,handler) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          handler();
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+}
+
 const Filter = () => {
+    const wrapperRef = useRef(null);
+    const handler = ()=>{
+        setToggle(false)
+    }
+    const handler2 = ()=>{
+        setSort(false)
+    }
+    useOutsideAlerter(wrapperRef,handler);
+    useOutsideAlerter(wrapperRef,handler2);
     const [toggle, setToggle] = useState(false);
     const [sort,setSort] = useState(false)
     const handleClick = () =>{
@@ -15,9 +38,9 @@ const Filter = () => {
             <div className={`p-absolute ${style["filter-position-absolute"]}`}>
                 <div className={`rounded-8 bg-pink mb-8 d-flex d-align-center d-justify-space-between ${style["filters-heading-wrapper"]}`}>
                     <a className='f-500 font-16 l-134'>Filter</a>
-                    <img onClick={handleClick} src='images/arrow-down.png'></img>
+                    <img className='cursor-pointer' onClick={handleClick} src='images/arrow-down.png'></img>
                 </div>
-                <div className={`p-absolute rounded-8 bg-pink ${style["filter-dropdown-menu"]} ${toggle ? "d-block" : "d-none"}`}>
+                <div ref={wrapperRef} className={`p-absolute rounded-8 bg-pink ${style["filter-dropdown-menu"]} ${toggle ? "d-block" : "d-none"}`}>
                     <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Recently Sold</a>
                     <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Most Popular</a>
                     <a className={`d-block text-black f-500 font-16 l-134 ${style["filters-heading-item-wrapper"]}`} href="#">Most Favorited</a>
@@ -28,9 +51,9 @@ const Filter = () => {
             <div className={`p-absolute`}>
                 <div className={`rounded-8 bg-pink mb-8 d-flex d-align-center d-justify-space-between ${style["sort-heading-wrapper"]}`}>
                     <a className='f-500 font-16 l-134'>Sort</a>
-                    <img onClick={sortHandler} src='images/arrow-down.png'></img>
+                    <img className='cursor-pointer' onClick={sortHandler} src='images/arrow-down.png'></img>
                 </div>
-                <div className={`p-absolute rounded-8 bg-pink ${style["sort-position-absolute"]} ${sort ? "d-block" : "d-none"}`}>
+                <div ref={wrapperRef}  className={`p-absolute rounded-8 bg-pink ${style["sort-position-absolute"]} ${sort ? "d-block" : "d-none"}`}>
                     <div className={`d-flex d-align-center d-justify-space-between ${style["sort-col-1"]}`}>
                         <h6 className='f-500 l-137'>Price</h6>
                         <h6 className='font-13 f-400 l-137 text-very-light-gray'>Clear</h6>
@@ -44,7 +67,7 @@ const Filter = () => {
                             <div className={`bg-pink rounded-8 d-flex ${style["min-wrapper"]}`}>
                                 <h6 className='f-400 l-137'>Min</h6>
                             </div>
-                            <div className={`d-flex `}>
+                            <div className={`d-flex`}>
                                 <h6 className='f-400 l-137'>to</h6>
                             </div>
                             <div className={`bg-pink rounded-8 d-flex ${style["max-wrapper"]}`}>

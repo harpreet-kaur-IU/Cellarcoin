@@ -8,21 +8,28 @@ import Loader from './Vendors Panel/Loader'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const MarketPlaceBanner = () => {
-    var JWTToken =  getUserOnBoardFromCookie()
+    const JWTToken = getUserOnBoardFromCookie();
     const [data,setData] = useState("")
     const router = useRouter();
     const nftId = router.query["id"];
     const [toggle,setToggle] = useState(false)
     const [loading,setLoading] = useState(false)
 
+    useEffect(()=>{
+        JWTToken=getUserOnBoardFromCookie();
+    },[getUserOnBoardFromCookie()])
     const navigationHandler = () =>{
         router.push("/profile")
     }
+    
     const buyNowHandler = () =>{
+        console.log("in buy now")
         if(JWTToken){
+            console.log(JWTToken)
             router.push(`/ownedby/${data._id}`)
         }
         else{
+            console.log("no JWT")
             handleClick()
         }
     }

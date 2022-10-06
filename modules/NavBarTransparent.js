@@ -95,7 +95,7 @@ const NavBarTransparent = () => {
       setRes(prev => !prev)
     }
     const confirmationHandler = () =>{
-      toast.success("User Signed In Successfully",{
+      toast.success(" In Successfully",{
         toastId:"2"
       });
     }

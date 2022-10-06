@@ -14,11 +14,11 @@ const FooterMenuBar = () => {
     const handleClick = () =>{
         setToggle(prev => !prev);
     }
-    const confirmationHandler = () =>{
-        toast.success("User Signed In Successfully",{
-            toastId:"2"
-        });
-    }
+    // const confirmationHandler = () =>{
+    //     toast.success("User Signed In Successfully",{
+    //         toastId:"2"
+    //     });
+    // }
     const profileHandler = () =>{
         if(JWTToken){
             router.push("/editprofile")

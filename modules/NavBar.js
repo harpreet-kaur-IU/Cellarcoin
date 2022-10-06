@@ -103,11 +103,11 @@ const NavBar = () => {
   const navBarHandler = () =>{
     setRes(prev => !prev)
   }
-  const confirmationHandler = () =>{
-    toast.success("User Signed In Successfully",{
-      toastId:"2"
-    });
-  }
+  // const confirmationHandler = () =>{
+  //   toast.success("User Signed In Successfully",{
+  //     toastId:"2"
+  //   });
+  // }
 
   // connect wallet web3 code starts here
   let web3Modal;
@@ -248,7 +248,7 @@ const NavBar = () => {
         </div>
         {toggle &&
           <Modal modalClass="modal-verify">
-            <SignUp confirm={confirmationHandler} handler={handleClick}></SignUp>
+            <SignUp  handler={handleClick}></SignUp>
           </Modal>
         }
           {noti &&
