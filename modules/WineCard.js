@@ -1,11 +1,35 @@
 import React from 'react'
 import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
+import { getUserOnBoardFromCookie } from '../auth/userCookies';
 const WineCard = (props) => {
     const router = useRouter();
+    const JWTToken = getUserOnBoardFromCookie();
     const navigationHandler = () =>{
         if(props.id)
             router.push(`/purple/${props.id}`)
+    }
+    const favoriteHandler = (e) =>{
+        e.preventDefault();
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "favourites": true
+        });
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${e.currentTarget.id}`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
   return (
     <>
@@ -21,7 +45,7 @@ const WineCard = (props) => {
                         </span>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{props.favourites}</span>
-                            <img className='cursor-pointer' src="images/heart.png"></img>
+                            <img id={props.id} onClick={favoriteHandler} className='cursor-pointer' src="images/heart.png"></img>
                         </span>
                     </h6>
                 </div>
