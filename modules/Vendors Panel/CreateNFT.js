@@ -221,7 +221,6 @@ const CreateNFT = () => {
         }
     },[cover,nftId])
 
-
     useEffect(()=>{
         if(JWTtoken){
             if(data){
@@ -444,7 +443,7 @@ const CreateNFT = () => {
                         {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>}
                         <div className={`d-flex d-flex-column ${styles["name-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Name</h5>
-                            <input value={name} onChange={nameHandler} type="text" maxLength="60" required></input>
+                            <input value={name} onChange={nameHandler} type="text" required></input>
                         </div>
                         {isNameError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Name.</span>}
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>

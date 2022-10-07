@@ -202,7 +202,7 @@ const AllNFT = () => {
                                     <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                                     {item.price}
                                     <div className={`d-flex d-align-center d-justify-center ${styles["nft-price-tool-tip"]}`}>
-                                        <h6 className='l-22 f-400'>ETH</h6>
+                                        <h6 className='l-22 f-400'>MATIC</h6>
                                     </div>
                                 </span>
                             }

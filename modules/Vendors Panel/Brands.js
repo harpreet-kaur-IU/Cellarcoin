@@ -194,7 +194,7 @@ const Brands = () => {
             <h5 className='f-500 l-23 mt-24'>Enter your Brand Name</h5>
             <h6 className='mt-16 f-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h6>
             <form className={`${styles["brand-form"]}`} onSubmit={formSubmit}>
-              <input value={brand} onChange={brandHandler} className={`mt-16 col-12 ${styles["brands-input"]}`} type="text" required></input>
+              <input value={brand} onChange={brandHandler} maxLength="60" className={`mt-16 col-12 ${styles["brands-input"]}`} type="text" required></input>
               {isBrandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
              
               {/* upload Documents */}
