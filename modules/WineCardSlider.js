@@ -6,9 +6,17 @@ import WineCard from './WineCard';
 import WineBottleHeader from './WineBottleHeader';
 import style from './css/WineCard.module.css';
 import Loader from './Vendors Panel/Loader';
+import Modal from './Modal';
+import SignUp from './SignUp';
 const WineCardSlider = () => {
   const [data,setData] = useState("")
   const [loading,setLoading] = useState(false)
+  const [toggle,setToggle] = useState(false)
+
+  const handleClick = () =>{
+    setToggle(prev => !prev)
+  }
+ 
   useEffect(()=>{
     var myHeaders = new Headers();
     myHeaders.append("Content-Type","application/json");
@@ -31,11 +39,10 @@ const WineCardSlider = () => {
       <div className={`container ${style["wine-card-slider-container"]}`}>
         <WineBottleHeader></WineBottleHeader>
         <Swiper
-          slidesPerView={3}
           spaceBetween={24}
           grabCursor={true}
           loop={true}
-           autoplay={{
+          autoplay={{
             delay: 10000,
             disableOnInteraction: false,
           }}
@@ -59,16 +66,10 @@ const WineCardSlider = () => {
         >
           {data && data.map((item)=>(
             <SwiperSlide>
-                <WineCard
-                
-                  key = {item.key}
-                  id= {item._id}
-                  name={item.name}
-                  price={item.price}
-                  favourites={item.favourites}
-                  views={item.views}
-                  imageUrl={item.imageUrl}
-                ></WineCard>
+              <WineCard
+                handler ={handleClick}
+                data = {item}
+              ></WineCard>
             </SwiperSlide>
            ))}
           {/* <SwiperSlide>slide 2</SwiperSlide>
@@ -77,6 +78,11 @@ const WineCardSlider = () => {
           <SwiperSlide>slide 5</SwiperSlide> */}
         </Swiper>
       </div>
+      {toggle &&
+        <Modal modalClass="modal-verify">
+            <SignUp handler={handleClick}></SignUp>
+        </Modal>
+      }
     </>
   )
 }

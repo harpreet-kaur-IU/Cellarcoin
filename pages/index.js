@@ -9,6 +9,7 @@ import Base from "../layout/Base"
 import Partner from "../modules/Partner"
 
 export default function Home() {
+  
   return (
     <Fragment>
       <Base>
@@ -20,6 +21,8 @@ export default function Home() {
         <Newsletter></Newsletter>
       </Base>
       <Footer></Footer>
+     
+
     </Fragment>
   )
 }

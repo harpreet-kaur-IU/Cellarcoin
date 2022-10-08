@@ -15,21 +15,15 @@ const MarketPlaceBanner = () => {
     const [toggle,setToggle] = useState(false)
     const [loading,setLoading] = useState(false)
 
-    useEffect(()=>{
-        JWTToken=getUserOnBoardFromCookie();
-    },[getUserOnBoardFromCookie()])
     const navigationHandler = () =>{
         router.push("/profile")
     }
     
     const buyNowHandler = () =>{
-        console.log("in buy now")
         if(JWTToken){
-            console.log(JWTToken)
             router.push(`/ownedby/${data._id}`)
         }
         else{
-            console.log("no JWT")
             handleClick()
         }
     }
@@ -37,13 +31,6 @@ const MarketPlaceBanner = () => {
     const handleClick = () =>{
         setToggle(prev => !prev);
     }
-    // const confirmationHandler = () =>{
-        
-    //     toast.success("User Signed In Successfully",{
-    //       toastId:"2"
-    //     });
-        
-    //   }
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
         if(nftId){
@@ -165,13 +152,13 @@ const MarketPlaceBanner = () => {
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>WineMaker</h5>
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.brand.brandName}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Region</h5>
-                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[2].value===''? "--n.a--":data.attributes[2].value}</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[2] ? (data.attributes[2].value===''? "--n.a--":data.attributes[2].value) :  "--n.a--"}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Volume by Alcohol</h5>
-                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[1].value===''? "--n.a--":data.attributes[1].value}</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[1] ? (data.attributes[1].value===''? "--n.a--":data.attributes[1].value) :  "--n.a--"}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Bottle Size</h5>
-                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[0].value===''? "--n.a--":data.attributes[0].value}</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[0] ? (data.attributes[0].value===''? "--n.a--":data.attributes[0].value) :  "--n.a--"}</h5>
                         <h5 className='mt-16 f-400 l-137 text-dark-gray'>Spirit</h5>
-                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[3].value===''? "--n.a--":data.attributes[3].value}</h5>
+                        <h5 className='mt-8 font-25 f-500 l-137 text-black'>{data.attributes[3] ? (data.attributes[3].value===''? "--n.a--":data.attributes[3].value) :  "--n.a--"}</h5>
                         {/* <h5 className='mt-16 f-400 l-137 text-dark-gray'>Available to Redeem:</h5>
                         <h5 className='mt-8 font-25 f-500 l-137 text-black'>
                             On {expirydate}

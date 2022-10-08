@@ -8,11 +8,11 @@ const UserNftCards = () => {
         <h5 className='font-24 f-600 l-137 text-black mt-24'>114.25M CRO</h5>
       </div>
       <div className={`rounded-16 bg-box text-center ${style["nft-cards-div"]}`}>
-        <h5 className='font-24 f-600 l-137 text-primary'>Volume</h5>
-        <h5 className='font-24 f-600 l-137 text-black mt-24'>114.25M CRO</h5>
+        <h5 className='font-24 f-600 l-137 text-primary'>Sales</h5>
+        <h5 className='font-24 f-600 l-137 text-black mt-24'>105.2K</h5>
       </div>
       <div className={`rounded-16 bg-box text-center ${style["nft-cards-div"]}`}>
-        <h5 className='font-24 f-600 l-137 text-primary'>Volume</h5>
+        <h5 className='font-24 f-600 l-137 text-primary'>Active</h5>
         <h5 className='font-24 f-600 l-137 text-black mt-24'>114.25M CRO</h5>
       </div>
     </div>

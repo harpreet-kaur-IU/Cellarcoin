@@ -16,6 +16,7 @@ import {ethers} from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
+import { SearchLoader } from './SearchLoader';
 const NavBar = () => {
   const {signOut} = useFirebaseAuth(); 
   const router = useRouter();
@@ -28,7 +29,11 @@ const NavBar = () => {
   const [confirm,setConfirm] = useState(false)
   const[email,setEmail] = useState("")
   const [userId,setUserId] = useState("")
+  const [searchBar,setSearchBar] = useState(false)
+  const [brand,setBrand] = useState("");
+  const [searchLoading,setSearchLoading] = useState(false)
   var JWTToken = getUserOnBoardFromCookie();
+
   useEffect(()=>{
     if(!JWTToken){
       setToken(false)
@@ -37,6 +42,7 @@ const NavBar = () => {
       setToken(true)
     }
   },[toggle])
+
   useEffect(()=>{
     if(JWTToken){
       function parseJwt() {
@@ -53,6 +59,7 @@ const NavBar = () => {
         // Router.push("/vendorlogin")
     }
   },[])
+
   const handleClick = () =>{
     setToggle(prev => !prev);
   }
@@ -103,6 +110,42 @@ const NavBar = () => {
   const navBarHandler = () =>{
     setRes(prev => !prev)
   }
+
+  const navigationHandler = (e) =>{
+    setSearchBar(false)
+    router.push(`/purple/${e.currentTarget.id}`)
+  }
+  const searchHandler = (e) =>{
+    if(e.target.value.length>2){
+      
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "searchTerm": e.target.value
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      setSearchLoading(true)
+      fetch("https://cellarcoinnft.herokuapp.com/api/v1/nft/searchNFT", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          const parseResult = JSON.parse(result);
+          setBrand(parseResult.data);
+          setSearchLoading(false)
+          setSearchBar(true)
+        })
+        .catch(error => console.log('error', error));
+    }else{
+      setSearchBar(false)
+    }
+  }
+
   // const confirmationHandler = () =>{
   //   toast.success("User Signed In Successfully",{
   //     toastId:"2"
@@ -191,10 +234,35 @@ const NavBar = () => {
           </Link>
           <Link href="/">
             <div className={`d-none d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
-              <SiteLogo color="#780543"></SiteLogo>
+             <SiteLogo color="#780543"></SiteLogo>
             </div>
           </Link>
-          <input className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+          <div className='p-relative'>
+            <input onChange={searchHandler} className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+            {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
+            <div className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
+              <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
+              <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
+                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
+                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
+                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
+                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
+              </div>
+              <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
+              <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-nft-wrapper"]}`}>
+                {brand && brand.map((item)=>(
+                  <div className='d-flex gap-1'>
+                    <img id={item._id} onClick={navigationHandler} className={`cursor-pointer ${style["search-nft-img"]}`} src={item.imageUrl}></img>
+                    <div className='d-flex d-flex-column'>
+                      <h6 id={item._id} onClick={navigationHandler} className='cursor-pointer font-13 f-400 l-137'>{item.name}</h6>
+                      <h6 id={item._id} onClick={navigationHandler} className='cursor-pointer font-10 f-400 l-137'>{item.brandName}</h6>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
           <ul id="ul-navbar" className={`d-flex d-flex-row text-dark-gray ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
             <NavItems name="not-transparent" path="/explore" value="Explore"></NavItems>
             <NavItems name="not-transparent" path="/community" value="Community"></NavItems>

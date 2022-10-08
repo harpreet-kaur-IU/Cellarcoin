@@ -16,6 +16,7 @@
   --background:#E5E5E5;
   --input-box-bg:#E7E7E7;
   --top-brands-bg:#FFF4F4;
+  --brown:#6B5260;
 }
 * {
   box-sizing: border-box;
@@ -230,6 +231,9 @@ a{
 
 .text-primary{
   color: var(--primary);
+}
+.text-brown{
+  color: var(--brown);
 }
 .text-black{
   color: var(--font-dark);

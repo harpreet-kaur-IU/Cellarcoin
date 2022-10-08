@@ -21,6 +21,7 @@ const EditProfileContent = () => {
   const [userName,setUserName] = useState("");
   const [location,setLocation] = useState("")
   var JWTToken = getUserOnBoardFromCookie();
+
   useEffect(()=>{
     if(JWTToken){
       function parseJwt() {
@@ -45,6 +46,7 @@ const EditProfileContent = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getProfile`, requestOptions)
     .then(response => response.json())
     .then(result =>{
+      console.log(result)
       setCover(result.user.coverImage)
       setUrl(result.user.coverImage)
       setProfileUrl(result.user.profileImage)
@@ -84,6 +86,7 @@ const EditProfileContent = () => {
       .then(result => {
         var results = (JSON.parse(result))
         setUrl(results.imageUrl)
+        
         setLoadingImg(false)
       })
       .catch(error => console.log('error', error));
@@ -137,9 +140,9 @@ const EditProfileContent = () => {
         method: 'GET', 
         headers: myHeaders,
       })
+      
       .then(response => response.json())
       .then(results =>{
-        // console.log(results.user)
         setUrl(results.user.coverImage)
         setProfileUrl(results.user.profileImage)
         setUserName(results.user.userName)

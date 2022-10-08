@@ -96,28 +96,28 @@ const CreateNFT = () => {
     }
     const coverHandler = (e) =>{
         
-        if(!e.target.files[0].name.match(/\.(jpg|png|gif)$/)){
-            setCoverError(true);
-            var inputfile = document.getElementById("file-input-field");
-            inputfile.value = "";
-        }   
-        else{
-            setCoverError(false);
-            var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-            var fSize =  e.target.files[0].size; 
-            var i=0;
-            while(fSize>900){
-              fSize/=1024;
-              i++;
-            }
-            var file = (Math.round(fSize*100)/100);
-            if(i<=2 && file<10){
+        // if(!e.target.files[0].name.match(/\.(jpg|png|gif)$/)){
+            // setCoverError(true);
+            // var inputfile = document.getElementById("file-input-field");
+            // inputfile.value = "";
+        // }   
+        // else{
+            // setCoverError(false);
+            // var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+            // var fSize =  e.target.files[0].size; 
+            // var i=0;
+            // while(fSize>900){
+            //   fSize/=1024;
+            //   i++;
+            // }
+            // var file = (Math.round(fSize*100)/100);
+            // if(i<=2 && file<10){
               setCover(e.target.files[0])
-            }
-            else{
-                setCoverError(true);
-            }
-        }   
+            // }
+            // else{
+            //     setCoverError(true);
+            // }
+        // }   
     }
     const additionalPropertyHandler = (data,data1) =>{
         setAdd(!add);

@@ -1,17 +1,13 @@
 import React, { useRef, useState } from 'react'
-import Modal from './Modal';
 import style from './css/SignUp.module.css'
-import SignIn from './SignIn';
 import useFirebaseAuth from '../auth/useFirebaseAuth';
 import axios from 'axios';
 import Loader from './Vendors Panel/Loader';
-import { setUserOnBoardCookie,removeUserOnBoardCookie,getUserOnBoardFromCookie } from '../auth/userCookies';
+import { setUserOnBoardCookie,removeUserOnBoardCookie} from '../auth/userCookies';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {getAuth,signInWithPopup,GoogleAuthProvider} from 'firebase/auth';
 import {firebaseApp} from '../auth/firebaseConfig';
-import { async } from '@firebase/util';
-
 const SignUp = (props) => {
     const {createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,signOut} = useFirebaseAuth(); 
     const [loading,setLoading] = useState(false);
@@ -19,6 +15,7 @@ const SignUp = (props) => {
     //signup states
     const [img,setImg] = useState(false)
     const [img2,setImg2] = useState(false)
+    const [img3,setImg3] = useState(false)
     const [name,setName] = useState("")
     const [username,setUserName] = useState("")
     const[email,setEmail] = useState('');
@@ -66,6 +63,10 @@ const SignUp = (props) => {
     }
     const viewConfirmPassword = (e) => {
         setImg2(prev => !prev)
+        e.currentTarget.parentElement.classList.toggle(style["show"]);
+    }
+    const viewPassword2 = (e) =>{
+        setImg3(prev => !prev)
         e.currentTarget.parentElement.classList.toggle(style["show"]);
     }
     const policyAcceptedHandler = () =>{
@@ -400,7 +401,7 @@ const SignUp = (props) => {
                     </div>
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]} `} placeholder='Confirm Password' onChange={confirmPasswordHandler} value={confirmPassword} required></input>
-                        <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={confirmPasswordHandler} value={confirmPassword} />
+                        <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Confirm Password" onChange={confirmPasswordHandler} value={confirmPassword} />
                         <img onClick={viewConfirmPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
                         src={img2?"images/eye2.svg":"images/eye-2.png"}></img>
                     </div>
@@ -424,7 +425,7 @@ const SignUp = (props) => {
             <>
                 <div className='d-flex d-align-center d-justify-space-between'>
                     <h3 className='f-500 l-137'>Sign In</h3>
-                    <img onClick={props.handler} src='images/cross.png'></img>
+                    <img className='cursor-pointer' onClick={props.handler} src='images/cross.png'></img>
                 </div>
                 <form onSubmit={formSubmit2}>
                     <input type="email" value={email2} onChange={emailHandler2} className={`bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder='Email' required></input>
@@ -432,7 +433,7 @@ const SignUp = (props) => {
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} value={password2} onChange={passwordHandler2} placeholder="Password" />
                         <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Password" onChange={passwordHandler2} value={password2} />
-                        <img onClick={viewPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src='images/eye-2.png'></img>
+                        <img onClick={viewPassword2} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} src={img3?"images/eye2.svg":"images/eye-2.png"}></img>
                     </div>
                     {passwordError && <span className={`mb-8 font-14 f-700 text-danger`}>Please fill out this field</span>}
                     <button className={`cursor-pointer mt-16 col-12 font-18 f-500 l-137 btn-primary ${style["btn-continue"]}`}>Continue</button>

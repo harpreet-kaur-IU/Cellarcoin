@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import { getUserOnBoardFromCookie } from '../auth/userCookies';
 import style from './css/WineCollection1.module.css'
 import Filter from './Filter';
 import NFTCard from './NFTCard';
@@ -6,10 +7,63 @@ import UserNftCards from './UserNftCards';
 import UserTable from './UserTable';
 import WineCard from './WineCard';
 const UserNft = () => {
+    const [data,setData] = useState("");
+    const [fav,setFav] = useState("")
+    const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
+    const JWTToken = getUserOnBoardFromCookie();
     const handleClick = (e) => {
         setActiveTab(e.target.id);
     };
+
+    useEffect(()=>{
+        //fetch user name from jwt token
+        function parseJwt() {
+            if (!JWTToken) {return}
+            const base64Url = JWTToken.split('.')[1];
+            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            return JSON.parse(window.atob(base64));
+        }
+        var user = parseJwt();
+        setUser(user.user.name)
+
+        //get collection list API
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getCollection`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setData(parseResult.nft)
+        })
+        .catch(error => console.log('error', error));
+
+        //get favorite nft API
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setFav(parseResult.favourites[0].nftId)
+        })
+        .catch(error => console.log('error', error));
+
+    },[])
   return (
     <>
         <div className={`container ${style["wine-collection-container"]}`}>
@@ -21,7 +75,7 @@ const UserNft = () => {
             <div className={`d-flex col-12 ${style["user-details"]}`}>
                 <div className={`col-3 d-flex d-flex-column d-align-center gap-2 ${style["user-details-col-3"]}`}>
                     <div className={`d-flex d-flex-column gap-2 ${style["user-name-wallet-address"]}`}>
-                        <h3 className={`text-center cursor-pointer f-700 l-137`}>User Name User Name</h3>
+                        <h3 className={`text-center cursor-pointer f-700 l-137`}>{user}</h3>
                         <div className={`d-flex d-align-center gap-1`}>
                             <img src='images/polygon-icon.svg'></img>
                             <h5 className='font-16 f-400 l-137 word-break'>0x8B5db879e1E2207DdA833aF136edD224aDf4DA19</h5>
@@ -44,24 +98,28 @@ const UserNft = () => {
                 <Filter></Filter>
                 {activeTab == "tab1" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-1"]}`}>
-                       <NFTCard status="Sell NFT"></NFTCard>
-                       <NFTCard status="Sell NFT"></NFTCard>
+                       {data && data.map((item)=>(
+                            <NFTCard
+                                key = {item.key}
+                                status="Sell NFT"
+                            />
+
+                       ))}
+                      
                     </div>
                 }
                 {activeTab == "tab2" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
+                        {data && data.map(()=>(
+                            <WineCard data={data}></WineCard>
+                        ))}
                     </div>
                 }
                 {activeTab == "tab3" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
-                        <WineCard></WineCard>
+                        {fav && fav.map((item)=>(
+                            <WineCard data={item}></WineCard>
+                        ))}
                     </div>
                 }
                 {activeTab == "tab4" &&

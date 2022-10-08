@@ -41,13 +41,7 @@ export default function Purple() {
                         <div className={`mt-32 d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
                             {data && data.map((item)=>(
                                 <WineCard
-                                    key={item.key}
-                                    name={item.name}
-                                    id={item._id}
-                                    price={item.price}
-                                    favourites={item.favourites}
-                                    views={item.views}
-                                    imageUrl={item.imageUrl}
+                                    data={item}
                                 ></WineCard>
                             ))}
                         </div>
