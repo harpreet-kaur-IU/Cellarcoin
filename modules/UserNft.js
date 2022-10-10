@@ -8,7 +8,9 @@ import UserTable from './UserTable';
 import WineCard from './WineCard';
 const UserNft = () => {
     const [data,setData] = useState("");
-    const [fav,setFav] = useState("")
+    const [fav,setFav] = useState("");
+    const [onSale,setOnSale] = useState("");
+    const [activity,setActivity] = useState("");
     const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
     const JWTToken = getUserOnBoardFromCookie();
@@ -42,6 +44,7 @@ const UserNft = () => {
         .then(result => {
             const parseResult = JSON.parse(result)
             setData(parseResult.nft)
+            console.log(parseResult.nft)
         })
         .catch(error => console.log('error', error));
 
@@ -63,6 +66,41 @@ const UserNft = () => {
         })
         .catch(error => console.log('error', error));
 
+        //get onsale nft API
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setOnSale(parseResult.data)
+        })
+        .catch(error => console.log('error', error));
+
+        //get activity nft API
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setActivity(parseResult)
+        })
+        .catch(error => console.log('error', error));
     },[])
   return (
     <>
@@ -100,6 +138,7 @@ const UserNft = () => {
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-1"]}`}>
                        {data && data.map((item)=>(
                             <NFTCard
+                                data={item}
                                 key = {item.key}
                                 status="Sell NFT"
                             />
@@ -110,15 +149,15 @@ const UserNft = () => {
                 }
                 {activeTab == "tab2" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
-                        {data && data.map(()=>(
-                            <WineCard data={data}></WineCard>
+                        {onSale && onSale.map((item)=>(
+                            <WineCard data={item} key = {item.key}></WineCard>
                         ))}
                     </div>
                 }
                 {activeTab == "tab3" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
                         {fav && fav.map((item)=>(
-                            <WineCard data={item}></WineCard>
+                            <WineCard data={item} key = {item.key}></WineCard>
                         ))}
                     </div>
                 }

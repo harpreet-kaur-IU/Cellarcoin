@@ -48,6 +48,18 @@ const Dashboard = () => {
     }else{
       router.push("/vendorlogin")
     }
+
+
+    // top performing nft API
+    // var requestOptions = {
+    //   method: 'GET',
+    //   redirect: 'follow'
+    // };
+    
+    // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
+    // .then(response => response.text())
+    // .then(result => console.log(result))
+    // .catch(error => console.log('error', error));
   },[])
 
   const deleteHandler = (e) =>{

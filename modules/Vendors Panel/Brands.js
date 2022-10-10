@@ -234,7 +234,7 @@ const Brands = () => {
               </div>
 
               {/* upload cover */}
-              <h5 className='f-500 l-23 mt-24'>Upload Cover Image Image</h5>
+              <h5 className='f-500 l-23 mt-24'>Upload Cover Image</h5>
               <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB. Dim.(800*200)</h6>
               <div className={`mt-16 ${styles["brands-file-upload"]}`}>
                 <input 

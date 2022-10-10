@@ -18,10 +18,11 @@
 }
 .sort-heading-wrapper{
     min-width: 144px;
-    height: 56px;
+    height: 42.9px;
     padding: 17px 24px;
 }
 .sort-position-absolute{
+    margin-top: 8px;
     z-index: 1;
     right: 0;
     width: 422px;
@@ -96,5 +97,103 @@
     .sort-heading-wrapper img{
         width: 22px;
         height: 22px;
+    }
+}
+
+
+
+
+.drop-down{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:42.9px;
+    padding:17px 24px;
+    background-color: var(--background-pink);
+    border-radius: 8px;
+    width:256px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    max-width: 100%;
+    box-sizing: border-box;
+    color: #030303;
+}
+.drop-down.open{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.drop-down span{
+    font-weight: 500;
+    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
+    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    color: #030303;
+    cursor: pointer;
+}
+.drop-down span:first-child{
+    overflow: hidden;
+}
+.drop-down ul{
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    top: 45px;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+    border-radius: 12px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 0;
+    overflow: hidden;
+    background-color: var(--background-pink);
+    color: #030303;
+    transition: 0.1s all ease-in-out;
+}
+
+.drop-down.open ul{
+    padding: 0px 0px 8px;
+    height: fit-content;
+    /* max-height: 150px; */
+    /* overflow-y: scroll; */
+}
+.drop-down ul li{
+    font-weight:400;
+    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
+    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    cursor: pointer;
+    padding: 9px 24px;
+}
+.drop-down ul li:last-child{
+    border-bottom: none;
+}
+.drop-down ul li:hover{
+    font-weight: 500;
+    background-color: var(--inactive-pink);
+}
+@media screen and (max-width:480px){
+    
+    .drop-down span{
+        font-size: 12px;
+    }
+    .drop-down ul li{
+        padding: 5px 13px;
+        font-size: 12px;
+    }
+    .drop-down span svg{
+        width:15px;
+        height: 15px;
+    }
+    .drop-down-date span{
+        font-size: 12px;
+    }
+    .drop-down-date ul li{
+        padding: 5px 13px;
+        font-size: 12px;
+    }
+    .drop-down-date span svg{
+        width:15px;
+        height: 15px;
     }
 }

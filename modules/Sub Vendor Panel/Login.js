@@ -23,37 +23,35 @@ const Login = () => {
 
     const formSubmit = (e) =>{
         e.preventDefault()
-        router.push("/vendordashboard")
-        // var myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/json");
-
-        // var raw = JSON.stringify({
-        //     "email":email,
-        //     "password":password
-        // })
-        // var requestOptions = {
-        //     method: 'POST',
-        //     headers: myHeaders,
-        //     body: raw,
-        //     redirect: 'follow'
-        // };
-        // setLoading(true)
-        // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/login`, requestOptions)
-        // .then(response => response.json()) 
-        // .then(result =>{ 
-        //     if(result.message === "Invalid email or password!"){
-        //         toast.error("Invalid email or password!",{
-        //             toastId:"2"
-        //         });
-        //         setLoading(false)
-        //     }else{
-        //         removeAdminOnBoardCookie()
-        //         setAdminOnBoardCookie(result.token)
-        //         router.push("/admindashboard")
-        //         setLoading(false)
-        //     }
-        // })
-        // .catch(error => console.log('error', error));
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+            "email":email,
+            "password":password
+        })
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/subVendor/login`, requestOptions)
+        .then(response => response.json()) 
+        .then(result =>{ 
+            if(result.message === "Invalid email or password!"){
+                toast.error("Invalid email or password!",{
+                    toastId:"2"
+                });
+                setLoading(false)
+            }else{
+                removeAdminOnBoardCookie()
+                setAdminOnBoardCookie(result.token)
+                router.push("/admindashboard")
+                setLoading(false)
+            }
+        })
+        .catch(error => console.log('error', error));
     }
   return (
     <>

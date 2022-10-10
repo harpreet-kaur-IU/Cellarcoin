@@ -21,7 +21,7 @@ const UserTable = () => {
                 
                 <span className={`p-relative font-14 f-500 d-flex d-align-center d-justify-center ${style["nft-price-wrapper"]}`}>
                     <img className={`${style["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
-                    0.17 ETH
+                    0.17 MATIC
                     {/* <div className={`d-flex d-align-center d-justify-center ${style["nft-price-tool-tip"]}`}>
                         <h6 className='l-22 f-400'>ETH</h6>
                     </div> */}

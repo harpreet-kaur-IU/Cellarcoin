@@ -10,14 +10,16 @@ import Loader from '../../modules/Vendors Panel/Loader';
 export default function Purple() {
     const [data,setData] = useState("")
     const [loading,setLoading] = useState(false)
+
     useEffect(()=>{
       var myHeaders = new Headers();
       myHeaders.append("Content-Type","application/json");
-  
+
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
       };
+
       setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
       .then(response => response.json())
@@ -27,6 +29,7 @@ export default function Purple() {
       })
       .catch(error => console.log('error', error));
     },[])
+
     return (
         <Fragment>  
             {loading && <Loader></Loader>}
@@ -36,16 +39,10 @@ export default function Purple() {
                     <div className={`d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
                         {data && data.map((item)=>(
                             <WineCard
-                                key={item.key}
-                                name={item.name}
-                                id={item._id}
-                                price={item.price}
-                                favourites={item.favourites}
-                                views={item.views}
-                                imageUrl={item.imageUrl}
+                                data={item}
                             ></WineCard>
                         ))}
-                    </div>
+                    </div> 
                 </div>
                 <BackgroundImageBanner></BackgroundImageBanner>
                 <Newsletter></Newsletter>

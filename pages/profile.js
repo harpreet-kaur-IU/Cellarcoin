@@ -24,7 +24,7 @@ export default function Profile() {
     },[])
     return (
         <Fragment>  
-            <Base>
+            <Base> 
                 <WineCollection></WineCollection>
                 <div className={`container mt-40 ${styles["profile-card-container"]}`}>
                     <div className={`d-grid grid-col-3 gap-3 ${styles["profile-card-wrapper"]}`}>

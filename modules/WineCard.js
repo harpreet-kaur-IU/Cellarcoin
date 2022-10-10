@@ -3,6 +3,7 @@ import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 const WineCard = (props) => {
+    console.log(props.data)
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
     const JWTToken = getUserOnBoardFromCookie();
@@ -57,7 +58,7 @@ const WineCard = (props) => {
         <div className={`bg-card-dark ${styles["wine-cards-container"]}`}>
             <img  onClick={navigationHandler} className={`${styles["wine-bg-img"]}`} src={nftdata.imageUrl}></img>
             <div className='p-16'>
-                <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
+                <div className='d-flex d-align-center d-justify-space-between text-light-gray'>
                     <h6 className='f-500'>Name</h6>
                     <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>

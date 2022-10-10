@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Discord from '../icons/Discord'
 import Facebook from '../icons/Facebook'
 import Instagram from '../icons/Instagram'
@@ -6,10 +6,40 @@ import Telegram from '../icons/Telegram'
 import Twitter from '../icons/Twitter'
 import Youtube from '../icons/Youtube'
 import styles from  './css/Newsletter.module.css'
+import {ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Newsletter = () => {
+    const [email,setEmail] = useState("");
+    const emailHandler = (e) =>{
+        setEmail(e.target.value);
+    }
     const formSubmit = (e) =>{
         e.preventDefault();
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "email": email
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/newsletter`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result)
+            toast.success("Successfully Subscribed for Newsletter",{
+                toastId:"2"
+            });
+        })
+        .catch(error => console.log('error', error));
     }
   return (
     <div className={`mt-80 ${styles["newsletter-wrapper"]}`}>
@@ -19,7 +49,7 @@ const Newsletter = () => {
                 <p className='col-12 font-25 l-137 mb-32'> Subscribe to our newsletter and receive regular updates on NFT</p>
                 <form onSubmit={formSubmit}>
                     <div className={`col-12 d-flex ${styles["wine-newsletter-subscribe"]}`}>
-                        <input type="email" className='font-20 f-400 l-137 text-black bg-search-box-bg' placeholder='Enter your email address' required></input>
+                        <input type="email" value={email} onChange={emailHandler} className='font-20 f-400 l-137 text-black bg-search-box-bg' placeholder='Enter your email address' required></input>
                         <button className='cursor-pointer font-20 f-500 l-137 rounded-16 btn-primary'>Submit</button>
                     </div>
                 </form>
@@ -55,6 +85,7 @@ const Newsletter = () => {
                 </div>
             </div>  
         </div>
+        <ToastContainer/>
     </div>
   )
 }

@@ -96,7 +96,7 @@ const Dashboard = () => {
                   <img loading='lazy' className={`${styles["dashboard-table-column-product"]}`} src={item.imageUrl}></img>
                 </span>                     
                 <span className='font-14 f-500 d-flex word-break'>{item.name}</span>
-                <span className='font-14 f-500 d-flex'>{item.brand}</span>
+                <span className='font-14 f-500 d-flex'>{item.brandName}</span>
                 {/* <div className={`d-flex d-justify-center d-align-center ${styles["nft-status"]}`}>
                   <span className={`font-14 f-500`}>
                     {item.status}

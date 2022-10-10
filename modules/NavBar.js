@@ -132,7 +132,7 @@ const NavBar = () => {
         redirect: 'follow'
       };
       setSearchLoading(true)
-      fetch("https://cellarcoinnft.herokuapp.com/api/v1/nft/searchNFT", requestOptions)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/searchNFT`, requestOptions)
         .then(response => response.text())
         .then(result => {
           const parseResult = JSON.parse(result);
@@ -251,11 +251,11 @@ const NavBar = () => {
               <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
               <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-nft-wrapper"]}`}>
                 {brand && brand.map((item)=>(
-                  <div className='d-flex gap-1'>
-                    <img id={item._id} onClick={navigationHandler} className={`cursor-pointer ${style["search-nft-img"]}`} src={item.imageUrl}></img>
+                  <div onClick={navigationHandler}  id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
+                    <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
                     <div className='d-flex d-flex-column'>
-                      <h6 id={item._id} onClick={navigationHandler} className='cursor-pointer font-13 f-400 l-137'>{item.name}</h6>
-                      <h6 id={item._id} onClick={navigationHandler} className='cursor-pointer font-10 f-400 l-137'>{item.brandName}</h6>
+                      <h6 className='font-13 f-400 l-137'>{item.name}</h6>
+                      <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
                     </div>
                   </div>
                 ))}
