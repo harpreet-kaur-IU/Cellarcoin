@@ -1,12 +1,10 @@
-import React, { Component, useEffect, useState ,useRef} from 'react'
+import React, {useEffect, useState ,useRef} from 'react'
 import styles from '.././css/Vendor Panel/SideBar.module.css'
 import Close from '../../icons/close'
 import Menu from '../../icons/menu'
 import Link from 'next/link'
 import Router from 'next/router'
 import useFirebaseAuth from '../../auth/useFirebaseAuth'
-import { ethers } from "ethers";
-import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
 import { providers } from "ethers";
@@ -198,12 +196,6 @@ const Header = (props) => {
             <Close></Close>
         </div>
         <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
-          {/* <div className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}>
-            <img src='images/search-icon-v.png'></img>
-            <form>
-              <input className='col-12' type="text" placeholder='Search' />
-            </form>
-          </div> */}
           <div className='p-relative d-flex d-align-center gap-3'>
             {/* <button onClick={dropdownHandler} className={`cursor-pointer ${styles["header-buttons"]}`}>Connect Wallet</button> */}
               {/* <WagmiConfig client={wagmiClient} />
@@ -248,7 +240,6 @@ const Header = (props) => {
               </button>
               <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
               <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
-                {/* <img className='cursor-pointer rounded-16' src='images/our-pillars-1.png'></img> */}
                 <h6 className='font-14 f-500 l-19'>{user}</h6>
                 <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
               </div>
@@ -260,28 +251,6 @@ const Header = (props) => {
               }
           </div>
         </div>
-        {/* {dropdown && 
-          <div className={`p-absolute ${styles["wallet-dropdown"]}`}>
-            <div className='d-flex d-justify-space-between'>
-              <h6 className='f-600 l-22'>Connect Wallet</h6>
-              <img onClick={dropdownHandler} className={`cursor-pointer ${styles["wallet-cross"]}`} src='images/wallet-cross.png'></img>
-            </div>
-            <div className={`d-flex d-flex-column ${styles["wallet-items-wrapper"]}`}>
-              <div className={`d-flex d-align-center d-justify-space-between ${styles["wallet-items"]}`}>
-                <h6 className='font-14 f-400 l-22'>Meta Mask</h6>
-                <img src='images/MetaMask.png'></img>
-              </div>
-              <div className={`d-flex d-align-center d-justify-space-between ${styles["wallet-items"]}`}>
-                <h6 className='font-14 f-400 l-22'>WalletConnect</h6>
-                <img src='images/wallet-connect.png'></img>
-              </div>
-              <div className={`d-flex d-align-center d-justify-space-between ${styles["wallet-items"]}`}>
-                <h6 className='font-14 f-400 l-22'>Coinbase Wallet</h6>
-                <img src='images/coin-base.png'></img>
-              </div>
-            </div>
-          </div>
-        } */}
     </div>
   )
 }

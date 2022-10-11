@@ -94,7 +94,7 @@ const Filter = () => {
         //         </div>
         //     </div>
         // </div>
-        <div className='col-12 d-flex d-justify-end'>
+        <div className='col-12 d-flex d-justify-end gap-2'>
             <div className={`f-500 ${style["drop-down"]}`} onClick={handler} >
                 <span> {value} </span>
                 <ul>

@@ -5,7 +5,8 @@ import {getOnBoardFromCookie} from '../../auth/userCookies';
 import Loader from './Loader';
 import {useRouter} from 'next/router'
 const Dashboard = () => {
-  const[data,setData] = useState('')
+  // const[data,setData] = useState('');
+  const [topNft,setTopNft] = useState("");
   const[dashboard,setDashboard] = useState('');
   const[nft,setNft] = useState('')
   const router = useRouter();
@@ -23,14 +24,14 @@ const Dashboard = () => {
         headers: myHeaders
       };
 
-      setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft`, requestOptions)
-      .then(response => response.json())
-      .then(result =>{
-        setData(result.data)
-        setLoading(false)
-      })
-      .catch(error => console.log('error', error));
+      // setLoading(true)
+      // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft`, requestOptions)
+      // .then(response => response.json())
+      // .then(result =>{
+      //   setData(result.data)
+      //   setLoading(false)
+      // })
+      // .catch(error => console.log('error', error));
 
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
       .then(response => response.json())
@@ -51,15 +52,22 @@ const Dashboard = () => {
 
 
     // top performing nft API
-    // var requestOptions = {
-    //   method: 'GET',
-    //   redirect: 'follow'
-    // };
-    
-    // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
-    // .then(response => response.text())
-    // .then(result => console.log(result))
-    // .catch(error => console.log('error', error));
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      const parseResult = JSON.parse(result)
+      console.log(parseResult.data)
+      setTopNft(parseResult.data)
+      setLoading(false)
+    })
+    .catch(error => console.log('error', error));
   },[])
 
   const deleteHandler = (e) =>{
@@ -69,7 +77,7 @@ const Dashboard = () => {
 
       var requestOptions = {
         method: 'PATCH',
-        headers: myHeaders,
+        headers: myHeaders
       };
 
       setLoading(true)
@@ -138,46 +146,18 @@ const Dashboard = () => {
                   <span className='font-16 f-600 d-flex'>Sold at</span>
                   <span className='font-16 f-600 d-flex'>Returns</span>
                 </div>
-                <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>              
-                  <span className='font-14 f-500 d-flex word-break'>1.</span>
-                  <span className='font-14 f-500 d-flex d-align-center'>
-                    <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
-                    <span className='font-14 f-500'>Mathilda Bell</span>
-                  </span> 
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>100%</span>
-                </div>
-                <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>             
-                  <span className='font-14 f-500 d-flex word-break'>2.</span>
-                  <span className='font-14 f-500 d-flex d-align-center'>
-                    <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
-                    <span className='font-14 f-500'>Mathilda Bell</span>
-                  </span> 
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>100%</span>
-                </div>
-                <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>                
-                  <span className='font-14 f-500 d-flex word-break'>3.</span>
-                  <span className='font-14 f-500 d-flex d-align-center'>
-                    <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
-                    <span className='font-14 f-500'>Mathilda Bell</span>
-                  </span> 
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>100%</span>
-                </div>
-                <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>               
-                  <span className='font-14 f-500 d-flex word-break'>4.</span>
-                  <span className='font-14 f-500 d-flex d-align-center'>
-                    <img className={`${styles["dashboard-table-column-nft"]}`} src="images/our-pillars-1.png"></img>
-                    <span className='font-14 f-500'>Mathilda Bell</span>
-                  </span> 
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                  <span className='font-14 f-400 d-flex'>100%</span>
-                </div>
+                {topNft && topNft.map((item,index)=>(
+                  <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>              
+                    <span className='font-14 f-500 d-flex word-break'>{index+1}.</span>
+                    <span className='font-14 f-500 d-flex d-align-center'>
+                      <img className={`${styles["dashboard-table-column-nft"]}`} src={item.imageUrl}></img>
+                      <span className='font-14 f-500'>{item.name}</span>
+                    </span> 
+                    <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                    <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                    <span className='font-14 f-400 d-flex'>100%</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

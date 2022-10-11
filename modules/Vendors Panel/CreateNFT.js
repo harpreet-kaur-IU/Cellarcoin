@@ -432,12 +432,9 @@ const CreateNFT = () => {
                                 ref={fileRef}
                                 multiple={false}
                                 onChange={coverHandler}
-                                // required
                             />  
                             {!loadingImg && !url && <img src="images/nft-image-icon.png"></img>}
                             {loadingImg && <SmallLoader></SmallLoader>}
-                            {/* {url && <p className='l-22 f-600 mt-14 text-primary'>Image Uploaded Successfully</p>} */}
-                            
                         </div>
                         {coverError && <h6 className={`mt-24 font-14 f-700 text-danger`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</h6>}
                         {isUrl && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>}
@@ -489,16 +486,9 @@ const CreateNFT = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
-                            <h5 className='font-24 f-600 l-33'>Enter you wallet address</h5>
-                            <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
-                            <input type="text" value={wallet} onChange={walletHandler}></input>
-                        </div> */}
-
                         <div className={`d-flex d-flex-column ${styles["desc-input"]}`}>
                             <h5 className='font-24 f-600 l-33'>Enter your Brand Name</h5>
                             <h6 className='font-18 f-400 l-25'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</h6>
-                            {/* <input type="text" value={brand} onChange={brandHandler} required></input>  */}
                             <BrandDropDown data={brandData} handler={brandHandler} tracker={edit} value={brand}></BrandDropDown>
                         </div>
                         {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Brand.</span>}

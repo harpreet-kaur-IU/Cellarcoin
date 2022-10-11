@@ -58,7 +58,11 @@ const Listing = () => {
                         <h4 className='f-500 l-39'>{item.name}</h4>
                         <h5 className={`f-500 ${styles["listing-content-brands"]}`}>Brand</h5>
                         <h4 className={`text-primary f-600 ${styles["listing-content-wine-name"]}`}>{item.brand.brandName}</h4>
-                    
+                        <h5 className={`f-500 ${styles["listing-content-brands"]}`}>Price</h5>
+                        <div className='mt-24 d-flex d-align-center gap-2'>
+                            <img src='images/polygon-icon.svg'></img>
+                            <h4 className={`f-500`}>{item.price} MATIC</h4>
+                        </div>
                         {item.price === 0 &&  
                             <button className={`${styles["sell-now-btn"]}`}>
                                 <Link href={`/sellnft/${item._id}`}>Sell Now</Link>

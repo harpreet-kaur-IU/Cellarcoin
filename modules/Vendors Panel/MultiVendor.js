@@ -5,7 +5,8 @@ import {getOnBoardFromCookie} from '../../auth/userCookies';
 import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import BrandDropDown from './BrandDropdown';
+import { useRouter } from 'next/router';
 const MultiVendor = () => {
   var JWTtoken = getOnBoardFromCookie();
   const [email,setEmail] = useState()
@@ -19,12 +20,10 @@ const MultiVendor = () => {
   const [emailError,setEmailError] = useState(false)
   const [passwordError,setPasswordError] = useState(false)
   const [brandError,setBrandError] = useState(false)
-
+  const [brandData,setBrandData] = useState("");
   const regex = /^[^\s]+(\s+[^\s]+)*$/;
-
-  const createLoginHandler = (e) =>{
-    setLogin(!login)
-  }
+  const router = useRouter();
+ 
 
   const emailHandler = (e) =>{
     setEmail(e.target.value)
@@ -33,8 +32,9 @@ const MultiVendor = () => {
   const passwordHandler = (e) =>{
     setPassword(e.target.value)
   }
-  const brandHandler = (e) =>{
-    setBrand(e.target.value)
+  const brandHandler = (value) =>{
+    setBrand(value);
+    console.log(value)
   }
 
   const validator = ()=>{
@@ -77,16 +77,47 @@ const MultiVendor = () => {
         method: 'GET',
         headers: myHeaders,
       };
-
+      setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getSubVendor`, requestOptions)
       .then(response => response.json())
       .then(result => {
         setData(result.data)
+        setLoading(false)
       })
       .catch(error => console.log('error', error));
+
+
+
+      if(JWTtoken){
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTtoken);
+        myHeaders.append("Content-Type","application/json");
+
+        var requestOptions = {
+          method: 'GET',
+          headers: myHeaders
+        };
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrands`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+          setBrandData(result.data)
+          console.log(result.data.length)
+        })
+        .catch(error => console.log('error', error));
+      }else{
+        router.push("/vendorlogin")
+      }
   },[])
 
-
+  const createLoginHandler = (e) =>{
+    if(brandData.length<=0){
+      toast.warning("Please Add Brand first",{
+        toastId:"2"
+      });
+    }else{
+      setLogin(!login)
+    }
+  }
   const formSubmit = (e) =>{
       e.preventDefault()
       var result = validator();
@@ -175,7 +206,7 @@ const MultiVendor = () => {
             <h3 className='f-700 font-36 text-primary l-49'>Multiple Vendor Access</h3>
             <div onClick={createLoginHandler} className={`cursor-pointer font-16 f-600 l-22 d-flex d-align-center d-justify-center ${styles["create-login-id"]}`}>Create Vendor</div>
           </div>
-          {login && 
+          {login &&
             <div className={`${styles["create-login-wrapper"]}`}>
               <h4 className={`font-24 f-600 l-22 ${styles["create-login-h4"]}`}>Create a new log in ID</h4>
               <form onSubmit={formSubmit}>
@@ -191,7 +222,8 @@ const MultiVendor = () => {
                 {passwordError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Password.</span>}
                 <div className={`${styles["create-login-input-wrapper"]}`}>
                   <h6 className='font-18 f-500 l-22'>Brand</h6>
-                  <input value={brand} onChange={brandHandler} type="text" required></input>
+                  {/* <input value={brand} onChange={brandHandler} type="text" required></input> */}
+                  <BrandDropDown width="343px" data={brandData} handler={brandHandler} value="Select Brand"></BrandDropDown>
                 </div>
                 {brandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
                 <button className={`d-flex d-align-center d-justify-center ${styles["save-btn"]}`}>

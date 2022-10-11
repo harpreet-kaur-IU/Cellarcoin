@@ -3,7 +3,6 @@ import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 const WineCard = (props) => {
-    console.log(props.data)
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
     const JWTToken = getUserOnBoardFromCookie();

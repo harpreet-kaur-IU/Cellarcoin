@@ -33,10 +33,7 @@
 .name-input input{
     border: none;
     outline: none;
-    position: absolute;
     background-color: transparent;
-    left: 160px;
-    width: 450px;
 }
 .name-input input:focus{
     outline: none;
@@ -103,6 +100,9 @@
     width: 20px;
     height: 14px;
 }
+.create-login-wrapper{
+    width: 343px;
+}
 .create-login-h4{
     margin-top: 36px;
 }
@@ -110,11 +110,11 @@
     margin-top: 32px;
 }
 .create-login-input-wrapper input{
+    width: 100%;
     border:none;
     border-bottom: 1px solid #000000;
     border-radius: 3px;
     padding: 12px 0px;
-    width: 343px;
     background-color: transparent;
     margin-top: 16px;
     font-weight: 500;
@@ -185,11 +185,11 @@
     .name-input h6{
         left: 15px;
     }
-    .name-input input{
-        left: 80px;
-    }
 }
 @media screen and (max-width:376px) {
+    .create-login-wrapper{
+        width: 280px;
+    }
     .profile-wrapper{
         padding: 28px 13px 36px 13px;
     }
@@ -198,8 +198,5 @@
     }
     .name-input h6{
         display: none;
-    }
-    .name-input input{
-        left: 20px;
     }
 }

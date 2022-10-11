@@ -31,6 +31,7 @@ const NavBar = () => {
   const [userId,setUserId] = useState("")
   const [searchBar,setSearchBar] = useState(false)
   const [brand,setBrand] = useState("");
+  const [nft,setNft] = useState("")
   const [searchLoading,setSearchLoading] = useState(false)
   var JWTToken = getUserOnBoardFromCookie();
 
@@ -136,7 +137,8 @@ const NavBar = () => {
         .then(response => response.text())
         .then(result => {
           const parseResult = JSON.parse(result);
-          setBrand(parseResult.data);
+          setBrand(parseResult.data2)
+          setNft(parseResult.data);
           setSearchLoading(false)
           setSearchBar(true)
         })
@@ -243,14 +245,14 @@ const NavBar = () => {
             <div className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
               <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
               <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
-                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
-                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
-                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
-                <h6 className='font-13 f-400 l-137'>Purple malbec</h6>
+                {brand && brand.map((item)=>(
+                  <h6 className='font-13 f-400 l-137'>{item.brandName}</h6>
+                ))}
+                
               </div>
               <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
               <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-nft-wrapper"]}`}>
-                {brand && brand.map((item)=>(
+                {nft && nft.map((item)=>(
                   <div onClick={navigationHandler}  id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
                     <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
                     <div className='d-flex d-flex-column'>

@@ -16,7 +16,6 @@ const Newsletter = () => {
     }
     const formSubmit = (e) =>{
         e.preventDefault();
-
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -35,6 +34,7 @@ const Newsletter = () => {
         .then(response => response.text())
         .then(result => {
             console.log(result)
+            setEmail("")
             toast.success("Successfully Subscribed for Newsletter",{
                 toastId:"2"
             });

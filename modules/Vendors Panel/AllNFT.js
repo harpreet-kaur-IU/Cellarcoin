@@ -25,8 +25,6 @@ function useOutsideAlerter(ref,handler) {
   }
 const AllNFT = () => {
 
-
-
     const[data,setData] = useState('');
     const[searchData,setSearchData] = useState('');
     const[isDelete,setDelete] = useState(false);

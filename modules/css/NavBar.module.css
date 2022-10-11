@@ -53,7 +53,7 @@
 }
 .search-nft-img{
     object-fit: contain;
-    width: 36px;
+    min-width: 36px;
     height: 36px;
     border: 1px solid #DCC5D2;
     border-radius: 4px;

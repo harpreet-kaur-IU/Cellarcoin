@@ -51,14 +51,14 @@
     color: #780543;
 }
 .profile-dropdown{
+    z-index: 1;
     width: 153px;
-    height: 102px;
     top: 56px;
     right: 0;
     background: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 0px 0px 8px 8px;
-    padding: 14px 8px 23px 8px;
+    padding: 14px 8px 20px 8px;
     gap:8px;
 }
 .profile-dropdown h6{

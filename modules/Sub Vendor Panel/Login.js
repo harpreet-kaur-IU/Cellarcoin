@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import styles from '../css/Sub Vendor Panel/Login.module.css'
-import {setAdminOnBoardCookie,removeAdminOnBoardCookie } from '../../auth/userCookies';
+import {setSubVendorBoardCookie,removeSubVendorOnBoardCookie } from '../../auth/userCookies';
 import {useRouter} from 'next/router'
 import Loader from '../Vendors Panel/Loader';
 import { ToastContainer, toast } from 'react-toastify';
@@ -24,7 +24,8 @@ const Login = () => {
     const formSubmit = (e) =>{
         e.preventDefault()
         var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Content-Type","application/json");
+
         var raw = JSON.stringify({
             "email":email,
             "password":password
@@ -39,15 +40,15 @@ const Login = () => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/subVendor/login`, requestOptions)
         .then(response => response.json()) 
         .then(result =>{ 
-            if(result.message === "Invalid email or password!"){
-                toast.error("Invalid email or password!",{
+            if(result.message === "Invalid email address"){
+                toast.error("Invalid email address",{
                     toastId:"2"
                 });
                 setLoading(false)
             }else{
-                removeAdminOnBoardCookie()
-                setAdminOnBoardCookie(result.token)
-                router.push("/admindashboard")
+                removeSubVendorOnBoardCookie()
+                setSubVendorBoardCookie(result.token)
+                router.push("/subVendorDashboard")
                 setLoading(false)
             }
         })

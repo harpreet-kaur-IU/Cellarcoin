@@ -61,8 +61,7 @@ const Dashboard = () => {
           <div className={`${styles["dashboard-cards-wrapper"]}`}>
             <div className='d-flex d-justify-space-between'>
               <h5 className='f-600 l-29'>
-                {/* {dashboard.visitorFrequency} */}
-                0
+                {dashboard.visitorFrequency}
               </h5>
               <img src="images/ic_trending_up.png" className={`${styles["dashboard-cards-icon"]}`}></img>
             </div>

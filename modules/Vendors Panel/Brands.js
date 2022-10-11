@@ -20,14 +20,23 @@ const Brands = () => {
   const [isUrl, setIsUrl] = useState(false);
 
   //profile states
+  const [profileError,setProfileError] = useState(false);
   const [profile,setProfile] = useState("");
   const [profileUrl,setProfileUrl] = useState("");
   const [loadingProfileImage,setLoadingProfileImage] = useState(false);
   const profileRef = useRef();
 
+  //cover Image States
+  const [coverImageError,setCoverImageError] = useState(false);
+  const [coverImage,setCoverImage] = useState("")
+  const [coverUrl,setCoverUrl] = useState("");
+  const [loadingCoverImage,setLoadingCoverImage] = useState(false);
+  const coverRef = useRef();
+
   const [data,setData] = useState("")
   const [loading,setLoading] = useState(false);
-  
+
+
   const [isBrandError,setBrandError] = useState(false);
   var JWTtoken = getOnBoardFromCookie();
   const regex = /^[^\s]+(\s+[^\s]+)*$/;
@@ -35,7 +44,7 @@ const Brands = () => {
     setBrand(e.target.value)
   }
   const coverHandler = (e) =>{
-    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|heiv|pdf)$/)){
+    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|heiv|pdf|txt)$/)){
       setCoverError(true)
     }
     else{
@@ -45,19 +54,80 @@ const Brands = () => {
   }
 
   const profileHandler = (e) =>{
-    setProfile(e.target.files[0])
+    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png)$/)){
+      setProfileError(true);
+      var inputfile = document.getElementById("profile-input-field");
+      inputfile.value = "";
+    }   
+    else{
+      setProfileError(false);
+      var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+      var fSize =  e.target.files[0].size; 
+      var i=0;
+      while(fSize>900){
+        fSize/=1024;
+        i++;
+      }
+      var file = (Math.round(fSize*100)/100);
+      if(i<=2 && file<10){
+        setProfile(e.target.files[0])
+      }
+      else{
+        setProfileError(true);
+      }
+    }   
   }
+
+  const coverImageHandler = (e) =>{
+    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png)$/)){
+      setCoverImageError(true);
+      var inputfile = document.getElementById("profile-input-field");
+      inputfile.value = "";
+    }   
+    else{
+      setCoverImageError(false);
+      var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+      var fSize =  e.target.files[0].size; 
+      var i=0;
+      while(fSize>900){
+        fSize/=1024;
+        i++;
+      }
+      var file = (Math.round(fSize*100)/100);
+      if(i<=2 && file<10){
+        setCoverImage(e.target.files[0])
+      }
+      else{
+        setCoverImageError(true);
+      }
+    }   
+  }
+
   const validator = () =>{
     if(regex.test(brand)){
       setBrandError(false);
     }else{
       setBrandError(true);
     }
+
     if(url === ''){
       setIsUrl(true);
     }else{
       setIsUrl(false);
     }
+
+    if(profileUrl == ""){
+      setProfileError(true);
+    }else{
+      setProfileError(false);
+    }
+
+    if(coverUrl == ""){
+      setCoverImageError(true);
+    }else{
+      setCoverImageError(false);
+    }
+
     if(!regex.test(brand) || url === ''){
       return false;
     }else{
@@ -74,7 +144,9 @@ const Brands = () => {
 
       var raw = JSON.stringify({
         "brandName":brand,
-        "documentUrl":url
+        "documentUrl":url,
+        "profileImageUrl":profileUrl,
+        "coverImageUrl":coverUrl
       });
 
       var requestOptions = {
@@ -95,9 +167,17 @@ const Brands = () => {
             setData(results.data)
             var inputfile = document.getElementById("file-input-field");
             inputfile.value = "";
-            setBrand(" ")
-            setCover(" ")
-            setUrl(" ")
+            setBrand("")
+
+            setCover("")
+            setUrl("")
+
+            setProfile("")
+            setProfileUrl("")
+
+            setCoverImage("")
+            setCoverUrl("")
+
             setLoading(false)
           })
           toast.success("Brand Created Successfully",{
@@ -126,7 +206,46 @@ const Brands = () => {
       })
       .catch(error => console.log('error', error));
     }
-  },[cover])
+
+    else if(profile){
+      var formdata = new FormData();
+      formdata.append("image",profile);
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+      setLoadingProfileImage(true)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        var results = (JSON.parse(result))
+        setProfileUrl(results.imageUrl)
+        setLoadingProfileImage(false)
+      })
+      .catch(error => console.log('error', error));
+    }
+
+    else if(coverImage){
+      var formdata = new FormData();
+      formdata.append("image",coverImage);
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+      setLoadingCoverImage(true)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        var results = (JSON.parse(result))
+        console.log(results.imageUrl)
+        setCoverUrl(results.imageUrl)
+        setLoadingCoverImage(false)
+      })
+      .catch(error => console.log('error', error));
+    }
+  },[cover,profile,coverImage])
 
   useEffect(()=>{
     var myHeaders = new Headers();
@@ -196,7 +315,6 @@ const Brands = () => {
             <form className={`${styles["brand-form"]}`} onSubmit={formSubmit}>
               <input value={brand} onChange={brandHandler} maxLength="60" className={`mt-16 col-12 ${styles["brands-input"]}`} type="text" required></input>
               {isBrandError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter Valid Brand Name.</span>}
-             
               {/* upload Documents */}
               <h5 className='f-500 l-23 mt-24'>Upload Documents</h5>
               <h6 className='mt-16 f-400'>Accepted documents: ID Proof, Company ID Proof</h6>
@@ -220,8 +338,8 @@ const Brands = () => {
               <h5 className='f-500 l-23 mt-24'>Upload Profile Image</h5>
               <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB.</h6>
               <div className={`mt-16 ${styles["brands-file-upload"]}`}>
-                <input 
-                  id='file-input-field'
+                <input
+                  id='profile-input-field'
                   type='file'
                   ref={profileRef}
                   multiple={false}
@@ -231,6 +349,7 @@ const Brands = () => {
                 {loadingProfileImage && !profileUrl && <SmallLoader></SmallLoader>}
                 {!loadingProfileImage && !profileUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
                 {profileUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {profileUrl}</span>}
+                {profileError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
               </div>
 
               {/* upload cover */}
@@ -238,16 +357,17 @@ const Brands = () => {
               <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB. Dim.(800*200)</h6>
               <div className={`mt-16 ${styles["brands-file-upload"]}`}>
                 <input 
-                  id='file-input-field'
+                  id='cover-input-field'
                   type='file'
-                  ref={profileRef}
+                  ref={coverRef}
                   multiple={false}
-                  onChange={profileHandler}
+                  onChange={coverImageHandler}
                   required>
                 </input>
-                {loadingProfileImage && !profileUrl && <SmallLoader></SmallLoader>}
-                {!loadingProfileImage && !profileUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
-                {profileUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {profileUrl}</span>}
+                {loadingCoverImage && !coverUrl && <SmallLoader></SmallLoader>}
+                {!loadingCoverImage && !coverUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
+                {coverUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {coverUrl}</span>}
+                {coverImageError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
               </div>
               {/* save button */}
               <div className='d-flex'>

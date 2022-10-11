@@ -46,17 +46,17 @@ export const setUserOnBoardCookie = token => {
 
 export const removeUserOnBoardCookie = () => cookies.remove('onboardingUser');
 
-//user cookies
-export const getTimerCookie = () => {
-  const cookie = cookies.get('timer');
+//subvendor cookies
+export const getSubVendorOnBoardFromCookie = () => {
+  const cookie = cookies.get('onboardingSubVendor');
   if (!cookie) {
     return null;
   }
   return cookie;
 };
 
-export const setTimerCookie =() => {
-  cookies.set('timer',"5");
+export const setSubVendorBoardCookie = token => {
+  cookies.set('onboardingSubVendor', token);
 };
 
-export const removeTimerCookie = () => cookies.remove('timer');
+export const removeSubVendorOnBoardCookie = () => cookies.remove('onboardingSubVendor');

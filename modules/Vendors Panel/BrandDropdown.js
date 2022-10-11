@@ -20,12 +20,12 @@ const BrandDropDown = (props) => {
     }
 
     return (
-        <div className={`f-500 ${styles["drop-down"]}`} onClick={handler} >
+        <div className={`f-500 ${styles["drop-down"]}`} onClick={handler}>
             <span>{value}</span>
             {props.data && <ul>
                 {props.data.map((item,index) => { 
                     return (
-                        <li value={item.brandName} id={item._id} on Click={selectHandler} key={index}>
+                        <li value={item.brandName} id={item._id} onClick={selectHandler} key={index}>
                             {item.brandName}
                         </li>
                     )
