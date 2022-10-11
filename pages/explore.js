@@ -35,6 +35,7 @@ export default function Explore() {
                     <div className={`d-grid grid-col-3 gap-3 ${styles["wine-card-wrapper"]}`}>
                     {data && data.map((item)=>(
                         <WineCard
+                          key={item._id}
                            data = {item}
                         ></WineCard>
                     ))}

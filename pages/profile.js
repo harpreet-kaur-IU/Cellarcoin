@@ -30,6 +30,7 @@ export default function Profile() {
                     <div className={`d-grid grid-col-3 gap-3 ${styles["profile-card-wrapper"]}`}>
                         {data && data.map((item)=>(
                             <WineCard
+                                key={item._id}
                                data={item}
                             ></WineCard>
                         ))}
