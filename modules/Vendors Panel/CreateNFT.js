@@ -500,7 +500,7 @@ const CreateNFT = () => {
                             </div>
                         </div>
                         <div className='d-flex d-justify-end'>
-                            <button className={`font-18 f-700 l-27 bg-primary ${styles["submit-btn"]}`}>Submit</button>
+                            <button className={`cursor-pointer font-18 f-700 l-27 bg-primary ${styles["submit-btn"]}`}>Submit</button>
                         </div>
                     </div>
                 </form>

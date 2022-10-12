@@ -207,7 +207,10 @@ const Brands = () => {
       .catch(error => console.log('error', error));
     }
 
-    else if(profile){
+  },[cover])
+
+  useEffect(()=>{
+    if(profile){
       var formdata = new FormData();
       formdata.append("image",profile);
       var requestOptions = {
@@ -225,8 +228,10 @@ const Brands = () => {
       })
       .catch(error => console.log('error', error));
     }
+  },[profile])
 
-    else if(coverImage){
+  useEffect(()=>{
+    if(coverImage){
       var formdata = new FormData();
       formdata.append("image",coverImage);
       var requestOptions = {
@@ -245,8 +250,7 @@ const Brands = () => {
       })
       .catch(error => console.log('error', error));
     }
-  },[cover,profile,coverImage])
-
+  },[coverImage])
   useEffect(()=>{
     var myHeaders = new Headers();
     myHeaders.append("Authorization","Bearer "+JWTtoken);
@@ -349,9 +353,9 @@ const Brands = () => {
                 {loadingProfileImage && !profileUrl && <SmallLoader></SmallLoader>}
                 {!loadingProfileImage && !profileUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
                 {profileUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {profileUrl}</span>}
-                {profileError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
+                
               </div>
-
+              {profileError && <h6 className={`mt-12 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</h6>}
               {/* upload cover */}
               <h5 className='f-500 l-23 mt-24'>Upload Cover Image</h5>
               <h6 className='mt-16 f-400'>File in JPG, PNG smaller than 10MB. Dim.(800*200)</h6>
@@ -367,8 +371,9 @@ const Brands = () => {
                 {loadingCoverImage && !coverUrl && <SmallLoader></SmallLoader>}
                 {!loadingCoverImage && !coverUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
                 {coverUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {coverUrl}</span>}
-                {coverImageError && <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</span>}
+                
               </div>
+              {coverImageError && <h6 className={`mt-12 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</h6>}
               {/* save button */}
               <div className='d-flex'>
                 <button className='mt-16'>Save</button>

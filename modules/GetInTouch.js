@@ -7,6 +7,10 @@ const GetInTouch = (props) => {
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [message,setMessage] = useState("");
+    const [isNameError,setNameError] = useState(false);
+    const [isMessageError,setMessageError] = useState(false);
+    const regex = /^[^\s]+(\s+[^\s]+)*$/;
+
     const nameHandler = (e) =>{
         setName(e.target.value)
     }
@@ -19,31 +23,51 @@ const GetInTouch = (props) => {
         setMessage(e.target.value)
     }
 
+    const validator = () =>{
+        if(regex.test(name)){
+            setNameError(false);
+        }else{
+            setNameError(true);
+        }
+        if(regex.test(message)){
+            setMessageError(false)
+        }else{
+            setMessageError(true);
+        }
+        if(regex.test(message) || regex.test(message)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     const formSubmit = (e) =>{
         e.preventDefault();
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type","application/json");
-        var raw = JSON.stringify({
-            "email":email,
-            "message":message,
-            "name":name
-        })
+        const result = validator();
+        if(result){
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type","application/json");
+            var raw = JSON.stringify({
+                "email":email,
+                "message":message,
+                "name":name
+            })
 
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw
-        };
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw
+            };
 
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getInTouch`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            props.handler();
-        })
-        .then(()=>toast.success("Thank you for your interest, please check your mail"),{
-            toastId:"1"
-        })
-        .catch(error => console.log('error', error));
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getInTouch`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                props.handler();
+            })
+            .then(()=>toast.success("Thank you for your interest, please check your mail"),{
+                toastId:"1"
+            })
+            .catch(error => console.log('error', error));
+        }
     }
   return (
     <div className={`${styles["GIT-wrapper"]}`}>
