@@ -45,9 +45,11 @@
 
 .dashboard-table-column-product{
     object-fit:contain;
-    width: 71px;
+    min-width: 71px;
+    max-width: 71px;
     height: 48px;
     border-radius: 8px;
+    background-color: #EDEDED;
 }
 .dashboard-table-column-spam{
     padding: 5px 15px;

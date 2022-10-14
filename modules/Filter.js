@@ -12,9 +12,6 @@ const Filter = () => {
     }
 
 
-
-
-
     const [value, setValue] = useState("Filter");
     const handler = (e) => {
         e.currentTarget.classList.toggle(style["open"]);
@@ -22,30 +19,28 @@ const Filter = () => {
 
     const selectHandler = (e) => {
         setValue(e.currentTarget.getAttribute("value"));
-        console.log(e.currentTarget.getAttribute("value"))
+        const filterValue = (e.currentTarget.getAttribute("value"));
+        
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "filterName": filterValue
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/filterNFT`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
-
-    const filterHandler = (e) =>{
-        console.log(e.target.id)
-        // var myHeaders = new Headers();
-        // myHeaders.append("Content-Type", "application/json");
-
-        // var raw = JSON.stringify({
-        //     "filterName": "hightolow"
-        // });
-
-        // var requestOptions = {
-        //     method: 'POST',
-        //     headers: myHeaders,
-        //     body: raw,
-        //     redirect: 'follow'
-        // };
-
-        // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/filterNFT`, requestOptions)
-        // .then(response => response.text())
-        // .then(result => console.log(result))
-        // .catch(error => console.log('error', error));
-    }
+    
     return (
         // <div className={`p-relative d-flex d-align-center d-justify-end gap-3 mt-40 mb-32 ${style["filter-margin"]}`}>
         //     <div className={`p-absolute ${style["filter-position-absolute"]}`}>
@@ -98,19 +93,19 @@ const Filter = () => {
             <div className={`f-500 ${style["drop-down"]}`} onClick={handler} >
                 <span> {value} </span>
                 <ul>
-                    <li value="Recently  Sold" onClick={selectHandler}>
+                    <li value="sold" onClick={selectHandler}>
                         Recently  Sold
                     </li>
-                    <li value="Most Popular" onClick={selectHandler}>
+                    <li value="popular" onClick={selectHandler}>
                         Most Popular
                     </li>
-                    <li value="Most Favorited" onClick={selectHandler}>
+                    <li value="favourite" onClick={selectHandler}>
                         Most Favorited
                     </li>
-                    <li value="Low to High" onClick={selectHandler}>
+                    <li value="lowtohigh" onClick={selectHandler}>
                         Price: Low to High
                     </li>
-                    <li value="High to Low" onClick={selectHandler}>
+                    <li value="hightolow" onClick={selectHandler}>
                         Price: High to Low
                     </li>
                 </ul>

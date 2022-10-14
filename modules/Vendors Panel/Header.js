@@ -113,11 +113,6 @@ const Header = (props) => {
   }, []);
 
 
-
-
-
-
-
   // //web3 modal
   // let web3Modal;
   // const providerOptions = {

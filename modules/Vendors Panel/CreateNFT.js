@@ -276,6 +276,11 @@ const CreateNFT = () => {
             .then(response => response.json())
             .then(result =>{
                 setBrandData(result.data)
+                if(result.data){
+                    console.log("has data")
+                }else{
+                    console.log("no data found")
+                }
             })
             .catch(error => console.log('error', error));
         }else{

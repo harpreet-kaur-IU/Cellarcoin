@@ -1,6 +1,29 @@
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import style from './css/WineCollection.module.css'
 const WineCollection = () => {
+  const router = useRouter();
+  const nftId = router.query["id"];
+  const [brandData,setbrandData] = useState();
+
+  useEffect(()=>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getBrandById/${nftId}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      const parseResult = JSON.parse(result)
+      console.log(parseResult.message)
+    })
+    .catch(error => console.log('error', error));
+  },[])
   return (
     <>
       <div className={`container ${style["wine-collection-container"]}`}>

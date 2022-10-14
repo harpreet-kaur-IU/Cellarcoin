@@ -14,7 +14,7 @@ import Hamburger from '../icons/Hamburger';
 import SiteLogo from '../icons/SiteLogo';
 import {ethers} from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
-import Web3Modal from "web3modal";
+import Web3Modal from 'web3Modal';
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
 const NavBar = () => {
@@ -240,7 +240,10 @@ const NavBar = () => {
             </div>
           </Link>
           <div className='p-relative'>
-            <input onChange={searchHandler} className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+            <div className='p-relative'>
+              <input onChange={searchHandler} className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+              <img className={`${style["search-icon-navbar"]}`} src='images/search-icon.svg'></img>
+            </div>
             {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
             <div className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
               <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>

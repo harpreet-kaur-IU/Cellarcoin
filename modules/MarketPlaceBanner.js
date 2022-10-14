@@ -16,7 +16,7 @@ const MarketPlaceBanner = () => {
     const [loading,setLoading] = useState(false)
 
     const navigationHandler = () =>{
-        router.push("/profile")
+        router.push(`/profile/${data.brand._id}`)
     }
     
     const buyNowHandler = () =>{

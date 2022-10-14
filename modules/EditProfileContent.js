@@ -158,7 +158,7 @@ const EditProfileContent = () => {
 
   return (
     <div className={`${style["edit-profile-wrapper"]}`}>
-      <h4 className="f-400 l-137">You have signed up using: <span className='f-500'>{email}</span></h4>
+      <h4 className="f-400 l-137">You have signed in using: <span className='f-500'>{email}</span></h4>
       <h4 className={`f-400 l-137 mb-24 ${style["change-cover-text"]}`}>Change Cover picture and profile picture</h4>
       <form onSubmit={formSubmit}>
         <div className={`p-relative ${style["cover-img-wrapper"]} ${imgLoading ? style["cover-img-wrapper-opacity"]:"" }`}>

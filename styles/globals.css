@@ -564,4 +564,15 @@ li{
     justify-content: center;
   }
 } */
-
+@media screen and (max-width:624px) {
+  .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{
+    width: 100px !important;
+  }
+  
+}
+@media screen and (max-width:425px) {
+  .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet{
+    width: 70px !important;
+  }
+  
+}
