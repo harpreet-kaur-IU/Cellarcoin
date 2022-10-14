@@ -14,7 +14,7 @@ import Hamburger from '../icons/Hamburger';
 import SiteLogo from '../icons/SiteLogo';
 import {ethers} from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
-import Web3Modal from 'web3Modal';
+import Web3Modal from 'Web3Modal';
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
 const NavBar = () => {
@@ -251,7 +251,6 @@ const NavBar = () => {
                 {brand && brand.map((item)=>(
                   <h6 className='font-13 f-400 l-137'>{item.brandName}</h6>
                 ))}
-                
               </div>
               <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
               <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-nft-wrapper"]}`}>
@@ -267,7 +266,6 @@ const NavBar = () => {
               </div>
             </div>
           </div>
-          
           <ul id="ul-navbar" className={`d-flex d-flex-row text-dark-gray ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
             <NavItems name="not-transparent" path="/explore" value="Explore"></NavItems>
             <NavItems name="not-transparent" path="/community" value="Community"></NavItems>

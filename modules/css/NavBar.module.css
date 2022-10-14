@@ -19,7 +19,6 @@
 }
 .navbar-search-input::placeholder{
     color:#6B5260;
-    
 }
 .navbar-items-wrapper{
     margin-left:40px;
@@ -72,7 +71,6 @@
     top: 11px;
     left: 35px;
 }
-
 @media screen and (max-width:1440px) {
     .navbar-search-input{
         width:280px;
