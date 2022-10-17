@@ -63,12 +63,12 @@ const Listing = () => {
                             <img src='images/polygon-icon.svg'></img>
                             <h4 className={`f-500`}>{item.price} MATIC</h4>
                         </div>
-                        {item.price === 0 &&  
+                        {/* {item.price === 0 &&   */}
                             <button className={`${styles["sell-now-btn"]}`}>
                                 <Link href={`/sellnft/${item._id}`}>Sell Now</Link>
                                 {/* Sell Now */}
                             </button>
-                        }    
+                        {/* }     */}
                     </div>
                 </div>
             ))}

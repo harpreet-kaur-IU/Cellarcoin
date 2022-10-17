@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, {useEffect,useState} from 'react'
+import React, {useEffect,useState,useRef} from 'react'
 import style from './css/NavBar.module.css'
 import SignUp from './SignUp';
 import {useRouter} from 'next/router';
@@ -17,7 +17,27 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from 'Web3Modal';
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
+
+function useOutsideAlerter(ref,handler) {
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        handler();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
 const NavBar = () => {
+  const wrapperRef = useRef(null);
+  const handler = ()=>{
+    setSearchBar(false)
+  }
+  useOutsideAlerter(wrapperRef,handler);
+
   const {signOut} = useFirebaseAuth(); 
   const router = useRouter();
   const [dropdown,setDropdown] = useState(false);
@@ -115,6 +135,11 @@ const NavBar = () => {
   const navigationHandler = (e) =>{
     setSearchBar(false)
     router.push(`/purple/${e.currentTarget.id}`)
+  }
+
+  const brandHandler = (e) =>{
+    setSearchBar(false)
+    router.push(`/profile/${e.currentTarget.id}`)
   }
   const searchHandler = (e) =>{
     if(e.target.value.length>2){
@@ -245,17 +270,17 @@ const NavBar = () => {
               <img className={`${style["search-icon-navbar"]}`} src='images/search-icon.svg'></img>
             </div>
             {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
-            <div className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
+            <div  ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
               <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
               <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
                 {brand && brand.map((item)=>(
-                  <h6 className='font-13 f-400 l-137'>{item.brandName}</h6>
+                  <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
                 ))}
               </div>
               <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
-              <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-nft-wrapper"]}`}>
+              <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
                 {nft && nft.map((item)=>(
-                  <div onClick={navigationHandler}  id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
+                  <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
                     <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
                     <div className='d-flex d-flex-column'>
                       <h6 className='font-13 f-400 l-137'>{item.name}</h6>

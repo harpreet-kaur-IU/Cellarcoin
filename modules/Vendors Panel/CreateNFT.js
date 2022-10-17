@@ -262,6 +262,7 @@ const CreateNFT = () => {
         console.log(val)
         // setSignerResult(val)
     }
+
     useEffect(()=>{
         if(JWTtoken){
             var myHeaders = new Headers();
@@ -272,63 +273,84 @@ const CreateNFT = () => {
                 method: 'GET',
                 headers: myHeaders
             };
+
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrands`, requestOptions)
             .then(response => response.json())
             .then(result =>{
                 setBrandData(result.data)
-                if(result.data){
-                    console.log("has data")
-                }else{
-                    console.log("no data found")
-                }
             })
             .catch(error => console.log('error', error));
         }else{
             router.push("/vendorlogin")
         }
     },[])
+
     const modalHandler = () =>{
         setAdd(!add);
     }
   
-    const to = "0x58b522D3948a51B66b5C359c4AFaC4FA44D02765";
-    const provider = new ethers.providers.JsonRpcProvider(
-      "https://polygon-mumbai.g.alchemy.com/v2/hqj9FnTht1P0gYdzJJhW1wgAKmHlFQbG"
-    );
+    // const to = "0x58b522D3948a51B66b5C359c4AFaC4FA44D02765";
+    // const provider = new ethers.providers.JsonRpcProvider(
+    //   "https://polygon-mumbai.g.alchemy.com/v2/hqj9FnTht1P0gYdzJJhW1wgAKmHlFQbG"
+    // );
     
-    const signer = new ethers.Wallet(
-      "30bff7d603f44ec3202b777daf2c99d6bb2269e8fcda59d045a3c19df60210dc",
-      provider
-    );
-    
+    // const signer = new ethers.Wallet(
+    //   "30bff7d603f44ec3202b777daf2c99d6bb2269e8fcda59d045a3c19df60210dc",
+    //   provider
+    // );
+
+    const mint = async()=>{
+        const ethers = require("ethers");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const addr = await signer.getAddress();
+
+        if(typeof window.ethereum !== "undefined"){
+            const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+            const contract = new ethers.Contract(
+                contractAddress,
+                Nft_marketplace_ABI,
+                signer
+            );
+            try{
+                await contract.nftMint(
+                    addr,
+                    "abb",
+                    "Cellarcoin",
+                    "2400",
+                    "Heloo",
+                    "Nothing"
+                )
+                .then(response => console.log(response))
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            console.log("Please install MetaMask");
+        }
+    }
+
+    const getToken = (raw) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTtoken);
+        myHeaders.append("Content-Type","application/json");
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/mintNFT`,{
+            method: 'POST', 
+            headers: myHeaders,
+            body: raw
+        })
+
+        .then(response => response.json())
+        .then(results => console.log(results.data))
+        .catch(error => console.log('error', error))
+    }    
     const formSubmit = async(e) =>{
         e.preventDefault();
         // if(signerResult1){
-            if(typeof window.ethereum !== "undefined"){
-                const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
-                const contract = new ethers.Contract(
-                    contractAddress,
-                    Nft_marketplace_ABI,
-                    signer
-                );
-                try{
-                    await contract.nftMint(
-                        to,
-                        "abb",
-                        "Cellarcoin",
-                        "2400",
-                        "Heloo",
-                        "Nothing"
-                    )
-                    .then(response => console.log(response))
-                }catch(error){
-                    console.log(error);
-                }
-            }else{
-                console.log("Please install MetaMask");
-            }
-        
+            // mint();
             const result = validator();
+           
             if(result){    
                 const attributes = [
                     {
@@ -361,63 +383,73 @@ const CreateNFT = () => {
                     "attributes":attributes,
                     "walletAddress":wallet,
                     "brand":brand,
-                    "isPremiumDrop":premiumDrops
+                    "isPremiumDrop":premiumDrops,
+                    "walletAddress":""
                 });
-                if(nftId){
-                    var requestOptions = {
-                        method: 'PATCH',
-                        headers: myHeaders,
-                        body: raw
-                    };
+
+                var tokenBody = JSON.stringify({
+                    "file":url,
+                    "name":name,
+                    "description":desc,
+                    "tokenId": 0,
+                    "external_url": "https://bigfatcats.io",
+                    "attributes":attributes,
+                });
+                getToken(tokenBody)
+                // if(nftId){
+                //     var requestOptions = {
+                //         method: 'PATCH',
+                //         headers: myHeaders,
+                //         body: raw
+                //     };
                     
-                    setLoading(true)
-                    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
-                    .then(response => response.json())
-                    .then(result =>{ 
-                        setData(result.data)
-                        setLoading(false)
-                        router.push("/allnftlist")
-                    })
-                    .catch(error => console.log('error', error));
-                }
-                else{
-                    var requestOptions = {
-                        method: 'POST',
-                        headers: myHeaders,
-                        body: raw
-                    };
-                    setLoading(true)
-                    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
-                    .then(response => response.json())
-                    .then(result =>{ 
-                        setLoading(false)
-                        setName("")
-                        setDesc("")
-                        setWallet("")
-                        setBrand("")
-                        setUrl("")
-                        setBrand("")
-                        setPremiumDrops(false)
-                        setBottleSize("")
-                        setVolumn("")
-                        setRegion("")
-                        setSpirit("")
-                        setCover("")
-                        var inputfile = document.getElementById("file-input-field");
-                        inputfile.value = "";
-                        router.push("/success")
-                    })
-                    .then(()=>toast.success("NFT created successfully"),{
-                        toastId:"2"
-                    })
-                    .catch(error => console.log('error', error));
-                }  
+                //     setLoading(true)
+                //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
+                //     .then(response => response.json())
+                //     .then(result =>{ 
+                //         setData(result.data)
+                //         setLoading(false)
+                //         router.push("/allnftlist")
+                //     })
+                //     .catch(error => console.log('error', error));
+                // }
+                // else{
+                //     var requestOptions = {
+                //         method: 'POST',
+                //         headers: myHeaders,
+                //         body: raw
+                //     };
+                //     setLoading(true)
+                    
+                    // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
+                    // .then(response => response.json())
+                    // .then(result =>{ 
+                    //     setLoading(false)
+                    //     setName("")
+                    //     setDesc("")
+                    //     setWallet("")
+                    //     setBrand("")
+                    //     setUrl("")
+                    //     setBrand("")
+                    //     setPremiumDrops(false)
+                    //     setBottleSize("")
+                    //     setVolumn("")
+                    //     setRegion("")
+                    //     setSpirit("")
+                    //     setCover("")
+                    //     var inputfile = document.getElementById("file-input-field");
+                    //     inputfile.value = "";
+                    //     // router.push("/success")
+                    // })
+                //     .catch(error => console.log('error', error));
+                // }  
             }
-        // }else{
-        //     toast.error("Please Connect Your Wallet"),{
-        //         toastId:"2"
-        //     }
-        // }
+        
+            else{
+                toast.error("Please Connect Your Wallet"),{
+                    toastId:"2"
+                }
+            }
     }
   return (
     <div>
@@ -470,14 +502,12 @@ const CreateNFT = () => {
                                     <input value={bottle} onChange={bottleHandler} className='col-12'></input>
                                     {isBottle && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter numbers only.</h6>}
                                 </div>
-                                
                                 <div className={`col-5 offset-2 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Alcohol by volume(ABV)</h5>
                                     <input value={volume} onChange={volumeHandler} className='col-12'></input>
                                     {isVolumn && <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter numbers only.</h6>}
                                 </div>
                             </div>
-                            
                             <div className={`d-flex d-flex-wrap ${styles['properties-wrapper']}`}>
                                 <div className={`col-5 ${styles["properties-name-wrapper"]}`}>
                                     <h5 className='font-24 f-600 l-33'>Region</h5>
@@ -518,7 +548,6 @@ const CreateNFT = () => {
             </Modal>
         }
     </div>
-    
   )
 }
 

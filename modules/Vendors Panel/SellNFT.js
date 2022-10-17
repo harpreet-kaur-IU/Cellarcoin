@@ -7,6 +7,7 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DropDown from './DropDown';
+import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
 const SellNFT = () => {
   const router = useRouter();
   const nftId = router.query["id"];
@@ -65,10 +66,42 @@ const SellNFT = () => {
     }
   },[nftId])
 
+//web3 code starts here
+  const sellNft = async()=>{
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    const tokenid = 0;
+
+    if(typeof window.ethereum !== "undefined"){
+      const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+      const contract = new ethers.Contract(
+        contractAddress,
+        Nft_marketplace_ABI,
+        signer
+      );
+      try{
+        await contract.placeNFTForSale(
+          tokenid,
+          price
+        )
+        .then(response => console.log(response))
+      }catch(error){
+        console.log(error);
+      }
+      tokenid++;
+    }else{
+      console.log("Please install MetaMask");
+    }
+  }
+
+//web3 code ends here
   const formSubmit = (e) =>{
     e.preventDefault()
     var result = validator();
     if(result){
+      sellNft();
       var myHeaders = new Headers();
       myHeaders.append("Authorization","Bearer "+JWTtoken);
       myHeaders.append("Content-Type","application/json");

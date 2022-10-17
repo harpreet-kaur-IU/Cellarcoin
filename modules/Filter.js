@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useRef } from 'react'
 import style from './css/Filter.module.css'
 
-const Filter = () => {
+const Filter = (props) => {
     const [toggle, setToggle] = useState(false);
     const [sort,setSort] = useState(false)
     const handleClick = () =>{
@@ -18,27 +18,9 @@ const Filter = () => {
     }
 
     const selectHandler = (e) => {
-        setValue(e.currentTarget.getAttribute("value"));
+        setValue(e.currentTarget.textContent);
         const filterValue = (e.currentTarget.getAttribute("value"));
-        
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            "filterName": filterValue
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/filterNFT`, requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        props.handler(filterValue)
     }
     
     return (
@@ -89,7 +71,7 @@ const Filter = () => {
         //         </div>
         //     </div>
         // </div>
-        <div className='col-12 d-flex d-justify-end gap-2'>
+        <div className='col-12 d-flex d-justify-end gap-2 mb-32'>
             <div className={`f-500 ${style["drop-down"]}`} onClick={handler} >
                 <span> {value} </span>
                 <ul>
@@ -116,10 +98,10 @@ const Filter = () => {
                     </svg>
                 </span>
             </div>
-            <div className={`p-relative`}>
+            {/* <div className={`p-relative`}>
                 <div onClick={sortHandler} className={`rounded-8 bg-pink d-flex d-align-center d-justify-space-between ${style["sort-heading-wrapper"]}`}>
                     <a className='f-500 font-16 l-134'>Sort</a>
-                    {/* <img className='cursor-pointer' onClick={sortHandler} src='images/arrow-down.png'></img> */}
+                    
                     <span>
                     <svg width="18" height="11" viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.5 0.374191C16.2018 0.375484 15.9158 0.493227 15.7031 0.702316L9 7.40544L2.29687 0.702316C2.08553 0.490973 1.79888 0.37224 1.5 0.37224C1.20111 0.37224 0.914468 0.490973 0.703123 0.702316C0.491779 0.913661 0.373047 1.2003 0.373047 1.49919C0.373047 1.79808 0.491779 2.08472 0.703123 2.29607L8.20312 9.79607C8.30764 9.90095 8.43183 9.98416 8.56858 10.0409C8.70532 10.0977 8.85193 10.127 9 10.127C9.14806 10.127 9.29467 10.0977 9.43142 10.0409C9.56816 9.98416 9.69236 9.90095 9.79687 9.79607L17.2969 2.29607C17.4018 2.19155 17.485 2.06736 17.5418 1.93061C17.5985 1.79387 17.6278 1.64726 17.6278 1.49919C17.6278 1.35113 17.5985 1.20452 17.5418 1.06777C17.485 0.931025 17.4018 0.806833 17.2969 0.702316C17.0842 0.493227 16.7982 0.375484 16.5 0.374191Z" fill="#525257"/>
@@ -152,7 +134,7 @@ const Filter = () => {
                         <button className='rounded-8 b-none font-20 f-500 l-137'>Continue</button>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

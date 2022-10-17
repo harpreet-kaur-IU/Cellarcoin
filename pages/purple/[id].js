@@ -16,11 +16,11 @@ export default function Purple() {
       myHeaders.append("Content-Type","application/json");
   
       var requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: myHeaders,
       };
       setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getAllNft`, requestOptions)
       .then(response => response.json())
       .then(result =>{
         console.log(result.data)

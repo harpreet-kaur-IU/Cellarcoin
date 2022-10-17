@@ -2,13 +2,19 @@
     margin-top:192px;
 }
 .wine-collection-bg{
-    background-image: url("/images/wine-collection-bg.png");
+    
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;
     height: 354px;
     border-radius: 16px;
+}
+.wine-collection-bg img{
+    width: 266px;
+    height: 266px;
+    border: 4px solid #FFFFFF;
+    border-radius: 50%;
 }
 .wine-collection-container img{
     margin-top:300px;
