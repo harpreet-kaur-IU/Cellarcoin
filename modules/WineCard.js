@@ -2,6 +2,8 @@ import React , {useEffect, useState} from 'react'
 import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const WineCard = (props) => {
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
@@ -49,7 +51,9 @@ const WineCard = (props) => {
             })
             .catch(error => console.log('error', error));
         }else{
-            props.handler()
+            toast.warning("Please sign in",{
+                toastId:"2"
+            });
         }
     }
   return (
@@ -86,6 +90,7 @@ const WineCard = (props) => {
                 </div>
             </div>
         </div>
+        
     </>
   )
 }
