@@ -64,8 +64,6 @@ const WineCollection = () => {
       .catch(error => console.log('error', error));
     }
   },[nftId])
-
-
   return (
     <>
     {loading && <Loader></Loader>}
@@ -77,8 +75,6 @@ const WineCollection = () => {
           <h1 className='font-61 f-700 l-137 mt-108'>{brandData && brandData.brandName}</h1>
           {/* <p className='mt-8 font-25 f-400 l-137'>Premium wine company</p> */}
         </div>
-
-        
       </div>
       <div className={`container mt-88 ${style["wine-card-page-container"]}`}>
         <div className={`d-grid grid-col-3 gap-3 ${style["wine-card-wrapper"]}`}>

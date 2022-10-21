@@ -4,11 +4,10 @@ import styles from '../css/Sub Vendor Panel/Listing.module.css';
 import {useRouter} from 'next/router'
 import {getSubVendorOnBoardFromCookie} from '../../auth/userCookies';
 import Link from 'next/link';
-import SellNow from './SellNow';
-import Modal from './Modal'
 import Loader from '../Vendors Panel/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Moment from 'react-moment';
 const Listing = () => {
     const router = useRouter();
     const nftId = router.query["id"];
@@ -16,13 +15,11 @@ const Listing = () => {
     const[hasMount,setHasMount] = useState(false)
     const[add,setAdd] = useState("")
     const [loading, setLoading] = useState(false);
+    const[activity,setActivity] = useState("");
     var JWTtoken = getSubVendorOnBoardFromCookie();
 
     if(hasMount){
         return data;
-    }
-    const modalHandler = () =>{
-        setAdd(prev => !prev);
     }
     useEffect(()=>{
         if(nftId){
@@ -42,9 +39,25 @@ const Listing = () => {
                 setLoading(false)
             })
             .catch(error => console.log('error', error));
+
+            //activity log
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            setLoading(true)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const parseResult = JSON.parse(result)
+                console.log(parseResult.data)
+                setActivity(parseResult.data)
+                setLoading(false)
+            })
+            .catch(error => console.log('error', error));
         }
     },[nftId])
-
   return (
     <div>
         <Header></Header>
@@ -58,13 +71,16 @@ const Listing = () => {
                         <h4 className='f-500 l-39'>{item.name}</h4>
                         <h5 className={`f-500 ${styles["listing-content-brands"]}`}>Brand</h5>
                         <h4 className={`text-primary f-600 ${styles["listing-content-wine-name"]}`}>{item.brand.brandName}</h4>
-                    
+                        <h5 className={`f-500 ${styles["listing-content-brands"]}`}>Price</h5>
+                        <div className='mt-24 d-flex d-align-center gap-2'>
+                            <img src='images/polygon-icon.svg'></img>
+                            <h4 className={`f-500`}>{item.price} MATIC</h4>
+                        </div>
                         {item.price === 0 &&  
                             <button className={`${styles["sell-now-btn"]}`}>
                                 <Link href={`/sellnftsubvendor/${item._id}`}>Sell Now</Link>
-                                {/* Sell Now */}
                             </button>
-                        }    
+                        } 
                     </div>
                 </div>
             ))}
@@ -77,22 +93,22 @@ const Listing = () => {
                         <span className='font-18 f-500 d-flex'>From</span>
                         <span className='font-18 f-500 d-flex'>To</span>
                         <span className='font-18 f-500 d-flex'>Date</span>
-                    </div>                    
-                    <div className={`${styles["table-column"]}`}>
-                        <span className='font-18 f-500 d-flex'>Transfer</span>
-                        <span className='text-primary font-18 f-600 d-flex'>Price</span>
-                        <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
-                        <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
-                        <span className='font-18 f-500 d-flex'>21/06/2022</span>
-                    </div> 
+                    </div>  
+                    {activity && activity.map((item)=>(
+                        <div className={`${styles["table-column"]}`}>
+                            <span className='font-18 f-500 d-flex'>{item.transactionType}</span>
+                            <div className={`d-flex d-align-center gap-1 ${styles["price-column"]}`}>
+                                {item.price === 0? "":<img src='images/polygon-icon.svg'></img>}
+                                <span className='text-primary font-18 f-600'>{item.price === 0?" ":item.price}</span>
+                            </div>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.from.name === null?"-":item.from.name}</span>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.to === null?"-":item.to}</span>
+                            <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
+                        </div> 
+                    ))}                  
                 </div>
             </div>
         </div>  
-        {add && 
-            <Modal modalClass="modal-verify">
-                <SellNow handler={modalHandler}></SellNow>
-            </Modal>
-        }
     </div>
   )
 }

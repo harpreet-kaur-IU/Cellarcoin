@@ -172,86 +172,84 @@ const NavBar = () => {
       setSearchBar(false)
     }
   }
+  const [connectedWallet, setConnectedWallet] = useState(false);
+  const web3ModalRef = useRef();
 
-  // const confirmationHandler = () =>{
-  //   toast.success("User Signed In Successfully",{
-  //     toastId:"2"
-  //   });
-  // }
-
-  // connect wallet web3 code starts here
-  let web3Modal;
-  const providerOptions = {
-    coinbasewallet: {
-      package: CoinbaseWalletSDK, // Required
-      options: {
-        appName: "My Awesome App", // Required
-        infuraId: "INFURA_ID", // Required
-        rpc: "", // Optional if `infuraId` is provided; otherwise it's required
-        chainId: 1, // Optional. It defaults to 1 if not provided
-        darkMode: false // Optional. Use dark theme, defaults to false
-      }
+  const getSignerOrProvider = async (needSigner = false) => {
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 80001) {
+      alert("Polygon Network");
+      throw new Error("Change network to Rinkeby");
     }
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return provider;
   };
 
-  if (typeof window !== "undefined") {
-    web3Modal = new Web3Modal({
-      cacheProvider: false,
-      providerOptions, // required
-    });
+  const connectWallet = async () => {
+    try {
+      await getSignerOrProvider();
+      setConnectedWallet(true);
+      
+    } catch (error) {
+      console.log(" error", error);
+    }
+    getAddress()
+  };
+
+  async function getAddress() {
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    updateWalletAddress(addr)
   }
 
+  const updateWalletAddress = (address) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+JWTToken);
+    myHeaders.append("Content-Type", "application/json");
 
-  const [isConnected, setIsConnected] = useState(false);
-  const [hasMetamask, setHasMetamask] = useState(false);
-  const [signer, setSigner] = useState(false);
+    var raw = JSON.stringify({
+      "walletAddress": address
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateWalletAddress`, requestOptions)
+    .then(response => response.text())
+    .then(result => result)
+    .catch(error => console.log('error', error));
+  }
+
 
   useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
-  });
+    // let val = window.ethereum.isConnected();
+    // if (val) {
+    //   console.log("is connected " + val);
+    // }else{
+    //   console.log("Notconnected " + val);
+    // }
 
-  // useEffect(()=>{
-  //   if(signer){
-  //     props.signerData(signer)
-  //   }
-  // },[signer])
-  async function connect() {
-    if(JWTToken){
-      if (typeof window.ethereum !== "undefined") {
-        try {
-          const web3ModalProvider = await web3Modal.connect();
-          setIsConnected(true);
-          const provider = new ethers.providers.Web3Provider(web3ModalProvider);
-          setSigner(provider.getSigner());
-          // localStorage.removeItem('signerWeb3');
-          // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
-        } catch (e) {
-          console.log(e);
-        }
-      } else {
-        setIsConnected(false);
-      }
-    }else{
-      handleClick()
-    }
-  }
+    // window.ethereum.on("accountsChanged", function (accounts) {
+    //   window.location.replace(location.pathname);
+    // });
 
-  async function execute() {
-    if (typeof window.ethereum !== "undefined") {
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      try {
-        await contract.store(42)
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log("Please install MetaMask");
-    }
-  }
-// connect wallet web3 code ends here
+    web3ModalRef.current = new Web3Modal({
+      network: "rinkeby",
+      providerOptions: {},
+    });
+  },[]);
+
   return (
     <>
       <nav className={`p-fixed col-12 ${style["navbar"]}`}>
@@ -302,28 +300,10 @@ const NavBar = () => {
             <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
             {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
           </ul>
-
-          {/* <div onClick={walletHandler} className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}>
-            <img src="images/web3-wallet-icon.svg"></img>
-          </div> */}
-          <div>
-            {hasMetamask ? (
-              isConnected ? (
-                ""
-              ) : (
-                <>
-                  <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connect()}>Connect Wallet</button>
-                  <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
-                    <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
-                  </div>
-                </>
-              )
-            ) : (
-              "Please install metamask"
-            )}
-            {isConnected ? <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => execute()}>Connected</button> : ""}
+          <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connectWallet()}>Connect Wallet</button>
+          <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connectWallet()}>
+            <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
           </div>
-          {/* <div onClick={walletHandler} className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div> */}
           <div onClick={notificationHandler} className={`cursor-pointer ml-32 ${style["bell-icon"]}`}><img src='images/bell.png'></img></div>
           <div onClick ={dropdownHandler} className={`cursor-pointer ml-24 ${style["profile-icon"]}`}>
             <ProfileIcon color="#010101"></ProfileIcon>

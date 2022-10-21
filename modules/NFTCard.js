@@ -5,6 +5,7 @@ import {useRouter} from 'next/router';
 const NFTCard = (props) => {
     console.log(props.imageUrl)
     const router = useRouter();
+
     const sellNftHandler = () =>{
         router.push("/sellnftUI")
     }

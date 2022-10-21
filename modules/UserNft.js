@@ -133,7 +133,7 @@ const UserNft = () => {
                 </div>
             </div>
             <>
-                <Filter></Filter>
+                {/* <Filter></Filter> */}
                 {activeTab == "tab1" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-1"]}`}>
                        {data && data.map((item)=>(

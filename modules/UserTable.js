@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './css/UserTable.module.css'
+import { getUserOnBoardFromCookie } from '../auth/userCookies';
 const UserTable = () => {
+    const JWTToken = getUserOnBoardFromCookie();
+    useEffect(()=>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getOrders`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    },[])
   return (
     <div className={`${style["dashboard-table-section-scroll"]}`}>
         <div className={`${style["dashboard-table-wrapper"]}`}>

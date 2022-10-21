@@ -4,46 +4,162 @@ import { useRouter } from 'next/router'
 import Modal from './Modal'
 import Congrats from './Congrats'
 import Loader from './Vendors Panel/Loader';
+import { getUserOnBoardFromCookie } from '../auth/userCookies'
+import Nft_marketplace_ABI from '../modules/Vendors Panel/Nft_marketplace_ABI.json'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ethers } from 'ethers';
+import web3 from 'web3';
 const OwnedBy = () => {
     const [add,setAdd] = useState(false);
     const router = useRouter();
     const [data,setData] = useState("");
     const nftId = router.query["id"];
     const [loading,setLoading] = useState(false);
+    const JWTToken = getUserOnBoardFromCookie();
 
-    const continueHandler = async() =>{
-        setAdd(prev=>!prev);
-        // // buy now
-        // if(typeof window.ethereum !== "undefined") {
-        //     const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
-        //     const contract = new ethers.Contract(
-        //         contractAddress,
-        //         Nft_marketplace_ABI,
-        //         signer
-        //     );
-        //     try {
-        //         await contract.placeNFTForSale( //for vendor
-        //             "token_id", // counter starts from 4
-        //             "price"
-        //         )
-
-        //         await contract.buynftwithERC( //for user
-        //             "token_id", // counter starts from 4
-        //             "0x0000000000000000000000000000000000001010"
-        //         )
-
-        //         await contract.RemoveNFTfromSale( //for vendor
-        //             "token_id" // counter starts from 4
-        //         )
-        //         .then(response=> console.log(response))
-        //     }catch(error){
-        //         console.log(error);
-        //     }
-        // }else{
-        //     console.log("Please install MetaMask");
-        // }
+    const buyNowHandler = () =>{   
+        walletConnected()
     }
+    const walletConnected = async() =>{
+        const { ethereum } = window;
+        if (ethereum) {
+            var provider = new ethers.providers.Web3Provider(ethereum);
+        }
+        const isMetaMaskConnected = async () => {
+            const accounts = await provider.listAccounts();
+            return accounts.length > 0;
+        }
+        await isMetaMaskConnected().then((connected) => {
+            if(connected) {
+                getHash() // second call
+            }else{
+                toast.warning("Please Connect Your Wallet",{
+                    toastId:"2"
+                });
+            }
+        });
+    }
+    const getHash = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
 
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/recentMintedNFT`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            buy(parseResult.data.hash)
+        })
+        .catch(error => console.log('error', error));
+    }
+    //web3 code starts here
+    const buy = async(hash)=>{  
+        //fetch token ID
+        const receipt = await web3.eth.getTransactionReceipt(hash)
+        const tokenId = web3.utils.hexToNumber(receipt.logs[0].topics[3]);
+
+        const ethers = require("ethers");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const addr = await signer.getAddress();
+        
+        if(typeof window.ethereum !== "undefined"){
+            const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+            const tokenAddress = "0x0000000000000000000000000000000000001010";
+            const contract = new ethers.Contract(
+                contractAddress,
+                Nft_marketplace_ABI,
+                signer
+            );
+            try{
+                await contract.buynftwithERC(
+                    tokenId,
+                    tokenAddress
+                )
+                .then(response => {
+                    buyNft(response,addr,tokenId);
+                })
+            }catch(error){
+                console.log(error);
+            }
+        }else{
+            console.log("Please install MetaMask");
+        }
+    }
+    //web3 code ends here
+    const buyNft = (hashResponse,walletAddress,tokenId) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${nftId}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result)
+            setLoading(false)
+            // setAdd(prev=>!prev);
+            updateUserCollection(hashResponse,walletAddress,tokenId);
+        })
+        .catch(error => console.log('error', error));
+    }
+    const updateUserCollection = (hashResponse,walletAddress,tokenId) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateUserCollection/${nftId}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result)
+            addTransaction(hashResponse.hash,nftId,walletAddress,tokenId);
+        })
+        .catch(error => console.log('error', error));
+    }
+    const addTransaction = (hash,id,walletAddress,tokenId) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "walletAddressFrom": "",
+            "walletAddressTo": walletAddress,
+            "hash": hash,
+            "tokenId": tokenId,
+            "transactionType": "transferred"
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    }
+    const continueHandler = () =>{
+        setAdd(prev=>!prev);
+    }
     const cancelHandler = () =>{
         router.push(`/purple/${nftId}`);
     }
@@ -133,7 +249,7 @@ const OwnedBy = () => {
                             <div className={`${style["btn-wrapper-sm"]}`}>
                                 <button className={`cursor-pointer mt-32 font-20 f-500 l-137 btn-secondary ${style["meta-mask-btn"]}`}>Metamask</button>
                                 <button onClick={cancelHandler} className={`cursor-pointer mt-108 font-20 f-500 l-137 btn-secondary ${style["cancel-btn"]}`}>Cancel</button>
-                                <button onClick={continueHandler} className={`cursor-pointer mt-24 font-20 f-500 l-137 btn-primary b-none ${style["continue-btn"]}`}>Continue</button>
+                                <button onClick={buyNowHandler} className={`cursor-pointer mt-24 font-20 f-500 l-137 btn-primary b-none ${style["continue-btn"]}`}>Continue</button>
                             </div>
                         </div>
                         {/* <div className={`col-3 p-relative ${style["wine-images-col-2"]}`}>
@@ -149,6 +265,7 @@ const OwnedBy = () => {
                 </Modal>
             }
         </div>
+        <ToastContainer />
     </>
   )
 }

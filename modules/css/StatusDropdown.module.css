@@ -1,27 +1,28 @@
 .drop-down{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height:42.9px;
-    padding: 0 30px 0px 44px;
-    background: #F4F4F4;
-    border-radius: 8px;
+    justify-content: center;
+    background: #fff;
+    padding: 10px 0px;
     position: relative;
     cursor: pointer;
     user-select: none;
-    width: 100%;
+    width: 143px;
     box-sizing: border-box;
-    color: #030303;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 16px;
 }
 .drop-down.open{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-.drop-down span{
+.drop-down h6{
     font-weight: 500;
+    font-size: 14px;
     font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
     line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
-    color: #030303;
+    color: var(--primary);
     cursor: pointer;
 }
 .drop-down span:first-child{
@@ -30,20 +31,22 @@
 .drop-down ul{
     position: absolute;
     z-index: 999;
-    width: 100%;
+    width: 293px;
+    height: 240px;
     top: 45px;
     left: 0;
     list-style: none;
-    margin: 0;
     padding: 0px;
-    border-radius: 12px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     height: 0;
     overflow: hidden;
-    background: #F4F4F4;
-    color: #030303;
+    background: #FFFFFF;
+    box-shadow: -3px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
     transition: 0.1s all ease-in-out;
+    
+
 }
 
 .drop-down.open ul{
@@ -89,10 +92,5 @@
     .drop-down-date span svg{
         width:15px;
         height: 15px;
-    }
-}
-@media screen and (max-width:1024px) {
-    .drop-down{
-        width: 100%;
     }
 }

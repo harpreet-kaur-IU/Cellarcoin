@@ -52,7 +52,12 @@ const Login = () => {
                 setLoading(false)
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            setLoading(false)
+            toast.warning("OOPs Something Went Wrong",{
+                toastId:"2"
+            });
+        });
     }
   return (
     <>

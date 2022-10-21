@@ -75,11 +75,7 @@ const Header = (props) => {
   },[])
 
   const [connectedWallet, setConnectedWallet] = useState(false);
-  const web3ModalRef = useRef(); // return the object with key named current
-
-  // providers and signer  =>
-  // providers is used for to get data from sc
-  // signer is used for to sign data / set the data to sc
+  const web3ModalRef = useRef();
 
   const getSignerOrProvider = async (needSigner = false) => {
     const provider = await web3ModalRef.current.connect();
@@ -100,18 +96,47 @@ const Header = (props) => {
     try {
       await getSignerOrProvider();
       setConnectedWallet(true);
+      getAddress()
     } catch (error) {
       console.log(" error", error);
     }
   };
 
+  async function getAddress() {
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    updateWalletAddress(addr)
+  }
 
+  const updateWalletAddress = (address) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+JWTtoken);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "walletAddress": address
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/vendorUpdateWalletAddress`, requestOptions)
+    .then(response => response.text())
+    .then(result => result)
+    .catch(error => console.log('error', error));
+  }
   useEffect(() => {
     // let val = window.ethereum.isConnected();
     // if (val) {
-    //   console.log("is connected" + val);
+    //   console.log("is connected " + val);
     // }else{
-    //   console.log("Notconnected" + val);
+    //   console.log("Notconnected " + val);
     // }
 
     // window.ethereum.on("accountsChanged", function (accounts) {
@@ -122,7 +147,7 @@ const Header = (props) => {
       network: "rinkeby",
       providerOptions: {},
     });
-  }, []);
+  },[]);
   // //web3 modal
   // let web3Modal;
   // const providerOptions = {
@@ -231,15 +256,11 @@ const Header = (props) => {
                 )}
                 {isConnected ? <button onClick={() => execute()}>Execute</button> : ""}
               </div> */}
-              {connectedWallet ?
-                <div className="text-center">
-                  <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connected</button>
-                </div>
-                :
-                <div className="text-center">
-                  <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
-                </div>
-              }
+             
+              <div className="text-center">
+                <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
+              </div>
+             
               <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
                 Create NFT
               </button>

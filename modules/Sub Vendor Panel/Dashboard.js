@@ -47,7 +47,7 @@ const Dashboard = () => {
       })
       .catch(error => console.log('error', error));
     }else{
-      router.push("/vendorlogin")
+      router.push("/subvendorlogin")
     }
 
 

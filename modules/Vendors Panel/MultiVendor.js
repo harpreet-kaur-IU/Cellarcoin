@@ -97,11 +97,10 @@ const MultiVendor = () => {
           method: 'GET',
           headers: myHeaders
         };
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrands`, requestOptions)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrandList`, requestOptions)
         .then(response => response.json())
         .then(result =>{
           setBrandData(result.data)
-          console.log(result.data.length)
         })
         .catch(error => console.log('error', error));
       }else{
@@ -237,7 +236,7 @@ const MultiVendor = () => {
               <div className={`d-flex ${styles["login-creds-wrapper"]}`}>
                 <h4 className='font-24 f-500'>{index+1}.</h4>
                 <div className={`d-flex d-flex-column ${styles["login-cred-details"]}`}>
-                  <h4 className='font-24 f-500'>Login Credentials for {item.brand}</h4>
+                  <h4 className='font-24 f-500'>Login Credentials for {item.parentVendor.name}</h4>
                   <h6 className='f-500'>{item.email}</h6>
                   {/* <div className={`d-flex d-align-center d-justify-space-between ${styles["login-cred-password-wrapper"]}`}>
                     <input className='font-32' type="password" readOnly value={item.password}></input>

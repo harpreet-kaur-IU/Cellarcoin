@@ -9,7 +9,8 @@ import Loader from './Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useRouter} from 'next/router'
-
+import StatusDropdown from './StatusDropdown';
+import Nft_marketplace_ABI from './Nft_marketplace_ABI.json'
 function useOutsideAlerter(ref,handler) {
     useEffect(() => {
       function handleClickOutside(event) {
@@ -59,7 +60,7 @@ const AllNFT = () => {
                 headers: myHeaders,
             };
             setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft`, requestOptions)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, requestOptions)
             .then(response => response.json())
             .then(result =>{
                 setData(result.data)
@@ -103,7 +104,57 @@ const AllNFT = () => {
         setDelete(prev => !prev);
         setDeleteUserId(e.target.id);
     }
-    const deleteHandler = () =>{
+    const removeNFT = async() =>{
+        const ethers = require("ethers");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const addr = await signer.getAddress();
+        const tokenid = 33;
+    
+        if(typeof window.ethereum !== "undefined"){
+          const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+          const contract = new ethers.Contract(
+            contractAddress,
+            Nft_marketplace_ABI,
+            signer
+          );
+          try{
+            await contract.RemoveNFTForSale(
+              tokenid
+            )
+            .then(response => {
+                deleteNFT(response,addr)
+            })
+          }catch(error){
+            console.log(error);
+          }
+          tokenid++;
+        }else{
+          console.log("Please install MetaMask");
+        }
+    }
+    const statusHandler = (data) =>{
+        if(data==="All"){
+            data=null;
+        }
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTtoken);
+        myHeaders.append("Content-Type","application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=${data}`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+            setData(result.data)
+            setLoading(false)
+        })
+        .catch(error => console.log('error', error));
+    }
+    const deleteNFT = (response,walletAddress) =>{
         var myHeaders = new Headers();
         myHeaders.append("Authorization","Bearer "+JWTtoken);
         myHeaders.append("Content-Type","application/json");
@@ -116,16 +167,14 @@ const AllNFT = () => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/deleteNft/${deleteUserId}`, requestOptions)
         .then(response => response.json())
         .then(result =>{
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft`,{
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`,{
                 method: 'GET', 
                 headers: myHeaders,
             })
             .then(response => response.json())
             .then(results =>{
                 setData(results.data)
-                toast.success("NFT Deleted Successfully",{
-                    toastId:"2"
-                });
+                addTransaction(response.hash,deleteUserId,walletAddress)
             })
             setDelete(prev => !prev)
             setLoading(false)
@@ -133,6 +182,39 @@ const AllNFT = () => {
             
         })
         .catch(error => console.log('error', error));
+    }
+
+    const addTransaction = (hash,id,walletAddress) =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTtoken);
+        myHeaders.append("Content-Type", "application/json");
+    
+        var raw = JSON.stringify({
+          "walletAddressFrom": walletAddress,
+          "walletAddressTo": "",
+          "hash": hash,
+          "tokenId": "4t57y7u8i9o0op",
+          "transactionType": "listed"
+        });
+    
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+    
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            toast.success("NFT Deleted Successfully",{
+                toastId:"2"
+            });
+        })
+        .catch(error => console.log('error', error));
+    }
+    const deleteHandler = () =>{
+        removeNFT();
     }
 
   return (
@@ -143,7 +225,7 @@ const AllNFT = () => {
             <div className='d-flex d-align-center d-justify-space-between'>
                 <h4 className='f-600 text-primary mt-24 mb-24'>NFT List</h4>
                 <div className='d-flex d-align-center gap-4'>
-                    <div className='p-relative'>
+                    {/* <div className='p-relative'>
                         <div className={`d-flex d-align-center gap-2 ${styles["active-filter"]}`}>
                             <h6 className='text-primary l-19 font-14 f-500'>Minted</h6>
                             <img onClick={dropdownHandler} className='cursor-pointer' src='images/arrow-down-primary.png'></img>
@@ -155,11 +237,12 @@ const AllNFT = () => {
                                 <h6 className='cursor-pointer f-500'>Listed</h6>
                             </div>
                         }
-                    </div>
+                    </div> */}
+                    <StatusDropdown handler={statusHandler}></StatusDropdown>
                     <div className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}>
                         <img src='images/search-icon-v.png'></img>
                         <form>
-                            <input onChange={searchHandler} className='col-12' type="text" placeholder='Search' />
+                            <input onChange={searchHandler} type="text" placeholder='Search' />
                         </form>
                     </div>
                     <div className={`d-none d-flex d-align-center d-justify-center ${styles["create-nft-div"]}`}>
@@ -212,7 +295,9 @@ const AllNFT = () => {
                                 <Link href={`/createnft/${item._id}`}>
                                     <img className='cursor-pointer' src='images/edit-2.svg'></img>
                                 </Link>
-                                <img className='cursor-pointer' id={item._id} onClick={deleteModalClicked} src='images/Delete.png'></img>
+                                {item.status !== "minted" &&
+                                    <img className='cursor-pointer' id={item._id} onClick={deleteModalClicked} src='images/Delete.png'></img>
+                                }
                             </span>
                         </div>
                     ))}

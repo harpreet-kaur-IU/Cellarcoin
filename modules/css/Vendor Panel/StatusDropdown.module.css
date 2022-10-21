@@ -3,13 +3,13 @@
     align-items: center;
     justify-content: space-between;
     height:42.9px;
-    padding: 0 30px 0px 44px;
+    padding: 0 30px;
     background: #F4F4F4;
     border-radius: 8px;
     position: relative;
     cursor: pointer;
     user-select: none;
-    width: 100%;
+    width:200px;
     box-sizing: border-box;
     color: #030303;
 }

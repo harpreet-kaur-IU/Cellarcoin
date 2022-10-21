@@ -14,7 +14,7 @@ const SellNFT = () => {
   var JWTtoken = getOnBoardFromCookie();
   const [data,setData] = useState("")
   const[price,setPrice] = useState("");
-  const[currency,setCurrency] = useState("ETH");
+  const[currency,setCurrency] = useState("MATIC");
   const [loading, setLoading] = useState(false);
   const [dropdown,setDropdown] = useState(false);
   const [expire,setExpire] = useState("")
@@ -24,7 +24,6 @@ const SellNFT = () => {
   const priceHandler  = (e) =>{
     setPrice(e.target.value)
   }
-
   const expireHandler = (value) =>{
     setExpire(value);
   }
@@ -67,12 +66,12 @@ const SellNFT = () => {
   },[nftId])
 
 //web3 code starts here
-  const sellNft = async()=>{
+  const sellNftWeb3 = async()=>{
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
-    const tokenid = 0;
+    const tokenid = 36;
 
     if(typeof window.ethereum !== "undefined"){
       const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
@@ -86,7 +85,10 @@ const SellNFT = () => {
           tokenid,
           price
         )
-        .then(response => console.log(response))
+        .then(response => {
+
+          sellNft(response,addr)
+        })
       }catch(error){
         console.log(error);
       }
@@ -95,38 +97,66 @@ const SellNFT = () => {
       console.log("Please install MetaMask");
     }
   }
-
 //web3 code ends here
+  const sellNft = (response,walletAddress) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
+
+    var raw = JSON.stringify({
+      "price": price,
+      "currency": currency,
+      "expireAfter":expire
+    })
+
+    var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body:raw,
+      redirect: 'follow'
+    };
+
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      addTransaction(response.hash,nftId,walletAddress)
+    })
+    .catch(error => console.log('error', error));
+  }
+  const addTransaction = (hash,id,walletAddress) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "walletAddressFrom": walletAddress,
+      "walletAddressTo": "",
+      "hash": hash,
+      "tokenId": "4t57y7u8i9o0op",
+      "transactionType": "listed"
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      setLoading(false)
+      Router.push("/allnftlist");
+    })
+    .catch(error => console.log('error', error));
+  }
   const formSubmit = (e) =>{
     e.preventDefault()
     var result = validator();
     if(result){
-      sellNft();
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization","Bearer "+JWTtoken);
-      myHeaders.append("Content-Type","application/json");
-
-      var raw = JSON.stringify({
-        "price": price,
-        "currency": currency,
-        "expireAfter":expire
-      })
-
-      var requestOptions = {
-        method: 'PATCH',
-        headers: myHeaders,
-        body:raw,
-        redirect: 'follow'
-      };
-
-      setLoading(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        Router.push("/allnftlist");
-        setLoading(false)
-      })
-      .catch(error => console.log('error', error));
+      sellNftWeb3();
     }
   }
   return (

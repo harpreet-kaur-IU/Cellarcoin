@@ -88,9 +88,8 @@
     font-size: 14px;
 }
 .header-search-box{
-    width: 288px;
     border: none;
-    padding: 14px 24px;
+    padding: 14px;
     margin: 12px 0px;
     background: #F6F6F6;
 }
@@ -98,6 +97,7 @@
     flex:1;
 }
 .header-search-box form input{
+    width: 260px;
     border:none;
     margin-left: 10px;
     background: #F6F6F6;
