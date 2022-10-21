@@ -17,17 +17,17 @@ const StatusDropdown = (props) => {
         <div className={`f-500 ${styles["drop-down"]}`} onClick={handler}>
             <h6 className='l-22'>{value}</h6>
             <ul>
-                <li value="All" onClick={selectHandler}>
+                <li className='d-flex d-align-center gap-2' value="All" onClick={selectHandler}>
                     All
                 </li>
                 <li value="minted" onClick={selectHandler}>
-                    Minted
+                    minted
                 </li>
                 <li value="expired" onClick={selectHandler}>
-                    Expired
+                    expired
                 </li>
                 <li value="listed" onClick={selectHandler}>
-                    Listed
+                    listed
                 </li>
             </ul>
           

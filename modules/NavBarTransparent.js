@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Menu from '../icons/menu';
 import style from './css/NavbarTransparent.module.css';
 import SignUp from './SignUp';
-import WalletModal from './WalletModal';
 import {useRouter} from 'next/router';
 import Modal from './Modal';
 import useFirebaseAuth from '../auth/useFirebaseAuth';
@@ -18,160 +16,236 @@ import { ethers } from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
-const NavBarTransparent = () => {
-
-    const {signOut} = useFirebaseAuth(); 
-    const router = useRouter();
-    const [dropdown,setDropdown] = useState(false);
-    const [toggle, setToggle] = useState(false);
-    const [toggle2, setToggle2] = useState(false);
-    const [noti,setNoti] = useState(false)
-    const [res,setRes] = useState(false)
-    const [token,setToken] = useState(false)
-    const [confirm,setConfirm] = useState(false)
-    const [userId,setUserId] = useState("")
-    var JWTToken = getUserOnBoardFromCookie();
-    useEffect(()=>{
-      if(!JWTToken){
-        setToken(false)
-      }
-      else{
-        setToken(true)
-      }
-    },[toggle])
-    useEffect(()=>{
-      if(JWTToken){
-          function parseJwt() {
-            if (!JWTToken) {return}
-            const base64Url = JWTToken.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(window.atob(base64));
-          }
-          var user = parseJwt();
-          setUserId(user.user._id)
-          
-      }else{
-          // Router.push("/vendorlogin")
-      }
-    },[])
-    const handleClick = () =>{
-      setToggle(prev => !prev);
-    }
-    const handleClick2 = () =>{
-      setToggle2(prev => !prev);
-    }
-    const notificationHandler = () =>{
-      setNoti(prev=>!prev);
-    }
-    const dropdownHandler = () =>{
-      if(JWTToken){
-        setDropdown(!dropdown)
-      }else{
-        handleClick()
-      }
-    }
-    const profileHandler = () =>{
-      router.push(`/editprofile/${userId}`)
-    }
-    const paymentHandler = () =>{
-      router.push("/editprofile")
-    }
-    const collectionHandler = () =>{
-      router.push("/usernft")
-    }
-    
-    const logHandler = () =>{
-      signOut()
-      .then(()=>{
-        removeUserOnBoardCookie()
-        setToken(false)
-        setConfirm(false)
-        router.push("/")
-      })
-      .catch((error)=>console.log("error while logout"))
-      setDropdown(!dropdown)
-    }
-    const navBarHandler = () =>{
-      setRes(prev => !prev)
-    }
-    // const confirmationHandler = () =>{
-    //   toast.success("User signed In Successfully",{
-    //     toastId:"2"
-    //   });
-    // }
-      // connect wallet web3 code starts here
-  let web3Modal;
-  const providerOptions = {
-    coinbasewallet: {
-      package: CoinbaseWalletSDK, // Required
-      options: {
-        appName: "My Awesome App", // Required
-        infuraId: "INFURA_ID", // Required
-        rpc: "", // Optional if `infuraId` is provided; otherwise it's required
-        chainId: 1, // Optional. It defaults to 1 if not provided
-        darkMode: false // Optional. Use dark theme, defaults to false
-      }
-    }
-  };
-
-  if (typeof window !== "undefined"){
-    web3Modal = new Web3Modal({
-      cacheProvider: false,
-      providerOptions, // required
-    });
-  }
-
-
-  const [isConnected, setIsConnected] = useState(false);
-  const [hasMetamask, setHasMetamask] = useState(false);
-  const [signer, setSigner] = useState(false);
-
+function useOutsideAlerter(ref,handler) {
   useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
-  });
-
-  // useEffect(()=>{
-  //   if(signer){
-  //     props.signerData(signer)
-  //   }
-  // },[signer])
-  async function connect() {
-    if(JWTToken){
-      if (typeof window.ethereum !== "undefined") {
-        try {
-          const web3ModalProvider = await web3Modal.connect();
-          setIsConnected(true);
-          const provider = new ethers.providers.Web3Provider(web3ModalProvider);
-          setSigner(provider.getSigner());
-          // localStorage.removeItem('signerWeb3');
-          // localStorage.setItem('signerWeb3',JSON.stringify(provider.getSigner()))
-        }catch(e){
-          console.log(e);
-        }
-      }else{
-        setIsConnected(false);
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        handler();
       }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
+const NavBarTransparent = () => {
+    const wrapperRef = useRef(null);
+    const handler = ()=>{
+      setSearchBar(false)
+    }
+    useOutsideAlerter(wrapperRef,handler);
+    const {signOut} = useFirebaseAuth(); 
+  const router = useRouter();
+  const [dropdown,setDropdown] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [toggle2, setToggle2] = useState(false);
+  const [noti,setNoti] = useState(false)
+  const [res,setRes] = useState(false)
+  const [token,setToken] = useState(false)
+  const [confirm,setConfirm] = useState(false)
+  const[email,setEmail] = useState("")
+  const [userId,setUserId] = useState("")
+  const [searchBar,setSearchBar] = useState(false)
+  const [brand,setBrand] = useState("");
+  const [nft,setNft] = useState("")
+  const [searchLoading,setSearchLoading] = useState(false)
+  var JWTToken = getUserOnBoardFromCookie();
+
+  useEffect(()=>{
+    if(!JWTToken){
+      setToken(false)
+    }
+    else{
+      setToken(true)
+    }
+  },[toggle])
+
+  useEffect(()=>{
+    if(JWTToken){
+      function parseJwt() {
+        if(!JWTToken){
+          return
+        }
+        const base64Url = JWTToken.split('.')[1];
+        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+      }
+      var user = parseJwt();
+      setUserId(user.user._id)
+    }else{
+        // Router.push("/vendorlogin")
+    }
+  },[])
+
+  const handleClick = () =>{
+    setToggle(prev => !prev);
+  }
+  const handleClick2 = () =>{
+    setToggle2(prev => !prev);
+  }
+  const notificationHandler = () =>{
+    setNoti(prev=>!prev);
+  }
+  
+  //wallet Handler
+  const walletHandler = () =>{
+    if(JWTToken){
+      
     }else{
       handleClick()
     }
   }
-
-  async function execute() {
-    if (typeof window.ethereum !== "undefined") {
-      const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      try {
-        await contract.store(42)
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log("Please install MetaMask");
+  //dropdown Handler
+  const dropdownHandler = () =>{
+    if(JWTToken){
+      setDropdown(!dropdown)
+    }else{
+      handleClick()
     }
   }
-// connect wallet web3 code ends here
+  const profileHandler = () =>{
+    router.push(`/editprofile/${userId}`)
+  }
+  const paymentHandler = () =>{
+    router.push("/editprofile")
+  }
+  const collectionHandler = () =>{
+    router.push("/usernft")
+  }
+  
+  const logHandler = () =>{
+    signOut()
+    .then(()=>{
+      removeUserOnBoardCookie()
+      router.push("/")
+      setToken(false)
+      setConfirm(false)
+    })
+    .catch((error)=>console.log("error while logout"))
+    setDropdown(!dropdown)
+  }
+  const navBarHandler = () =>{
+    setRes(prev => !prev)
+  }
+
+  const navigationHandler = (e) =>{
+    setSearchBar(false)
+    router.push(`/purple/${e.currentTarget.id}`)
+  }
+
+  const brandHandler = (e) =>{
+    setSearchBar(false)
+    router.push(`/profile/${e.currentTarget.id}`)
+  }
+  const searchHandler = (e) =>{
+    if(e.target.value.length>2){
+      
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "searchTerm": e.target.value
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+      setSearchLoading(true)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/searchNFT`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+          const parseResult = JSON.parse(result);
+          setBrand(parseResult.data2)
+          setNft(parseResult.data);
+          setSearchLoading(false)
+          setSearchBar(true)
+        })
+        .catch(error => console.log('error', error));
+    }else{
+      setSearchBar(false)
+    }
+  }
+  const [connectedWallet, setConnectedWallet] = useState(false);
+  const web3ModalRef = useRef();
+
+  const getSignerOrProvider = async (needSigner = false) => {
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+    const { chainId } = await web3Provider.getNetwork();
+    if (chainId !== 80001) {
+      alert("Polygon Network");
+      throw new Error("Change network to Rinkeby");
+    }
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return provider;
+  };
+
+  const connectWallet = async () => {
+    try {
+      await getSignerOrProvider();
+      setConnectedWallet(true);
+      
+    } catch (error) {
+      console.log(" error", error);
+    }
+    getAddress()
+  };
+
+  async function getAddress() {
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    updateWalletAddress(addr)
+  }
+
+  const updateWalletAddress = (address) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+JWTToken);
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "walletAddress": address
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateWalletAddress`, requestOptions)
+    .then(response => response.text())
+    .then(result => result)
+    .catch(error => console.log('error', error));
+  }
+
+
+  useEffect(() => {
+    // let val = window.ethereum.isConnected();
+    // if (val) {
+    //   console.log("is connected " + val);
+    // }else{
+    //   console.log("Notconnected " + val);
+    // }
+
+    // window.ethereum.on("accountsChanged", function (accounts) {
+    //   window.location.replace(location.pathname);
+    // });
+
+    web3ModalRef.current = new Web3Modal({
+      network: "rinkeby",
+      providerOptions: {},
+    });
+  },[]);
     return (
       <>
         <nav className={`p-fixed col-12 ${style["navbar"]}`}>
@@ -196,26 +270,9 @@ const NavBarTransparent = () => {
               <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
               {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
             </ul>
-  
-            {/* <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}>
-              <img src="images/web3-wallet-icon.svg"></img>
-            </div> */}
-            <div>
-              {hasMetamask ? (
-                isConnected ? (
-                  ""
-                ) : (
-                  <>
-                    <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connect()}>Connect Wallet</button>
-                    <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
-                      <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
-                    </div>
-                  </>
-                )
-              ) : (
-                "Install metamask"
-              )}
-              {isConnected ? <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => execute()}>Connected</button> : ""}
+            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connect()}>Connect Wallet</button>
+            <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
+              <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
             </div>
             {/* <div className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div> */}
             <div onClick={notificationHandler} className={`cursor-pointer ml-32 ${style["bell-icon"]}`}><img src='images/bell-icon-white.svg'></img></div>

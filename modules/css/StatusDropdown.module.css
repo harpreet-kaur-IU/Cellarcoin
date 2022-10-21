@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
     padding: 10px 0px;
+    background: #fff;
     position: relative;
     cursor: pointer;
     user-select: none;
@@ -13,15 +13,14 @@
     border: 1px solid var(--primary);
     border-radius: 16px;
 }
-.drop-down.open{
+/* .drop-down.open{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-}
+} */
 .drop-down h6{
     font-weight: 500;
     font-size: 14px;
-    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
-    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    line-height: 21px;
     color: var(--primary);
     cursor: pointer;
 }
@@ -34,34 +33,30 @@
     width: 293px;
     height: 240px;
     top: 45px;
-    left: 0;
+    left: -150px;
     list-style: none;
+    margin-top:10px;
     padding: 0px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 12px;
     height: 0;
     overflow: hidden;
     background: #FFFFFF;
     box-shadow: -3px 4px 15px rgba(0, 0, 0, 0.2);
     border-radius: 16px;
+    color: #000000;
     transition: 0.1s all ease-in-out;
-    
-
 }
 
 .drop-down.open ul{
-    padding: 0px 0px 8px;
+    padding: 26px 0px;
     height: fit-content;
-    max-height: 176px; 
-    overflow-y: scroll;
 }
 .drop-down ul li{
-    font-weight:500;
-    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
-    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 21px;
     cursor: pointer;
-    border-bottom: 1px solid #eee;
-    padding: 15px 30px 15px 44px;
+    padding: 10px 0px 10px 50px;
 }
 .drop-down ul li:last-child{
     border-bottom: none;

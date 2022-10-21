@@ -12,7 +12,6 @@ const WineCardSlider = () => {
   const [data,setData] = useState("")
   const [loading,setLoading] = useState(false)
   const [toggle,setToggle] = useState(false)
-
   const handleClick = () =>{
     setToggle(prev => !prev)
   }
@@ -31,7 +30,10 @@ const WineCardSlider = () => {
       setData(result.data)
       setLoading(false)
     })
-    .catch(error => console.log('error', error));
+    .catch(error => {
+      setLoading(false)
+      console.log('error', error)
+    });
   },[])
   return (
     <>  

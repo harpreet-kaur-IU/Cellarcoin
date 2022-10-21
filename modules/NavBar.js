@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Hamburger from '../icons/Hamburger';
 import SiteLogo from '../icons/SiteLogo';
 import {ethers} from "ethers";
-import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
