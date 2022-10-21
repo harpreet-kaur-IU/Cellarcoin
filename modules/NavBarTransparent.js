@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef} from 'react'
 import style from './css/NavbarTransparent.module.css';
 import SignUp from './SignUp';
 import {useRouter} from 'next/router';
@@ -85,7 +85,13 @@ const NavBarTransparent = () => {
     setToggle2(prev => !prev);
   }
   const notificationHandler = () =>{
-    setNoti(prev=>!prev);
+    if(JWTToken){
+      setNoti(prev=>!prev);
+    }else{
+      toast.warning("Please Sign in",{
+          toastId:"2"
+      });
+    }
   }
   
   //wallet Handler

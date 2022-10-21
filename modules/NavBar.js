@@ -87,7 +87,13 @@ const NavBar = () => {
     setToggle2(prev => !prev);
   }
   const notificationHandler = () =>{
-    setNoti(prev=>!prev);
+    if(JWTToken){
+      setNoti(prev=>!prev);
+    }else{
+      toast.warning("Please Sign in",{
+          toastId:"2"
+      });
+    }
   }
   
   //wallet Handler
