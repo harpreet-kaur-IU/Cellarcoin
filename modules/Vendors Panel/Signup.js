@@ -37,7 +37,8 @@ export default function Signup() {
 
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     const regex = /^[^\s]+(\s+[^\s]+)*$/;
-
+    const usernameRegex = /^[A-Za-z0-9\.]+$/
+    
     const dropdownHandler = () =>{
         setToggle(!toggle);
     }
@@ -121,7 +122,7 @@ export default function Signup() {
     },[cover])
     //to check that all the form fields are filled correctly without any error
     const validator = () =>{
-        if(regex.test(name)){
+        if(usernameRegex.test(name)){
             setErrorName(false)
         }
         else{
@@ -132,7 +133,7 @@ export default function Signup() {
         }else{
             setErrorEmail(false);
         }
-        if(password === ''){
+        if(password === '' || password.length<6){
             setErrorPass(true);
         }else{
             setErrorPass(false);
@@ -147,7 +148,7 @@ export default function Signup() {
         }else{
             setPolicyError(true)
         }
-        if(!errorEmail && !errorPass && policyAccepted && !isUrl && regex.test(name)){
+        if(!errorEmail && !errorPass && policyAccepted && !isUrl && usernameRegex.test(name)){
             return true;
         }else{
             return false;
@@ -237,6 +238,7 @@ export default function Signup() {
                                 {img ? <img src="images/eye2.svg"/> :<img src="images/eye.png"/>}
                             </span>
                         </div>
+                        {errorPass && <span className={`mb-8 font-14 f-700 text-danger`}>Password must be at least 6 character long.</span>}
                         {/* <div className='col-12 p-relative'>
                             <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 d-flex d-align-center d-justify-space-between ${styles["input-wrapper"]} `}>
                                 <span className={`font-20 f-400 l-28 ${styles["connect-wallet-text"]}`}>Connect your Wallet</span>

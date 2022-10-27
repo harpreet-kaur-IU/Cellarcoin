@@ -13,68 +13,88 @@ const Notification = () => {
     const [loading,setLoading] = useState(false)
     const [del,setDelete] = useState(false)
     const [delId,setDelId] = useState("")
-    const deleteIdHandler = (e)=>{
-        setDelId(e.currentTarget.id)
-        setDelete(prev=>!prev)
-    }
-    const modalHandler = () =>{
-        setDelete(prev=>!prev)
-    }
+    // const deleteIdHandler = (e)=>{
+    //     setDelId(e.currentTarget.id)
+    //     setDelete(prev=>!prev)
+    // }
+    // const modalHandler = () =>{
+    //     setDelete(prev=>!prev)
+    // }
 
-    const deleteHandler = (data) =>{
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization","Bearer "+JWTtoken);
-        myHeaders.append("Content-Type","application/json");
+    // const deleteHandler = () =>{
+    //     if(JWTtoken){
+    //         function parseJwt() {
+    //             if(!JWTtoken){
+    //             return
+    //             }
+    //             const base64Url = JWTtoken.split('.')[1];
+    //             const base64 = base64Url.replace('-', '+').replace('_', '/');
+    //             return JSON.parse(window.atob(base64));
+    //         }
+    //         var user = parseJwt();
+    //         var userId = (user.user._id)
+    //     }
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("Authorization","Bearer "+JWTtoken);
+    //     myHeaders.append("Content-Type","application/json");
 
-        var raw = JSON.stringify({
-            "status":data
-        })
-        var requestOptions = {
-            method: 'PATCH',
-            headers: myHeaders,
-            body : raw
-        };
+    //     var requestOptions = {
+    //         method: 'GET',
+    //         headers: myHeaders,
+    //     };
 
-        setLoading(true)
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/updateNotificationStatus/${delId}`, requestOptions)
-        .then(response => response.json())
-        .then(result =>{
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getNotifications`,{
-                method: 'GET', 
-                headers: myHeaders,
-            })
-            .then(response => response.json())
-            .then(results =>{
-                setData(results.data)
-                toast.success("Notification deleted Successfully",{
-                    toastId:"2"
-                });
-            })
-            setLoading(false)
-        })
-        .catch(error => console.log('error', error));
-    }
+    //     setLoading(true)
+    //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/deleteNotifications/${delId}`, requestOptions)
+    //     .then(response => response.json())
+    //     .then(result =>{
+    //         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getAllNotifications?userId=${userId}`,{
+    //             method: 'GET', 
+    //             headers: myHeaders,
+    //         })
+    //         .then(response => response.json())
+    //         .then(results =>{
+    //             setData(results.data)
+    //             toast.success("Notification deleted Successfully",{
+    //                 toastId:"2"
+    //             });
+    //         })
+    //         setLoading(false)
+    //     })
+    //     .catch(error => console.log('error', error));
+    // }
     var JWTtoken = getAdminOnBoardFromCookie();
     useEffect(()=>{
         if(JWTtoken){
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization","Bearer "+JWTtoken);
-            myHeaders.append("Content-Type","application/json");
+            function parseJwt() {
+                if(!JWTtoken){
+                return
+                }
+                const base64Url = JWTtoken.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+            }
+            var user = parseJwt();
+            console.log(user)
+            // var userId = (user.user._id)
 
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders
-            };
-            setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getNotifications`, requestOptions)
-            .then(response => response.json())
+            // var myHeaders = new Headers();
+            // myHeaders.append("Authorization","Bearer "+JWTtoken);
+            // myHeaders.append("Content-Type","application/json");
+
+            // var requestOptions = {
+            //     method: 'GET',
+            //     headers: myHeaders
+            // };
+            // setLoading(true)
+            // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getAllNotifications?userId=${userId}`, requestOptions)
+            // .then(response => response.json())
             
-            .then(result =>{
-                setData(result.data)
-                console.log(result.data)
-                setLoading(false)
-            })
-            .catch(error => console.log('error', error));
+            // .then(result =>{
+            //     // setData(result.data)
+            //     console.log(result)
+            //     setLoading(false)
+            // })
+            // .catch(error => console.log('error', error));
         }else{
             router.push("/vendorlogin");
         }
@@ -83,7 +103,7 @@ const Notification = () => {
     <div>
         {loading && <Loader></Loader>}
         <Header></Header>
-        <div className={`vendor-container ${styles["notification-container"]}`}>
+        {/* <div className={`vendor-container ${styles["notification-container"]}`}>
             <h4 className='l-50 f-600 text-primary mt-24'>Notification</h4>
             {data && data.map((item)=>(
                 <div className={`d-flex ${styles["notification-wrapper"]}`}>
@@ -115,11 +135,11 @@ const Notification = () => {
                     }      
                 </div>
             ))}
-        </div>
-        {del && <Modal modalClass="modal-verify">
+        </div> */}
+        {/* {del && <Modal modalClass="modal-verify">
             <Delete deleteHandler={deleteHandler} handler={modalHandler}></Delete>
         </Modal>
-        }
+        } */}
         <ToastContainer></ToastContainer>
     </div>
   )

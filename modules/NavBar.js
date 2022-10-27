@@ -16,6 +16,7 @@ import {ethers} from "ethers";
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
+import Search from '../icons/Search';
 
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
@@ -83,9 +84,11 @@ const NavBar = () => {
   const handleClick = () =>{
     setToggle(prev => !prev);
   }
+
   const handleClick2 = () =>{
     setToggle2(prev => !prev);
   }
+
   const notificationHandler = () =>{
     if(JWTToken){
       setNoti(prev=>!prev);
@@ -95,7 +98,7 @@ const NavBar = () => {
       });
     }
   }
-  
+
   //wallet Handler
   const walletHandler = () =>{
     if(JWTToken){
@@ -121,7 +124,6 @@ const NavBar = () => {
   const collectionHandler = () =>{
     router.push("/usernft")
   }
-  
   const logHandler = () =>{
     signOut()
     .then(()=>{
@@ -133,6 +135,7 @@ const NavBar = () => {
     .catch((error)=>console.log("error while logout"))
     setDropdown(!dropdown)
   }
+
   const navBarHandler = () =>{
     setRes(prev => !prev)
   }
@@ -146,6 +149,7 @@ const NavBar = () => {
     setSearchBar(false)
     router.push(`/profile/${e.currentTarget.id}`)
   }
+
   const searchHandler = (e) =>{
     if(e.target.value.length>2){
       
@@ -196,14 +200,20 @@ const NavBar = () => {
   };
 
   const connectWallet = async () => {
-    try {
-      await getSignerOrProvider();
-      setConnectedWallet(true);
-      
-    } catch (error) {
-      console.log(" error", error);
+    if(JWTToken){
+      try {
+        await getSignerOrProvider();
+        setConnectedWallet(true);
+        
+      } catch (error) {
+        console.log(" error", error);
+      }
+      getAddress()
+    }else{
+      toast.warning("Please Sign in",{
+        toastId:"2"
+      });
     }
-    getAddress()
   };
 
   async function getAddress() {
@@ -236,7 +246,6 @@ const NavBar = () => {
     .catch(error => console.log('error', error));
   }
 
-
   useEffect(() => {
     // let val = window.ethereum.isConnected();
     // if (val) {
@@ -264,35 +273,39 @@ const NavBar = () => {
           </Link>
           <Link href="/">
             <div className={`d-none d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
-             <SiteLogo color="#780543"></SiteLogo>
+              <SiteLogo color="#780543"></SiteLogo>
             </div>
           </Link>
           <div className='p-relative'>
             <div className='p-relative'>
               <input onChange={searchHandler} className={`rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
-              <img className={`${style["search-icon-navbar"]}`} src='images/search-icon.svg'></img>
+              <div className={`${style["search-icon-navbar"]}`}>
+                <Search color="#6B5260"></Search>
+              </div>
             </div>
             {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
-            <div  ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
-              <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
-              <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
-                {brand && brand.map((item)=>(
-                  <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
-                ))}
-              </div>
-              <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
-              <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
-                {nft && nft.map((item)=>(
-                  <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
-                    <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
-                    <div className='d-flex d-flex-column'>
-                      <h6 className='font-13 f-400 l-137'>{item.name}</h6>
-                      <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
+            {searchBar &&
+              <div ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
+                <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
+                <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
+                  {brand && brand.map((item)=>(
+                    <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
+                  ))}
+                </div>
+                <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
+                <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
+                  {nft && nft.map((item)=>(
+                    <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
+                      <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
+                      <div className='d-flex d-flex-column'>
+                        <h6 className='font-13 f-400 l-137'>{item.name}</h6>
+                        <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            }
           </div>
           <ul id="ul-navbar" className={`d-flex d-flex-row text-dark-gray ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
             <NavItems name="not-transparent" path="/explore" value="Explore"></NavItems>

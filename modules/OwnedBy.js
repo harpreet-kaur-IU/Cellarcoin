@@ -164,6 +164,18 @@ const OwnedBy = () => {
         router.push(`/purple/${nftId}`);
     }
     useEffect(()=>{
+        if(JWTToken){
+            function parseJwt() {
+                if(!JWTToken){
+                return
+                }
+                const base64Url = JWTToken.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+            }
+            var user = parseJwt();
+            var userId = (user.user._id)
+        }
         if(nftId){
             var myHeaders = new Headers();
             myHeaders.append("Content-Type","application/json");
@@ -173,7 +185,7 @@ const OwnedBy = () => {
                 headers: myHeaders,
             };
             setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}`, requestOptions)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}&&userId=${userId}`, requestOptions)
             .then(response => response.json())
             .then(result =>{
                 setData(result.nft)

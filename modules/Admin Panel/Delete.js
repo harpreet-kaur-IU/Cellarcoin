@@ -3,7 +3,7 @@ import styles from '../css/Admin Panel/AddProperties.module.css'
 const Delete = (props) => {
 
     const yesClicked = () =>{
-        props.deleteHandler("deleted");
+        props.deleteHandler();
         props.handler()
     }
   return (

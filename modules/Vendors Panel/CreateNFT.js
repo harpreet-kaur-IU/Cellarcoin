@@ -12,6 +12,7 @@ import SmallLoader from './SmallLoader';
 import BrandDropDown from './BrandDropdown';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
 import { ethers } from 'ethers';
+import web3 from 'web3';
 const CreateNFT = () => {
     const Web3 = require('web3');
     const router = useRouter();
@@ -95,28 +96,28 @@ const CreateNFT = () => {
     }
     const coverHandler = (e) =>{
         
-        // if(!e.target.files[0].name.match(/\.(jpg|png|gif)$/)){
-            // setCoverError(true);
-            // var inputfile = document.getElementById("file-input-field");
-            // inputfile.value = "";
-        // }   
-        // else{
-            // setCoverError(false);
-            // var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-            // var fSize =  e.target.files[0].size; 
-            // var i=0;
-            // while(fSize>900){
-            //   fSize/=1024;
-            //   i++;
-            // }
-            // var file = (Math.round(fSize*100)/100);
-            // if(i<=2 && file<10){
+        if(!e.target.files[0].name.match(/\.(jpg|png|gif|jpeg)$/)){
+            setCoverError(true);
+            var inputfile = document.getElementById("file-input-field");
+            inputfile.value = "";
+        }   
+        else{
+            setCoverError(false);
+            var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+            var fSize =  e.target.files[0].size; 
+            var i=0;
+            while(fSize>900){
+              fSize/=1024;
+              i++;
+            }
+            var file = (Math.round(fSize*100)/100);
+            if(i<=2 && file<10){
               setCover(e.target.files[0])
-            // }
-            // else{
-            //     setCoverError(true);
-            // }
-        // }   
+            }
+            else{
+                setCoverError(true);
+            }
+        }   
     }
     const additionalPropertyHandler = (data,data1) =>{
         setAdd(!add);
@@ -292,7 +293,6 @@ const CreateNFT = () => {
             router.push("/vendorlogin")
         }
     },[])
-
     const modalHandler = () =>{
         setAdd(!add);
     }
@@ -303,7 +303,7 @@ const CreateNFT = () => {
         const addr = await signer.getAddress();
         
         if(typeof window.ethereum !== "undefined"){
-            const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+            const contractAddress = "0x58fB90C73193c63E9a47a6C123Ca28Cb74eec77c";
             const contract = new ethers.Contract(
                 contractAddress,
                 Nft_marketplace_ABI,
@@ -319,7 +319,13 @@ const CreateNFT = () => {
                     "Nothing"
                 )
                 .then(response =>{
+                    // console.log(response);
                     createNFT(response,addr)
+                })
+                .then(res =>{
+                    var MyContract = new web3.eth.Contract(Nft_marketplace_ABI, contractAddress);
+                    MyContract.methods.nftMint().call()
+                    .then(console.log);
                 })
             }catch(error){
                 console.log(error);

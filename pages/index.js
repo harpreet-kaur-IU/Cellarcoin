@@ -21,8 +21,6 @@ export default function Home() {
         <Newsletter></Newsletter>
       </Base>
       <Footer></Footer>
-     
-
     </Fragment>
   )
 }

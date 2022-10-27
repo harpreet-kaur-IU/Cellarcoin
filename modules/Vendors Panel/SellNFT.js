@@ -194,7 +194,7 @@ const SellNFT = () => {
             </div>
 
             <div className={`${styles["expire-date"]}`}>
-              <h4 className={`f-600 ${styles["expiry-date-h4"]}`}>Expiration Date</h4>
+              <h4 className={`f-600 mb-16 ${styles["expiry-date-h4"]}`}>Expiration Date</h4>
               {/* <div className={`d-flex d-align-center d-justify-center ${styles["date-wrapper"]}`}> */
                 /* <div onClick={dropdownHandler} className={`d-flex d-align-center d-justify-space-between f-500 l-28 ${styles["expiry-dropdown"]}`}>
                   <h5>7 days </h5>
@@ -207,7 +207,7 @@ const SellNFT = () => {
               <DropDown handler={expireHandler} placeholder="Select Expiry Date"></DropDown>
               {isExpire && <span className={`mt-32 mb-8 font-14 f-700 text-danger`}>Please Select Expiry Date.</span>}
               <div className={`${styles["expire-instructions"]}`}>
-                <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not more than 7 days</h4>
+                <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not less than 7 days</h4>
                 <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-2"]}`}>*Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
               </div>
               

@@ -16,6 +16,8 @@ import { ethers } from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
+import { SearchLoader } from './SearchLoader';
+import Search from '../icons/Search';
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
     function handleClickOutside(event) {
@@ -30,12 +32,7 @@ function useOutsideAlerter(ref,handler) {
   }, [ref]);
 }
 const NavBarTransparent = () => {
-    const wrapperRef = useRef(null);
-    const handler = ()=>{
-      setSearchBar(false)
-    }
-    useOutsideAlerter(wrapperRef,handler);
-    const {signOut} = useFirebaseAuth(); 
+  const [searchBar,setSearchBar] = useState(false)
   const router = useRouter();
   const [dropdown,setDropdown] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -46,11 +43,17 @@ const NavBarTransparent = () => {
   const [confirm,setConfirm] = useState(false)
   const[email,setEmail] = useState("")
   const [userId,setUserId] = useState("")
-  const [searchBar,setSearchBar] = useState(false)
   const [brand,setBrand] = useState("");
   const [nft,setNft] = useState("")
   const [searchLoading,setSearchLoading] = useState(false)
   var JWTToken = getUserOnBoardFromCookie();
+
+  const wrapperRef = useRef(null);
+  const handler = ()=>{
+    setSearchBar(false)
+  }
+  useOutsideAlerter(wrapperRef,handler);
+  const {signOut} = useFirebaseAuth(); 
 
   useEffect(()=>{
     if(!JWTToken){
@@ -264,7 +267,37 @@ const NavBarTransparent = () => {
                 <SiteLogo color="#ffffff"></SiteLogo>
               </div>
             </Link>
-            <input className={`rounded-12 b-none font-13 f-400 l-135 text-white ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+            <div className='p-relative'>
+            <div className='p-relative'>
+              <input onChange={searchHandler} className={`text-white rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+              <div className={`${style["search-icon-navbar"]}`}>
+                <Search color="#ffffff"></Search>
+              </div>
+            </div>
+            {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
+            {searchBar &&
+              <div ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
+                <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
+                <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
+                  {brand && brand.map((item)=>(
+                    <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
+                  ))}
+                </div>
+                <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
+                <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
+                  {nft && nft.map((item)=>(
+                    <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
+                      <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
+                      <div className='d-flex d-flex-column'>
+                        <h6 className='font-13 f-400 l-137'>{item.name}</h6>
+                        <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            }
+          </div>
             <ul id="ul-navbar" className={`d-flex d-flex-row text-white ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
               <NavItems name="transparent" path="/explore" value="Explore"></NavItems>
               <NavItems name="transparent" path="/community" value="Community"></NavItems>

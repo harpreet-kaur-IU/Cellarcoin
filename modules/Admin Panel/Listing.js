@@ -6,6 +6,7 @@ import Loader from '../Vendors Panel/Loader'
 import Header from './Header'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Moment from 'react-moment';
 
 const Listing = () => {
     const router = useRouter();
@@ -13,6 +14,7 @@ const Listing = () => {
     const[data,setData] = useState("");
     const[hasMount,setHasMount] = useState(false)
     const [loading, setLoading] = useState(false);
+    const[activity,setActivity] = useState("");
     var JWTtoken = getAdminOnBoardFromCookie();
     if(hasMount){
         return data;
@@ -33,6 +35,23 @@ const Listing = () => {
             .then(result =>{
                 console.log(result.data)
                 setData(result.data)
+                setLoading(false)
+            })
+            .catch(error => console.log('error', error));
+
+            //activity log API
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            setLoading(true)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                const parseResult = JSON.parse(result)
+                console.log(parseResult.data)
+                setActivity(parseResult.data)
                 setLoading(false)
             })
             .catch(error => console.log('error', error));
@@ -84,13 +103,18 @@ const Listing = () => {
                         <span className='font-18 f-500 d-flex'>To</span>
                         <span className='font-18 f-500 d-flex'>Date</span>
                     </div>                    
-                    <div className={`${styles["table-column"]}`}>
-                        <span className='font-18 f-500 d-flex'>Transfer</span>
-                        <span className='text-primary font-18 f-500 d-flex'>$15,008</span>
-                        <span className='text-primary font-18 f-500 d-flex' style={{textDecoration:"underline"}}>LK. Davidson</span>
-                        <span className='text-primary font-18 f-500 d-flex'  style={{textDecoration:"underline"}}>LK. Davidson</span>
-                        <span className='font-18 f-500 d-flex'>21/06/2022</span>
-                    </div> 
+                    {activity && activity.map((item)=>(
+                        <div className={`${styles["table-column"]}`}>
+                            <span className='font-18 f-500 d-flex'>{item.transactionType}</span>
+                            <div className={`d-flex d-align-center gap-1 ${styles["price-column"]}`}>
+                                {item.price === 0? "":<img src='images/polygon-icon.svg'></img>}
+                                <span className='text-primary font-18 f-600'>{item.price === 0?" ":item.price}</span>
+                            </div>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.from.name === null?"-":item.from.name}</span>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.to === null?"-":item.to}</span>
+                            <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
+                        </div> 
+                    ))}  
                 </div>
             </div>
         </div>  

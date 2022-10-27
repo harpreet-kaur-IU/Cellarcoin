@@ -82,7 +82,7 @@ const WineCardSlider = () => {
       </div>
       {toggle &&
         <Modal modalClass="modal-verify">
-            <SignUp handler={handleClick}></SignUp>
+          <SignUp handler={handleClick}></SignUp>
         </Modal>
       }
     </>

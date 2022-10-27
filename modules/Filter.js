@@ -1,9 +1,22 @@
 import React, { useState,useEffect,useRef } from 'react'
 import style from './css/Filter.module.css'
-
+function useOutsideAlerter(ref,handler) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          handler();
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
 const Filter = (props) => {
     const [toggle, setToggle] = useState(false);
     const [sort,setSort] = useState(false)
+    const [filter,setFilter] = useState(false)
     const handleClick = () =>{
         setToggle(!toggle);
     }
@@ -11,10 +24,20 @@ const Filter = (props) => {
         setSort(prev=>!prev);
     }
 
+    //collapse dropdown code starts here
+
+    const wrapperRef = useRef(null);
+    const handler1 = ()=>{
+      setFilter(false)
+    }
+    useOutsideAlerter(wrapperRef,handler1);
+
+    //collapse dropdown code end here
 
     const [value, setValue] = useState("Filter");
     const handler = (e) => {
         e.currentTarget.classList.toggle(style["open"]);
+        setFilter(prev=>!prev)
     }
 
     const selectHandler = (e) => {
@@ -74,23 +97,28 @@ const Filter = (props) => {
         <div className='col-12 d-flex d-justify-end gap-2 mb-32'>
             <div className={`f-500 ${style["drop-down"]}`} onClick={handler} >
                 <span> {value} </span>
-                <ul>
-                    <li value="sold" onClick={selectHandler}>
-                        Recently  Sold
-                    </li>
-                    <li value="popular" onClick={selectHandler}>
-                        Most Popular
-                    </li>
-                    <li value="favourite" onClick={selectHandler}>
-                        Most Favorited
-                    </li>
-                    <li value="lowtohigh" onClick={selectHandler}>
-                        Price: Low to High
-                    </li>
-                    <li value="hightolow" onClick={selectHandler}>
-                        Price: High to Low
-                    </li>
-                </ul>
+                {filter &&
+                    <ul ref={wrapperRef}>
+                        <li value="all" onClick={selectHandler}>
+                            All
+                        </li>
+                        <li value="sold" onClick={selectHandler}>
+                            Recently  Sold
+                        </li>
+                        <li value="popular" onClick={selectHandler}>
+                            Most Popular
+                        </li>
+                        <li value="favourite" onClick={selectHandler}>
+                            Most Favorited
+                        </li>
+                        <li value="lowtohigh" onClick={selectHandler}>
+                            Price: Low to High
+                        </li>
+                        <li value="hightolow" onClick={selectHandler}>
+                            Price: High to Low
+                        </li>
+                    </ul>
+                }
 
                 <span>
                     <svg width="18" height="11" viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg">

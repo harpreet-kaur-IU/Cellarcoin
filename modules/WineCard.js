@@ -4,60 +4,30 @@ import {useRouter} from 'next/router'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from './Vendors Panel/Loader';
 const WineCard = (props) => {
+    useEffect(()=>{
+       setData(props.data)
+    },[props.data])
+
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
+    const [loading,setLoading] = useState(false);
     const JWTToken = getUserOnBoardFromCookie();
     const navigationHandler = () =>{
         if(nftdata._id)
             router.push(`/purple/${nftdata._id}`)
     }
-
     const favoriteHandler = (e) =>{
-        if(JWTToken){
-            e.preventDefault();
-            console.log(JWTToken);
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Bearer "+JWTToken);
-            myHeaders.append("Content-Type", "application/json");
-
-            var raw = JSON.stringify({
-                "favourites": true
-            });
-
-            var requestOptions = {
-                method:'PATCH',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${e.currentTarget.id}`, requestOptions)
-            .then(response => response.text())
-            .then(result =>{
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type","application/json");
-                var requestOptions = {
-                    method: 'GET',
-                    headers: myHeaders,
-                };
-                fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
-                .then(response => response.json())
-                .then(result1 =>{ 
-                    setData(result1.data)
-                    
-                })
-                .catch(error => console.log('error', error));
-            })
-            .catch(error => console.log('error', error));
+        if(nftdata.favourite){
+            props.handler(false,e.currentTarget.id)
         }else{
-            toast.warning("Please sign in",{
-                toastId:"2"
-            });
+            props.handler(true,e.currentTarget.id)
         }
     }
   return (
     <>
+        {loading && <Loader></Loader>}
         <div className={`bg-card-dark ${styles["wine-cards-container"]}`}>
             <img  onClick={navigationHandler} className={`${styles["wine-bg-img"]}`} src={nftdata.imageUrl}></img>
             <div className='p-16'>
@@ -70,7 +40,7 @@ const WineCard = (props) => {
                         </span>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{nftdata.favourites}</span> 
-                            <img id={nftdata._id} onClick={favoriteHandler} className='cursor-pointer' src={nftdata.favourites?"images/heart-fill.svg":"images/heart.png"}></img>
+                            <img id={nftdata._id} onClick={favoriteHandler} className='cursor-pointer' src={nftdata.favourite?"images/heart-fill.svg":"images/heart.png"}></img>
                         </span>
                     </h6>
                 </div>
@@ -86,7 +56,7 @@ const WineCard = (props) => {
                         <img src='images/polygon-icon.svg'></img>
                         {nftdata.price} MATIC
                     </h5>
-                    <h5 className='l-137 f-500'>@Odule</h5>
+                    <h5 className='l-137 f-500'>{nftdata.ownerId && nftdata.ownerId.name}</h5>
                 </div>
             </div>
         </div>
