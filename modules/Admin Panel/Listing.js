@@ -46,7 +46,7 @@ const Listing = () => {
                 redirect: 'follow'
             };
             setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}`, requestOptions)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}&&status=null`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 const parseResult = JSON.parse(result)
