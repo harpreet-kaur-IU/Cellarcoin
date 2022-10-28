@@ -26,7 +26,7 @@ const Notification = () => {
                 redirect: 'follow'
             };
             
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getAllNotifications?userId=${user.user._id}`, requestOptions)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getNotifications?userId=${user.user._id}`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 const parseResult = JSON.parse(result)

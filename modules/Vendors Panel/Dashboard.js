@@ -4,6 +4,7 @@ import styles from '.././css/Vendor Panel/Dashboard.module.css'
 import {getOnBoardFromCookie} from '../../auth/userCookies';
 import Loader from './Loader';
 import {useRouter} from 'next/router'
+import Moment from 'react-moment';
 const Dashboard = () => {
   // const[data,setData] = useState('');
   const [topNft,setTopNft] = useState("");
@@ -153,8 +154,8 @@ const Dashboard = () => {
                       <img className={`${styles["dashboard-table-column-nft"]}`} src={item.imageUrl}></img>
                       <span className='font-14 f-500'>{item.name}</span>
                     </span> 
-                    <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
-                    <span className='font-14 f-400 d-flex'>MATIC 2.90</span>
+                    <span className='font-14 f-400 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
+                    <span className='font-14 f-400 d-flex'>{item.transferredDate===null?"-":<Moment fromNow>{item.transferredDate}</Moment>}</span>
                     <span className='font-14 f-400 d-flex'>100%</span>
                   </div>
                 ))}

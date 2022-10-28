@@ -229,7 +229,7 @@ export default function Signup() {
                         </div>
                         {errorName && <span className={`mb-8 font-14 f-700 text-danger`}>Please Enter Valid Name.</span>}
                         <div className={`col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]}`}>
-                            <input type="text" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
+                            <input type="email" className={`${errorEmail && styles["error"]}`} placeholder='Email' value={email} onChange={emailHandler}  required/>   
                         </div>
                         <div className={`col-12 col-xl-12 c ol-lg-12 col-md-12 col-sm-12 col-xs-12 ${styles["input-wrapper"]} ${styles["password"]}`}>
                             <input type="password" value={password} onChange={passwordHandler} placeholder="Password" required/>
