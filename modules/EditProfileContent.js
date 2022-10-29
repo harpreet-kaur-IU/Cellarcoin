@@ -200,8 +200,8 @@ const EditProfileContent = () => {
         </div>
       
         <div className={`${style["input-wrapper"]}`}>
-          <input value={userName} onChange={userNameHandler} className={`col-12 font-20 f-500 l-137 bg-input-box b-none rounded-16 mb-24 ${style["profile-user-name"]}`} placeholder='User Name'></input>
-          <input value={location} onChange={locationHandler} className={`col-12 font-20 f-500 l-137 bg-input-box b-none rounded-16 mb-24 ${style["profile-user-name"]}`} placeholder='Location'></input>
+          <input value={userName} onChange={userNameHandler} className={`col-12 font-20 f-500 l-137 bg-input-box b-none rounded-16 mb-24 ${style["profile-user-name"]}`} placeholder='Enter user name'></input>
+          <input value={location} onChange={locationHandler} className={`col-12 font-20 f-500 l-137 bg-input-box b-none rounded-16 mb-24 ${style["profile-user-name"]}`} placeholder='Enter your location'></input>
         </div>
         <button className={`cursor-pointer font-20 f-500 l-137 btn-primary b-none ${style["btn-save-profile"]}`}>Save Profile</button>
       </form>

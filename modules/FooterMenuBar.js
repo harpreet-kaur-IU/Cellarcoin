@@ -21,7 +21,16 @@ const FooterMenuBar = () => {
     // }
     const profileHandler = () =>{
         if(JWTToken){
-            router.push("/editprofile")
+            function parseJwt() {
+                if(!JWTToken){
+                  return
+                }
+                const base64Url = JWTToken.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+              }
+              var user = parseJwt();
+            router.push(`/editprofile/${user.user._id}`)
         }else{
             handleClick()
         }

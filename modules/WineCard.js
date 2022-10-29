@@ -40,7 +40,7 @@ const WineCard = (props) => {
                         </span>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{nftdata.favourites}</span> 
-                            <img id={nftdata._id} onClick={favoriteHandler} className='cursor-pointer' src={nftdata.favourite?"images/heart-fill.svg":"images/heart.png"}></img>
+                            <img id={nftdata._id} onClick={favoriteHandler} className='cursor-pointer' src={nftdata.favourite? "images/heart-fill.svg" : "images/heart.png"}></img>
                         </span>
                     </h6>
                 </div>
