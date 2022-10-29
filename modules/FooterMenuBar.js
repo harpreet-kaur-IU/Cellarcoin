@@ -94,7 +94,7 @@ const FooterMenuBar = () => {
         </ul>
         {toggle &&
           <Modal modalClass="modal-verify">
-            <SignUp confirm={confirmationHandler} handler={handleClick}></SignUp>
+            <SignUp handler={handleClick}></SignUp>
           </Modal>
         }
         <ToastContainer/>
