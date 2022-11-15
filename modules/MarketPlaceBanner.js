@@ -42,6 +42,7 @@ const MarketPlaceBanner = () => {
                 headers: myHeaders,
             };
             // setLoading(true)
+            
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=null`, requestOptions)
             .then(response => response.json())
             .then(result =>{

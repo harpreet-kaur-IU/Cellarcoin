@@ -72,14 +72,14 @@ const FooterMenuBar = () => {
             </li>
         </ul>
 
-        <ul >
+        <ul>
             <li>
                 <h3 className='font-25'>Resources</h3>
                 <ul className='mt-24'>
-                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="">Help Center</a></li>
-                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="">Discord Community</a></li>
-                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="">Blog</a></li>
-                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="">Newsletter</a></li>
+                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="/">Help Center</a></li>
+                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="/">Discord Community</a></li>
+                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="/">Blog</a></li>
+                    <li className='cursor-pointer mt-16 f-500'><a className="text-white font-16" href="/">Newsletter</a></li>
                 </ul>
             </li>
         </ul>

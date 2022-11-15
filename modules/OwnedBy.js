@@ -18,9 +18,12 @@ const OwnedBy = () => {
     const [loading,setLoading] = useState(false);
     const JWTToken = getUserOnBoardFromCookie();
 
+    //buy now handler
     const buyNowHandler = () =>{   
         walletConnected()
     }
+
+    //connect wallet
     const walletConnected = async() =>{
         const { ethereum } = window;
         if (ethereum) {
@@ -32,7 +35,7 @@ const OwnedBy = () => {
         }
         await isMetaMaskConnected().then((connected) => {
             if(connected) {
-                getHash() // second call
+                buy() // second call
             }else{
                 toast.warning("Please Connect Your Wallet",{
                     toastId:"2"
@@ -40,30 +43,10 @@ const OwnedBy = () => {
             }
         });
     }
-    const getHash = () =>{
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer "+JWTToken);
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/recentMintedNFT`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-            const parseResult = JSON.parse(result)
-            buy(parseResult.data.hash)
-        })
-        .catch(error => console.log('error', error));
-    }
     //web3 code starts here
-    const buy = async(hash)=>{  
-        //fetch token ID
-        const receipt = await web3.eth.getTransactionReceipt(hash)
-        const tokenId = web3.utils.hexToNumber(receipt.logs[0].topics[3]);
-
+    const buy = async()=>{ 
+        console.log(data.tokenId) 
         const ethers = require("ethers");
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -79,11 +62,11 @@ const OwnedBy = () => {
             );
             try{
                 await contract.buynftwithERC(
-                    tokenId,
+                    data.tokenId,
                     tokenAddress
                 )
                 .then(response => {
-                    buyNft(response,addr,tokenId);
+                    buyNft(response,addr);
                 })
             }catch(error){
                 console.log(error);
@@ -92,16 +75,17 @@ const OwnedBy = () => {
             console.log("Please install MetaMask");
         }
     }
+
     //web3 code ends here
-    const buyNft = (hashResponse,walletAddress,tokenId) =>{
+    const buyNft = (hashResponse,walletAddress) =>{
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer "+JWTToken);
-        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+        myHeaders.append("Content-Type","application/json");
 
         var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            redirect: 'follow'
+            method:'POST',
+            headers:myHeaders,
+            redirect:'follow'
         };
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${nftId}`, requestOptions)
@@ -110,13 +94,14 @@ const OwnedBy = () => {
             console.log(result)
             setLoading(false)
             // setAdd(prev=>!prev);
-            updateUserCollection(hashResponse,walletAddress,tokenId);
+            updateUserCollection(hashResponse,walletAddress);
         })
         .catch(error => console.log('error', error));
     }
-    const updateUserCollection = (hashResponse,walletAddress,tokenId) =>{
+
+    const updateUserCollection = (hashResponse,walletAddress) =>{
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer "+JWTToken);
+        myHeaders.append("Authorization","Bearer "+JWTToken);
 
         var requestOptions = {
             method: 'PATCH',
@@ -128,20 +113,21 @@ const OwnedBy = () => {
         .then(response => response.text())
         .then(result => {
             console.log(result)
-            addTransaction(hashResponse.hash,nftId,walletAddress,tokenId);
+            addTransaction(hashResponse.hash,nftId,walletAddress);
         })
         .catch(error => console.log('error', error));
     }
-    const addTransaction = (hash,id,walletAddress,tokenId) =>{
+
+    const addTransaction = (hash,id,walletAddress) =>{
         var myHeaders = new Headers();
         myHeaders.append("Authorization","Bearer "+JWTToken);
-        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Content-Type","application/json");
 
         var raw = JSON.stringify({
             "walletAddressFrom": "",
             "walletAddressTo": walletAddress,
             "hash": hash,
-            "tokenId": tokenId,
+            "tokenId": data.tokenId,
             "transactionType": "transferred"
         });
 
@@ -157,12 +143,15 @@ const OwnedBy = () => {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
     }
+
     const continueHandler = () =>{
         setAdd(prev=>!prev);
     }
+
     const cancelHandler = () =>{
         router.push(`/purple/${nftId}`);
     }
+
     useEffect(()=>{
         if(JWTToken){
             function parseJwt() {
@@ -184,8 +173,9 @@ const OwnedBy = () => {
                 method: 'GET',
                 headers: myHeaders,
             };
+
             setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft/${nftId}&&userId=${userId}`, requestOptions)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=${userId}`, requestOptions)
             .then(response => response.json())
             .then(result =>{
                 setData(result.nft)
@@ -194,6 +184,7 @@ const OwnedBy = () => {
             .catch(error => console.log('error', error));
         }
     },[nftId])
+
     // const time = () =>{
     //     var fiveMinutes = 60 * 5;
     //     console.log(fiveMinutes)

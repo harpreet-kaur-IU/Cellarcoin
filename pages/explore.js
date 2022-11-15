@@ -100,6 +100,7 @@ export default function Explore() {
           body: raw,
           redirect: 'follow'
         };
+        
         if(value){
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
           .then(response => response.text())

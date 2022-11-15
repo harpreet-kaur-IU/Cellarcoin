@@ -61,6 +61,8 @@ const CreateNFT = () => {
     const [isRegion,setRegionError] = useState(false);
     const [isSpirit,setSpiritError] = useState(false);
     //error states ends
+
+    const[tokenID,setTokenID] = useState("")
     const [idUser,setUserId] = useState("");
     var JWTtoken = getOnBoardFromCookie();
 
@@ -296,80 +298,36 @@ const CreateNFT = () => {
     const modalHandler = () =>{
         setAdd(!add);
     }
-    const mint = async(abb)=>{
-        const ethers = require("ethers");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const addr = await signer.getAddress();
-        
-        if(typeof window.ethereum !== "undefined"){
-            const contractAddress = "0x58fB90C73193c63E9a47a6C123Ca28Cb74eec77c";
-            const contract = new ethers.Contract(
-                contractAddress,
-                Nft_marketplace_ABI,
-                signer
-            );
-            try{
-                await contract.nftMint(
-                    addr,
-                    abb,
-                    "Cellarcoin",
-                    "2400",
-                    "Heloo",
-                    "Nothing"
-                )
-                .then(response =>{
-                    // console.log(response);
-                    createNFT(response,addr)
-                })
-                .then(res =>{
-                    var MyContract = new web3.eth.Contract(Nft_marketplace_ABI, contractAddress);
-                    MyContract.methods.nftMint().call()
-                    .then(console.log);
-                })
-            }catch(error){
-                console.log(error);
-            }
+
+//form submit
+const formSubmit = (e) =>{
+    e.preventDefault();
+    walletConnected(); // first call
+}
+//walletConnected
+const walletConnected = async() =>{
+    const { ethereum } = window;
+    if (ethereum) {
+        var provider = new ethers.providers.Web3Provider(ethereum);
+    }
+    const isMetaMaskConnected = async () => {
+        const accounts = await provider.listAccounts();
+        return accounts.length > 0;
+    }
+    await isMetaMaskConnected().then((connected) => {
+        if(connected) {
+            checkValidation() // second call
         }else{
-            console.log("Please install MetaMask");
+            toast.warning("Please Connect Your Wallet",{
+                toastId:"2"
+            });
         }
-    }
-    const getToken = (raw) =>{
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type","application/json");
-
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/mintNFT`,{
-            method: 'POST', 
-            headers: myHeaders,
-            body: raw
-        })
-
-        .then(response => response.json())
-        .then(results => {
-            mint(results.data)
-        }) // fourth call
-        .catch(error => console.log('error', error))
-    }   
-    const walletConnected = async() =>{
-        const { ethereum } = window;
-        if (ethereum) {
-            var provider = new ethers.providers.Web3Provider(ethereum);
-        }
-        const isMetaMaskConnected = async () => {
-            const accounts = await provider.listAccounts();
-            return accounts.length > 0;
-        }
-        await isMetaMaskConnected().then((connected) => {
-            if(connected) {
-                checkValidation() // second call
-            }else{
-                toast.warning("Please Connect Your Wallet",{
-                    toastId:"2"
-                });
-            }
-        });
-    }
-    const createNFT = (response,walletAddress) =>{5
+    });
+}
+//check validation
+const checkValidation = () =>{
+    const result = validator();
+    if(result){    
         const attributes = [
             {
                 "trait_type":"Bottle Size",
@@ -390,67 +348,186 @@ const CreateNFT = () => {
             {...additionalProps},
             {...additionalProps1}
         ]
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization","Bearer "+JWTtoken);
-        myHeaders.append("Content-Type","application/json");
 
-        var raw = JSON.stringify({
+        var tokenBody = JSON.stringify({
+            "file":url,
             "name":name,
-            "imageUrl":url,
             "description":desc,
+            "external_url":"https://bigfatcats.io",
             "attributes":attributes,
-            "walletAddress":wallet,
-            "brand":brand,
-            "isPremiumDrop":premiumDrops,
-            "walletAddress":""
         });
-        if(nftId){
-            var requestOptions = {
-                method: 'PATCH',
-                headers: myHeaders,
-                body: raw
-            };
-            setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
-            .then(response => response.json())
-            .then(result =>{ 
-                setData(result.data)
-                setLoading(false)
-                router.push("/allnftlist")
-            })
-            .catch(error => console.log('error', error));
-        }
-        else{
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw
-            };
-            setLoading(true)
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
-            .then(response => response.json())
-            .then(result =>{ 
-                setLoading(false)
-                setName("")
-                setDesc("")
-                setWallet("")
-                setBrand("")
-                setUrl("")
-                setBrand("")
-                setPremiumDrops(false)
-                setBottleSize("")
-                setVolumn("")
-                setRegion("")
-                setSpirit("")
-                setCover("")
-                var inputfile = document.getElementById("file-input-field");
-                inputfile.value = "";
-                addTransaction(response.hash,result.data._id,walletAddress)
-            })
-            .catch(error => console.log('error', error));
-        } 
+        
+        // get token and mint function call
+        getToken(tokenBody) // third call
     }
-    const addTransaction = (hash,id,walletAddress) =>{
+}
+//Get Token abb
+const getToken = (raw) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type","application/json");
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/mintNFT`,{
+        method: 'POST', 
+        headers: myHeaders,
+        body: raw
+    })
+
+    .then(response => response.json())
+    .then(results => {
+        mint(results.data)
+    }) // fourth call
+    .catch(error => console.log('error', error))
+}  
+//web3 mint
+const mint = async(abb)=>{
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    
+    if(typeof window.ethereum !== "undefined"){
+        const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+        const contract = new ethers.Contract(
+            contractAddress,
+            Nft_marketplace_ABI,
+            signer
+        );
+        try{
+            await contract.nftMint(
+                addr,
+                abb,
+                "Cellarcoin",
+                "2400",
+                "Heloo",
+                "Nothing"
+            )
+            .then(response =>{
+                // console.log(response);
+                tokenId(response,addr)
+                
+            })
+        }catch(error){
+            console.log(error);
+        }
+    }else{
+        console.log("Please install MetaMask");
+    }
+} 
+//token Id - get token id with web3
+const tokenId = async(web3Response,addr)=>{
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    
+    if(typeof window.ethereum !== "undefined"){
+        const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+        const contract = new ethers.Contract(
+            contractAddress,
+            Nft_marketplace_ABI,
+            signer
+        );
+        try{
+            await contract.tokenId()
+            .then(response =>{
+                var hexString = response._hex;
+                var yourNumber = parseInt(hexString, 16);
+                yourNumber++;
+                setTokenID(yourNumber)
+                createNFT(web3Response,addr,yourNumber)
+            })
+        }catch(error){
+            console.log(error);
+        }
+    }else{
+        console.log("Please install MetaMask");
+    }
+}
+//create nft with backend API
+const createNFT = (response,walletAddress,web3tokenID) =>{
+    const attributes = [
+        {
+            "trait_type":"Bottle Size",
+            "value":bottle
+        },
+        {
+            "trait_type":"Alcohol by volume",
+            "value":volume
+        },
+        {
+            "trait_type":"Region",
+            "value":region
+        },
+        {
+            "trait_type":"Spirit",
+            "value":spirit
+        },
+        {...additionalProps},
+        {...additionalProps1}
+    ]
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
+
+    var raw = JSON.stringify({
+        "name":name,
+        "imageUrl":url,
+        "description":desc,
+        "attributes":attributes,
+        "walletAddress":wallet,
+        "brand":brand,
+        "isPremiumDrop":premiumDrops,
+        "walletAddress":walletAddress,
+        "tokenId":web3tokenID
+    });
+    if(nftId){
+        var requestOptions = {
+            method: 'PATCH',
+            headers: myHeaders,
+            body: raw
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{ 
+            setData(result.data)
+            setLoading(false)
+            router.push("/allnftlist")
+        })
+        .catch(error => console.log('error', error));
+    }
+    else{
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw
+        };
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{ 
+            setLoading(false)
+            setName("")
+            setDesc("")
+            setWallet("")
+            setBrand("")
+            setUrl("")
+            setBrand("")
+            setPremiumDrops(false)
+            setBottleSize("")
+            setVolumn("")
+            setRegion("")
+            setSpirit("")
+            setCover("")
+            var inputfile = document.getElementById("file-input-field");
+            inputfile.value = "";
+            console.log(response.hash,result.data._id,walletAddress)
+            addTransaction(response.hash,result.data._id,walletAddress,web3tokenID)
+        })
+        .catch(error => console.log('error', error));
+    } 
+}
+//create order API
+const addTransaction = (hash,id,walletAddress,web3tokenID) =>{
         var myHeaders = new Headers();
         myHeaders.append("Authorization","Bearer "+JWTtoken);
         myHeaders.append("Content-Type", "application/json");
@@ -459,7 +536,7 @@ const CreateNFT = () => {
             "walletAddressFrom": walletAddress,
             "walletAddressTo": "",
             "hash": hash,
-            "tokenId": "4t57y7u8i9o0op",
+            "tokenId": web3tokenID,
             "transactionType": "minted"
         });
 
@@ -474,47 +551,8 @@ const CreateNFT = () => {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
-    }
-    const checkValidation = () =>{
-        const result = validator();
-        if(result){    
-            const attributes = [
-                {
-                    "trait_type":"Bottle Size",
-                    "value":bottle
-                },
-                {
-                    "trait_type":"Alcohol by volume",
-                    "value":volume
-                },
-                {
-                    "trait_type":"Region",
-                    "value":region
-                },
-                {
-                    "trait_type":"Spirit",
-                    "value":spirit
-                },
-                {...additionalProps},
-                {...additionalProps1}
-            ]
-
-            var tokenBody = JSON.stringify({
-                "file":url,
-                "name":name,
-                "description":desc,
-                "external_url":"https://bigfatcats.io",
-                "attributes":attributes,
-            });
-            
-            // get token and mint function call
-            getToken(tokenBody) // third call
-        }
-    }
-    const formSubmit = (e) =>{
-        e.preventDefault();
-        walletConnected(); // first call
-    }
+    
+}
   return (
     <div>
         {loading && <Loader></Loader>}

@@ -272,7 +272,7 @@ const NavBar = () => {
             <img className={`cursor-pointer d-flex d-align-center d-justify-center ${style["navbar-site-logo"]}`} src='images/site-logo.png'></img>
           </Link>
           <Link href="/">
-            <div className={`d-none d-align-center d-justify-center ${style["navbar-site-sm-logo"]} `}>
+            <div className={`d-none d-align-center d-justify-center ${style["navbar-site-sm-logo"]}`}>
               <SiteLogo color="#780543"></SiteLogo>
             </div>
           </Link>
