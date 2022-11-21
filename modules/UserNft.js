@@ -43,8 +43,8 @@ const UserNft = () => {
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
-            setData(parseResult.nft)
-            console.log(parseResult.nft)
+            setData(parseResult.nft[0].nftId)
+            console.log(parseResult.nft[0].nftId)
         })
         .catch(error => console.log('error', error));
 

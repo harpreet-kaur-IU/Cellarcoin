@@ -16,6 +16,7 @@ const Brands = () => {
       behavior: 'smooth',
     })
   }
+  
   const barndTwoHandler = () =>{
     window.scrollTo({
       top: brand3,

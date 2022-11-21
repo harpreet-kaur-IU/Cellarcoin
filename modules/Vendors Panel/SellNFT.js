@@ -82,7 +82,7 @@ const sellNftWeb3 = async()=>{
   const addr = await signer.getAddress();
 
   if(typeof window.ethereum !== "undefined"){
-    const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+    const contractAddress = "0x75d87f709B5E74F049271D9d82816231dCEE1eEd";
     const contract = new ethers.Contract(
       contractAddress,
       Nft_marketplace_ABI,

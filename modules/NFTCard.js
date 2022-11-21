@@ -3,7 +3,7 @@ import styles from './css/WineCard.module.css';
 import {useRouter} from 'next/router';
 
 const NFTCard = (props) => {
-    console.log(props.imageUrl)
+    console.log(props.data)
     const router = useRouter();
 
     const sellNftHandler = () =>{
@@ -12,23 +12,23 @@ const NFTCard = (props) => {
   return (
     <>
         <div className={`bg-card-dark ${styles["user-nft-cards-container"]}`}>
-            <img className={`${styles["wine-bg-img"]}`} src={props.imageUrl}></img>
+            <img className={`${styles["wine-bg-img"]}`} src={props.data.imageUrl}></img>
             <div className='p-16'>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
                     <h6 className='f-500'>Name</h6>
                     <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
-                            <span>{props.views}</span>
+                            <span>{props.data.views}</span>
                             <img src="images/view-primary.svg"></img>
                         </span>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
-                            <span>{props.favourites}</span>
+                            <span>{props.data.favourites}</span>
                             <img src="images/heart.png"></img>
                         </span>
                     </h6>
                 </div>
                 <div className={`d-flex d-justify-space-between ${styles["nft-name"]}`}>
-                    <h6 className='word-break l-137 f-500'>{props.name}</h6>
+                    <h6 className='word-break l-137 f-500'>{props.data.name}</h6>
                 </div>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray'>
                     <h6 className='l-137 f-500'>Listing Price</h6>
@@ -37,7 +37,7 @@ const NFTCard = (props) => {
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
                     <h5 className='l-137 f-500'>
                         <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
-                        {props.price} 
+                        {props.data.price} 
                     </h5>
                     <h5 className='l-137 f-500'>@Odule</h5>
                 </div>

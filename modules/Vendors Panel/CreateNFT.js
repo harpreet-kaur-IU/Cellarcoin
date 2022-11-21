@@ -302,7 +302,9 @@ const CreateNFT = () => {
 //form submit
 const formSubmit = (e) =>{
     e.preventDefault();
+    console.log("in form submit")
     walletConnected(); // first call
+    
 }
 //walletConnected
 const walletConnected = async() =>{
@@ -316,6 +318,7 @@ const walletConnected = async() =>{
     }
     await isMetaMaskConnected().then((connected) => {
         if(connected) {
+            console.log("in wallet connected")
             checkValidation() // second call
         }else{
             toast.warning("Please Connect Your Wallet",{
@@ -326,6 +329,7 @@ const walletConnected = async() =>{
 }
 //check validation
 const checkValidation = () =>{
+   
     const result = validator();
     if(result){    
         const attributes = [
@@ -363,6 +367,7 @@ const checkValidation = () =>{
 }
 //Get Token abb
 const getToken = (raw) =>{
+    console.log("in get token")
     var myHeaders = new Headers();
     myHeaders.append("Content-Type","application/json");
 
@@ -386,7 +391,7 @@ const mint = async(abb)=>{
     const addr = await signer.getAddress();
     
     if(typeof window.ethereum !== "undefined"){
-        const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+        const contractAddress = "0x75d87f709B5E74F049271D9d82816231dCEE1eEd";
         const contract = new ethers.Contract(
             contractAddress,
             Nft_marketplace_ABI,
@@ -420,7 +425,7 @@ const tokenId = async(web3Response,addr)=>{
     const signer = provider.getSigner();
     
     if(typeof window.ethereum !== "undefined"){
-        const contractAddress = "0xDf00126C37EFB27e60F53c520364763fc99e7F2B";
+        const contractAddress = "0x75d87f709B5E74F049271D9d82816231dCEE1eEd";
         const contract = new ethers.Contract(
             contractAddress,
             Nft_marketplace_ABI,
