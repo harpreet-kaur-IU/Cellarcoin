@@ -29,6 +29,9 @@
     background-color: #ECECEC;
     border-radius: 16px;
 }
+.wine-images-col-1 img{
+    width: 100%;
+}
 .wine-images-col-2{
     padding-top: 100px;
     border-right: 1px solid #8C8C8C;

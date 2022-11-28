@@ -44,6 +44,7 @@ const SellNFT = () => {
       return true;
     }
   }
+
   useEffect(()=>{
     if(nftId){
       var myHeaders = new Headers();
@@ -65,100 +66,99 @@ const SellNFT = () => {
     }
   },[nftId])
 
-//form submit
-const formSubmit = (e) =>{
-  e.preventDefault()
-  var result = validator();
-  if(result){
-    sellNftWeb3();
-  }
-}
-//sellnft web3 code starts here
-const sellNftWeb3 = async()=>{
-  console.log(data[0].tokenId)
-  const ethers = require("ethers");
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const addr = await signer.getAddress();
-
-  if(typeof window.ethereum !== "undefined"){
-    const contractAddress = "0x75d87f709B5E74F049271D9d82816231dCEE1eEd";
-    const contract = new ethers.Contract(
-      contractAddress,
-      Nft_marketplace_ABI,
-      signer
-    );
-    try{
-      await contract.placeNFTForSale(
-        data[0].tokenId,
-        price
-      )
-      .then(response => {
-        sellNft(response,addr)
-      })
-    }catch(error){
-      console.log(error);
+  //form submit
+  const formSubmit = (e) =>{
+    e.preventDefault()
+    var result = validator();
+    if(result){
+      sellNftWeb3();
     }
-  }else{
-    console.log("Please install MetaMask");
   }
-}
-//sellnft backend API
-const sellNft = (response,walletAddress) =>{
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization","Bearer "+JWTtoken);
-  myHeaders.append("Content-Type","application/json");
+  //sellnft web3 code starts here
+  const sellNftWeb3 = async()=>{
+    const ethers = require("ethers");
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
 
-  var raw = JSON.stringify({
-    "price": price,
-    "currency": currency,
-    "expireAfter":expire
-  })
+    if(typeof window.ethereum !== "undefined"){
+      const contractAddress = "0x75d87f709B5E74F049271D9d82816231dCEE1eEd";
+      const contract = new ethers.Contract(
+        contractAddress,
+        Nft_marketplace_ABI,
+        signer
+      );
+      try{
+        await contract.placeNFTForSale(
+          data[0].tokenId,
+          price
+        )
+        .then(response => {
+          sellNft(response,addr)
+        })
+      }catch(error){
+        console.log(error);
+      }
+    }else{
+      console.log("Please install MetaMask");
+    }
+  }
+  //sellnft backend API
+  const sellNft = (response,walletAddress) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
 
-  var requestOptions = {
-    method: 'PATCH',
-    headers: myHeaders,
-    body:raw,
-    redirect: 'follow'
-  };
+    var raw = JSON.stringify({
+      "price": price,
+      "currency": currency,
+      "expireAfter":expire
+    })
 
-  setLoading(true)
-  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
-  .then(response => response.json())
-  .then(result => {
-    addTransaction(response.hash,nftId,walletAddress)
-  })
-  .catch(error => console.log('error', error));
-}
-//create order API
-const addTransaction = (hash,id,walletAddress) =>{
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization","Bearer "+JWTtoken);
-  myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body:raw,
+      redirect: 'follow'
+    };
 
-  var raw = JSON.stringify({
-    "walletAddressFrom": walletAddress,
-    "walletAddressTo": "",
-    "hash": hash,
-    "tokenId": data[0].tokenId,
-    "transactionType": "listed"
-  });
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      addTransaction(response.hash,nftId,walletAddress)
+    })
+    .catch(error => console.log('error', error));
+  }
+  //create order API
+  const addTransaction = (hash,id,walletAddress) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type", "application/json");
 
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
+    var raw = JSON.stringify({
+      "walletAddressFrom": walletAddress,
+      "walletAddressTo": "",
+      "hash": hash,
+      "tokenId": data[0].tokenId,
+      "transactionType": "listed"
+    });
 
-  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    setLoading(false)
-    Router.push("/allnftlist");
-  })
-  .catch(error => console.log('error', error));
-}
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      setLoading(false)
+      Router.push("/allnftlist");
+    })
+    .catch(error => console.log('error', error));
+  }
   return (
     <>
       <Header></Header>
@@ -172,9 +172,9 @@ const addTransaction = (hash,id,walletAddress) =>{
               <h4 className='f-500'>{item.name}</h4>
               <h5 className={`f-400 l-27 ${styles["nft-desc"]}`}>{item.description}</h5>
               <h5 className={`f-600 l-27 ${styles["contract-address-heading"]}`}>Contract Address</h5>
-              <h5 className={`f-400 l-27 ${styles["contract-address"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
-              <h5 className={`f-600 l-27 ${styles["token-heading"]}`}>Token</h5>
-              <h5 className={`f-400 l-27 ${styles["token"]}`}>AQRGSGSGSGFSGDS3133#R$TQ@$</h5>
+              <h5 className={`f-400 l-27 ${styles["contract-address"]}`}>0x75d87f709B5E74F049271D9d82816231dCEE1eEd</h5>
+              <h5 className={`f-600 l-27 ${styles["token-heading"]}`}>Token Id</h5>
+              <h5 className={`f-400 l-27 ${styles["token"]}`}>{item.tokenId}</h5>
             </div>
           </div>
         ))}

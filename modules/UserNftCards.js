@@ -32,7 +32,7 @@ const UserNftCards = () => {
       <div className={`d-flex d-flex-row d-justify-end ${style["user-nft-row"]}`}>
         <div className={`rounded-16 bg-box text-center ${style["nft-cards-div"]}`}>
           <h5 className='font-24 f-600 l-137 text-primary'>Volume</h5>
-          <h5 className='font-24 f-600 l-137 text-black mt-24'>{data && data.activeNFT}</h5>
+          <h5 className='font-24 f-600 l-137 text-black mt-24'>{data && data.nftVolume}</h5>
         </div>
         <div className={`rounded-16 bg-box text-center ${style["nft-cards-div"]}`}>
           <h5 className='font-24 f-600 l-137 text-primary'>Sales</h5>

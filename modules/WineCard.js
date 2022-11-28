@@ -56,7 +56,7 @@ const WineCard = (props) => {
                         <img src='images/polygon-icon.svg'></img>
                         {nftdata.price} MATIC
                     </h5>
-                    <h5 className='l-137 f-500'>{nftdata.ownerId && nftdata.ownerId.name}</h5>
+                    <h5 className='l-137 f-500'>{nftdata.ownedByUserId?nftdata.ownedByUserId.userName:(nftdata.ownerId && nftdata.ownerId.name)}</h5>
                 </div>
             </div>
         </div>

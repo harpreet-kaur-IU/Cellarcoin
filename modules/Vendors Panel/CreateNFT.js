@@ -367,10 +367,10 @@ const checkValidation = () =>{
 }
 //Get Token abb
 const getToken = (raw) =>{
-    console.log("in get token")
     var myHeaders = new Headers();
     myHeaders.append("Content-Type","application/json");
 
+    setLoading(true)
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/mintNFT`,{
         method: 'POST', 
         headers: myHeaders,
@@ -379,6 +379,7 @@ const getToken = (raw) =>{
 
     .then(response => response.json())
     .then(results => {
+        setLoading(false)
         mint(results.data)
     }) // fourth call
     .catch(error => console.log('error', error))
@@ -397,6 +398,7 @@ const mint = async(abb)=>{
             Nft_marketplace_ABI,
             signer
         );
+        setLoading(true)
         try{
             await contract.nftMint(
                 addr,
@@ -408,6 +410,7 @@ const mint = async(abb)=>{
             )
             .then(response =>{
                 // console.log(response);
+                setLoading(false)
                 tokenId(response,addr)
                 
             })
@@ -431,12 +434,14 @@ const tokenId = async(web3Response,addr)=>{
             Nft_marketplace_ABI,
             signer
         );
+        setLoading(true)
         try{
             await contract.tokenId()
             .then(response =>{
                 var hexString = response._hex;
                 var yourNumber = parseInt(hexString, 16);
                 yourNumber++;
+                setLoading(false)
                 setTokenID(yourNumber)
                 createNFT(web3Response,addr,yourNumber)
             })
@@ -552,9 +557,12 @@ const addTransaction = (hash,id,walletAddress,web3tokenID) =>{
             redirect: 'follow'
         };
 
+        setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result =>{
+            setLoading(false)
+        })
         .catch(error => console.log('error', error));
     
 }

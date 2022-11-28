@@ -72,27 +72,6 @@ const ActivityTable = () => {
             <div className={`d-flex d-align-center d-justify-space-between ${styles["table-heading"]}`}>
                 <h3 className={`f-600 text-primary`}>Activity</h3>
                 <div className='p-relative'>
-                    {/* <button onClick={filterHandler} className='cursor-pointer btn-secondary font-14 f-500 l-137'>Filter</button> */}
-                    {/* {toggle &&
-                        <div className={`d-flex d-flex-column ${styles["filter-dropdown"]}`}>
-                            <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
-                                <input type="checkbox"></input>
-                                <h6 className='font-12 f-500 l-22'>Sales</h6>
-                            </div>
-                            <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
-                                <input type="checkbox"></input>
-                                <h6 className='font-12 f-500 l-22'>Transfer</h6>
-                            </div>
-                            <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
-                                <input type="checkbox"></input>
-                                <h6 className='font-12 f-500 l-22'>Offers</h6>
-                            </div>
-                            <div className={`d-flex ${styles["filter-dropdown-item"]}`}>
-                                <input type="checkbox"></input>
-                                <h6 className='font-12 f-500 l-22'>Listings</h6>
-                            </div>
-                        </div>
-                    } */}
                     <StatusDropdown handler={statusHandler}></StatusDropdown>
                 </div>
             </div>
@@ -128,8 +107,6 @@ const ActivityTable = () => {
                                     <span onClick={navigationHandler} className='a-underline text-black font-16 f-500 l-137'>{item.to === null?"":item.to}</span>
                                 </div>
                             </div>
-                            {/* <span className='text-primary font-18 f-500 d-flex'>LK. Davidson</span>
-                            <span className='font-18 f-500 d-flex'>21/06/2022</span> */}
                         </div> 
                     ))}  
                 </div>

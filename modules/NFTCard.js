@@ -3,11 +3,10 @@ import styles from './css/WineCard.module.css';
 import {useRouter} from 'next/router';
 
 const NFTCard = (props) => {
-    console.log(props.data)
     const router = useRouter();
 
     const sellNftHandler = () =>{
-        router.push("/sellnftUI")
+        router.push(`/resellNft/${props.data._id}`)
     }
   return (
     <>

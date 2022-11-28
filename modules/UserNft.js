@@ -5,6 +5,7 @@ import Filter from './Filter';
 import NFTCard from './NFTCard';
 import UserNftCards from './UserNftCards';
 import UserTable from './UserTable';
+import Loader from './Vendors Panel/Loader';
 import WineCard from './WineCard';
 const UserNft = () => {
     const [data,setData] = useState("");
@@ -13,6 +14,7 @@ const UserNft = () => {
     const [activity,setActivity] = useState("");
     const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
+    const[loading,setLoading] = useState(false)
     const JWTToken = getUserOnBoardFromCookie();
     const handleClick = (e) => {
         setActiveTab(e.target.id);
@@ -39,12 +41,13 @@ const UserNft = () => {
             redirect: 'follow'
         };
 
+        setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getCollection`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
             setData(parseResult.nft[0].nftId)
-            console.log(parseResult.nft[0].nftId)
+            setLoading(false)
         })
         .catch(error => console.log('error', error));
 
@@ -57,12 +60,13 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
-
+        setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
             setFav(parseResult.favourites[0].nftId)
+            setLoading(false)
         })
         .catch(error => console.log('error', error));
 
@@ -75,12 +79,13 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
-
+        setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
             setOnSale(parseResult.data)
+            setLoading(false)
         })
         .catch(error => console.log('error', error));
 
@@ -93,17 +98,19 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
-
+        setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
             setActivity(parseResult)
+            setLoading(false)
         })
         .catch(error => console.log('error', error));
     },[])
   return (
     <>
+        {loading && <Loader></Loader>}
         <div className={`container ${style["wine-collection-container"]}`}>
             <div className={`d-flex d-flex-column d-justify-start ${style["wine-collection-bg"]}`}>
                 <div className={`${style["wine-collection-circle-img"]}`}>
@@ -139,25 +146,23 @@ const UserNft = () => {
                        {data && data.map((item)=>(
                             <NFTCard
                                 data={item}
-                                key = {item.key}
+                                key = {item._id}
                                 status="Sell NFT"
                             />
-
                        ))}
-                      
                     </div>
                 }
                 {activeTab == "tab2" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
                         {onSale && onSale.map((item)=>(
-                            <WineCard data={item} key = {item.key}></WineCard>
+                            <WineCard data={item} key = {item._id}></WineCard>
                         ))}
                     </div>
                 }
                 {activeTab == "tab3" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
                         {fav && fav.map((item)=>(
-                            <WineCard data={item} key = {item.key}></WineCard>
+                            <WineCard data={item} key = {item._id}></WineCard>
                         ))}
                     </div>
                 }

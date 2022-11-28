@@ -44,7 +44,7 @@ const OwnedBy = () => {
         });
     }
 
-
+    //web3 buy function
     const buy = async()=>{ 
         const ethers = require("ethers");
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -99,7 +99,8 @@ const OwnedBy = () => {
         })
         .catch(error => console.log('error', error));
     }
-
+    
+    //update collection API
     const updateUserCollection = (hashResponse,walletAddress) =>{
         var myHeaders = new Headers();
         myHeaders.append("Authorization","Bearer "+JWTToken);
@@ -119,6 +120,7 @@ const OwnedBy = () => {
         .catch(error => console.log('error', error));
     }
 
+    //create order API for adding transaction history
     const addTransaction = (hash,id,walletAddress) =>{
         var myHeaders = new Headers();
         myHeaders.append("Authorization","Bearer "+JWTToken);
@@ -141,7 +143,9 @@ const OwnedBy = () => {
 
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result =>{
+            router.push("/usernft")
+        })
         .catch(error => console.log('error', error));
     }
 

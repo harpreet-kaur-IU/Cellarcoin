@@ -47,47 +47,6 @@ const MarketPlaceBanner = () => {
             .then(response => response.json())
             .then(result =>{
                 setData(result.nft)
-                // var arr2 = result.nft.expiryDate.split('/');
-                // var month = "";
-                // if(arr2[1] === "01"){
-                //     month="Jan";
-                // }
-                // else if(arr2[1] === "02"){
-                //     month="Feb";
-                // }
-                // else if(arr2[1] === "03"){
-                //     month="March";
-                // }
-                // else if(arr2[1] === "04"){
-                //     month="Apr";
-                // }
-                // else if(arr2[1] === "05"){
-                //     month="May";
-                // }
-                // if(arr2[1] === "06"){
-                //     month="June";
-                // }
-                // else if(arr2[1] === "07"){
-                //     month="July";
-                // }
-                // else if(arr2[1] === "08"){
-                //     month="Aug";
-                // }
-                // else if(arr2[1] === "09"){
-                //     month="Sept";
-                // }
-                // else if(arr2[1] === "10"){
-                //     month="Oct";
-                // }
-                // else if(arr2[1] === "11"){
-                //     month="Nov";
-                // }
-                // else if(arr2[1] === "12"){
-                //     month="Dec";
-                // }
-                // var date = `${month} ${arr2[0]},${arr2[2]}`;
-                // setDate(date)
-                // setLoading(false)
             })
             .catch(error => console.log('error', error));
         }
