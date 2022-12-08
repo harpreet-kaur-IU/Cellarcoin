@@ -200,9 +200,10 @@ const NavBarTransparent = () => {
     try {
       await getSignerOrProvider();
       setConnectedWallet(true);
-      
-    } catch (error) {
-      console.log(" error", error);
+      console.log("ghg")
+    }
+    catch(e){
+     
     }
     getAddress()
   };
@@ -234,7 +235,11 @@ const NavBarTransparent = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateWalletAddress`, requestOptions)
     .then(response => response.text())
     .then(result => result)
-    .catch(error => console.log('error', error));
+    .catch(error => {
+        toast.warning("Oops! Something went wrong",{
+          toastId:"1"
+      });
+    });
   }
 
 
@@ -309,8 +314,8 @@ const NavBarTransparent = () => {
               <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
               {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
             </ul>
-            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connect()}>Connect Wallet</button>
-            <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
+            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}  onClick={() => connectWallet()}>Connect Wallet</button>
+            <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}  onClick={() => connectWallet()}>
               <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
             </div>
             {/* <div className={`cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}>Connect Wallet</div> */}

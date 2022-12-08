@@ -125,6 +125,7 @@ const SignUp = (props) => {
             setLoading(true)
             axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}user/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.accessToken}})
             .then(response => {
+                console.log(response)
                 if(response.data.message === "User added successfully!"){
                     signOut();
                     //login API
@@ -151,7 +152,12 @@ const SignUp = (props) => {
                             setLoading(false);
                         }
                     })
-                    .catch(error => console.log('error', error));
+                    .catch(error => {
+                        setLoading(false)
+                        toast.warning("Oops! Something went wrong",{
+                            toastId:"1"
+                        });
+                    });   
                     return response();
                 }
                 else if(response.data.message === 'User already exist!!'){
@@ -172,12 +178,29 @@ const SignUp = (props) => {
                     return response();
                 }
                 else{
+                    setLoading(false)
+                    toast.warning("Oops! Something went wrong",{
+                        toastId:"1"
+                    });  
                     throw new Error(response);
                 }
             })
-            .catch(error => console.log('error', error));   
+            .catch(error => {
+                props.handler()
+                setLoading(false)
+                toast.warning("Oops! Something went wrong",{
+                    toastId:"1"
+                });
+                
+            });   
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            props.handler()
+            setLoading(false)
+            toast.warning("Oops! Something went wrong",{
+                toastId:"1"
+            });
+        });   
     }
 
     const validator = () =>{
@@ -263,6 +286,7 @@ const SignUp = (props) => {
                 setLoading(true)
                 axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}user/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.multiFactor.user.accessToken}})
                 .then(response => {
+                    console.log(response)
                     if(response.data.message === "User added successfully!"){
                         authUser.user.sendEmailVerification();
                         signOut();
@@ -277,11 +301,20 @@ const SignUp = (props) => {
                         setLoading(false)
                     }
                     else{
+                        props.handler()
                         setLoading(false)
-                        throw new Error(response);
+                        toast.warning("Oops! Something went wrong",{
+                            toastId:"1"
+                        });
                     }
                 })
-                .catch(error => console.log('error', error));            
+                .catch(error => {
+                    props.handler()
+                    setLoading(false)
+                    toast.warning("Oops! Something went wrong",{
+                        toastId:"1"
+                    });
+                });            
             })
             .catch(error => {
                 if(error.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'){
@@ -344,7 +377,12 @@ const SignUp = (props) => {
                             setLoading(false)
                         }
                     })
-                    .catch(error => console.log('error', error));
+                    .catch(error => {
+                        setLoading(false)
+                        toast.warning("Oops! Something went wrong",{
+                            toastId:"1"
+                        });
+                    });
                 }else{
                     toast.error("User Not Verified",{
                         toastId:"1"

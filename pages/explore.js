@@ -7,6 +7,8 @@ import React, { Fragment,useEffect, useState } from 'react'
 import styles from '../modules/css/WineCard.module.css'
 import Loader from "../modules/Vendors Panel/Loader";
 import { getUserOnBoardFromCookie } from "../auth/userCookies";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Explore() {
     const [data,setData] = useState("")
     const [loading,setLoading] = useState(false)
@@ -70,7 +72,12 @@ export default function Explore() {
         setData(result.data)
         setLoading(false)
       })
-      .catch(error => console.log('error', error));
+      .catch(error =>{
+        setLoading(false)
+        toast.warning("Unable to get NFT List",{
+            toastId:"1"
+        });
+      });
     },[])
 
     const favoriteHandler = (value,id) =>{
@@ -181,6 +188,7 @@ export default function Explore() {
                 <Newsletter></Newsletter>
             </Base>
             <Footer></Footer>
+            <ToastContainer/>
         </Fragment>
     );
 }

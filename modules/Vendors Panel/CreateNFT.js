@@ -410,9 +410,9 @@ const mint = async(abb)=>{
             )
             .then(response =>{
                 // console.log(response);
-                setLoading(false)
                 tokenId(response,addr)
-                
+                console.log("response")
+                setLoading(false)
             })
         }catch(error){
             console.log(error);

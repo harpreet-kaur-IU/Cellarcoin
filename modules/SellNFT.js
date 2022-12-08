@@ -208,12 +208,11 @@ const SellNFT = () => {
               <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-1"]}`}>*Not less than 7 days</h4>
               <h4 className={`font-24 f-400 l-33 ${styles["expire-instructions-2"]}`}>*Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
             </div>
-            
+
             <div className={`d-flex d-flex-column ${styles["royalty-fee"]}`}>
               <h3 className={`font-31 f-600 l-39 ${styles["royalty-fee-h3"]}`}>Royalty Fee</h3>
               <h4 className={`font-24 f-400 l-33 ${styles["royalty-fee-h4"]}`}>A royalty payment gives a percentage of of the sale price to the orginal creator/ beneficiary each time the NFT is sold on our platform/Marketplace</h4>
             </div>
-
             <div className={`d-flex d-justify-end ${styles["list-btn"]}`}>
               <button className='cursor-pointer font-20 f-500'>Sell</button>
             </div>
