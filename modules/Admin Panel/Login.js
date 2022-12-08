@@ -54,7 +54,12 @@ const Login = () => {
                 setLoading(false)
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error =>{
+            setLoading(false)
+            toast.warning("Oops! Something went wrong",{
+                toastId:"1"
+            });
+        });
     }
   return (
     <>

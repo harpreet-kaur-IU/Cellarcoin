@@ -117,7 +117,12 @@ export default function Signup() {
                 setUrl(results.imageUrl)
                 setLoadingImg(false)
             })
-            .catch(error => console.log('error', error));
+            .catch(error =>{
+                setLoadingImg(false)
+                toast.warning("Unable to upload documents",{
+                    toastId:"1"
+                });
+            });
         }
     },[cover])
     //to check that all the form fields are filled correctly without any error
@@ -187,10 +192,19 @@ export default function Signup() {
                         });
                     }
                     else{
+                        setLoading(false)
+                        toast.warning("Oops! Something went wrong",{
+                            toastId:"1"
+                        });
                         throw new Error(response);
                     }
                 })
-                .catch(error => console.log('error', error));            
+                .catch(error =>{
+                    setLoading(false)
+                    toast.warning("Oops! Something went wrong",{
+                        toastId:"1"
+                    });
+                });           
             })
             .catch(error => {
                 if(error.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'){

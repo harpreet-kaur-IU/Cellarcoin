@@ -67,7 +67,12 @@ export default function Login() {
                     setLoading(false)
                 }
             })
-            .catch(error => console.log('error', error));
+            .catch(error =>{
+                setLoading(false)
+                toast.warning("Oops! Something went wrong",{
+                    toastId:"1"
+                });
+            });
         })
         .catch(error => {
             if(error.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'){
