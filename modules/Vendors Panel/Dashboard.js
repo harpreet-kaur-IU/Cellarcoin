@@ -66,9 +66,11 @@ const Dashboard = () => {
       const parseResult = JSON.parse(result)
       console.log(parseResult.data)
       setTopNft(parseResult.data)
-      setLoading(false)
+      
     })
-    .catch(error => console.log('error', error));
+    .catch(error =>{
+      setLoading(false)
+    });
   },[])
 
   const deleteHandler = (e) =>{

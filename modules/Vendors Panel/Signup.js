@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SmallLoader from './SmallLoader';
 import axios from 'axios';
+import FirebaseErrors from '../FirebaseErrors';
 export default function Signup() {
 
     const {createUserWithEmailAndPassword,formatAuthUser,signOut} = useFirebaseAuth(); 
@@ -164,7 +165,7 @@ export default function Signup() {
     const formSubmit = (e) =>{
         e.preventDefault();
         const result = validator();
-        if(result){    
+        // if(result){    
             createUserWithEmailAndPassword(email,password)
             .then(async(authUser) =>{
                 var myHeaders = new Headers();
@@ -177,7 +178,6 @@ export default function Signup() {
                 setLoading(true)
                 axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.multiFactor.user.accessToken}})
                 .then(response => {
-                    console.log(response)
                     if(response.data.message === "Signed up successfully!"){
                         authUser.user.sendEmailVerification();
                         signOut();
@@ -207,18 +207,32 @@ export default function Signup() {
                 });           
             })
             .catch(error => {
-                if(error.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'){
-                    toast.error("Email Already Exists",{
-                        toastId:"2"
-                    });
-                }
-                if(error.message == 'Firebase: Password should be at least 6 characters (auth/weak-password).'){
-                    toast.error("Password Should be atleast 6 characters",{
-                        toastId:"2"
-                    });
-                }
+                var str = error.code;
+                var codes = str.substring(str.lastIndexOf('/')+1);
+                toast.error(codes,{
+                    toastId:"2"
+                });
+                 // switch(code){
+                //     case "auth/email-already-in-use":
+                //         console.log("email error");
+                //         break;
+
+                //     case "auth/weak-password":
+                //         console.log("password error");
+                //         break;
+                // }
+                // if(error.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'){
+                //     toast.error("Email Already Exists",{
+                //         toastId:"2"
+                //     });
+                // }
+                // if(error.message == 'Firebase: Password should be at least 6 characters (auth/weak-password).'){
+                //     toast.error("Password Should be atleast 6 characters",{
+                //         toastId:"2"
+                //     });
+                // }
             })
-        }
+        // }
     }
   return (
     <>

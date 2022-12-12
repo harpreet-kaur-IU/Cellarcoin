@@ -1,5 +1,4 @@
 import firebase from './firebaseConfig';
-
 export default function useFirebaseAuth(){
     const sendPasswordResetEmail = (email) =>
         firebase.auth().sendPasswordResetEmail(email);
