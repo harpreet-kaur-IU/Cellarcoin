@@ -25,15 +25,6 @@ const Dashboard = () => {
         headers: myHeaders
       };
 
-      // setLoading(true)
-      // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft`, requestOptions)
-      // .then(response => response.json())
-      // .then(result =>{
-      //   setData(result.data)
-      //   setLoading(false)
-      // })
-      // .catch(error => console.log('error', error));
-
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
       .then(response => response.json())
       .then(result =>{
@@ -64,8 +55,8 @@ const Dashboard = () => {
     .then(response => response.text())
     .then(result => {
       const parseResult = JSON.parse(result)
-      console.log(parseResult.data)
       setTopNft(parseResult.data)
+      setLoading(false)
       
     })
     .catch(error =>{

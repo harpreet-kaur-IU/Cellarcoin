@@ -530,7 +530,6 @@ const createNFT = (response,walletAddress,web3tokenID) =>{
             setCover("")
             var inputfile = document.getElementById("file-input-field");
             inputfile.value = "";
-            console.log(response.hash,result.data._id,walletAddress)
             addTransaction(response.hash,result.data._id,walletAddress,web3tokenID)
         })
         .catch(error => console.log('error', error));

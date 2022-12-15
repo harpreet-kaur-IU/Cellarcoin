@@ -148,7 +148,7 @@ const SignUp = (props) => {
                             setUserOnBoardCookie(result.token);
                             // props.confirm()
                             props.handler()
-                            window.location.reload(true);
+                            // window.location.reload(true);
                             setLoading(false);
                         }
                     })
@@ -172,7 +172,7 @@ const SignUp = (props) => {
                         setUserOnBoardCookie(result.token);
                         props.handler();
                         // props.confirm();
-                        window.location.reload(true);
+                        // window.location.reload(true);
                     })
                     .catch(error => console.log('error', error));
                     return response();
@@ -358,6 +358,7 @@ const SignUp = (props) => {
                         method: 'POST',
                         headers: myHeaders,
                     };
+
                     setLoading(true)
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
                     .then(response => response.json()) 
@@ -373,7 +374,7 @@ const SignUp = (props) => {
                             setUserOnBoardCookie(result.token);
                             // props.confirm()
                             props.handler()
-                            window.location.reload(true);
+                            // window.location.reload(true);
                             setLoading(false)
                         }
                     })
@@ -435,13 +436,17 @@ const SignUp = (props) => {
                         <img 
                             onClick={viewPassword} 
                             className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
-                            src={img?"images/eye2.svg":"images/eye-2.png"}></img>
+                            src={img?"images/eye2.svg":"images/eye-2.png"}>
+                        </img>
                     </div>
                     <div className={`p-relative ${style["password"]}`}>
                         <input type="password" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]} `} placeholder='Confirm Password' onChange={confirmPasswordHandler} value={confirmPassword} required></input>
                         <input type="text" className={`p-relative d-inline bg-pink mt-24 font-18 f-500 l-137 ${style["signup-input"]}`} placeholder="Confirm Password" onChange={confirmPasswordHandler} value={confirmPassword} />
-                        <img onClick={viewConfirmPassword} className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
-                        src={img2?"images/eye2.svg":"images/eye-2.png"}></img>
+                        <img 
+                            onClick={viewConfirmPassword} 
+                            className={`cursor-pointer p-absolute d-inline text-black ${style["password-img"]}`} 
+                            src={img2?"images/eye2.svg":"images/eye-2.png"}>
+                        </img>
                     </div>
                     {passMatch && <span className={`mb-8 font-14 f-700 text-danger`}>Password doesn't match.</span>}
                     {errorRePass && <span className={`mb-8 font-14 f-700 text-danger `}>Please re-enter password.</span>}
