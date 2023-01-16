@@ -1,0 +1,19 @@
+.modal-wrapper{
+    width: 635px;
+    right:0;
+    top: 90px;
+}
+.modal-cross-btn{
+    padding-left: 580px;
+    padding-top: 53px;
+    margin-bottom: 4px;
+}
+.modal-site-logo{
+    padding: 0px 248px;
+}
+.modal-content{
+    padding:21px 40px 102px 40px;
+}
+.modal-content-items{
+    padding: 22px 20px 22px 40px;
+}

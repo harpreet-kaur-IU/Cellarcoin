@@ -1,0 +1,39 @@
+{
+  "name": "wine-nft",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@coinbase/wallet-sdk": "^3.5.0",
+    "@rainbow-me/rainbowkit": "^0.4.8",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
+    "firebase": "^9.9.1",
+    "js-cookie": "^3.0.1",
+    "moment": "^2.29.4",
+    "next": "12.1.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-moment": "^1.1.2",
+    "react-onclickoutside": "^6.12.2",
+    "react-spinners": "^0.13.4",
+    "react-toastify": "^9.0.8",
+    "swiper": "^8.2.6",
+    "use-bn-idle": "^1.0.11",
+    "wagmi": "^0.6.3",
+    "web-vitals": "^3.0.3",
+    "web3": "^1.8.0",
+    "web3modal": "^1.9.8"
+  },
+  "devDependencies": {
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.1.6"
+  }
+}

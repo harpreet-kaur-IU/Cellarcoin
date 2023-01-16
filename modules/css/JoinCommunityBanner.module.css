@@ -1,0 +1,126 @@
+.community-banner-wrapper{
+    padding-top: 56px;
+    padding-bottom: 66px;
+}
+.community-banner-container{
+    margin-top:120px;
+    margin-bottom:88px;
+}
+.community-banner-para{
+    padding-right: 50px;
+}
+.btn-join-YT{
+    padding: 20px 38px;
+}
+.banner-img{
+    width: 600px;
+}
+/* .community-banner-container::after{
+    content: url('/images/com-shadow-banner.png');
+    position: absolute;
+    top:0;
+    left:476px;
+} */
+
+@media screen and (max-width:1440px) {
+    .community-banner-container{
+        width: 90%;
+    }
+    .banner-img{
+        width: 500px;
+    }
+    .community-h2{
+        font-size: 36px;
+    }
+    
+}
+@media screen and (max-width:1024px) {
+    .community-banner-para{
+        padding-right: 15px;
+        font-size: 26px;
+    }
+    .wine-newsletter-social-icon-wrapper{
+        gap:20px;
+    }
+    .banner-img{
+        width: 380px;
+    }
+    .community-banner-container{
+        margin-top:80px;
+        margin-bottom:68px;
+    }
+}
+@media screen and (max-width:768px) {
+    .banner-img{
+        width: 280px;
+    }
+    .community-h2{
+        font-size: 28px;
+    }
+    .community-banner-para{
+        font-size: 18px;
+    }
+    .btn-join-YT{
+        margin-top: 22px;
+        padding: 10px 28px;
+        font-size: 14px;
+    }
+    .wine-newsletter-social-icon-wrapper{
+        gap:10px;
+    }
+    .wine-newsletter-social-icon{
+        width: 40px;
+        height: 36px;
+    }
+    .community-banner-wrapper{
+        padding-top: 36px;
+        padding-bottom: 66px;
+    }
+    .community-banner-container{
+        margin-top:50px;
+        margin-bottom:38px;
+    }
+}
+@media screen and (max-width:560px) {
+    .img-col-6{
+        display: none;
+    }
+    .community-banner-wrapper{
+        padding-top: 16px;
+        padding-bottom: 36px;
+    }
+    .content-col-6{
+        width: 100%;
+    }
+    .wine-newsletter-social-icon-wrapper{
+        gap:20px;
+    }
+    .wine-newsletter-social-icon{
+        width: 43px;
+        height: 38px;
+    }
+    .community-banner-container{
+        margin-top:40px;
+        margin-bottom:28px;
+    }
+}
+@media screen and (max-width:375px) {
+    .community-h2{
+        font-size: 22px;
+    }
+    .community-banner-para{
+        font-size: 14px;
+        padding-right: 5px;
+    }
+    .wine-newsletter-social-icon-wrapper{
+        gap:10px;
+    }
+    .community-banner-container{
+        margin-top:20px;
+        margin-bottom:8px;
+    }
+    .wine-newsletter-social-icon{
+        width: 33px;
+        height: 28px;
+    }
+}

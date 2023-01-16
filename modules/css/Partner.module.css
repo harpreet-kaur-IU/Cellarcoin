@@ -1,0 +1,79 @@
+.partner-container{
+    background-image:url('/images/partner_bg.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.partner-wrapper{
+    padding: 37px 127px 0px 127px;
+}
+.partner-wrapper h3{
+    font-family: 'Righteous', cursive;
+}
+.get-in-touch-btn{
+    padding: 11px 51px;
+    transition: 0.8s;
+}
+.get-in-touch-btn:hover{
+    background:var(--primary);
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+@media screen and (max-width:1440px) {
+    .partner-container{
+        width: 90%;
+    }
+    .partner-wrapper{
+        padding: 37px 107px 0px 107px;
+    }
+    .partner-wrapper h2{
+        font-size: 32px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .partner-wrapper{
+        padding: 37px 67px 0px 67px;
+    }
+    .partner-wrapper h2{
+        font-size: 26px;
+        line-height: 40px;
+    }
+}
+@media screen and (max-width:768px) {
+    .partner-wrapper{
+        padding: 20px 37px 0px 37px;
+    }
+    .partner-wrapper h2{
+        font-size: 22px;
+        line-height: 34px;
+    }
+    .partner-wrapper img{
+        width: 400px;
+    }
+}
+@media screen and (max-width:470px) {
+    .partner-wrapper{
+        padding: 14px 17px 0px 17px;
+    }
+    .partner-wrapper h2{
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .partner-wrapper img{
+        width: 300px;
+    }
+
+}
+@media screen and (max-width:470px) {
+    .partner-wrapper{
+        padding: 10px 10px 0px 10px;
+    }
+    .partner-wrapper h2{
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .partner-wrapper img{
+        width: 250px;
+    }
+
+}

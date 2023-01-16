@@ -1,0 +1,101 @@
+.GIT-wrapper{
+    width: 970px;
+    height: 614px;
+    background-color: #ffffff;
+}
+.cross-wrapper{
+    padding: 10px;
+}
+.get-in-touch-right{
+    margin:0 auto;
+    max-height: 100vh;
+    text-align: center;
+}
+.get-in-touch-left{
+    height: 614px;
+    background-image: url('/images/get-in-touch.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.get-in-touch-form{
+    padding: 40px 47px 33px 48px;
+}
+.get-in-touch-form h2{
+    text-align: left;
+}
+.get-in-touch-form form{
+    width: 100%;
+    gap:24px;
+    margin-top: 24px;
+}
+.btn-submit{
+    padding: 12px 71px;
+}
+.name-wrapper{
+    gap:8px;
+}
+.name-wrapper h6{
+    text-align: left;
+}
+.name-wrapper input{
+    padding: 14px 20px 16px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14.2206px;
+}
+.email-wrapper input{
+    padding: 14px 20px 16px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14.2206px;
+}
+.email-wrapper{
+    gap:8px;
+}
+.email-wrapper h6{
+    text-align: left;
+}
+.message-wrapper{
+    gap:8px;
+}
+.message-wrapper h6{
+    text-align: left;
+}
+.message-wrapper input{
+    padding: 14px 20px 96px 28px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 14.2206px;
+}
+.get-in-touch-right form input:focus-visible{
+    outline: none;
+}
+@media screen and (max-width:1000px) {
+    .GIT-wrapper{
+        width: 768px;
+    }
+    .get-in-touch-form{
+        padding: 30px 27px 33px 28px;
+    }
+}
+@media screen and (max-width:790px) {
+    .GIT-wrapper{
+        width: 400px;
+    }
+    .get-in-touch-left{
+        display: none;
+    }
+    .get-in-touch-right{
+        margin:0 auto;
+        width: 100%;
+    }
+}
+@media screen and (max-width:425px) {
+    .GIT-wrapper{
+        width: 315px;
+    }
+    .get-in-touch-form{
+        padding: 20px 14px 0px 14px;
+    }
+    .get-in-touch-form h2{
+        font-size: 24px;
+    }
+}

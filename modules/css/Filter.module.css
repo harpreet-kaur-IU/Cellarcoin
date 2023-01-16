@@ -1,0 +1,199 @@
+.filter-position-absolute{
+    right: 180px;
+}
+.filters-heading-wrapper{
+    min-width: 256px;
+    height: 56px;
+    padding: 0px 24px;
+}
+.filters-heading-item-wrapper{
+    min-width: 256px;
+    padding: 17px 24px;
+}
+.filter-dropdown-menu{
+    z-index: 1;
+}
+.filter-dropdown-menu a:hover{
+    background-color: var(--inactive-pink);
+}
+.sort-heading-wrapper{
+    min-width: 144px;
+    height: 42.9px;
+    padding: 17px 24px;
+}
+.sort-position-absolute{
+    margin-top: 8px;
+    z-index: 1;
+    right: 0;
+    width: 422px;
+    height: auto;
+}
+.sort-col-1{
+    padding: 16px 22px 14px 22px;
+}
+.sort-col-2{
+    padding:22px 16px;
+}
+.min-wrapper{
+    padding: 10px 36px;
+}
+.max-wrapper{
+    padding: 10px 36px;
+}
+.btn-continue{
+    margin:21px 0px 14px 0px;
+}
+.btn-continue button{
+    padding: 5px 56px;
+    background: var(--primary);
+    color: var(--white);
+}
+@media screen  and (max-width:476px){
+    .filter-margin{
+        display:none;
+    }
+    .filters-heading-wrapper{
+        min-width: 200px;
+        padding: 0px 14px;
+    }
+    .filters-heading-item-wrapper{
+        min-width: 200px;
+        padding: 17px 14px;
+    }
+}
+@media screen  and (max-width:425px){
+    .filters-heading-wrapper{
+        min-width: 150px;
+        padding: 0px 10px;
+    }
+    .filters-heading-item-wrapper{
+        min-width: 150px;
+        padding: 10px 10px;
+    }
+}
+@media screen  and (max-width:375px){
+    .filter-margin{
+        display:none;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+    .filters-heading-wrapper{
+        height: 36px;
+    }
+    .filters-heading-wrapper a{
+        font-size: 12px;
+    }
+    .filters-heading-wrapper img{
+        width: 22px;
+        height: 22px;
+    }
+    .sort-heading-wrapper{
+        height: 36px;
+        padding: 0px 10px;
+    }
+    .sort-heading-wrapper a{
+        font-size: 12px;
+    }
+    .sort-heading-wrapper img{
+        width: 22px;
+        height: 22px;
+    }
+}
+
+
+
+
+.drop-down{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:42.9px;
+    padding:17px 24px;
+    background-color: var(--background-pink);
+    border-radius: 8px;
+    width:256px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    max-width: 100%;
+    box-sizing: border-box;
+    color: #030303;
+}
+.drop-down.open{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.drop-down span{
+    font-weight: 500;
+    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
+    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    color: #030303;
+    cursor: pointer;
+}
+.drop-down span:first-child{
+    overflow: hidden;
+}
+.drop-down ul{
+    position: absolute;
+    z-index:5;
+    width: 100%;
+    top: 45px;
+    left: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+    border-radius: 12px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 0;
+    overflow: hidden;
+    background-color: var(--background-pink);
+    color: #030303;
+    transition: 0.1s all ease-in-out;
+}
+
+.drop-down.open ul{
+    padding: 0px 0px 8px;
+    height: fit-content;
+    /* max-height: 150px; */
+    /* overflow-y: scroll; */
+}
+.drop-down ul li{
+    font-weight:400;
+    font-size: clamp(0.875rem, 0.8500rem + 0.1250vw, 1rem);
+    line-height: clamp(1.25rem, 1.2250rem + 0.1250vw, 1.375rem);
+    cursor: pointer;
+    padding: 9px 24px;
+}
+.drop-down ul li:last-child{
+    border-bottom: none;
+}
+.drop-down ul li:hover{
+    font-weight: 500;
+    background-color: var(--inactive-pink);
+}
+@media screen and (max-width:480px){
+    
+    .drop-down span{
+        font-size: 12px;
+    }
+    .drop-down ul li{
+        padding: 5px 13px;
+        font-size: 12px;
+    }
+    .drop-down span svg{
+        width:15px;
+        height: 15px;
+    }
+    .drop-down-date span{
+        font-size: 12px;
+    }
+    .drop-down-date ul li{
+        padding: 5px 13px;
+        font-size: 12px;
+    }
+    .drop-down-date span svg{
+        width:15px;
+        height: 15px;
+    }
+}

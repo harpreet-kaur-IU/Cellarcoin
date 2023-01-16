@@ -1,0 +1,100 @@
+
+.signup-section-position{
+    width: 700px;
+    right:0;
+    top: 40px;
+    padding:24px 44px 24px 44px;
+}
+.sign-up-wrapper{
+    padding:  64px 64px 164px 64px;
+}
+.signup-input{
+    width: 100%;
+    border: none;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--very-light-gray);
+}
+.signup-input::placeholder{
+    color:var(--text-black);
+}
+.signup-input:focus{
+    outline: none;
+}
+.password-img{
+    bottom: 8px;
+    right: 0;
+}
+.show.password input[type=text]{
+    display: block;
+}
+.show input[type=password]{
+    display: none;
+}
+.password input[type=text]{
+    display: none;
+}
+.terms-wrapper input{
+    margin-right: 24px;
+}
+.btn-continue{
+    padding: 10px 0px;
+    border:none;
+}
+.btn-google{
+    padding: 10px 0px;
+}
+
+@media screen and (max-width:768px) {
+    .signup-section-position{
+        width: 450px;
+        padding: 20px 24px 20px 20px;
+    }
+    .terms-wrapper h5{
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .btn-continue{
+        font-size: 16px;
+    }
+    .btn-google{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:476px) {
+    .signup-section-position{
+        width: 350px;
+        padding: 20px 24px 20px 20px;
+    }
+    .password-warning{
+        font-size: 14px;
+    }
+    .signup-input{
+        font-size: 14px;
+        padding-bottom: 6px;
+    }
+    .terms-wrapper input{
+        margin-right: 14px;
+    }
+    .terms-wrapper h5{
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .btn-continue{
+        font-size: 14px;
+    }
+    .btn-google{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width:351px) {
+    .signup-section-position{
+        width: 319px;
+        padding: 20px 24px 20px 20px;
+    }
+    .btn-continue{
+        padding: 8px 0px;
+    }
+    .btn-google{
+        padding: 8px 0px;
+    }
+}

@@ -1,0 +1,54 @@
+.wine-collection-container{
+    margin-top:192px;
+}
+.wine-collection-bg{
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 354px;
+    border-radius: 16px;
+}
+.wine-collection-bg img{
+    width: 266px;
+    height: 266px;
+    border: 4px solid #FFFFFF;
+    border-radius: 50%;
+}
+.wine-collection-container img{
+    margin-top:300px;
+}
+
+@media screen and (max-width:1440px) {
+    .wine-collection-container{
+        width: 90%;
+    }
+    .wine-card-page-container{
+        width: 90%;
+    }
+    .profile-card-container{
+        width: 90%;
+    }
+}
+@media screen and (max-width:1024px) {
+    .profile-card-wrapper{
+        grid-template-columns: repeat(2,1fr);
+        gap:30px;
+    }
+}
+@media screen and (max-width:650px){
+    .profile-card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media screen and (max-width:425px){
+    .wine-collection-bg{
+        height: 300px;
+    }
+    .wine-collection-container img{
+        margin-top: 250px;
+        width: 200px;
+        height: 200px;
+    }
+}

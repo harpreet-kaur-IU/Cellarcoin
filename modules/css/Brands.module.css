@@ -1,0 +1,34 @@
+.brands-bg{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.brands-banner-padding{
+    padding: 152px 0px 35px 0;
+}
+@media screen and (max-width:1024px) {
+    .brands-banner-padding h3{
+        width: 90%;
+    }
+    .mouse-pointer{
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .logo{
+        width: 100px;
+        height: 100px;
+    }
+}
+@media screen and (max-width:425px) {
+    .brands-banner-padding h3{
+        width: 95%;
+    }
+    .mouse-pointer{
+        height: 100px;
+    }
+    .brands-banner-padding{
+        padding: 102px 0px 35px 0;
+    }
+}

@@ -1,0 +1,290 @@
+.navbar{
+    top:0;
+    background: rgba(19, 19, 19, 0.48);
+    backdrop-filter: blur(24px);
+    z-index: 100;
+}
+
+.navbar-site-logo{
+    padding: 35px 0px;
+}
+.navbar-search-input{
+    background: rgba(235, 224, 230, 0.3);
+    margin-left: 22px;
+    padding: 11px 14px 11px 44px;
+    width: 307px;
+}
+.navbar-search-input:focus{
+    outline: none;
+}
+.navbar-search-input::placeholder{
+    color:#ffffff;
+}
+.navbar-items-wrapper{
+    margin-left:40px;
+}
+.btn-connect-wallet{
+    padding: 14px 21px;
+    border: 1px solid var(--primary);
+}
+.btn-connect-wallet:hover{
+    background: #FFFFFF;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    box-shadow: 0px 6px 16px rgba(190, 157, 171, 0.4);
+}
+.search-loader-wrapper{
+    top: 5px;
+    right: 5px;
+}
+.search-icon-navbar{
+    position: absolute;
+    top: 11px;
+    left: 35px;
+}
+.search-suggestion-wrapper{
+    z-index: 1;
+    overflow-y: scroll;
+    width: 307px;
+    height: 360px;
+    top:50px;
+    left: 20px;
+    padding: 16px 13px;
+    background: #FFFFFF;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.16);
+    border-radius: 8px;
+}
+.search-brand-wrapper{
+    padding-bottom: 16px;
+    border-bottom: 1px solid #CBCBCB;
+}
+.search-nft-img{
+    object-fit: contain;
+    min-width: 36px;
+    height: 36px;
+    border: 1px solid #DCC5D2;
+    border-radius: 4px;
+}
+.search-loader-wrapper{
+    top: 5px;
+    right: 5px;
+}
+.search-nft-item:hover{
+    background-color: var(--inactive-pink);
+    border-radius: 8px;
+}
+.expand{
+    left: 0% !important;
+}
+@media screen and (max-width:1440px) {
+    .navbar-search-input{
+        width:280px;
+    }
+    .navbar-items-wrapper{
+        margin-left:20px;
+    }
+    .navbar-container{
+        width: 95%;
+    }
+}
+@media screen and (max-width:1250px) {
+    .navbar-search-input{
+        margin-left: 12px;
+    }
+    .navbar-items-wrapper{
+        margin-left: 0px;
+    }
+    .connect-wallet-icon{
+        display: block;
+    }
+    .btn-connect-wallet{
+        display: none;
+    }
+    .navbar-search-input{
+        width: 200px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .navbar-items-wrapper li{
+        margin-left: 12px;
+        font-size: 15px;
+    }
+    .connect-wallet-icon{
+        margin-left: 18px;
+    }
+    .bell-icon{
+        margin-left: 18px;
+    }
+    .profile-icon{
+        margin-left: 18px;
+    }
+}
+@media screen and (max-width:891px) {
+    .bar-cross{
+        display: flex;
+        flex-direction: column;
+    } 
+    .navbar-container{
+        gap:18px;
+    }
+    .navbar-search-input{
+        width: 300px;
+    }
+    .navbar-items-wrapper{
+        width: 100%;
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        background: rgba(19, 19, 19, 0.48);
+        backdrop-filter: blur(24px);
+        padding: 30px 0px;
+        border-radius: 0px 0px 8px 8px;
+    }
+    
+}
+@media screen and (max-width:738px) {
+    .navbar-container{
+        gap:24px;
+    }
+    .navbar-search-input{
+        width: 250px;
+        font-size: 10px;
+        margin-left:0px;
+    }
+    .navbar-site-logo{
+        width: 100px;
+    }
+    .connect-wallet-icon{
+        margin-left: 12px;
+    }
+    .bell-icon{
+        margin-left: 12px;
+    }
+    .profile-icon{
+        margin-left: 12px;
+    }
+    .bar-cross{
+        margin-left: 12px; 
+    }
+}
+@media screen and (max-width:631px) {
+
+    .navbar-container{
+        gap:24px;
+    }
+    .navbar-search-input{
+        width: 170px;
+        font-size: 8px;
+        margin-left:0px;
+        padding: 8px 14px;
+    }
+    .connect-wallet-icon{
+        margin-left: 8px;
+    }
+    .bell-icon{
+        margin-left: 8px;
+    }
+    .profile-icon{
+        margin-left: 8px;
+    }
+    .bar-cross{
+        margin-left: 8px; 
+    }
+    .bell-icon img{
+        width: 22px;
+        height: 22px;
+    }
+    .profile-icon img{
+        width: 22px;
+        height: 22px;
+    }
+    .bar-cross{
+        width: 22px;
+        height: 22px;
+    }
+}
+@media screen and (max-width:530px) {
+    .navbar-container{
+        gap:12px;
+    }
+}
+@media screen and (max-width:470px) {
+    .navbar-container{
+        gap:14px;
+    }
+    .navbar-site-sm-logo{
+        display: flex;
+        padding: 35px 0px;
+    }
+    .navbar-site-logo{
+        display: none;
+    }
+    .bell-icon img{
+        width: 18px;
+        height: 18px;
+    }
+    .profile-icon img{
+        width: 18px;
+        height: 18px;
+    }
+    .bar-cross{
+        width: 18px;
+        height: 18px;
+    }
+}
+@media screen and (max-width:470px) {
+    .navbar-container{
+        gap:8px;
+    }
+}
+@media screen and (max-width:375px) {
+    .navbar-search-input{
+        width: 145px;
+    }
+    .navbar-container{
+        gap:6px;
+    }
+    .connect-wallet-icon{
+        margin-left: 6px;
+    }
+    .bell-icon{
+        margin-left: 6px;
+    }
+    .profile-icon{
+        margin-left: 6px;
+    }
+    .bar-cross{
+        margin-left: 6px; 
+    }
+}
+
+/* dropdown code*/
+.profile-dropdown{
+    background: rgba(19, 19, 19, 0.48);
+    backdrop-filter: blur(24px);
+    color: #ffffff;
+    width: 153px;
+    height: auto;
+    top: 100px;
+    right: 10px;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 10%);
+    border-radius: 0px 0px 8px 8px;
+    padding: 13px 8px;
+    gap: 10px;
+}
+.profile-dropdown h6{
+    padding: 5px;
+    width: 100%;
+    height: 31px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.profile-dropdown h6:hover{
+    background: #FFDAEE;
+    color: #000000;
+}

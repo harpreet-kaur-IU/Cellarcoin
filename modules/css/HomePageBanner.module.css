@@ -1,0 +1,87 @@
+.home-banner-container{
+    padding-top: 213px;
+    padding-bottom: 201px;
+}
+.home-banner-container h1{
+    padding-right: 50px;
+}
+.btn-home-explore{
+    padding: 14px 114px;
+    transition: 0.8s;
+}
+.btn-home-explore:hover{
+    background-color: #740578;
+}
+.home-banner-slider-img{
+    width: 600px;
+}
+/* .home-banner-container::after{
+    content: url('/images/com-shadow-banner.png');
+    position: absolute;
+    top:113px;
+    left:370px;
+} */
+@media screen and (max-width:1440px){
+    .home-banner-container{
+        width: 90%;
+    }
+    .home-banner-container h1{
+        font-size: 40px;
+    }
+    .home-banner-container h4{
+        font-size: 24px;
+    }
+    .home-banner-slider-img{
+        width: 500px;
+    }
+    .btn-home-explore{
+        font-size: 16px;
+    }
+}
+@media screen and (max-width:1200px){
+    .home-banner-container::after{
+        left:250px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .home-banner-slider-img{
+        width: 380px;
+    }
+    .home-banner-container{
+        padding-bottom: 100px;
+    }
+    .home-banner-container h1{
+        font-size: 32px;
+        padding-right: 0px;
+    }
+    .home-banner-container h4{
+        font-size: 20px;
+        margin-top: 22px;
+    }
+}
+@media screen and (max-width:992px){
+    .home-banner-container{
+        width: 90%;
+    }
+    .home-banner-container::after{
+        left:200px;
+    }
+}
+@media screen and (max-width:768px){
+    .home-banner-container::after{
+        display: none;
+    }
+    .home-banner-col-7{
+        width: 100%;
+    }
+    .home-banner-container{
+        padding-top: 130px;
+        padding-bottom: 100px;
+    }
+    .home-banner-slider-img{
+        width: 280px;
+    }
+    .home-banner-col-3{
+        display: none;
+    }
+}

@@ -1,0 +1,123 @@
+.create-nft-wrapper{
+    margin-top: 16px;
+    margin-bottom: 100px;
+}
+.create-nft-file-format{
+    margin-top: 10px;
+}
+.image-input-wrapper{
+    position: relative;
+    width: 300px;
+    height: 250px;
+    margin-top: 16px;
+    border: 1px dashed #000000;
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+.image-input-wrapper input{
+    position: absolute;
+    top:0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    opacity: 0;
+}
+.image-input-wrapper img{
+    width: 65px;
+    height: 65px;
+}
+.image-input-wrapper input:focus{
+    outline: none;
+}
+.name-input{
+    margin-top: 16px;
+    gap:14px;
+}
+.name-input input{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    height: 49px;
+    padding-left: 20px;
+}
+.name-input input:focus{
+    outline: none;
+}
+.desc-input{
+    margin-top: 16px;
+}
+.desc-input h6{
+    margin-top: 16px;
+    margin-bottom: 14px;
+}
+.desc-input input{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    height: 49px;
+    padding-left: 20px;
+}
+.desc-input input:focus{
+    outline: none;
+}
+.properties-input{
+    margin-top: 16px;
+}
+.properties-input h6{
+    margin-top: 16px;
+    margin-bottom:14px;
+}
+.properties-input input{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    height: 49px;
+    padding-left: 20px;
+}
+.properties-input input:focus{
+    outline: none;
+}
+.properties-wrapper{
+    margin-top: 16px;
+}
+.properties-name-wrapper h5{
+    margin-bottom: 14px;
+}
+.property-add-btn{
+    border: none;
+    padding: 14px 24px;
+    background-color: var(--primary);
+    border-radius: 16px;
+}
+.property-add-btn img{
+    height: 24px;
+    width: 24px;
+}
+.submit-btn{
+    margin-top:26px;
+    width: 201px;
+    padding: 10px 0px;
+    border-radius: 16px;
+    color: #ffffff;
+    border:none;
+}
+.post-input{
+    margin-top: 16px;
+    gap:16px;
+}
+.checkbox-text{
+    gap:10px;
+}
+
+@media screen and (max-width:1064px) {
+    .properties-name-wrapper{
+        width: 100%;
+        margin-left: calc(100% / 12 * 0);
+    }
+
+}
+@media screen and (max-width:768px) {
+    .vendor-container{
+        width: 100%;
+    }
+}

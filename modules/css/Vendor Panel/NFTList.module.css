@@ -1,0 +1,59 @@
+.nft-list-wrapper{
+    margin-top: 33px;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    padding: 30px 22px 35px 52px;
+}
+.nft-content-left img{
+    width: 84px;
+    height: 63px;
+    border-radius: 8px;
+}
+.nft-details{
+    margin-left: 17px;
+}
+.nft-details h6{
+    font-size: 18px;
+    line-height: 27px;
+}
+.pricing-details{
+    margin-top: 12px;
+}
+.pricing-details span{
+    color: #676767;
+    font-size: 12px;
+    line-height: 16px;
+    margin-right: 15px;
+}
+.pricing-details span{
+    font-size: 14px;
+    line-height: 19px;
+}
+.Created-details{
+    margin-top: 23px;
+}
+.Created-details span{
+    color: #676767;
+    font-size: 12px;
+    line-height: 16px;
+    margin-right: 15px;
+}
+.Created-details span{
+    font-size: 14px;
+    line-height: 19px;
+}
+.rejection-reason h5{
+    font-size: 14px;
+    line-height: 19px;
+}
+.rejection-reason h6{
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 21px;
+}
+.icons-wrapper img{
+    width: 20px;
+    height: 20px;
+
+}

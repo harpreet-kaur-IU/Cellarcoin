@@ -1,0 +1,51 @@
+.nft-cards-div{
+    padding: 37px 14px;
+    width: 201px;
+}
+.user-nft-row{
+    gap: 110px;
+    margin: 52px 0px 96px 0px;
+}
+@media screen and (max-width:1440px) {
+    .user-nft-row{
+        gap: 50px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .user-nft-row{
+        gap: 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .user-nft-row{
+        gap: 10px;
+        margin: 22px 0px 36px 0px;
+    }
+    .nft-cards-div h5{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width:650px){
+    .nft-cards-div h5{
+        font-size: 16px;
+    }
+    .nft-cards-div{
+        padding: 27px 14px;
+    }
+}
+@media screen and (max-width:425px){
+    .nft-cards-div h5{
+        font-size: 14px;
+    }
+    .nft-cards-div{
+        padding: 17px 14px;
+    }
+}
+@media screen and (max-width:375px){
+    .nft-cards-div h5{
+        font-size: 12px;
+    }
+    .nft-cards-div{
+        padding: 17px 14px;
+    }
+}

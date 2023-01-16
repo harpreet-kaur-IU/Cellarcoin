@@ -1,0 +1,130 @@
+/* .wine-card-slider-container{
+    margin-left: 64px;
+} */
+/* .wine-card-container{
+    gap:23px;
+} */
+.wine-cards-container{
+    border-radius: 16px;
+    width: 422px;
+    transition: 0.5s;
+}
+.wine-cards-container:hover{
+    box-shadow: 5px 7px 5px 5px rgb(0 0 0 / 5%);
+    opacity: 0.8;
+    transform: scale(1.01);
+}
+.wine-card-wrapper{
+    margin-bottom: 26px;
+}
+.wine-bg-img{
+    object-fit: contain;
+    width: 100%;
+    max-width: 100%;
+    height: 420px;
+}
+.wine-bg-content{
+    padding: 16px;
+}
+.wine-card-content-view span{
+    padding: 4px;
+}
+.wine-card-content-row-2 img{
+    width: 27px;
+    height: 27px;
+}
+.polygon-icon-img{
+    width: 27px;
+    height: 27px;
+}
+/* .wine-card-content-row-2{
+    margin-bottom: 34px;
+} */
+.wine-card-content-row-2 h5{
+    margin: 0;
+}
+.wine-card-content-view :first-child{
+    margin-right: 6px;
+}
+/* .wine-card-content-view span img{
+    position: relative;
+    top: 6px;
+    left: 7px;
+} */
+.wine-card-content-row-2 h5 img{
+    position: relative;
+    top:7px;
+    right: 9px;
+}
+.wine-card-content-row-2:nth-child(3){
+    margin-top:5px;
+}
+.nft-name{
+    height: 50px;
+}
+.nft-name h6{
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media screen and (max-width:1440px){
+    .wine-card-slider-container{
+        width: 90%;
+    }
+    .wine-card-page-container{
+        width: 90%;
+    }
+    .wine-card-wrapper{
+        gap:14px;
+    }
+}
+@media screen and (max-width:1440px) {
+    .wine-cards-container{
+        width: 400px;
+    }
+}
+@media screen and (max-width:1347px) {
+    .wine-cards-container{
+        width:365px;
+    }
+}
+@media screen and (max-width:1245px) {
+    .wine-cards-container{
+        width: auto;
+    }
+}
+@media screen and (max-width:1024px) {
+    .wine-card-container{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media screen and (max-width:650px){
+    .wine-card-container{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .wine-card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+@media screen and (max-width:425px) {
+    .wine-bg-img{
+        height: 350px;
+    }
+}
+
+/* user nft cards */
+.usernft-list-nft-btn{
+    padding: 15px 0px;
+}
+.user-nft-cards-container{
+    border-radius: 16px;
+    width: 100%;
+}
+.user-nft-cards-container:hover{
+    box-shadow: 5px 7px 5px 5px rgb(0 0 0 / 5%);
+    transition: transform 1s;
+    transform: scale(1.01);
+}

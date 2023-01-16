@@ -1,0 +1,55 @@
+
+.wine-coming-soon-content-1{
+    margin-right: 196px;
+}
+.wine-coming-soon-content-2{
+    margin-right: 196px;
+}
+
+
+@media screen and (max-width:1440px) {
+    .coming-soon-container{
+        width: 90%;
+    }
+}
+@media screen and (max-width:1024px) {
+    .coming-soon-container{
+        width: 90%;
+    }
+    .wine-coming-soon-content-1{
+        margin-right: 0px;
+    }
+    .wine-coming-soon-content-2{
+        margin-left: calc(100% / 12 * 0);
+        margin-right: 66px;
+    }
+}
+@media screen and (max-width:768px) {
+    .coming-soon-container{
+        width: 90%;
+    }
+    .wine-cooming-soon-1{
+        flex-direction: column;
+    }
+    .wine-cooming-soon-1 img{
+        width: 100%;
+        margin-left: calc(100% / 12 * 0);
+        margin-bottom: 24px;
+    }
+    .wine-cooming-soon-1 p{
+        width: 100%;
+        margin-left: calc(100% / 12 * 0);
+    }
+    .wine-cooming-soon-2{
+        flex-direction: column;
+    }
+    .wine-cooming-soon-2 img{
+        width: 100%;
+        margin-left: calc(100% / 12 * 0);
+        margin-bottom: 24px;
+    }
+    .wine-cooming-soon-2 p{
+        width: 100%;
+        margin-left: calc(100% / 12 * 0);
+    }
+}

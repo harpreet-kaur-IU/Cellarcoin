@@ -1,0 +1,202 @@
+.multi-vendor-wrapper{
+    padding: 38px 131px 100px 59px;
+    overflow-x: scroll;
+    height: 100vh;
+}
+.profile-wrapper{
+    margin-top: 36px;
+    background: #FFFFFF;
+    box-shadow: 0px 1.77758px 3.55516px 2.66637px rgba(0, 0, 0, 0.0250765);
+    border-radius: 14.2206px;
+}
+.profile-wrapper{
+    padding:28px 33px 36px 28px;
+    gap:42px;
+}
+
+.vendor-panel-img img{
+    border-radius: 7.11032px;
+}
+.profile-details-wrapper{
+    gap:13px;
+}
+.profile-details-wrapper form{
+    gap:14px;
+}
+.name-input{
+    background: #F6F6F6;
+    border-radius: 14.2206px;
+    padding: 16px 0px 16px 0px;
+    position: relative;
+    height: 53.33px;
+}
+.name-input input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.name-input input:focus{
+    outline: none;
+}
+.name-input input::placeholder{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #404040;
+}
+.name-input h6{
+    position: absolute;
+    left: 35px;
+    color: #404040;
+}
+.name-input img{
+   margin-left: 600px;
+}
+.submit-btn-wrapper{
+    margin-top: 52px;
+}
+.submit-btn-wrapper button{
+    padding: 14px 0px;
+    width: 209px;
+    background-color: var(--primary);
+    box-shadow: 0px 5.33274px 10.6655px rgba(192, 231, 253, 0.5);
+    border-radius: 14.2206px;
+    border:none;
+    color: #FFFFFF;
+}
+.multi-vendor-access{
+    margin-top: 36px;
+}
+.create-login-id{
+    padding: 12px 0px;
+    width: 235px;
+    background: var(--primary);
+    box-shadow: 0px 6px 12px rgba(192, 231, 253, 0.5);
+    border-radius: 16px;
+    border:none;
+    color: #FFFFFF;
+}
+.multi-vendor-access-wrapper{
+    margin-top: 38px;
+    margin-bottom:50px;
+}
+.login-creds-wrapper{
+    gap:16px;
+}
+.login-cred-details h6{
+    margin-top: 24px;
+}
+.login-cred-password-wrapper{
+    margin-top: 16px;
+}
+.login-cred-password-wrapper input{
+    border: none;
+    background-color: transparent;
+}
+.login-cred-password-wrapper input:focus{
+    outline: none;
+}
+.login-cred-password-wrapper img{
+    width: 20px;
+    height: 14px;
+}
+.create-login-wrapper{
+    width: 343px;
+}
+.create-login-h4{
+    margin-top: 36px;
+}
+.create-login-input-wrapper{
+    margin-top: 32px;
+}
+.create-login-input-wrapper input{
+    width: 100%;
+    border:none;
+    border-bottom: 1px solid #000000;
+    border-radius: 3px;
+    padding: 12px 0px;
+    background-color: transparent;
+    margin-top: 16px;
+    font-weight: 500;
+    font-size: 16px
+}
+
+.create-login-input-wrapper input:focus{
+    outline: none;
+}
+.save-btn{
+    margin-top: 57px;
+    padding: 14px 138px;
+    width: 235px;
+    background:var(--primary);
+    box-shadow: 0px 6px 12px rgba(192, 231, 253, 0.5);
+    border-radius: 16px;
+    color: #FFFFFF;
+    border: none;
+}
+@media screen and (max-width:1000px) {
+    .multi-vendor-wrapper{
+        padding: 38px 31px 100px 31px;
+    }
+}
+@media screen and (max-width:768px) {
+    .multi-vendor-access-wrapper{
+        width: 100%;
+    }
+    .multi-vendor-access h3{
+        font-size: 24px;
+    }
+    .profile-details-wrapper{
+        width: 100%;
+    }
+    .multi-vendor-access h3{
+        font-size: 30px;
+    }
+}
+@media screen and (max-width:600px) {
+    .create-login-id{
+        width: 200px;
+        font-size: 14px;
+    }
+    .multi-vendor-access h3{
+        font-size: 18px;
+    }
+    .multi-vendor-access h3{
+        font-size: 26px;
+    }
+}
+@media screen and (max-width:490px) {
+    .create-login-id{
+        width: 100px;
+        font-size: 10px;
+    }
+    .multi-vendor-access h3{
+        font-size: 14px;
+    }
+    .login-cred-details h4{
+        font-size: 16px;
+    }
+    .multi-vendor-wrapper{
+        padding: 38px 11px 100px 11px
+    }
+    .name-input{
+        height: 43px;
+    }
+    .name-input h6{
+        left: 15px;
+    }
+}
+@media screen and (max-width:376px) {
+    .create-login-wrapper{
+        width: 280px;
+    }
+    .profile-wrapper{
+        padding: 28px 13px 36px 13px;
+    }
+    .name-input{
+        height: 43px;
+    }
+    .name-input h6{
+        display: none;
+    }
+}
