@@ -26,14 +26,15 @@ function useOutsideAlerter(ref,handler) {
 const Header = (props) => {
   const wrapperRef = useRef(null);
   const handler = ()=>{
-    setDropdown(false)
+    setDropdown(prev =>!prev)
   }
   useOutsideAlerter(wrapperRef,handler);
+
   const [dropdown,setDropdown] = useState(false);
   const [user,setUser] = useState("");
 
   const dropdownHandler = () =>{
-    setDropdown(!dropdown)
+    setDropdown(prev =>!prev)
   }
   const createNftNavigation = ()=>{
     Router.push("/createnft")
@@ -227,36 +228,7 @@ const Header = (props) => {
         </div>
         <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
           <div className='p-relative d-flex d-align-center gap-3'>
-            {/* <button onClick={dropdownHandler} className={`cursor-pointer ${styles["header-buttons"]}`}>Connect Wallet</button> */}
-              {/* <WagmiConfig client={wagmiClient} />
-              <RainbowKitProvider chains={chains} theme={lightTheme({
-                accentColor:'#780543',
-                accentColorForeground:'white',
-                borderRadius:'small',
-                fontStack:'system',
-              })}/>
-              <ConnectButton />
-              <RainbowKitProvider />
-              <WagmiConfig /> */}
-
-              {/* <div>
-                {hasMetamask ? (
-                  isConnected ? (
-                    "Connected! "
-                  ) : (
-                    <>
-                      <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={() => connect()}>Connect Wallet</button>
-                      <div className={`d-none cursor-pointer ${styles["header-buttons-icon"]}`} onClick={() => connect()}>
-                        <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
-                      </div>
-                    </>
-                  )
-                ) : (
-                  "Please install metamask"
-                )}
-                {isConnected ? <button onClick={() => execute()}>Execute</button> : ""}
-              </div> */}
-             
+           
               <div className="text-center">
                 <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
               </div>
@@ -275,6 +247,7 @@ const Header = (props) => {
                   <h6 onClick={logOutHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>
                 </div>
               }
+              
           </div>
         </div>
     </div>

@@ -125,7 +125,6 @@ const SignUp = (props) => {
             setLoading(true)
             axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}user/signup`,raw,{headers:{"Authorization":"Bearer "+authUser.user.accessToken}})
             .then(response => {
-                console.log(response)
                 if(response.data.message === "User added successfully!"){
                     signOut();
                     //login API
@@ -137,7 +136,6 @@ const SignUp = (props) => {
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
                     .then(response => response.json()) 
                     .then(result => {
-                        
                         if(result.message == "This email is not registered with us"){
                             toast.error("Email is not registered",{
                                 toastId:"2"
@@ -147,14 +145,14 @@ const SignUp = (props) => {
                             removeUserOnBoardCookie();
                             setUserOnBoardCookie(result.token);
                             // props.confirm()
-                            props.handler()
+                            props.handler();
                             // window.location.reload(true);
                             setLoading(false);
                         }
                     })
                     .catch(error => {
                         setLoading(false)
-                        toast.warning("Oops! Something went wrong",{
+                        toast.warning(error,{
                             toastId:"1"
                         });
                     });   
@@ -179,7 +177,7 @@ const SignUp = (props) => {
                 }
                 else{
                     setLoading(false)
-                    toast.warning("Oops! Something went wrong",{
+                    toast.warning(response.data.message,{
                         toastId:"1"
                     });  
                     throw new Error(response);
@@ -188,7 +186,7 @@ const SignUp = (props) => {
             .catch(error => {
                 props.handler()
                 setLoading(false)
-                toast.warning("Oops! Something went wrong",{
+                toast.warning(error,{
                     toastId:"1"
                 });
                 
@@ -197,7 +195,7 @@ const SignUp = (props) => {
         .catch(error => {
             props.handler()
             setLoading(false)
-            toast.warning("Oops! Something went wrong",{
+            toast.warning(error,{
                 toastId:"1"
             });
         });   
@@ -411,7 +409,6 @@ const SignUp = (props) => {
                         toastId:"1"
                     });
                 }
-                console.log(error)
             })
         }
     }
