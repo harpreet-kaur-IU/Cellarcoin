@@ -82,6 +82,7 @@ const NavBar = () => {
   },[])
 
   const handleClick = () =>{
+    // console.log("modal called");
     setToggle(prev => !prev);
   }
 
@@ -342,7 +343,7 @@ const NavBar = () => {
         </div>
         {toggle &&
           <Modal modalClass="modal-verify">
-            <SignUp  handler={handleClick}></SignUp>
+            <SignUp handler={handleClick}></SignUp>
           </Modal>
         }
           {noti &&

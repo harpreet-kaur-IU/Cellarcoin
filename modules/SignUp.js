@@ -114,6 +114,7 @@ const SignUp = (props) => {
     const provider = new GoogleAuthProvider();
 
     const googleSignIn = () =>{
+        // console.log("in google sign")
         signInWithPopup(firebaseAuth, provider)
         .then(authUser=>{
             var myHeaders = new Headers();
@@ -132,7 +133,6 @@ const SignUp = (props) => {
                         method: 'POST',
                         headers: myHeaders,
                     };
-                    console.log(requestOptions)
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
                     .then(response => response.json()) 
                     .then(result => {
@@ -142,10 +142,11 @@ const SignUp = (props) => {
                             });
                         }
                         else{
+                            // console.log("new user registration")
                             removeUserOnBoardCookie();
                             setUserOnBoardCookie(result.token);
                             // props.confirm()
-                            props.handler();
+                            props.handler()
                             // window.location.reload(true);
                             setLoading(false);
                         }
@@ -156,7 +157,7 @@ const SignUp = (props) => {
                             toastId:"1"
                         });
                     });   
-                    return response();
+                    // return response();
                 }
                 else if(response.data.message === 'User already exist!!'){
                     var requestOptions = {
@@ -166,14 +167,13 @@ const SignUp = (props) => {
                     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/login`, requestOptions)
                     .then(response => response.json()) 
                     .then(result => {
+                        // console.log("user already exist")
                         removeUserOnBoardCookie();
                         setUserOnBoardCookie(result.token);
                         props.handler();
-                        // props.confirm();
-                        // window.location.reload(true);
                     })
                     .catch(error => console.log('error', error));
-                    return response();
+                    // return response();
                 }
                 else{
                     setLoading(false)
