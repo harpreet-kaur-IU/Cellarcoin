@@ -399,7 +399,7 @@ const CreateNFT = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1899E91Ed1143f49942797A222e034F1fDC92839';
+        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -408,7 +408,7 @@ const CreateNFT = () => {
         setLoading(true);
         try {
           contract
-            .nftMint(`ipfs://${tokenURI}`, 10) // todo dynamic royalty
+            .nftMint(`ipfs://${tokenURI}`)
             .then((result) => {
               result.wait().then((response) => {
                 setTokenID(
@@ -420,8 +420,6 @@ const CreateNFT = () => {
                 );
                 let web3Response = response;
                 createNFT(web3Response, addr, tokId);
-
-                // queryHandler(tokId, contractAddressLocal);
               });
             })
             .catch((error) => {
@@ -451,36 +449,7 @@ const CreateNFT = () => {
       console.log('Please install MetaMask');
     }
   };
-  //token Id - get token id with web3
-  // const tokenId = async (web3Response, addr) => {
-  //   const ethers = require('ethers');
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
 
-  //   if (typeof window.ethereum !== 'undefined') {
-  //     const contractAddress = '0x75d87f709B5E74F049271D9d82816231dCEE1eEd';
-  //     const contract = new ethers.Contract(
-  //       contractAddress,
-  //       Nft_marketplace_ABI,
-  //       signer
-  //     );
-  //     setLoading(true);
-  //     try {
-  //       await contract.tokenId().then((response) => {
-  //         var hexString = response._hex;
-  //         var yourNumber = parseInt(hexString, 16);
-  //         yourNumber++;
-  //         setLoading(false);
-  //         setTokenID(yourNumber);
-  //         createNFT(web3Response, addr, yourNumber);
-  //       });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } else {
-  //     console.log('Please install MetaMask');
-  //   }
-  // };
   //create nft with backend API
   const createNFT = (response, walletAddress, web3tokenID) => {
     const attributes = [

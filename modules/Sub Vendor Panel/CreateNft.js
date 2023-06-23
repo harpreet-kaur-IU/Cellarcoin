@@ -270,7 +270,7 @@ const CreateNft = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1899E91Ed1143f49942797A222e034F1fDC92839';
+        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -279,7 +279,7 @@ const CreateNft = () => {
         setLoading(true);
         try {
           contract
-            .nftMint(`ipfs://${tokenURI}`, 10) // todo dynamic royalty
+            .nftMint(`ipfs://${tokenURI}`)
             .then((result) => {
               result.wait().then((response) => {
                 setTokenID(
@@ -291,8 +291,6 @@ const CreateNft = () => {
                 );
                 let web3Response = response;
                 createNFT(web3Response, addr, tokId);
-
-                // queryHandler(tokId, contractAddressLocal);
               });
             })
             .catch((error) => {
@@ -323,32 +321,6 @@ const CreateNft = () => {
     }
   };
 
-  //   const mint = async (abb) => {
-  //     const ethers = require('ethers');
-  //     const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //     const signer = provider.getSigner();
-  //     const addr = await signer.getAddress();
-
-  //     if (typeof window.ethereum !== 'undefined') {
-  //       const contractAddress = '0x1899E91Ed1143f49942797A222e034F1fDC92839';
-  //       const contract = new ethers.Contract(
-  //         contractAddress,
-  //         Nft_marketplace_ABI,
-  //         signer
-  //       );
-  //       try {
-  //         await contract
-  //           .nftMint(addr, abb, 'Cellarcoin', '2400', 'Heloo', 'Nothing')
-  //           .then((response) => {
-  //             createNFT(response, addr);
-  //           });
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     } else {
-  //       console.log('Please install MetaMask');
-  //     }
-  //   };
   const getToken = (raw) => {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');

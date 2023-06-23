@@ -67,32 +67,57 @@ const SellNow = () => {
     }
   }, [nftId]);
   //web3 code starts here
-  const sellNftWeb3 = async () => {
+  const sellNftWeb3 = async (tokenURI) => {
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
-    const tokenid = 36;
 
     if (typeof window.ethereum !== 'undefined') {
-      const contractAddress = '0x1899E91Ed1143f49942797A222e034F1fDC92839';
-      const contract = new ethers.Contract(
-        contractAddress,
-        Nft_marketplace_ABI,
-        signer
-      );
-      try {
-        await contract.placeNFTForSale(tokenid, price).then((response) => {
-          sellNft(response, addr);
-        });
-      } catch (error) {
-        console.log(error);
+      if (window.ethereum.networkVersion == '80001') {
+        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contract = new ethers.Contract(
+          contractAddress,
+          Nft_marketplace_ABI,
+          signer
+        );
+        setLoading(true);
+        try {
+          contract
+            .placeNFTForSale(data[0].tokenId, price)
+            .then((result) => {
+              result.wait().then((response) => {
+                sellNft(response, addr);
+              });
+            })
+            .catch((error) => {
+              setLoading(false);
+              errorMessage = error.toString();
+              if (
+                errorMessage &&
+                errorMessage.includes('user rejected transaction')
+              ) {
+                console.log('error message', errorMessage);
+                toast.error('User rejected transaction', {
+                  toastId: 'create-error-10',
+                });
+              } else {
+              }
+            });
+        } catch (error) {
+          setLoading(false);
+          toast.error(error.message, {
+            toastId: 'create-error-6',
+          });
+        }
+      } else {
+        alert('Please switch to polygon chain');
       }
-      tokenid++;
     } else {
       console.log('Please install MetaMask');
     }
   };
+
   //web3 code ends here
   const sellNft = (response, walletAddress) => {
     var myHeaders = new Headers();
