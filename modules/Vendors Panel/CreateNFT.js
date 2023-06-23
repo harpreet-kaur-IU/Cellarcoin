@@ -177,9 +177,9 @@ const CreateNFT = () => {
       !string.test(region) ||
       !string.test(spirit)
     ) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   };
 
