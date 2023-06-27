@@ -376,12 +376,12 @@ const AllNFT = () => {
                         src="images/Eye Icon.png"
                       ></img>
                     </Link>
-                    <Link href={`/createnft/${item._id}`}>
+                    {/* <Link href={`/createnft/${item._id}`}>
                       <img
                         className="cursor-pointer"
                         src="images/edit-2.svg"
                       ></img>
-                    </Link>
+                    </Link> */}
                     {item.status !== 'minted' && (
                       <img
                         className="cursor-pointer"

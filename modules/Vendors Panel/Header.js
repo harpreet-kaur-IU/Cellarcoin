@@ -8,6 +8,8 @@ import useFirebaseAuth from '../../auth/useFirebaseAuth'
 import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
 import { providers } from "ethers";
+import { useDisconnect, useAccount, useConnectModal } from "@web3modal/react";
+
 
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
@@ -49,6 +51,9 @@ const Header = (props) => {
     Router.push("/multivendor");
   }
   const {signOut} = useFirebaseAuth();
+  // const { account } = useAccount()
+
+  // console.log(account);
   const logOutHandler = () => {
     signOut()
     .then(()=>{
@@ -72,7 +77,7 @@ const Header = (props) => {
     }else{
       Router.push("/vendorlogin")
     }
-    
+    updateWalletActivity()
   },[])
 
   const [connectedWallet, setConnectedWallet] = useState(false);
@@ -93,16 +98,28 @@ const Header = (props) => {
     return provider;
   };
 
+  
   const connectWallet = async () => {
     try {
       await getSignerOrProvider();
       setConnectedWallet(true);
       getAddress()
-    } catch (error) {
+    }catch(error){
       console.log(" error", error);
     }
   };
 
+
+  //this function is called when there is any changes in wallet state
+  const updateWalletActivity = () =>{
+    window.ethereum.on('accountsChanged', function (accounts) {
+      // Time to reload your interface with accounts[0]!
+      if(accounts.length === 0)
+        setConnectedWallet(false);
+      else  
+        setConnectedWallet(true);
+    })
+  }
   async function getAddress() {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -230,7 +247,7 @@ const Header = (props) => {
           <div className='p-relative d-flex d-align-center gap-3'>
            
               <div className="text-center">
-                <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
+                <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{connectedWallet?"Connected":"Connect"}</button>
               </div>
              
               <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
