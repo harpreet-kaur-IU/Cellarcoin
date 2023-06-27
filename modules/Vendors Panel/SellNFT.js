@@ -103,18 +103,17 @@ const SellNFT = () => {
             })
             .catch((error) => {
               setLoading(false);
-              console.log(error.toString);
-              // errorMessage = error.toString();
-              // if (
-              //   errorMessage &&
-              //   errorMessage.includes('user rejected transaction')
-              // ) {
-              //   console.log('error message', errorMessage);
-              //   toast.error('User rejected transaction', {
-              //     toastId: 'create-error-10',
-              //   });
-              // } else {
-              // }
+              errorMessage = error.toString();
+              if (
+                errorMessage &&
+                errorMessage.includes('user rejected transaction')
+              ) {
+                console.log('error message', errorMessage);
+                toast.error('User rejected transaction', {
+                  toastId: 'create-error-10',
+                });
+              } else {
+              }
             });
         } catch (error) {
           setLoading(false);

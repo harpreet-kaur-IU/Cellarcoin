@@ -80,8 +80,8 @@ const Listing = () => {
       >
         <h4 className="l-50 f-600 text-primary">NFT</h4>
         {data &&
-          data.map((item) => (
-            <div className={`mt-32 d-flex`}>
+          data.map((item,index) => (
+            <div key={index} className={`mt-32 d-flex`}>
               <img
                 loading="lazy"
                 className={`${styles['listing-img']}`}
@@ -146,7 +146,8 @@ const Listing = () => {
                     </span>
                   </div>
                   <span className="text-primary font-18 f-500 d-flex">
-                    {item.from.name === null ? '-' : item.from.name}
+
+                    {item.from && (item.from.name === null ? '-' : item.from.name)}
                   </span>
                   <span className="text-primary font-18 f-500 d-flex">
                     {item.to === null ? '-' : item.to}
