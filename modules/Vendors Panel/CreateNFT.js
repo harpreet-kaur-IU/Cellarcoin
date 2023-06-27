@@ -384,6 +384,7 @@ const CreateNFT = () => {
       .then((response) => response.json())
       .then((results) => {
         setLoading(false);
+
         mint(results.data);
         console.log(results);
         console.log(results.data);
