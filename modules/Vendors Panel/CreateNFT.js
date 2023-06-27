@@ -114,6 +114,7 @@ const CreateNFT = () => {
       }
     }
   };
+
   const additionalPropertyHandler = (data, data1) => {
     setAdd(!add);
     setAdditionalProps(data);
@@ -138,7 +139,7 @@ const CreateNFT = () => {
       setIsUrl(false);
     }
 
-    if (brand === '') {
+    if (brand == 'Select Brand') {
       setBrandError(true);
     } else {
       setBrandError(false);
@@ -171,7 +172,7 @@ const CreateNFT = () => {
       !regex.test(name) ||
       !regex.test(desc) ||
       url === '' ||
-      brand === '' ||
+      brand == 'Select Brand' ||
       !pattern.test(bottle) ||
       !decimal.test(volume) ||
       !string.test(region) ||
@@ -787,16 +788,11 @@ const CreateNFT = () => {
         </div>
       </div>
       <ToastContainer />
-      {add && (
-        <Modal modalClass="modal-verify">
-          <AddProperties
-            opt1={fourth}
-            opt2={fifth}
-            data={additionalPropertyHandler}
-            handler={modalHandler}
-          ></AddProperties>
-        </Modal>
-      )}
+      {add && 
+          <Modal modalClass="modal-verify">
+              <AddProperties property1={additionalProps} property2={additionalProps1} data={additionalPropertyHandler} handler={modalHandler}></AddProperties>
+          </Modal>
+      }
     </div>
   );
 };

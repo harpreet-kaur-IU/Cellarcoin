@@ -310,7 +310,7 @@ const AllNFT = () => {
             </div>
             {data &&
               data.map((item, index) => (
-                <div
+                <div key={index}
                   className={`${styles['dashboard-table-column']} ${styles['dashboard-table-column-data']} d-flex d-align-center`}
                 >
                   <span className="font-14 f-500 d-flex">
@@ -376,12 +376,12 @@ const AllNFT = () => {
                         src="images/Eye Icon.png"
                       ></img>
                     </Link>
-                    <Link href={`/createnft/${item._id}`}>
+                    {/* <Link href={`/createnft/${item._id}`}>
                       <img
                         className="cursor-pointer"
                         src="images/edit-2.svg"
                       ></img>
-                    </Link>
+                    </Link> */}
                     {item.status !== 'minted' && (
                       <img
                         className="cursor-pointer"

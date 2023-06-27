@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../css/Vendor Panel/AddProperties.module.css'
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddProperties = (props) => {
-    const [property1,setProperty1] = useState("");
-    const [propertyName1,setPropertyName1] = useState("");
-    const [loading,setLoading] = useState("")
-    const [property2,setProperty2] = useState("");
-    const [propertyName2,setPropertyName2] = useState("");
+    // console.log(props.property1,props.property2);
+    const [property1,setProperty1] = useState(props.property1.trait_type);
+    const [propertyName1,setPropertyName1] = useState(props.property1.value);
+    // const [loading,setLoading] = useState("")
+    const [property2,setProperty2] = useState(props.property2.trait_type);
+    const [propertyName2,setPropertyName2] = useState(props.property2.value);
 
     const removeProperty1Handler = () =>{
         setProperty1("")
@@ -34,16 +35,16 @@ const AddProperties = (props) => {
         setPropertyName2(e.target.value)
     }
 
-    useEffect(()=>{
-        if(props.opt1){  
-            setProperty1(props.opt1.trait_type)
-            setPropertyName1(props.opt1.value)
-        }
-        if(props.opt2){  
-            setProperty2(props.opt2.trait_type)
-            setPropertyName2(props.opt2.value)
-        }
-    },[])
+    // useEffect(()=>{
+    //     if(props.opt1){  
+    //         setProperty1(props.opt1.trait_type)
+    //         setPropertyName1(props.opt1.value)
+    //     }
+    //     if(props.opt2){  
+    //         setProperty2(props.opt2.trait_type)
+    //         setPropertyName2(props.opt2.value)
+    //     }
+    // },[])
 
     const submitHandler = (e) =>{
         e.preventDefault();

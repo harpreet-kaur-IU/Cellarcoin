@@ -49,6 +49,9 @@ const Header = (props) => {
     Router.push("/multivendor");
   }
   const {signOut} = useFirebaseAuth();
+  // const { account } = useAccount()
+
+  // console.log(account);
   const logOutHandler = () => {
     signOut()
     .then(()=>{
@@ -72,7 +75,7 @@ const Header = (props) => {
     }else{
       Router.push("/vendorlogin")
     }
-    
+    updateWalletActivity()
   },[])
 
   const [connectedWallet, setConnectedWallet] = useState(false);
@@ -93,16 +96,28 @@ const Header = (props) => {
     return provider;
   };
 
+  
   const connectWallet = async () => {
     try {
       await getSignerOrProvider();
       setConnectedWallet(true);
       getAddress()
-    } catch (error) {
+    }catch(error){
       console.log(" error", error);
     }
   };
 
+
+  //this function is called when there is any changes in wallet state
+  const updateWalletActivity = () =>{
+    window.ethereum.on('accountsChanged', function (accounts) {
+      // Time to reload your interface with accounts[0]!
+      if(accounts.length === 0)
+        setConnectedWallet(false);
+      else  
+        setConnectedWallet(true);
+    })
+  }
   async function getAddress() {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -222,34 +237,32 @@ const Header = (props) => {
   // });
   return (
     <div className={`p-relative d-flex d-align-center d-justify-space-between ${styles["header-wrapper"]}`}>
-        <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>
-            <Menu></Menu>
-            <Close></Close>
-        </div>
-        <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
-          <div className='p-relative d-flex d-align-center gap-3'>
-           
-              <div className="text-center">
-                <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>Connect</button>
-              </div>
-             
-              <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
-                Create NFT
-              </button>
-              <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
-              <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
-                <h6 className='font-14 f-500 l-19'>{user}</h6>
-                <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
-              </div>
-              {dropdown && 
-                <div ref={wrapperRef} className={`p-absolute d-flex d-flex-column d-align-center ${styles["profile-dropdown"]}`}>
-                  <h6 onClick={profileHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
-                  <h6 onClick={logOutHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>
-                </div>
-              }
-              
+      <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>
+        <Menu></Menu>
+        <Close></Close>
+      </div>
+      <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
+        <div className='p-relative d-flex d-align-center gap-3'>
+          <div className="text-center">
+            <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{connectedWallet?"Connected":"Connect"}</button>
           </div>
+          
+          <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
+            Create NFT
+          </button>
+          <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
+          <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
+            <h6 className='font-14 f-500 l-19'>{user}</h6>
+            <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
+          </div>
+          {dropdown && 
+            <div ref={wrapperRef} className={`p-absolute d-flex d-flex-column d-align-center ${styles["profile-dropdown"]}`}>
+              <h6 onClick={profileHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
+              <h6 onClick={logOutHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>
+            </div>
+          } 
         </div>
+      </div>
     </div>
   )
 }

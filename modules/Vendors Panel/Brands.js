@@ -46,6 +46,10 @@ const Brands = () => {
   const coverHandler = (e) =>{
     if(!e.target.files[0].name.match(/\.(jpg|jpeg|png|heiv|pdf|txt)$/)){
       setCoverError(true)
+      setCover("")
+      setUrl("")
+      var inputfile = document.getElementById("file-input-field");
+      inputfile.value = "";
     }
     else{
       setCoverError(false)
@@ -53,54 +57,46 @@ const Brands = () => {
     }
   }
 
-  const profileHandler = (e) =>{
-    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png)$/)){
-      setProfileError(true);
-      var inputfile = document.getElementById("profile-input-field");
-      inputfile.value = "";
-    }   
-    else{
-      setProfileError(false);
-      var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-      var fSize =  e.target.files[0].size; 
-      var i=0;
-      while(fSize>900){
-        fSize/=1024;
-        i++;
-      }
-      var file = (Math.round(fSize*100)/100);
-      if(i<=2 && file<10){
-        setProfile(e.target.files[0])
-      }
-      else{
+  const profileHandler = (e) =>{    
+    if(e.target.files[0]){
+      if(!e.target.files[0].name.match(/\.(jpg|png|jpeg)$/)){
         setProfileError(true);
-      }
-    }   
+        var inputfile = document.getElementById("profile-input-field");
+        inputfile.value = "";
+      }   
+      else{
+        setProfileError(false);
+        if(e.target.files[0].size<10e6){
+          setProfile(e.target.files[0])
+        }
+        else{
+          setProfileError(true);
+          var inputfile = document.getElementById("profile-input-field");
+          inputfile.value = "";
+        }
+      }   
+    }
   }
 
-  const coverImageHandler = (e) =>{
-    if(!e.target.files[0].name.match(/\.(jpg|jpeg|png)$/)){
-      setCoverImageError(true);
-      var inputfile = document.getElementById("profile-input-field");
-      inputfile.value = "";
-    }   
-    else{
-      setCoverImageError(false);
-      var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
-      var fSize =  e.target.files[0].size; 
-      var i=0;
-      while(fSize>900){
-        fSize/=1024;
-        i++;
-      }
-      var file = (Math.round(fSize*100)/100);
-      if(i<=2 && file<10){
-        setCoverImage(e.target.files[0])
-      }
-      else{
+  const coverImageHandler = (e) =>{    
+    if(e.target.files[0]){
+      if(!e.target.files[0].name.match(/\.(jpg|png|jpeg)$/)){
         setCoverImageError(true);
-      }
-    }   
+        var inputfile = document.getElementById("cover-input-field");
+        inputfile.value = "";
+      }   
+      else{
+        setCoverImageError(false);
+        if(e.target.files[0].size<10e6){
+          setCoverImage(e.target.files[0])
+        }
+        else{
+          setCoverImageError(true);
+          var inputfile = document.getElementById("cover-input-field");
+          inputfile.value = "";
+        }
+      }   
+    }
   }
 
   const validator = () =>{
@@ -244,7 +240,6 @@ const Brands = () => {
       .then(response => response.text())
       .then(result => {
         var results = (JSON.parse(result))
-        console.log(results.imageUrl)
         setCoverUrl(results.imageUrl)
         setLoadingCoverImage(false)
       })
