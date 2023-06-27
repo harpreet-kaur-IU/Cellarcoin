@@ -20,7 +20,7 @@ const SellNFT = () => {
   const [expire, setExpire] = useState('');
   const [isPrice, setPriceError] = useState(false);
   const [isExpire, setExpireError] = useState(false);
-  const regex = /^\d+\.\d{0,8}$/;
+  const regex = /^\d+(\.\d{1,8})?$/;
   const priceHandler = (e) => {
     setPrice(e.target.value);
   };
