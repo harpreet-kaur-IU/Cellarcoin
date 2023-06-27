@@ -139,7 +139,7 @@ const CreateNFT = () => {
       setIsUrl(false);
     }
 
-    if (brand === 'Select Brand') {
+    if (brand == 'Select Brand') {
       setBrandError(true);
     } else {
       setBrandError(false);
@@ -172,7 +172,7 @@ const CreateNFT = () => {
       !regex.test(name) ||
       !regex.test(desc) ||
       url === '' ||
-      brand === '' ||
+      brand == 'Select Brand' ||
       !pattern.test(bottle) ||
       !decimal.test(volume) ||
       !string.test(region) ||

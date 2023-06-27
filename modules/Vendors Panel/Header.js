@@ -8,8 +8,6 @@ import useFirebaseAuth from '../../auth/useFirebaseAuth'
 import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
 import { providers } from "ethers";
-import { useDisconnect, useAccount, useConnectModal } from "@web3modal/react";
-
 
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
@@ -239,34 +237,32 @@ const Header = (props) => {
   // });
   return (
     <div className={`p-relative d-flex d-align-center d-justify-space-between ${styles["header-wrapper"]}`}>
-        <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>
-            <Menu></Menu>
-            <Close></Close>
-        </div>
-        <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
-          <div className='p-relative d-flex d-align-center gap-3'>
-           
-              <div className="text-center">
-                <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{connectedWallet?"Connected":"Connect"}</button>
-              </div>
-             
-              <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
-                Create NFT
-              </button>
-              <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
-              <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
-                <h6 className='font-14 f-500 l-19'>{user}</h6>
-                <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
-              </div>
-              {dropdown && 
-                <div ref={wrapperRef} className={`p-absolute d-flex d-flex-column d-align-center ${styles["profile-dropdown"]}`}>
-                  <h6 onClick={profileHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
-                  <h6 onClick={logOutHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>
-                </div>
-              }
-              
+      <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>
+        <Menu></Menu>
+        <Close></Close>
+      </div>
+      <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
+        <div className='p-relative d-flex d-align-center gap-3'>
+          <div className="text-center">
+            <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{connectedWallet?"Connected":"Connect"}</button>
           </div>
+          
+          <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
+            Create NFT
+          </button>
+          <Link href="/vendorNotification"><img className={`rounded-16 cursor-pointer ${styles["header-notification-icon"]}`} src='images/Notifications.png'></img></Link>
+          <div className={`d-flex d-align-center gap-1 ${styles["header-profile-wrapper"]}`}>
+            <h6 className='font-14 f-500 l-19'>{user}</h6>
+            <img onClick={dropdownHandler} className='cursor-pointer rounded-16' src='images/arrow-down.png'></img>
+          </div>
+          {dropdown && 
+            <div ref={wrapperRef} className={`p-absolute d-flex d-flex-column d-align-center ${styles["profile-dropdown"]}`}>
+              <h6 onClick={profileHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
+              <h6 onClick={logOutHandler} className='d-flex d-align-center d-justify-center font-14 f-500 l-22'>Log Out</h6>
+            </div>
+          } 
         </div>
+      </div>
     </div>
   )
 }
