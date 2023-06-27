@@ -20,7 +20,7 @@ const SellNFT = () => {
   const [expire, setExpire] = useState('');
   const [isPrice, setPriceError] = useState(false);
   const [isExpire, setExpireError] = useState(false);
-  const regex = /^\d+\.\d{0,2}$/;
+  const regex = /^\d+\.\d{0,8}$/;
   const priceHandler = (e) => {
     setPrice(e.target.value);
   };
@@ -103,17 +103,18 @@ const SellNFT = () => {
             })
             .catch((error) => {
               setLoading(false);
-              errorMessage = error.toString();
-              if (
-                errorMessage &&
-                errorMessage.includes('user rejected transaction')
-              ) {
-                console.log('error message', errorMessage);
-                toast.error('User rejected transaction', {
-                  toastId: 'create-error-10',
-                });
-              } else {
-              }
+              console.log(error.toString);
+              // errorMessage = error.toString();
+              // if (
+              //   errorMessage &&
+              //   errorMessage.includes('user rejected transaction')
+              // ) {
+              //   console.log('error message', errorMessage);
+              //   toast.error('User rejected transaction', {
+              //     toastId: 'create-error-10',
+              //   });
+              // } else {
+              // }
             });
         } catch (error) {
           setLoading(false);
