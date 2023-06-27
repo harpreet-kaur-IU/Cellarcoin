@@ -51,7 +51,7 @@ const SellNFT = () => {
     }
   };
   //web3 function for sell nft
-  const sellNftWeb3 = async (tokenURI) => {
+  const sellNftWeb3 = async () => {
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -69,7 +69,13 @@ const SellNFT = () => {
         setLoading(true);
         try {
           contract
-            .placeNFTForSale(data[0].tokenId, price)
+            .placeNFTForSale(
+              data[0].tokenId,
+              ethers.utils.parseEther(price.toString()),
+              {
+                value: ethers.utils.parseEther('0.001'),
+              }
+            )
             .then((result) => {
               result.wait().then((response) => {
                 sellNft(response, addr);
@@ -78,6 +84,7 @@ const SellNFT = () => {
             .catch((error) => {
               setLoading(false);
               errorMessage = error.toString();
+
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
@@ -87,6 +94,17 @@ const SellNFT = () => {
                   toastId: 'create-error-10',
                 });
               } else {
+                if (error.reason) {
+                  setLoading(false);
+                  toast.error(error.reason, {
+                    toastId: 'sell-error-6',
+                  });
+                } else {
+                  setLoading(false);
+                  toast.error('Not enough user funds in the wallet.', {
+                    toastId: 'sell-error-7',
+                  });
+                }
               }
             });
         } catch (error) {

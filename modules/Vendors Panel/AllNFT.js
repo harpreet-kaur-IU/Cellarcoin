@@ -145,6 +145,17 @@ const AllNFT = () => {
                   toastId: 'create-error-10',
                 });
               } else {
+                if (error.reason) {
+                  setLoading(false);
+                  toast.error(error.reason, {
+                    toastId: 'sell-error-6',
+                  });
+                } else {
+                  setLoading(false);
+                  toast.error('Not enough user funds in the wallet.', {
+                    toastId: 'sell-error-7',
+                  });
+                }
               }
             });
         } catch (error) {
