@@ -114,6 +114,7 @@ const AllNFT = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
+    let errorMessage;
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
@@ -310,7 +311,8 @@ const AllNFT = () => {
             </div>
             {data &&
               data.map((item, index) => (
-                <div key={index}
+                <div
+                  key={index}
                   className={`${styles['dashboard-table-column']} ${styles['dashboard-table-column-data']} d-flex d-align-center`}
                 >
                   <span className="font-14 f-500 d-flex">
