@@ -78,11 +78,15 @@ const SellNFT = () => {
     }
   };
 
-  const sellNftWeb3 = async (tokenURI) => {
+  const sellNftWeb3 = async () => {
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
+    let errorMessage;
+
+    console.log(signer);
+    console.log(addr);
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
@@ -94,14 +98,24 @@ const SellNFT = () => {
         );
         setLoading(true);
         try {
+          console.log(data[0].tokenId);
+          console.log('price', ethers.utils.parseEther(price.toString()));
           contract
-            .placeNFTForSale(data[0].tokenId, price)
+            .placeNFTForSale(
+              data[0].tokenId,
+              ethers.utils.parseEther(price.toString()),
+              {
+                value: ethers.utils.parseEther('0.001'),
+              }
+            )
             .then((result) => {
               result.wait().then((response) => {
                 sellNft(response, addr);
               });
             })
             .catch((error) => {
+              console.log('error', error);
+
               setLoading(false);
               errorMessage = error.toString();
               if (
@@ -113,6 +127,17 @@ const SellNFT = () => {
                   toastId: 'create-error-10',
                 });
               } else {
+                if (error.reason) {
+                  setLoading(false);
+                  toast.error(error.reason, {
+                    toastId: 'sell-error-6',
+                  });
+                } else {
+                  setLoading(false);
+                  toast.error('Not enough user funds in the wallet.', {
+                    toastId: 'sell-error-7',
+                  });
+                }
               }
             });
         } catch (error) {

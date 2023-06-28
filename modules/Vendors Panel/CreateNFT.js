@@ -114,7 +114,6 @@ const CreateNFT = () => {
       }
     }
   };
-
   const additionalPropertyHandler = (data, data1) => {
     setAdd(!add);
     setAdditionalProps(data);
@@ -139,7 +138,7 @@ const CreateNFT = () => {
       setIsUrl(false);
     }
 
-    if (brand == 'Select Brand') {
+    if (brand === '') {
       setBrandError(true);
     } else {
       setBrandError(false);
@@ -172,7 +171,7 @@ const CreateNFT = () => {
       !regex.test(name) ||
       !regex.test(desc) ||
       url === '' ||
-      brand == 'Select Brand' ||
+      brand === '' ||
       !pattern.test(bottle) ||
       !decimal.test(volume) ||
       !string.test(region) ||
@@ -385,6 +384,7 @@ const CreateNFT = () => {
       .then((response) => response.json())
       .then((results) => {
         setLoading(false);
+
         mint(results.data);
         console.log(results);
         console.log(results.data);
@@ -397,6 +397,7 @@ const CreateNFT = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const addr = await signer.getAddress();
+    let errorMessage;
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
@@ -435,6 +436,17 @@ const CreateNFT = () => {
                   toastId: 'create-error-10',
                 });
               } else {
+                if (error.reason) {
+                  setLoading(false);
+                  toast.error(error.reason, {
+                    toastId: 'sell-error-6',
+                  });
+                } else {
+                  setLoading(false);
+                  toast.error('Not enough user funds in the wallet.', {
+                    toastId: 'sell-error-7',
+                  });
+                }
               }
             });
         } catch (error) {
@@ -787,11 +799,16 @@ const CreateNFT = () => {
         </div>
       </div>
       <ToastContainer />
-      {add && 
-          <Modal modalClass="modal-verify">
-              <AddProperties property1={additionalProps} property2={additionalProps1} data={additionalPropertyHandler} handler={modalHandler}></AddProperties>
-          </Modal>
-      }
+      {add && (
+        <Modal modalClass="modal-verify">
+          <AddProperties
+            opt1={fourth}
+            opt2={fifth}
+            data={additionalPropertyHandler}
+            handler={modalHandler}
+          ></AddProperties>
+        </Modal>
+      )}
     </div>
   );
 };
