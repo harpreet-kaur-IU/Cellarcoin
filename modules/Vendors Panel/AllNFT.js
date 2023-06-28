@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 import StatusDropdown from './StatusDropdown';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
+import dayjs from 'dayjs';
 function useOutsideAlerter(ref, handler) {
   useEffect(() => {
     function handleClickOutside(event) {
@@ -377,7 +378,7 @@ const AllNFT = () => {
                     </span>
                   )}
                   <span className="font-14 f-500 d-flex">
-                    {item.createdTime}
+                    {dayjs(item.createdTime).format('DD-MM-YYYY')}
                   </span>
                   <span
                     className={`font-14 f-500 d-flex d-align-center d-justify-center`}
