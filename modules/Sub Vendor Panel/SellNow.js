@@ -201,6 +201,8 @@ const SellNow = () => {
   return (
     <>
       <Header></Header>
+      <ToastContainer></ToastContainer>
+
       {loading && <Loader></Loader>}
       <div className={`${styles['sell-nft-wrapper']}`}>
         <h2 className={`f-500 l-65 ${styles['sell-nft-main-heading']}`}>

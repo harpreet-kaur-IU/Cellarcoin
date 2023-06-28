@@ -267,6 +267,8 @@ const AllNFT = () => {
     <>
       {loading && <Loader></Loader>}
       <Header></Header>
+      <ToastContainer></ToastContainer>
+
       <div className="vendor-container">
         <div className="d-flex d-align-center d-justify-space-between">
           <h4 className="f-600 text-primary mt-24 mb-24">NFT List</h4>

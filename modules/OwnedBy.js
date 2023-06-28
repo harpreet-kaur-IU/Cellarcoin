@@ -258,6 +258,8 @@ const OwnedBy = () => {
   return (
     <>
       {loading && <Loader></Loader>}
+      <ToastContainer></ToastContainer>
+
       <div className={`p-relative col-12 ${style['wine-ownedby-section']}`}>
         <div className={`container ${style['wine-ownedby-container']}`}>
           <h2 className={`f-600 l-137 text-center ${style['buy-nft-h2']}`}>

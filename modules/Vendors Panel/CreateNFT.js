@@ -393,6 +393,7 @@ const CreateNFT = () => {
   };
   //web3 mint
   const mint = async (tokenURI) => {
+    console.log('test');
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -427,6 +428,8 @@ const CreateNFT = () => {
             .catch((error) => {
               setLoading(false);
               errorMessage = error.toString();
+              console.log('test');
+              console.log(error);
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
@@ -442,6 +445,7 @@ const CreateNFT = () => {
                     toastId: 'sell-error-6',
                   });
                 } else {
+                  console.log(error);
                   setLoading(false);
                   toast.error('Not enough user funds in the wallet.', {
                     toastId: 'sell-error-7',
@@ -450,6 +454,8 @@ const CreateNFT = () => {
               }
             });
         } catch (error) {
+          console.log('error', error);
+
           setLoading(false);
           toast.error(error.message, {
             toastId: 'create-error-6',
@@ -589,6 +595,8 @@ const CreateNFT = () => {
     <div>
       {loading && <Loader></Loader>}
       <Header signerData={signerResult}></Header>
+      <ToastContainer></ToastContainer>
+
       <div style={{ height: '100vh', overflow: 'scroll' }}>
         <div className={`col-9 vendor-container ${styles['vendor-container']}`}>
           <h4 className="l-50 f-600 text-primary mt-24">Create NFT</h4>
@@ -802,8 +810,8 @@ const CreateNFT = () => {
       {add && (
         <Modal modalClass="modal-verify">
           <AddProperties
-             property1={additionalProps} 
-             property2={additionalProps1}
+            property1={additionalProps}
+            property2={additionalProps1}
             data={additionalPropertyHandler}
             handler={modalHandler}
           ></AddProperties>

@@ -118,13 +118,14 @@ const SellNFT = () => {
 
               setLoading(false);
               errorMessage = error.toString();
+              console.log(errorMessage);
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
               ) {
                 console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
-                  toastId: 'create-error-10',
+                  toastId: 'sell-error-10',
                 });
               } else {
                 if (error.reason) {
@@ -219,6 +220,7 @@ const SellNFT = () => {
   return (
     <>
       <Header></Header>
+      <ToastContainer></ToastContainer>
       {loading && <Loader></Loader>}
       <div className={`${styles['sell-nft-wrapper']}`}>
         <h2 className={`f-500 l-65 ${styles['sell-nft-main-heading']}`}>

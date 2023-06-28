@@ -263,6 +263,7 @@ const CreateNft = () => {
   };
 
   const mint = async (tokenURI) => {
+    console.log('test');
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -517,6 +518,7 @@ const CreateNft = () => {
     <div>
       {loading && <Loader></Loader>}
       <Header></Header>
+      <ToastContainer></ToastContainer>
       <div style={{ height: '100vh', overflow: 'scroll' }}>
         <div className={`col-9 vendor-container ${styles['vendor-container']}`}>
           <h4 className="l-50 f-600 text-primary mt-24">Create NFT</h4>
