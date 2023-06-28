@@ -8,8 +8,8 @@ const AddProperties = (props) => {
     const [property1,setProperty1] = useState(props.property1.trait_type);
     const [propertyName1,setPropertyName1] = useState(props.property1.value);
     // const [loading,setLoading] = useState("")
-    const [property2,setProperty2] = useState(props.property2.trait_type);
-    const [propertyName2,setPropertyName2] = useState(props.property2.value);
+    const [property2,setProperty2] = useState(props.property2 && props.property2.trait_type);
+    const [propertyName2,setPropertyName2] = useState(props.property2 && props.property2.value);
 
     const removeProperty1Handler = () =>{
         setProperty1("")

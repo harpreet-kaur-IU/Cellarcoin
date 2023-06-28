@@ -802,8 +802,8 @@ const CreateNFT = () => {
       {add && (
         <Modal modalClass="modal-verify">
           <AddProperties
-            opt1={fourth}
-            opt2={fifth}
+             property1={additionalProps} 
+             property2={additionalProps1}
             data={additionalPropertyHandler}
             handler={modalHandler}
           ></AddProperties>
