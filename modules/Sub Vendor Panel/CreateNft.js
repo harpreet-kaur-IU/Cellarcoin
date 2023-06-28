@@ -299,7 +299,6 @@ const CreateNft = () => {
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
               ) {
-                console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'create-error-10',
                 });

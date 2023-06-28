@@ -428,8 +428,7 @@ const CreateNFT = () => {
             .catch((error) => {
               setLoading(false);
               errorMessage = error.toString();
-              console.log('test');
-              console.log(error);
+
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
