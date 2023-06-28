@@ -7,6 +7,8 @@ import UserNftCards from './UserNftCards';
 import UserTable from './UserTable';
 import Loader from './Vendors Panel/Loader';
 import WineCard from './WineCard';
+import Web3Modal from "web3modal";
+import { providers } from "ethers";
 const UserNft = () => {
     const [data,setData] = useState("");
     const [fav,setFav] = useState("");
@@ -15,13 +17,24 @@ const UserNft = () => {
     const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
     const[loading,setLoading] = useState(false)
+    const[walletAddress,setWalletAddress] = useState("")
     const JWTToken = getUserOnBoardFromCookie();
     const handleClick = (e) => {
         setActiveTab(e.target.id);
     };
 
+    
+    async function getAddress() {
+        const ethers = require("ethers");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const addr = await signer.getAddress();
+        setWalletAddress(addr)
+      }
+
     useEffect(()=>{
         //fetch user name from jwt token
+        getAddress()
         function parseJwt() {
             if (!JWTToken) {return}
             const base64Url = JWTToken.split('.')[1];
@@ -79,6 +92,7 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
+
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
         .then(response => response.text())
@@ -98,6 +112,7 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
+
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
         .then(response => response.text())
@@ -123,7 +138,7 @@ const UserNft = () => {
                         <h3 className={`text-center cursor-pointer f-700 l-137`}>{user}</h3>
                         <div className={`d-flex d-align-center gap-1`}>
                             <img src='images/polygon-icon.svg'></img>
-                            <h5 className='font-16 f-400 l-137 word-break'>0x8B5db879e1E2207DdA833aF136edD224aDf4DA19</h5>
+                            <h5 className='font-16 f-400 l-137 word-break'>{walletAddress}</h5>
                         </div>
                     </div>
                     {/* <h5 className='text-center f-400 l-137'>
