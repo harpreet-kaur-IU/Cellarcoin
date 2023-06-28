@@ -150,7 +150,7 @@ const Listing = () => {
                     {item.from && (item.from.name === null ? '-' : item.from.name)}
                   </span>
                   <span className="text-primary font-18 f-500 d-flex">
-                    {item.to === null ? '-' : item.to}
+                    {item.to === null ? " " : item.to}
                   </span>
                   <span className="font-18 f-500 d-flex">
                     <Moment fromNow>{item.createdAt}</Moment>
