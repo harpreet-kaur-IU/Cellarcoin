@@ -4,11 +4,10 @@ import Router, { useRouter } from 'next/router';
 import { getSubVendorOnBoardFromCookie } from '../../auth/userCookies';
 import Header from './Header';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import DropDown from '../Vendors Panel/DropDown';
 import Loader from '../Vendors Panel/Loader';
 import Nft_marketplace_ABI from '../Vendors Panel/Nft_marketplace_ABI.json';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 const SellNow = () => {
   const router = useRouter();
   const nftId = router.query['id'];
