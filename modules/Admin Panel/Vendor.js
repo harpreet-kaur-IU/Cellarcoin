@@ -77,6 +77,7 @@ const Vendor = () => {
         })
         .catch(error => console.log('error', error));
     },[])
+    
   return (
     <>
         {loading && <Loader></Loader>}

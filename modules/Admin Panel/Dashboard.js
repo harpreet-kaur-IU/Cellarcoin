@@ -108,6 +108,7 @@ const Dashboard = () => {
                     <span className={`font-14 f-500 ${styles["nft-status-green"]}`}>{item.status}</span>
                   }
                 </div>
+                
                 {item.price === 0 ?
                   <span className={`p-relative font-14 f-500 d-flex d-align-center`}>
                     --
