@@ -128,7 +128,7 @@ const SellNFT = () => {
                   toastId: 'sell-error-10',
                 });
               }else {
-                if (error.reason) {
+                if(error.reason) {
                   setLoading(false);
                   toast.error(error.reason, {
                     toastId: 'sell-error-6',

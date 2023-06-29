@@ -235,6 +235,7 @@ const Brands = () => {
         body: formdata,
         redirect: 'follow'
       };
+      
       setLoadingCoverImage(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
       .then(response => response.text())
