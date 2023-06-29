@@ -162,6 +162,7 @@ const SellNow = () => {
       })
       .catch((error) => console.log('error', error));
   };
+  
   const addTransaction = (hash, id, walletAddress) => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);

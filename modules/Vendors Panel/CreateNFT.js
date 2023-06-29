@@ -13,6 +13,7 @@ import BrandDropDown from './BrandDropdown';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
 import { ethers } from 'ethers';
 import web3 from 'web3';
+
 const CreateNFT = () => {
   const Web3 = require('web3');
   const router = useRouter();
