@@ -3,6 +3,7 @@ import styles from '../css/Sub Vendor Panel/SellNFT.module.css';
 import Router, { useRouter } from 'next/router';
 import { getSubVendorOnBoardFromCookie } from '../../auth/userCookies';
 import Header from './Header';
+import { ToastContainer, toast } from 'react-toastify';
 import DropDown from '../Vendors Panel/DropDown';
 import Loader from '../Vendors Panel/Loader';
 import Nft_marketplace_ABI from '../Vendors Panel/Nft_marketplace_ABI.json';

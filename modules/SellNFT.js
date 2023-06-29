@@ -3,6 +3,7 @@ import DropDown from './Vendors Panel/DropDown';
 import { useRouter } from 'next/router';
 import styles from './css/Vendor Panel/SellNFT.module.css';
 import Nft_marketplace_ABI from '../modules/Vendors Panel/Nft_marketplace_ABI.json';
+import { ToastContainer, toast } from 'react-toastify';
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 const SellNFT = () => {
   const JWTToken = getUserOnBoardFromCookie();
@@ -59,6 +60,7 @@ const SellNFT = () => {
     let errorMessage;
 
     if (typeof window.ethereum !== 'undefined') {
+      console.log(data.tokenId);
       if (window.ethereum.networkVersion == '80001') {
         const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
         const contract = new ethers.Contract(
@@ -70,7 +72,7 @@ const SellNFT = () => {
         try {
           contract
             .placeNFTForSale(
-              data[0].tokenId,
+              data.tokenId,
               ethers.utils.parseEther(price.toString()),
               {
                 value: ethers.utils.parseEther('0.001'),
