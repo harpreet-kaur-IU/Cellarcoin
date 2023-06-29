@@ -53,6 +53,7 @@ const NavBar = () => {
   const [brand,setBrand] = useState("");
   const [nft,setNft] = useState("")
   const [searchLoading,setSearchLoading] = useState(false)
+  const [connectedWallet, setConnectedWallet] = useState(false);
   var JWTToken = getUserOnBoardFromCookie();
 
   useEffect(()=>{
@@ -79,8 +80,19 @@ const NavBar = () => {
     }else{
         // Router.push("/vendorlogin")
     }
+    updateWalletActivity()
   },[])
 
+    //this function is called when there is any changes in wallet state
+    const updateWalletActivity = () =>{
+      window.ethereum.on('accountsChanged', function (accounts) {
+        // Time to reload your interface with accounts[0]!
+        if(accounts.length === 0)
+          setConnectedWallet(false);
+        else  
+          setConnectedWallet(true);
+      })
+    }
   const handleClick = () =>{
     // console.log("modal called");
     setToggle(prev => !prev);
@@ -167,6 +179,7 @@ const NavBar = () => {
         body: raw,
         redirect: 'follow'
       };
+
       setSearchLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/searchNFT`, requestOptions)
         .then(response => response.text())
@@ -177,12 +190,15 @@ const NavBar = () => {
           setSearchLoading(false)
           setSearchBar(true)
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          console.log('error', error)
+          setSearchLoading(false)
+        });
     }else{
       setSearchBar(false)
     }
   }
-  const [connectedWallet, setConnectedWallet] = useState(false);
+
   const web3ModalRef = useRef();
 
   const getSignerOrProvider = async (needSigner = false) => {
@@ -202,10 +218,10 @@ const NavBar = () => {
 
   const connectWallet = async () => {
     if(JWTToken){
+      
       try {
         await getSignerOrProvider();
-        setConnectedWallet(true);
-        
+                
       } catch (error) {
         console.log(" error", error);
       }
@@ -319,7 +335,7 @@ const NavBar = () => {
             <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
             {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
           </ul>
-          <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connectWallet()}>Connect Wallet</button>
+          <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connectWallet()}>{connectedWallet?"Connected":"Connect Wallet"}</button>
           <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connectWallet()}>
             <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
           </div>

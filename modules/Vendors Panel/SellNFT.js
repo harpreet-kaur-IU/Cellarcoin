@@ -122,18 +122,18 @@ const SellNFT = () => {
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
-              ) {
+              ){
                 console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'sell-error-10',
                 });
-              } else {
+              }else {
                 if (error.reason) {
                   setLoading(false);
                   toast.error(error.reason, {
                     toastId: 'sell-error-6',
                   });
-                } else {
+                }else {
                   setLoading(false);
                   toast.error('Not enough user funds in the wallet.', {
                     toastId: 'sell-error-7',
@@ -183,7 +183,10 @@ const SellNFT = () => {
       .then((result) => {
         addTransaction(response.hash, nftId, walletAddress);
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error)
+      });
   };
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
@@ -215,7 +218,10 @@ const SellNFT = () => {
         setLoading(false);
         Router.push('/allnftlist');
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error)
+      });
   };
   return (
     <>

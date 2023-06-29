@@ -33,7 +33,7 @@ const Listing = () => {
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}admin/getNft/${nftId}`, requestOptions)
             .then(response => response.json())
             .then(result =>{
-                console.log(result.data)
+                // console.log(result.data)
                 setData(result.data)
                 setLoading(false)
             })
@@ -47,11 +47,10 @@ const Listing = () => {
             };
             setLoading(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}&&status=null`, requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => {
-                const parseResult = JSON.parse(result)
-                console.log(parseResult.data)
-                setActivity(parseResult.data)
+                // console.log(result.data)
+                setActivity(result.data)
                 setLoading(false)
             })
             .catch(error => console.log('error', error));
@@ -110,7 +109,7 @@ const Listing = () => {
                                 {item.price === 0? "":<img src='images/polygon-icon.svg'></img>}
                                 <span className='text-primary font-18 f-600'>{item.price === 0?" ":item.price}</span>
                             </div>
-                            <span className='text-primary font-18 f-500 d-flex'>{item.from.name === null?"-":item.from.name}</span>
+                            {/* <span className='text-primary font-18 f-500 d-flex'>{item.from && (item.from.name === null?"-":item.from.name)}</span> */}
                             <span className='text-primary font-18 f-500 d-flex'>{item.to === null?"-":item.to}</span>
                             <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
                         </div> 

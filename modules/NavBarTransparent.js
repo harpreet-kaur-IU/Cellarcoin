@@ -46,6 +46,8 @@ const NavBarTransparent = () => {
   const [brand,setBrand] = useState("");
   const [nft,setNft] = useState("")
   const [searchLoading,setSearchLoading] = useState(false)
+  const [connectedWallet, setConnectedWallet] = useState(false);
+
   var JWTToken = getUserOnBoardFromCookie();
 
   const wrapperRef = useRef(null);
@@ -79,7 +81,18 @@ const NavBarTransparent = () => {
     }else{
         // Router.push("/vendorlogin")
     }
+    updateWalletActivity()
   },[])
+      //this function is called when there is any changes in wallet state
+      const updateWalletActivity = () =>{
+        window.ethereum.on('accountsChanged', function (accounts) {
+          // Time to reload your interface with accounts[0]!
+          if(accounts.length === 0)
+            setConnectedWallet(false);
+          else  
+            setConnectedWallet(true);
+        })
+      }
 
   const handleClick = () =>{
     setToggle(prev => !prev);
@@ -178,7 +191,6 @@ const NavBarTransparent = () => {
       setSearchBar(false)
     }
   }
-  const [connectedWallet, setConnectedWallet] = useState(false);
   const web3ModalRef = useRef();
 
   const getSignerOrProvider = async (needSigner = false) => {
@@ -273,36 +285,36 @@ const NavBarTransparent = () => {
               </div>
             </Link>
             <div className='p-relative'>
-            <div className='p-relative'>
-              <input onChange={searchHandler} className={`text-white rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
-              <div className={`${style["search-icon-navbar"]}`}>
-                <Search color="#ffffff"></Search>
-              </div>
-            </div>
-            {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
-            {searchBar &&
-              <div ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
-                <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
-                <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
-                  {brand && brand.map((item)=>(
-                    <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
-                  ))}
+              <div className='p-relative'>
+                <input onChange={searchHandler} className={`text-white rounded-12 b-none bg-box font-13 f-400 l-135 ${style["navbar-search-input"]}`} placeholder='Search by Sellers, Wine or Collection'></input>
+                <div className={`${style["search-icon-navbar"]}`}>
+                  <Search color="#ffffff"></Search>
                 </div>
-                <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
-                <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
-                  {nft && nft.map((item)=>(
-                    <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
-                      <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
-                      <div className='d-flex d-flex-column'>
-                        <h6 className='font-13 f-400 l-137'>{item.name}</h6>
-                        <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
+              </div>
+              {searchLoading && <div className={`p-absolute ${style["search-loader-wrapper"]}`}><SearchLoader></SearchLoader></div>}
+              {searchBar &&
+                <div ref={wrapperRef} className={`p-absolute ${searchBar?"d-block":"d-none"} ${style["search-suggestion-wrapper"]}`}>
+                  <h6 className='text-brown font-10 l-137 f-700'>SUGGESTIONS</h6>
+                  <div className={`d-flex d-flex-column gap-1 mt-12 ${style["search-brand-wrapper"]}`}>
+                    {brand && brand.map((item)=>(
+                      <h6 id={item._id} onClick={brandHandler} className='cursor-pointer font-13 f-400 l-137'>{item.brandName}</h6>
+                    ))}
+                  </div>
+                  <h6 className='text-brown font-10 l-137 f-700 mt-12'>NFT</h6>
+                  <div className={`d-flex d-flex-column gap-1 mt -12 ${style["search-nft-wrapper"]}`}>
+                    {nft && nft.map((item)=>(
+                      <div onClick={navigationHandler} id={item._id} className={`cursor-pointer d-flex gap-1 ${style["search-nft-item"]}`}>
+                        <img className={`${style["search-nft-img"]}`} src={item.imageUrl}></img>
+                        <div className='d-flex d-flex-column'>
+                          <h6 className='font-13 f-400 l-137'>{item.name}</h6>
+                          <h6 className='font-10 f-400 l-137'>{item.brandName}</h6>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            }
-          </div>
+              }
+            </div>
             <ul id="ul-navbar" className={`d-flex d-flex-row text-white ${style["navbar-items-wrapper"]} ${res ? style["expand"] : ""}`}>
               <NavItems name="transparent" path="/explore" value="Explore"></NavItems>
               <NavItems name="transparent" path="/community" value="Community"></NavItems>
@@ -314,7 +326,7 @@ const NavBarTransparent = () => {
               <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
               {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
             </ul>
-            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}  onClick={() => connectWallet()}>Connect Wallet</button>
+            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}  onClick={() => connectWallet()}>{connectedWallet?"Connected":"Connect Wallet"}</button>
             <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}  onClick={() => connectWallet()}>
               <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
             </div>

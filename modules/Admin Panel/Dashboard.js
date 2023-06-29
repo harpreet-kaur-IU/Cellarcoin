@@ -90,7 +90,7 @@ const Dashboard = () => {
               <span className='font-16 f-600 d-flex d-justify-space-evenly'>Action</span>
             </div>
             {data && data.map((item,index)=>(
-              <div className={`${styles["dashboard-table-column"]} ${styles["dashboard-table-column-data"]} d-flex d-align-center`}>
+              <div key={index} className={`${styles["dashboard-table-column"]} ${styles["dashboard-table-column-data"]} d-flex d-align-center`}>
                 <span className='font-14 f-500 d-flex'>
                   <img loading='lazy' className={`${styles["dashboard-table-column-product"]}`} src={item.imageUrl}></img>
                 </span>                     

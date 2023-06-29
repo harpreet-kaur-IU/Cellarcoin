@@ -398,14 +398,14 @@ const AllNFT = () => {
                         src="images/edit-2.svg"
                       ></img>
                     </Link> */}
-                    {item.status !== 'minted' && (
+                    {/* {item.status !== 'minted' && (
                       <img
                         className="cursor-pointer"
                         id={item._id}
                         onClick={deleteModalClicked}
                         src="images/Delete.png"
                       ></img>
-                    )}
+                    )} */}
                   </span>
                 </div>
               ))}
