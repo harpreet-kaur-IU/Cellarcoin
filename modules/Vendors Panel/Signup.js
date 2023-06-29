@@ -38,7 +38,7 @@ export default function Signup() {
 
     const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     const regex = /^[^\s]+(\s+[^\s]+)*$/;
-    const usernameRegex = /^[A-Za-z0-9\.]+$/
+    const usernameRegex = /^[a-zA-Z ]*$/;
     
     const dropdownHandler = () =>{
         setToggle(!toggle);
@@ -160,8 +160,8 @@ export default function Signup() {
             return false;
         }
     }
-    //form Submit Handler
 
+    //form Submit Handler
     const formSubmit = (e) =>{
         e.preventDefault();
         const result = validator();
