@@ -233,8 +233,8 @@ const SellNFT = () => {
           Select your sell method
         </h2>
         {data &&
-          data.map((item) => (
-            <div className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}>
+          data.map((item,index) => (
+            <div key={index} className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}>
               <img
                 className={`col-6 ${styles['sell-nft-img']}`}
                 src={item.imageUrl}

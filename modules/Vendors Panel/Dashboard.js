@@ -141,7 +141,7 @@ const Dashboard = () => {
                   <span className='font-16 f-600 d-flex'>Returns</span>
                 </div>
                 {topNft && topNft.map((item,index)=>(
-                  <div className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>              
+                  <div key={index} className={`${styles["dashboard-table-column-top-nft"]} ${styles["dashboard-table-column-nft-data"]} d-flex d-align-center`}>              
                     <span className='font-14 f-500 d-flex word-break'>{index+1}.</span>
                     <span className='font-14 f-500 d-flex d-align-center'>
                       <img className={`${styles["dashboard-table-column-nft"]}`} src={item.imageUrl}></img>
@@ -163,7 +163,7 @@ const Dashboard = () => {
                 <h6 className='font-14 f-500'>Price</h6>
               </div>
               {nft && nft.map((item)=>(
-                <div className={`d-flex d-justify-space-between ${styles["new-nft-inner-wrapper"]}`}>
+                <div key={item._id} className={`d-flex d-justify-space-between ${styles["new-nft-inner-wrapper"]}`}>
                   <span className='font-14 f-500 d-flex'>
                     <img className={`${styles["dashboard-new-nft-img"]}`} src={item.imageUrl}></img>
                     <span className='font-14 f-500 d-flex d-align-center'>{item.name}</span>

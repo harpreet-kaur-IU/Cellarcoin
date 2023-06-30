@@ -59,11 +59,9 @@ const Listing = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}&&status=null`,
         requestOptions
       )
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((result) => {
-          const parseResult = JSON.parse(result);
-          console.log(parseResult.data);
-          setActivity(parseResult.data);
+          setActivity(result.data);
           setLoading(false);
         })
         .catch((error) => console.log('error', error));
@@ -128,8 +126,8 @@ const Listing = () => {
               <span className="font-18 f-500 d-flex">Date</span>
             </div>
             {activity &&
-              activity.map((item) => (
-                <div className={`${styles['table-column']}`}>
+              activity.map((item,index) => (
+                <div key={index} className={`${styles['table-column']}`}>
                   <span className="font-18 f-500 d-flex">
                     {item.transactionType}
                   </span>

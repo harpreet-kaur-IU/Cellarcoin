@@ -279,8 +279,8 @@ const Brands = () => {
                 <span className='font-16 f-600'>Created On</span>
                 <span className='font-16 f-600 text-center'>Status</span>
               </div>
-              {data && data.map((item)=>(
-                <div className={`${styles["brand-table-body"]}`}>
+              {data && data.map((item,index)=>(
+                <div key={index} className={`${styles["brand-table-body"]}`}>
                   <span className='font-16 f-500 text-primary'>{item.brandName}</span>
                   <span className='font-16 f-500'><Moment fromNow>{item.createdAt}</Moment></span>
                     {item.status === "approved" &&
