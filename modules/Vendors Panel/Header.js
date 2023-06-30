@@ -107,11 +107,9 @@ const Header = (props) => {
     }
   };
 
-
   //this function is called when there is any changes in wallet state
   const updateWalletActivity = () =>{
     window.ethereum.on('accountsChanged', function (accounts) {
-      // Time to reload your interface with accounts[0]!
       if(accounts.length === 0)
         setConnectedWallet(false);
       else  

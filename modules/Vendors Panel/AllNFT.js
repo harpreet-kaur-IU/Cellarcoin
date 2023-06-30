@@ -91,12 +91,12 @@ const AllNFT = () => {
           `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftByName?search=${e.target.value}`,
           requestOptions
         )
-          .then((response) => response.json())
-          .then((result) => {
-            setData(result.data);
-            setLoading(false);
-          })
-          .catch((error) => console.log('error', error));
+        .then((response) => response.json())
+        .then((result) => {
+          setData(result.data);
+          setLoading(false);
+        })
+        .catch((error) => console.log('error', error));
       }, '1000');
     } else if (e.target.value.length <= 2) {
       setData(searchData);
@@ -190,13 +190,14 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=${data}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        setData(result.data);
-        setLoading(false);
-      })
-      .catch((error) => console.log('error', error));
+    .then((response) => response.json())
+    .then((result) => {
+      setData(result.data);
+      setLoading(false);
+    })
+    .catch((error) => console.log('error', error));
   };
+
   const deleteNFT = (response, walletAddress) => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
@@ -211,22 +212,23 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/deleteNft/${deleteUserId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
-          method: 'GET',
-          headers: myHeaders,
-        })
-          .then((response) => response.json())
-          .then((results) => {
-            setData(results.data);
-            addTransaction(response.hash, deleteUserId, walletAddress);
-          });
-        setDelete((prev) => !prev);
-        setLoading(false).catch((error) => console.log('error', error));
+    .then((response) => response.json())
+    .then((result) => {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
+        method: 'GET',
+        headers: myHeaders,
       })
-      .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((results) => {
+        setData(results.data);
+        addTransaction(response.hash, deleteUserId, walletAddress);
+      });
+      setDelete((prev) => !prev);
+      setLoading(false).catch((error) => console.log('error', error));
+    })
+    .catch((error) => console.log('error', error));
   };
+
   const addTransaction = (hash, id, walletAddress) => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
@@ -251,18 +253,17 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => {
-        toast.success('NFT Deleted Successfully', {
-          toastId: '2',
-        });
-      })
-      .catch((error) => console.log('error', error));
+    .then((response) => response.text())
+    .then((result) => {
+      toast.success('NFT Deleted Successfully', {
+        toastId: '2',
+      });
+    })
+    .catch((error) => console.log('error', error));
   };
   const deleteHandler = () => {
     removeNFT();
   };
-
   return (
     <>
       {loading && <Loader></Loader>}
@@ -286,42 +287,38 @@ const AllNFT = () => {
                             </div>
                         }
                     </div> */}
-            <StatusDropdown handler={statusHandler}></StatusDropdown>
-            <div
-              className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}
-            >
-              <img src="images/search-icon-v.png"></img>
-              <form>
-                <input
-                  onChange={searchHandler}
-                  type="text"
-                  placeholder="Search"
-                />
-              </form>
-            </div>
-            <div
-              className={`d-none d-flex d-align-center d-justify-center ${styles['create-nft-div']}`}
-            >
-              <button onClick={createHandler} className="font-12 f-600 b-none">
-                Create NFT
-              </button>
-            </div>
+              <StatusDropdown handler={statusHandler}></StatusDropdown>
+              <div
+                className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}
+              >
+                <img src="images/search-icon-v.png"></img>
+                <form>
+                  <input
+                    onChange={searchHandler}
+                    type="text"
+                    placeholder="Search"
+                  />
+                </form>
+              </div>
+              <div
+                className={`d-none d-flex d-align-center d-justify-center ${styles['create-nft-div']}`}
+              >
+                <button onClick={createHandler} className="font-12 f-600 b-none">
+                  Create NFT
+                </button>
+              </div>
           </div>
         </div>
         <div className={`${styles['dashboard-table-section-scroll']}`}>
           <div className={`${styles['dashboard-table-wrapper']}`}>
-            <div
-              className={`${styles['dashboard-table-column']} bg-orange d-flex d-align-center`}
-            >
+            <div className={`${styles['dashboard-table-column']} bg-orange d-flex d-align-center`}>
               <span className="font-16 f-600 d-flex">NFT</span>
               <span className="font-16 f-600 d-flex">Title</span>
               <span className="font-16 f-600 d-flex">Brand</span>
               <span className="font-16 f-600 d-flex">Status</span>
               <span className="font-16 f-600 d-flex">Price</span>
               <span className="font-16 f-600 d-flex">Created On</span>
-              <span className="font-16 f-600 d-flex d-justify-space-evenly">
-                Action
-              </span>
+              <span className="font-16 f-600 d-flex d-justify-space-evenly">Action</span>
             </div>
             {data &&
               data.map((item, index) => (

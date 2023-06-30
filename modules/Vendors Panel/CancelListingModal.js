@@ -6,6 +6,7 @@ const CancelListingModal = (props) => {
     const yesClicked = () =>{
         props.cancelHandler(true);
     }
+
   return (
     <>
         <div className={`bg-white rounded-16 ${styles["active-status-modal"]}`}>
@@ -19,7 +20,6 @@ const CancelListingModal = (props) => {
                 <button onClick={props.handler} className={`cursor-pointer font-14 f-600 l-19 rounded-12 text-primary bg-white  ${styles["crud-btn-no"]}`}>No</button>
             </div>
         </div>
-        
     </>
   )
 }

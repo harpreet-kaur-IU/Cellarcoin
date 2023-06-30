@@ -78,6 +78,7 @@ const Listing = () => {
     console.log('handlerCancelListing')
     cancelListing()
   }
+  
   return (
     <div>
       <Header></Header>
@@ -146,7 +147,7 @@ const Listing = () => {
             <h3 className={`f-600 text-primary ${styles['table-heading']}`}>
               Activity
             </h3>
-            
+
             <div className={` ${styles['table-column']}`}>
               <span className="font-18 f-500 d-flex">Event</span>
               <span className="font-18 f-500 d-flex">Price</span>

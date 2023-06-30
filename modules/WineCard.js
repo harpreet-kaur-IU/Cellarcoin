@@ -1,8 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
-import { getUserOnBoardFromCookie } from '../auth/userCookies';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './Vendors Panel/Loader';
 const WineCard = (props) => {
@@ -13,11 +11,12 @@ const WineCard = (props) => {
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
     const [loading,setLoading] = useState(false);
-    const JWTToken = getUserOnBoardFromCookie();
+
     const navigationHandler = () =>{
         if(nftdata._id)
             router.push(`/purple/${nftdata._id}`)
     }
+
     const favoriteHandler = (e) =>{
         if(nftdata.favourite){
             props.handler(false,e.currentTarget.id)
