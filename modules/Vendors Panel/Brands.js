@@ -230,6 +230,7 @@ const Brands = () => {
     if(coverImage){
       var formdata = new FormData();
       formdata.append("image",coverImage);
+      
       var requestOptions = {
         method: 'POST',
         body: formdata,
@@ -367,7 +368,6 @@ const Brands = () => {
                 {loadingCoverImage && !coverUrl && <SmallLoader></SmallLoader>}
                 {!loadingCoverImage && !coverUrl && <span className='f-400 font-14'>Drag and drop files here or upload</span>}
                 {coverUrl && <span className='d-flex d-justify-center mt-16 f-400 font-14'>File Uploaded Successfully : {coverUrl}</span>}
-                
               </div>
               {coverImageError && <h6 className={`mt-12 mb-8 font-14 f-700 text-danger`}>Please Select Valid file format.</h6>}
               {/* save button */}

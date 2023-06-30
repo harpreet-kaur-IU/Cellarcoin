@@ -185,3 +185,8 @@
             width: 100px;
         }
     }
+    .cancel-listing{
+        padding: 14px 12px;
+        border:1px solid var(--primary);
+        border-radius: 16px;
+    }

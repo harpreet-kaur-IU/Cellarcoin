@@ -117,6 +117,7 @@ const MultiVendor = () => {
       setLogin(!login)
     }
   }
+  
   const formSubmit = (e) =>{
       e.preventDefault()
       var result = validator();
@@ -231,6 +232,7 @@ const MultiVendor = () => {
               </form>
             </div>
           }
+
           {!login && data && data.map((item,index)=>(
             <div key={index} className={`col-6 ${styles["multi-vendor-access-wrapper"]}`}>
               <div className={`d-flex ${styles["login-creds-wrapper"]}`}>

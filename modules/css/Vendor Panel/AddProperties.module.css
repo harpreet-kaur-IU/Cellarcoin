@@ -55,14 +55,14 @@
     border: none;
 }
 .active-status-modal{
-    width: 468px;
-    height: 353px;
+    width: 583px;
+    height: auto;
     background: #FFFFFF;
     border-radius: 16px;
     padding: 55px 42px;
 }
 .btn-wrapper{
-    margin-top:59px;
+    margin-top:39px;
     gap: 34px;
 }
 .crud-btn{

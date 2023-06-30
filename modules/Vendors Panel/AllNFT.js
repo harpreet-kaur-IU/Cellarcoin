@@ -380,7 +380,7 @@ const AllNFT = () => {
                     </span>
                   )}
                   <span className="font-14 f-500 d-flex">
-                    {dayjs(item.createdTime).format('DD-MM-YYYY')}
+                    {dayjs(item.createdAt).format('DD MMM, YYYY, hh:mm')}
                   </span>
                   <span
                     className={`font-14 f-500 d-flex d-align-center d-justify-center`}
