@@ -4,6 +4,7 @@ import {useRouter} from 'next/router'
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './Vendors Panel/Loader';
 const WineCard = (props) => {
+
     useEffect(()=>{
        setData(props.data)
     },[props.data])
@@ -51,15 +52,14 @@ const WineCard = (props) => {
                     <h6 className='l-137 f-500'>Owned by</h6>
                 </div>
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
-                    <h5 className='l-137 f-500'>
+                    <span className='d-flex d-align-center h5 l-137 f-500'>
                         <img src='images/polygon-icon.svg'></img>
                         {nftdata.price} MATIC
-                    </h5>
+                    </span>
                     <h5 className='l-137 f-500'>{nftdata.ownedByUserId?nftdata.ownedByUserId.userName:(nftdata.ownerId && nftdata.ownerId.name)}</h5>
                 </div>
             </div>
         </div>
-        
     </>
   )
 }

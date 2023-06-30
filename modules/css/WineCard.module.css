@@ -18,10 +18,11 @@
     margin-bottom: 26px;
 }
 .wine-bg-img{
-    object-fit: contain;
+    object-fit: cover;
     width: 100%;
     max-width: 100%;
     height: 420px;
+    border-radius: 16px 16px 0px 0px;
 }
 .wine-bg-content{
     padding: 16px;

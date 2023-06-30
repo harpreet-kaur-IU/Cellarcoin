@@ -29,6 +29,7 @@ const Listing = () => {
     setAdd((prev) => !prev);
   };
   useEffect(() => {
+    
     if (nftId) {
       var myHeaders = new Headers();
       myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
@@ -43,12 +44,12 @@ const Listing = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftById/${nftId}`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.data);
-          setLoading(false);
-        })
-        .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log('error', error));
 
       //activity log
       var requestOptions = {
@@ -78,7 +79,7 @@ const Listing = () => {
     console.log('handlerCancelListing')
     cancelListing()
   }
-  
+
   return (
     <div>
       <Header></Header>
@@ -118,17 +119,16 @@ const Listing = () => {
                   </div>
 
                   {item.price!= 0 && <div className='col-3 d-flex d-flex-column gap-1'>
-                      <h5 className={`f-500 ${styles['listing-content-brands']}`}>
-                        Expiry
-                      </h5>
-                      <div className="d-flex d-align-center ">
-                        <h5 className={`f-500`}>{item.expiryDate}</h5>
-                      </div>
-                    </div>}
-                    {item.price!= 0 &&  <div onClick={cancelListing} className={`col-3 cursor-pointer d-flex d-justify-center d-align-center ${styles["cancel-listing"]}`}>
-                      <h6 className='f-500 text-primary'>Cancel Listing</h6>
+                    <h5 className={`f-500 ${styles['listing-content-brands']}`}>
+                      Expiry
+                    </h5>
+                    <div className="d-flex d-align-center ">
+                      <h5 className={`f-500`}>{item.expiryDate}</h5>
                     </div>
-                  }
+                  </div>}
+                  {item.price!= 0 &&  <div onClick={cancelListing} className={`col-3 cursor-pointer d-flex d-justify-center d-align-center ${styles["cancel-listing"]}`}>
+                    <h6 className='f-500 text-primary'>Cancel Listing</h6>
+                  </div>}
                 </div>
                 
                 {item.price === 0 && (
@@ -175,7 +175,6 @@ const Listing = () => {
                     </span>
                   </div>
                   <span className="text-primary font-18 f-500 d-flex">
-
                     {item.from && (item.from.name === null ? '-' : item.from.name)}
                   </span>
                   <span className="text-primary font-18 f-500 d-flex">

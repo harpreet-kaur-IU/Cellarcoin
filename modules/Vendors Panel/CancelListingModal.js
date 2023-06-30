@@ -2,11 +2,9 @@ import React from 'react'
 import styles from '../css/Vendor Panel/AddProperties.module.css'
 
 const CancelListingModal = (props) => {
-    
     const yesClicked = () =>{
         props.cancelHandler(true);
     }
-
   return (
     <>
         <div className={`bg-white rounded-16 ${styles["active-status-modal"]}`}>

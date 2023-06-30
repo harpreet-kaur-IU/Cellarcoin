@@ -25,6 +25,7 @@ function useOutsideAlerter(ref, handler) {
     };
   }, [ref]);
 }
+
 const AllNFT = () => {
   const [data, setData] = useState('');
   const [searchData, setSearchData] = useState('');
