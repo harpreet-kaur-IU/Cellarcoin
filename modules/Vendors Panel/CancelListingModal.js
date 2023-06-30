@@ -12,7 +12,7 @@ const CancelListingModal = (props) => {
             <div className='d-flex d-flex-column'>
                 <h5 className='f-600 text-black'>Are you sure you want to cancel this Listing?</h5>
                 <h6 className='mt-16 f-500 text-dark-gray'>Gas Fees deduction ( for cancelation of NFT listing )</h6>
-                <h5 className='mt-8 f-600 text-black'>0.19 wETH</h5>
+                {/* <h5 className='mt-8 f-600 text-black'>0.19 wETH</h5> */}
             </div>
             <div className={`d-flex d-flex-column ${styles["btn-wrapper"]}`}>
                 <button onClick={yesClicked} className={`cursor-pointer font-14 f-600 l-19 rounded-12 text-white bg-primary  ${styles["crud-btn"]}`}>Yes</button>

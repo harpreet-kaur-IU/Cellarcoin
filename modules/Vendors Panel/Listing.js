@@ -146,6 +146,7 @@ const Listing = () => {
             <h3 className={`f-600 text-primary ${styles['table-heading']}`}>
               Activity
             </h3>
+            
             <div className={` ${styles['table-column']}`}>
               <span className="font-18 f-500 d-flex">Event</span>
               <span className="font-18 f-500 d-flex">Price</span>
@@ -153,6 +154,7 @@ const Listing = () => {
               <span className="font-18 f-500 d-flex">To</span>
               <span className="font-18 f-500 d-flex">Date</span>
             </div>
+
             {activity &&
               activity.map((item,index) => (
                 <div key={index} className={`${styles['table-column']}`}>
