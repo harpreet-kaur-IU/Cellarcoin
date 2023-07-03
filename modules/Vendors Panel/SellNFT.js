@@ -60,12 +60,12 @@ const SellNFT = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftById/${nftId}`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.data);
-          setLoading(false);
-        })
-        .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log('error', error));
     }
   }, [nftId]);
 
@@ -85,8 +85,8 @@ const SellNFT = () => {
     const addr = await signer.getAddress();
     let errorMessage;
 
-    console.log(signer);
-    console.log(addr);
+    // console.log(signer);
+    // console.log(addr);
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
@@ -98,8 +98,8 @@ const SellNFT = () => {
         );
         setLoading(true);
         try {
-          console.log(data[0].tokenId);
-          console.log('price', ethers.utils.parseEther(price.toString()));
+          // console.log(data[0].tokenId);
+          // console.log('price', ethers.utils.parseEther(price.toString()));
           contract
             .placeNFTForSale(
               data[0].tokenId,
@@ -141,7 +141,7 @@ const SellNFT = () => {
                 }
               }
             });
-        } catch (error) {
+        }catch (error) {
           setLoading(false);
           toast.error(error.message, {
             toastId: 'create-error-6',
@@ -179,14 +179,14 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error)
-      });
+    .then((response) => response.json())
+    .then((result) => {
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error)
+    });
   };
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
@@ -213,15 +213,15 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => {
-        setLoading(false);
-        Router.push('/allnftlist');
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error)
-      });
+    .then((response) => response.text())
+    .then((result) => {
+      setLoading(false);
+      Router.push('/allnftlist');
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error)
+    });
   };
   return (
     <>

@@ -25,12 +25,12 @@ const UserNft = () => {
 
     
     async function getAddress() {
-        const ethers = require("ethers");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const addr = await signer.getAddress();
-        setWalletAddress(addr)
-      }
+        // const ethers = require("ethers");
+        // const provider = new ethers.providers.Web3Provider(window.ethereum);
+        // const signer = provider.getSigner();
+        // const addr = await signer.getAddress();
+        // setWalletAddress(addr)
+    }
 
     useEffect(()=>{
         //fetch user name from jwt token
@@ -73,12 +73,12 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
+
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
-            console.log(parseResult)
             setFav(parseResult.favourites)
             setLoading(false)
         })
@@ -134,6 +134,7 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
+
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
         .then(response => response.text())
@@ -146,18 +147,7 @@ const UserNft = () => {
     }
 
     const addFavouriteHandler = (value,id) =>{
-        if(JWTToken){
-          function parseJwt() {
-            if(!JWTToken){
-              return
-            }
-            const base64Url = JWTToken.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(window.atob(base64));
-          }
-          var user = parseJwt();
-          var userId = (user.user._id)
-  
+        if(JWTToken){  
           //add favourite
           var myHeaders = new Headers();
           myHeaders.append("Authorization", "Bearer "+JWTToken);
@@ -175,23 +165,23 @@ const UserNft = () => {
           
           if(value){
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result =>{
                 getFavourites()
             })
             .catch(error => console.log('error', error));
           }else{
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result =>{
                 getFavourites()
             })
             .catch(error => console.log('error', error));
           }
         }else{
-          toast.warning("Please sign in",{
-              toastId:"2"
-          });
+            toast.warning("Please sign in",{
+                toastId:"2"
+            });
         }
       }
   return (

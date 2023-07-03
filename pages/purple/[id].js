@@ -31,50 +31,52 @@ export default function Purple() {
       })
       .catch(error => console.log('error', error));
     },[])
+
     const favoriteHandler = (value,id) =>{
-        console.log(value)
-        if(JWTToken){
-          function parseJwt() {
-            if(!JWTToken){
-              return
-            }
-            const base64Url = JWTToken.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(window.atob(base64));
+      if(JWTToken){
+        function parseJwt() {
+          if(!JWTToken){
+            return
           }
-          var user = parseJwt();
-          var userId = (user.user._id)
-  
-          //add favourite
-          var myHeaders = new Headers();
-          myHeaders.append("Authorization", "Bearer "+JWTToken);
-          myHeaders.append("Content-Type", "application/json");
-  
-          var raw = JSON.stringify({
-            "favourite":value
-          });
-          var requestOptions = {
-            method:'PATCH',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-          };
+          const base64Url = JWTToken.split('.')[1];
+          const base64 = base64Url.replace('-', '+').replace('_', '/');
+          return JSON.parse(window.atob(base64));
+        }
+        var user = parseJwt();
+        var userId = (user.user._id)
+
+        //add favourite
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          "favourite":value
+        });
+        var requestOptions = {
+          method:'PATCH',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        
+        if(value){
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
           .then(response => response.text())
           .then(result =>{
             var myHeaders1 = new Headers();
             myHeaders1.append("Content-Type","application/json");
-  
+
             var raw = JSON.stringify({
               "user": userId
             });
-  
+
             var requestOptions = {
               method: 'POST',
               headers: myHeaders1,
               body: raw
             };
-  
+
             setLoading(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getAllNft`, requestOptions)
             .then(response => response.json())
@@ -86,10 +88,38 @@ export default function Purple() {
           })
           .catch(error => console.log('error', error));
         }else{
-            toast.warning("Please sign in",{
-                toastId:"2"
+          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
+          .then(response => response.text())
+          .then(result =>{
+            var myHeaders1 = new Headers();
+            myHeaders1.append("Content-Type","application/json");
+
+            var raw = JSON.stringify({
+              "user": userId
             });
+
+            var requestOptions = {
+              method: 'POST',
+              headers: myHeaders1,
+              body: raw
+            };
+
+            setLoading(true)
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getAllNft`, requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+              setData(result.data)
+              setLoading(false)
+            })
+            .catch(error => console.log('error', error));
+          })
+          .catch(error => console.log('error', error));
         }
+      }else{
+        toast.warning("Please sign in",{
+            toastId:"2"
+        });
+      }
     }
     return (
         <Fragment>  
