@@ -78,7 +78,7 @@ const SellNow = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -156,11 +156,11 @@ const SellNow = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-    .then((response) => response.json())
-    .then((result) => {
-      addTransaction(response.hash, nftId, walletAddress);
-    })
-    .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        addTransaction(response.hash, nftId, walletAddress);
+      })
+      .catch((error) => console.log('error', error));
   };
 
   const addTransaction = (hash, id, walletAddress) => {

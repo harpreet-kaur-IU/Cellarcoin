@@ -107,35 +107,71 @@ const ListNFT = () => {
   //     setDelete(prev => !prev);
   //     setDeleteUserId(e.target.id);
   // }
-  // const removeNFT = async() =>{
-  //     const ethers = require("ethers");
-  //     const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //     const signer = provider.getSigner();
-  //     const addr = await signer.getAddress();
-  //     const tokenid = 33;
 
-  //     if(typeof window.ethereum !== "undefined"){
-  //       const contractAddress = "0x1D74738Bb91802977019Dfedb709B6183f6c6781";
-  //       const contract = new ethers.Contract(
-  //         contractAddress,
-  //         Nft_marketplace_ABI,
-  //         signer
-  //       );
-  //       try{
-  //         await contract.RemoveNFTForSale(
-  //           tokenid
-  //         )
-  //         .then(response => {
-  //             deleteNFT(response,addr)
-  //         })
-  //       }catch(error){
-  //         console.log(error);
-  //       }
-  //       tokenid++;
-  //     }else{
-  //       console.log("Please install MetaMask");
-  //     }
-  // }
+  const removeNFT = async () => {
+    console.log(data.tokenId);
+    const ethers = require('ethers');
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    let errorMessage;
+
+    if (typeof window.ethereum !== 'undefined') {
+      if (window.ethereum.networkVersion == '80001') {
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
+        const contract = new ethers.Contract(
+          contractAddress,
+          Nft_marketplace_ABI,
+          signer
+        );
+        setLoading(true);
+        try {
+          contract;
+          RemoveNFTForSale(tokenid)
+            .then((result) => {
+              result.wait().then((response) => {
+                deleteNFT(response, addr);
+              });
+            })
+            .catch((error) => {
+              setLoading(false);
+              errorMessage = error.toString();
+              if (
+                errorMessage &&
+                errorMessage.includes('user rejected transaction')
+              ) {
+                console.log('error message', errorMessage);
+                toast.error('User rejected transaction', {
+                  toastId: 'create-error-10',
+                });
+              } else {
+                if (error.reason) {
+                  setLoading(false);
+                  toast.error(error.reason, {
+                    toastId: 'sell-error-6',
+                  });
+                } else {
+                  setLoading(false);
+                  toast.error('Not enough user funds in the wallet.', {
+                    toastId: 'sell-error-7',
+                  });
+                }
+              }
+            });
+        } catch (error) {
+          setLoading(false);
+          toast.error(error.message, {
+            toastId: 'create-error-6',
+          });
+        }
+      } else {
+        alert('Please switch to polygon chain');
+      }
+    } else {
+      console.log('Please install MetaMask');
+    }
+  };
+
   const statusHandler = (data) => {
     if (data === 'All') {
       data = null;

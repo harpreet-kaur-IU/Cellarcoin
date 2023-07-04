@@ -64,12 +64,12 @@ const SellNFT = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftById/${nftId}`,
         requestOptions
       )
-      .then((response) => response.json())
-      .then((result) => {
-        setData(result.data);
-        setLoading(false);
-      })
-      .catch((error) => console.log('error', error));
+        .then((response) => response.json())
+        .then((result) => {
+          setData(result.data);
+          setLoading(false);
+        })
+        .catch((error) => console.log('error', error));
     }
   }, [nftId]);
 
@@ -83,6 +83,7 @@ const SellNFT = () => {
   };
 
   const sellNftWeb3 = async () => {
+    console.log(expire);
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -91,7 +92,7 @@ const SellNFT = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -105,6 +106,7 @@ const SellNFT = () => {
             .placeNFTForSale(
               data[0].tokenId,
               ethers.utils.parseEther(price.toString()),
+              expire,
               {
                 value: ethers.utils.parseEther('0.001'),
               }
@@ -123,18 +125,18 @@ const SellNFT = () => {
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
-              ){
+              ) {
                 console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'sell-error-10',
                 });
-              }else {
-                if(error.reason) {
+              } else {
+                if (error.reason) {
                   setLoading(false);
                   toast.error(error.reason, {
                     toastId: 'sell-error-6',
                   });
-                }else {
+                } else {
                   setLoading(false);
                   toast.error('Not enough user funds in the wallet.', {
                     toastId: 'sell-error-7',
@@ -142,7 +144,7 @@ const SellNFT = () => {
                 }
               }
             });
-        }catch (error) {
+        } catch (error) {
           setLoading(false);
           toast.error(error.message, {
             toastId: 'create-error-6',
@@ -180,14 +182,14 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-    .then((response) => response.json())
-    .then((result) => {
-      addTransaction(response.hash, nftId, walletAddress);
-    })
-    .catch((error) => {
-      setLoading(false);
-      console.log('error', error)
-    });
+      .then((response) => response.json())
+      .then((result) => {
+        addTransaction(response.hash, nftId, walletAddress);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error);
+      });
   };
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
@@ -214,15 +216,15 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-    .then((response) => response.text())
-    .then((result) => {
-      setLoading(false);
-      Router.push('/allnftlist');
-    })
-    .catch((error) => {
-      setLoading(false);
-      console.log('error', error)
-    });
+      .then((response) => response.text())
+      .then((result) => {
+        setLoading(false);
+        Router.push('/allnftlist');
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error);
+      });
   };
   return (
     <>
@@ -234,8 +236,11 @@ const SellNFT = () => {
           Select your sell method
         </h2>
         {data &&
-          data.map((item,index) => (
-            <div key={index} className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}>
+          data.map((item, index) => (
+            <div
+              key={index}
+              className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}
+            >
               <img
                 className={`col-6 ${styles['sell-nft-img']}`}
                 src={item.imageUrl}
@@ -251,7 +256,7 @@ const SellNFT = () => {
                   Contract Address
                 </h5>
                 <h5 className={`f-400 l-27 ${styles['contract-address']}`}>
-                  0x1D74738Bb91802977019Dfedb709B6183f6c6781
+                  0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf
                 </h5>
                 <h5 className={`f-600 l-27 ${styles['token-heading']}`}>
                   Token Id

@@ -403,7 +403,7 @@ const CreateNFT = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -415,13 +415,15 @@ const CreateNFT = () => {
             .nftMint(`ipfs://${tokenURI}`)
             .then((result) => {
               result.wait().then((response) => {
+                console.log(response);
                 setTokenID(
-                  parseInt(response.events[1].topics[1].toString(), 16)
+                  parseInt(response.events[0].topics[3].toString(), 16)
                 );
                 let tokId = parseInt(
-                  response.events[1].topics[1].toString(),
+                  response.events[0].topics[3].toString(),
                   16
                 );
+                console.log(tokId);
                 let web3Response = response;
                 createNFT(web3Response, addr, tokId);
               });
