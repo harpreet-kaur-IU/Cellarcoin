@@ -92,12 +92,12 @@ const AllNFT = () => {
           `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftByName?search=${e.target.value}`,
           requestOptions
         )
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.data);
-          setLoading(false);
-        })
-        .catch((error) => console.log('error', error));
+          .then((response) => response.json())
+          .then((result) => {
+            setData(result.data);
+            setLoading(false);
+          })
+          .catch((error) => console.log('error', error));
       }, '1000');
     } else if (e.target.value.length <= 2) {
       setData(searchData);
@@ -111,68 +111,68 @@ const AllNFT = () => {
     setDeleteUserId(e.target.id);
   };
 
-  const removeNFT = async (tokenURI) => {
-    const ethers = require('ethers');
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const addr = await signer.getAddress();
-    let errorMessage;
+  // const removeNFT = async () => {
+  //   const ethers = require('ethers');
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const addr = await signer.getAddress();
+  //   let errorMessage;
 
-    if (typeof window.ethereum !== 'undefined') {
-      if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
-        const contract = new ethers.Contract(
-          contractAddress,
-          Nft_marketplace_ABI,
-          signer
-        );
-        setLoading(true);
-        try {
-          contract;
-          RemoveNFTForSale(tokenid)
-            .then((result) => {
-              result.wait().then((response) => {
-                deleteNFT(response, addr);
-              });
-            })
-            .catch((error) => {
-              setLoading(false);
-              errorMessage = error.toString();
-              if (
-                errorMessage &&
-                errorMessage.includes('user rejected transaction')
-              ) {
-                console.log('error message', errorMessage);
-                toast.error('User rejected transaction', {
-                  toastId: 'create-error-10',
-                });
-              } else {
-                if (error.reason) {
-                  setLoading(false);
-                  toast.error(error.reason, {
-                    toastId: 'sell-error-6',
-                  });
-                } else {
-                  setLoading(false);
-                  toast.error('Not enough user funds in the wallet.', {
-                    toastId: 'sell-error-7',
-                  });
-                }
-              }
-            });
-        } catch (error) {
-          setLoading(false);
-          toast.error(error.message, {
-            toastId: 'create-error-6',
-          });
-        }
-      } else {
-        alert('Please switch to polygon chain');
-      }
-    } else {
-      console.log('Please install MetaMask');
-    }
-  };
+  //   if (typeof window.ethereum !== 'undefined') {
+  //     if (window.ethereum.networkVersion == '80001') {
+  //       const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
+  //       const contract = new ethers.Contract(
+  //         contractAddress,
+  //         Nft_marketplace_ABI,
+  //         signer
+  //       );
+  //       setLoading(true);
+  //       try {
+  //         contract;
+  //         RemoveNFTForSale(data[0].tokenId))
+  //           .then((result) => {
+  //             result.wait().then((response) => {
+  //               deleteNFT(response, addr);
+  //             });
+  //           })
+  //           .catch((error) => {
+  //             setLoading(false);
+  //             errorMessage = error.toString();
+  //             if (
+  //               errorMessage &&
+  //               errorMessage.includes('user rejected transaction')
+  //             ) {
+  //               console.log('error message', errorMessage);
+  //               toast.error('User rejected transaction', {
+  //                 toastId: 'create-error-10',
+  //               });
+  //             } else {
+  //               if (error.reason) {
+  //                 setLoading(false);
+  //                 toast.error(error.reason, {
+  //                   toastId: 'sell-error-6',
+  //                 });
+  //               } else {
+  //                 setLoading(false);
+  //                 toast.error('Not enough user funds in the wallet.', {
+  //                   toastId: 'sell-error-7',
+  //                 });
+  //               }
+  //             }
+  //           });
+  //       } catch (error) {
+  //         setLoading(false);
+  //         toast.error(error.message, {
+  //           toastId: 'create-error-6',
+  //         });
+  //       }
+  //     } else {
+  //       alert('Please switch to polygon chain');
+  //     }
+  //   } else {
+  //     console.log('Please install MetaMask');
+  //   }
+  // };
 
   const statusHandler = (data) => {
     if (data === 'All') {
@@ -191,12 +191,12 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=${data}`,
       requestOptions
     )
-    .then((response) => response.json())
-    .then((result) => {
-      setData(result.data);
-      setLoading(false);
-    })
-    .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log('error', error));
   };
 
   const deleteNFT = (response, walletAddress) => {
@@ -213,21 +213,21 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/deleteNft/${deleteUserId}`,
       requestOptions
     )
-    .then((response) => response.json())
-    .then((result) => {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
-        method: 'GET',
-        headers: myHeaders,
-      })
       .then((response) => response.json())
-      .then((results) => {
-        setData(results.data);
-        addTransaction(response.hash, deleteUserId, walletAddress);
-      });
-      setDelete((prev) => !prev);
-      setLoading(false).catch((error) => console.log('error', error));
-    })
-    .catch((error) => console.log('error', error));
+      .then((result) => {
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
+          method: 'GET',
+          headers: myHeaders,
+        })
+          .then((response) => response.json())
+          .then((results) => {
+            setData(results.data);
+            addTransaction(response.hash, deleteUserId, walletAddress);
+          });
+        setDelete((prev) => !prev);
+        setLoading(false).catch((error) => console.log('error', error));
+      })
+      .catch((error) => console.log('error', error));
   };
 
   const addTransaction = (hash, id, walletAddress) => {
@@ -254,17 +254,18 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-    .then((response) => response.text())
-    .then((result) => {
-      toast.success('NFT Deleted Successfully', {
-        toastId: '2',
-      });
-    })
-    .catch((error) => console.log('error', error));
+      .then((response) => response.text())
+      .then((result) => {
+        toast.success('NFT Deleted Successfully', {
+          toastId: '2',
+        });
+      })
+      .catch((error) => console.log('error', error));
   };
   const deleteHandler = () => {
     removeNFT();
   };
+
   return (
     <>
       {loading && <Loader></Loader>}
@@ -288,38 +289,42 @@ const AllNFT = () => {
                             </div>
                         }
                     </div> */}
-              <StatusDropdown handler={statusHandler}></StatusDropdown>
-              <div
-                className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}
-              >
-                <img src="images/search-icon-v.png"></img>
-                <form>
-                  <input
-                    onChange={searchHandler}
-                    type="text"
-                    placeholder="Search"
-                  />
-                </form>
-              </div>
-              <div
-                className={`d-none d-flex d-align-center d-justify-center ${styles['create-nft-div']}`}
-              >
-                <button onClick={createHandler} className="font-12 f-600 b-none">
-                  Create NFT
-                </button>
-              </div>
+            <StatusDropdown handler={statusHandler}></StatusDropdown>
+            <div
+              className={`d-flex d-align-center rounded-16 ${styles['header-search-box']}`}
+            >
+              <img src="images/search-icon-v.png"></img>
+              <form>
+                <input
+                  onChange={searchHandler}
+                  type="text"
+                  placeholder="Search"
+                />
+              </form>
+            </div>
+            <div
+              className={`d-none d-flex d-align-center d-justify-center ${styles['create-nft-div']}`}
+            >
+              <button onClick={createHandler} className="font-12 f-600 b-none">
+                Create NFT
+              </button>
+            </div>
           </div>
         </div>
         <div className={`${styles['dashboard-table-section-scroll']}`}>
           <div className={`${styles['dashboard-table-wrapper']}`}>
-            <div className={`${styles['dashboard-table-column']} bg-orange d-flex d-align-center`}>
+            <div
+              className={`${styles['dashboard-table-column']} bg-orange d-flex d-align-center`}
+            >
               <span className="font-16 f-600 d-flex">NFT</span>
               <span className="font-16 f-600 d-flex">Title</span>
               <span className="font-16 f-600 d-flex">Brand</span>
               <span className="font-16 f-600 d-flex">Status</span>
               <span className="font-16 f-600 d-flex">Price</span>
               <span className="font-16 f-600 d-flex">Created On</span>
-              <span className="font-16 f-600 d-flex d-justify-space-evenly">Action</span>
+              <span className="font-16 f-600 d-flex d-justify-space-evenly">
+                Action
+              </span>
             </div>
             {data &&
               data.map((item, index) => (

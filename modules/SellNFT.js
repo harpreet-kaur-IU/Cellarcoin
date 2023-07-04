@@ -62,7 +62,7 @@ const SellNFT = () => {
     if (typeof window.ethereum !== 'undefined') {
       console.log(data.tokenId);
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -74,6 +74,7 @@ const SellNFT = () => {
             .placeNFTForSale(
               data.tokenId,
               ethers.utils.parseEther(price.toString()),
+              expire,
               {
                 value: ethers.utils.parseEther('0.001'),
               }
@@ -146,11 +147,11 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-    .then((response) => response.json())
-    .then((result) => {
-      addTransaction(response.hash, nftId, walletAddress);
-    })
-    .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        addTransaction(response.hash, nftId, walletAddress);
+      })
+      .catch((error) => console.log('error', error));
   };
   //add order API
   const addTransaction = (hash, id, walletAddress) => {
@@ -244,7 +245,7 @@ const SellNFT = () => {
             Contract Address
           </h5>
           <h5 className={`f-400 l-27 ${styles['contract-address']}`}>
-            0x1D74738Bb91802977019Dfedb709B6183f6c6781
+            0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf
           </h5>
           <h5 className={`f-600 l-27 ${styles['token-heading']}`}>Token Id</h5>
           <h5 className={`f-400 l-27 ${styles['token']}`}>{data.tokenId}</h5>

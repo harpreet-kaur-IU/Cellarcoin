@@ -79,6 +79,7 @@ const SellNFT = () => {
   };
 
   const sellNftWeb3 = async () => {
+    console.log(expire);
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -90,7 +91,7 @@ const SellNFT = () => {
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
-        const contractAddress = '0x1D74738Bb91802977019Dfedb709B6183f6c6781';
+        const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
         const contract = new ethers.Contract(
           contractAddress,
           Nft_marketplace_ABI,
@@ -104,6 +105,7 @@ const SellNFT = () => {
             .placeNFTForSale(
               data[0].tokenId,
               ethers.utils.parseEther(price.toString()),
+              expire,
               {
                 value: ethers.utils.parseEther('0.001'),
               }
@@ -253,7 +255,7 @@ const SellNFT = () => {
                   Contract Address
                 </h5>
                 <h5 className={`f-400 l-27 ${styles['contract-address']}`}>
-                  0x1D74738Bb91802977019Dfedb709B6183f6c6781
+                  0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf
                 </h5>
                 <h5 className={`f-600 l-27 ${styles['token-heading']}`}>
                   Token Id
