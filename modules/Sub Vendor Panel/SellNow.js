@@ -156,12 +156,13 @@ const SellNow = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => console.log('error', error));
+    .then((response) => response.json())
+    .then((result) => {
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => console.log('error', error));
   };
+
   const addTransaction = (hash, id, walletAddress) => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
@@ -193,6 +194,7 @@ const SellNow = () => {
       })
       .catch((error) => console.log('error', error));
   };
+
   const formSubmit = (e) => {
     e.preventDefault();
     var result = validator();
@@ -200,6 +202,7 @@ const SellNow = () => {
       sellNftWeb3();
     }
   };
+
   return (
     <>
       <Header></Header>

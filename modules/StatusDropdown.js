@@ -10,7 +10,11 @@ const StatusDropdown = (props) => {
     const selectHandler = (e) => {
         setValue(e.currentTarget.getAttribute("value"));
         // console.log(e.currentTarget.getAttribute("textContent"))
-        props.handler(e.currentTarget.getAttribute("value"))
+
+        if(e.currentTarget.getAttribute("value") == "All")
+            props.handler(e.currentTarget.getAttribute("null"))
+        else
+            props.handler(e.currentTarget.getAttribute("value"))
     }
 
     return (

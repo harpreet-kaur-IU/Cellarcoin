@@ -45,6 +45,7 @@ const Listing = () => {
                 headers: myHeaders,
                 redirect: 'follow'
             };
+
             setLoading(true)
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getTransaction?nftId=${nftId}&&status=null`, requestOptions)
             .then(response => response.json())
@@ -109,8 +110,9 @@ const Listing = () => {
                                 {item.price === 0? "":<img src='images/polygon-icon.svg'></img>}
                                 <span className='text-primary font-18 f-600'>{item.price === 0?" ":item.price}</span>
                             </div>
-                            {/* <span className='text-primary font-18 f-500 d-flex'>{item.from && (item.from.name === null?"-":item.from.name)}</span> */}
-                            <span className='text-primary font-18 f-500 d-flex'>{item.to === null?"-":item.to}</span>
+
+                            <span className='text-primary font-18 f-500 d-flex'>{item.from && (item.from.name === null?"-":item.from.name)}</span>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.to == null?"-":item.to.name}</span>
                             <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
                         </div> 
                     ))}  

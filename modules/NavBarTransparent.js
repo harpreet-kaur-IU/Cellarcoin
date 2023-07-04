@@ -83,16 +83,17 @@ const NavBarTransparent = () => {
     }
     updateWalletActivity()
   },[])
-      //this function is called when there is any changes in wallet state
-      const updateWalletActivity = () =>{
-        window.ethereum.on('accountsChanged', function (accounts) {
-          // Time to reload your interface with accounts[0]!
-          if(accounts.length === 0)
-            setConnectedWallet(false);
-          else  
-            setConnectedWallet(true);
-        })
-      }
+  
+  //this function is called when there is any changes in wallet state
+  const updateWalletActivity = () =>{
+    window.ethereum.on('accountsChanged', function (accounts) {
+      // Time to reload your interface with accounts[0]!
+      if(accounts.length === 0)
+        setConnectedWallet(false);
+      else  
+        setConnectedWallet(true);
+    })
+  }
 
   const handleClick = () =>{
     setToggle(prev => !prev);
@@ -147,6 +148,7 @@ const NavBarTransparent = () => {
     .catch((error)=>console.log("error while logout"))
     setDropdown(!dropdown)
   }
+
   const navBarHandler = () =>{
     setRes(prev => !prev)
   }

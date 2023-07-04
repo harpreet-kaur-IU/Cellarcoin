@@ -77,6 +77,7 @@ const Vendor = () => {
         })
         .catch(error => console.log('error', error));
     },[])
+    
   return (
     <>
         {loading && <Loader></Loader>}
@@ -102,7 +103,7 @@ const Vendor = () => {
                                 <a className='text-primary' href={`${item.documentUrl}`} download target='_blank'>Verification file.doc</a>
                             </span>
                             <span className={`cusror-pointer font-14 f-500 d-flex d-align-center d-justify-center ${styles["dashboard-btns"]}`}>
-                                {item.status === "pending" &&
+                                {item.status === "Pending" &&
                                     <>
                                         <div id={item._id} onClick={acceptedIdHandler} className={`cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 text-white ${styles["dashboard-accept-btn"]}`}>Accept</div>
                                         <div id={item._id} onClick={modalIdHandler} className={`cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 text-primary ${styles["dashboard-reject-btn"]}`}>Reject</div>

@@ -117,6 +117,7 @@ const MultiVendor = () => {
       setLogin(!login)
     }
   }
+  
   const formSubmit = (e) =>{
       e.preventDefault()
       var result = validator();
@@ -141,8 +142,8 @@ const MultiVendor = () => {
         .then(response => response.json())
         .then(result =>{
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getSubVendor`,{
-              method: 'GET', 
-              headers: myHeaders,
+            method: 'GET', 
+            headers: myHeaders,
           })
           .then(response => response.json())
           .then(results =>{
@@ -231,8 +232,9 @@ const MultiVendor = () => {
               </form>
             </div>
           }
+
           {!login && data && data.map((item,index)=>(
-            <div className={`col-6 ${styles["multi-vendor-access-wrapper"]}`}>
+            <div key={index} className={`col-6 ${styles["multi-vendor-access-wrapper"]}`}>
               <div className={`d-flex ${styles["login-creds-wrapper"]}`}>
                 <h4 className='font-24 f-500'>{index+1}.</h4>
                 <div className={`d-flex d-flex-column ${styles["login-cred-details"]}`}>

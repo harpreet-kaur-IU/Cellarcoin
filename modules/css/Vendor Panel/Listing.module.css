@@ -118,70 +118,75 @@
     border-bottom-right-radius: 8px;
 } 
 
-    /* table scroll y-axis*/
-    .table-section-scroll::-webkit-scrollbar {
-        width: 3px;
-    }
-    .table-section-scroll::-webkit-scrollbar-track {
-        background: #f5f1ef;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-    }
-    .table-section-scroll::-webkit-scrollbar-thumb {
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-        background: var(--primary);
-    }
-    .table-section-scroll::-webkit-scrollbar-thumb:hover {
-        background: var(--primary);
-        border-radius: 0;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-    }
+/* table scroll y-axis*/
+.table-section-scroll::-webkit-scrollbar {
+    width: 3px;
+}
+.table-section-scroll::-webkit-scrollbar-track {
+    background: #f5f1ef;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.table-section-scroll::-webkit-scrollbar-thumb {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: var(--primary);
+}
+.table-section-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    border-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
 
-    @media screen and (max-width:600px) {
-        .listing-content-brands{
-            margin-top: 10px;
-        }
-        .listing-content-wine-name{
-            margin-top: 10px;
-        }
-        .listing-content-wrapper{
-            margin-left: 20px;
-        }
-        .sell-now-btn{
-            width: 130px;
-            margin-top: 19px;
-            font-size: 14px;
-        }
-        .listing-img{
-            width: 200px;
-            height: 200px;
-        }
-        .listing-content-wrapper h4{
-            font-size: 24px;
-        }
-        .table-section-scroll{
-            padding-right: 8px;
-        }
+@media screen and (max-width:600px) {
+    .listing-content-brands{
+        margin-top: 10px;
     }
-    
-    @media screen and (max-width:370px) {
-        .listing-img{
-            width:150px;
-            height: 180px;
-        }
-        .listing-content-wrapper h4{
-            font-size: 18px;
-            margin-top: 5px;
-        }
-        .listing-content-brands{
-            font-size: 16px;
-            margin-top: 5px;
-        }
-        .sell-now-btn{
-            padding: 4px 0px;
-            margin-top: 5px;
-            width: 100px;
-        }
+    .listing-content-wine-name{
+        margin-top: 10px;
     }
+    .listing-content-wrapper{
+        margin-left: 20px;
+    }
+    .sell-now-btn{
+        width: 130px;
+        margin-top: 19px;
+        font-size: 14px;
+    }
+    .listing-img{
+        width: 200px;
+        height: 200px;
+    }
+    .listing-content-wrapper h4{
+        font-size: 24px;
+    }
+    .table-section-scroll{
+        padding-right: 8px;
+    }
+}
+
+@media screen and (max-width:370px) {
+    .listing-img{
+        width:150px;
+        height: 180px;
+    }
+    .listing-content-wrapper h4{
+        font-size: 18px;
+        margin-top: 5px;
+    }
+    .listing-content-brands{
+        font-size: 16px;
+        margin-top: 5px;
+    }
+    .sell-now-btn{
+        padding: 4px 0px;
+        margin-top: 5px;
+        width: 100px;
+    }
+}
+.cancel-listing{
+    padding: 14px 12px;
+    border:1px solid var(--primary);
+    border-radius: 16px;
+}

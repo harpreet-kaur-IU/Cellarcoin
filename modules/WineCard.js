@@ -1,11 +1,10 @@
 import React , {useEffect, useState} from 'react'
 import styles from './css/WineCard.module.css'
 import {useRouter} from 'next/router'
-import { getUserOnBoardFromCookie } from '../auth/userCookies';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './Vendors Panel/Loader';
 const WineCard = (props) => {
+
     useEffect(()=>{
        setData(props.data)
     },[props.data])
@@ -13,11 +12,12 @@ const WineCard = (props) => {
     const [nftdata,setData] = useState(props.data);
     const router = useRouter();
     const [loading,setLoading] = useState(false);
-    const JWTToken = getUserOnBoardFromCookie();
+
     const navigationHandler = () =>{
         if(nftdata._id)
             router.push(`/purple/${nftdata._id}`)
     }
+
     const favoriteHandler = (e) =>{
         if(nftdata.favourite){
             props.handler(false,e.currentTarget.id)
@@ -52,15 +52,14 @@ const WineCard = (props) => {
                     <h6 className='l-137 f-500'>Owned by</h6>
                 </div>
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
-                    <h5 className='l-137 f-500'>
+                    <span className='d-flex d-align-center h5 l-137 f-500'>
                         <img src='images/polygon-icon.svg'></img>
                         {nftdata.price} MATIC
-                    </h5>
+                    </span>
                     <h5 className='l-137 f-500'>{nftdata.ownedByUserId?nftdata.ownedByUserId.userName:(nftdata.ownerId && nftdata.ownerId.name)}</h5>
                 </div>
             </div>
         </div>
-        
     </>
   )
 }

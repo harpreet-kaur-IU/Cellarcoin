@@ -15,6 +15,8 @@ export default function DropDown(props){
             props.handler("7")
         }else if(value === "20 days"){
             props.handler("20")
+        }else if(value === "1 day"){
+            props.handler("1")
         }else{
             props.handler("30")
         }
@@ -24,6 +26,9 @@ export default function DropDown(props){
         <div className={`f-500 ${styles["drop-down"]}`} onClick={handler} >
             <span> {value} </span>
             {!props.data && <ul>
+                <li value="1 day" onClick={selectHandler}>
+                    1 day
+                </li>
                 <li value="7 days" onClick={selectHandler}>
                     7 days
                 </li>

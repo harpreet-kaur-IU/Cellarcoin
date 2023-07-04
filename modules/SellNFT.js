@@ -146,11 +146,11 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => console.log('error', error));
+    .then((response) => response.json())
+    .then((result) => {
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => console.log('error', error));
   };
   //add order API
   const addTransaction = (hash, id, walletAddress) => {
@@ -183,6 +183,7 @@ const SellNFT = () => {
       })
       .catch((error) => console.log('error', error));
   };
+
   //getNft by Id
   useEffect(() => {
     if (JWTToken) {

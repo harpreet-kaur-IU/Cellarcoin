@@ -14,7 +14,7 @@ const MarketPlaceBanner = () => {
     const nftId = router.query["id"];
     const [toggle,setToggle] = useState(false)
     const [loading,setLoading] = useState(false)
-
+    const[favorite,setFavorite] = useState(false)
     const navigationHandler = () =>{
         router.push(`/profile/${data.brand._id}`)
     }
@@ -34,47 +34,64 @@ const MarketPlaceBanner = () => {
     const [expirydate,setDate] = useState("")
     useEffect(()=>{
         if(nftId){
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type","application/json");
-        
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-            };
-            // setLoading(true)
-            
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=null`, requestOptions)
-            .then(response => response.json())
-            .then(result =>{
-                setData(result.nft)
-            })
-            .catch(error => console.log('error', error));
+           getNFTDetails()
         }
     },[nftId])
 
-    const favoriteHandler = () =>{
+    const getNFTDetails = () =>{
         var myHeaders = new Headers();
-        myHeaders.append("Authorization","Bearer "+JWTToken);
         myHeaders.append("Content-Type","application/json");
-        
-        var raw = JSON.stringify({
-            "favourites":true
-        })
-
+    
         var requestOptions = {
-            method: 'PATCH',
+            method: 'GET',
             headers: myHeaders,
-            body: raw
-        }
-
-        setLoading(true)
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${nftId}`, requestOptions)
+        };
+        // setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=null`, requestOptions)
         .then(response => response.json())
         .then(result =>{
-            console.log(result)
-            setLoading(false)
+            setFavorite(result.favourite)
+            setData(result.nft)
         })
         .catch(error => console.log('error', error));
+    }
+    const favoriteHandler = () =>{
+        if(JWTToken){  
+          //add favourite
+          var myHeaders = new Headers();
+          myHeaders.append("Authorization", "Bearer "+JWTToken);
+          myHeaders.append("Content-Type", "application/json");
+  
+          var raw = JSON.stringify({
+            "favourite":true,
+          });
+          var requestOptions = {
+            method:'PATCH',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+          };
+          
+        //   if(favorite){
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${nftId}`, requestOptions)
+            .then(response => response.text())
+            .then(result =>{
+                getNFTDetails()
+            })
+            .catch(error => console.log('error', error));
+        //   }else{
+        //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${nftId}`, requestOptions)
+        //     .then(response => response.text())
+        //     .then(result =>{
+        //         getNFTDetails()
+        //     })
+        //     .catch(error => console.log('error', error));
+        //   }
+        }else{
+          toast.warning("Please sign in",{
+              toastId:"2"
+          });
+        }
     }
   return (
     <>
@@ -83,8 +100,8 @@ const MarketPlaceBanner = () => {
             {data &&
                 <div className={`container d-grid ${style["market-grid-wrapper"]}`}>
                     <div className={`d-flex d-flex-column d-align-center d-justify-center ${style["marketplace-image-wrapper"]}`}>
-                        <div onClick={favoriteHandler} className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
-                            <img src="images/heart.png"></img>
+                        <div onClick={()=>favoriteHandler(data.favourite)} className={`cursor-pointer d-flex d-justify-end ${style["favorite-icon"]}`}>
+                            <img src={favorite? "images/heart-fill.svg" : "images/heart.png"}></img>
                         </div>
                         <img className={`${style["nft-image"]}`} src={data.imageUrl}></img>
                     </div>

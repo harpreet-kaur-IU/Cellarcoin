@@ -25,12 +25,12 @@ const UserNft = () => {
 
     
     async function getAddress() {
-        const ethers = require("ethers");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const addr = await signer.getAddress();
-        setWalletAddress(addr)
-      }
+        // const ethers = require("ethers");
+        // const provider = new ethers.providers.Web3Provider(window.ethereum);
+        // const signer = provider.getSigner();
+        // const addr = await signer.getAddress();
+        // setWalletAddress(addr)
+    }
 
     useEffect(()=>{
         //fetch user name from jwt token
@@ -73,12 +73,13 @@ const UserNft = () => {
             headers: myHeaders,
             redirect: 'follow'
         };
+
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
         .then(response => response.text())
         .then(result => {
             const parseResult = JSON.parse(result)
-            setFav(parseResult.favourites[0].nftId)
+            setFav(parseResult.favourites)
             setLoading(false)
         })
         .catch(error => console.log('error', error));
@@ -123,6 +124,66 @@ const UserNft = () => {
         })
         .catch(error => console.log('error', error));
     },[])
+
+    const getFavourites = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer "+JWTToken);
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        setLoading(true)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setFav(parseResult.favourites)
+            setLoading(false)
+        })
+        .catch(error => console.log('error', error));
+    }
+
+    const addFavouriteHandler = (value,id) =>{
+        if(JWTToken){  
+          //add favourite
+          var myHeaders = new Headers();
+          myHeaders.append("Authorization", "Bearer "+JWTToken);
+          myHeaders.append("Content-Type", "application/json");
+  
+          var raw = JSON.stringify({
+            "favourite":value
+          });
+          var requestOptions = {
+            method:'PATCH',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+          };
+          
+          if(value){
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                getFavourites()
+            })
+            .catch(error => console.log('error', error));
+          }else{
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                getFavourites()
+            })
+            .catch(error => console.log('error', error));
+          }
+        }else{
+            toast.warning("Please sign in",{
+                toastId:"2"
+            });
+        }
+      }
   return (
     <>
         {loading && <Loader></Loader>}
@@ -177,7 +238,7 @@ const UserNft = () => {
                 {activeTab == "tab3" &&
                     <div className={`offset-4 col-8 d-grid grid-col-2 gap-3 ${style["wine-tab-2"]}`}>
                         {fav && fav.map((item)=>(
-                            <WineCard data={item} key = {item._id}></WineCard>
+                            <WineCard handler={addFavouriteHandler} data={item.nftId} key = {item._id}></WineCard>
                         ))}
                     </div>
                 }

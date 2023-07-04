@@ -107,11 +107,9 @@ const Header = (props) => {
     }
   };
 
-
   //this function is called when there is any changes in wallet state
   const updateWalletActivity = () =>{
     window.ethereum.on('accountsChanged', function (accounts) {
-      // Time to reload your interface with accounts[0]!
       if(accounts.length === 0)
         setConnectedWallet(false);
       else  
@@ -147,6 +145,7 @@ const Header = (props) => {
     .then(result => result)
     .catch(error => console.log('error', error));
   }
+  
   useEffect(() => {
     // let val = window.ethereum.isConnected();
     // if (val) {
@@ -158,7 +157,6 @@ const Header = (props) => {
     // window.ethereum.on("accountsChanged", function (accounts) {
     //   window.location.replace(location.pathname);
     // });
-
     web3ModalRef.current = new Web3Modal({
       network: "rinkeby",
       providerOptions: {},

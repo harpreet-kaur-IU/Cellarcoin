@@ -85,8 +85,8 @@ const SellNFT = () => {
     const addr = await signer.getAddress();
     let errorMessage;
 
-    console.log(signer);
-    console.log(addr);
+    // console.log(signer);
+    // console.log(addr);
 
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
@@ -98,8 +98,8 @@ const SellNFT = () => {
         );
         setLoading(true);
         try {
-          console.log(data[0].tokenId);
-          console.log('price', ethers.utils.parseEther(price.toString()));
+          // console.log(data[0].tokenId);
+          // console.log('price', ethers.utils.parseEther(price.toString()));
           contract
             .placeNFTForSale(
               data[0].tokenId,
@@ -233,8 +233,11 @@ const SellNFT = () => {
           Select your sell method
         </h2>
         {data &&
-          data.map((item) => (
-            <div className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}>
+          data.map((item, index) => (
+            <div
+              key={index}
+              className={`d-flex ${styles['sell-nft-img-content-wrapper']}`}
+            >
               <img
                 className={`col-6 ${styles['sell-nft-img']}`}
                 src={item.imageUrl}
