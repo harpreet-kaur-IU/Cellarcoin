@@ -218,7 +218,6 @@ const NavBar = () => {
 
   const connectWallet = async () => {
     if(JWTToken){
-      
       try {
         await getSignerOrProvider();
                 

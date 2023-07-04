@@ -21,12 +21,15 @@ const SellNFT = () => {
   const [isPrice, setPriceError] = useState(false);
   const [isExpire, setExpireError] = useState(false);
   const regex = /^\d+(\.\d{1,8})?$/;
+
   const priceHandler = (e) => {
     setPrice(e.target.value);
   };
+
   const expireHandler = (value) => {
     setExpire(value);
   };
+
   const validator = () => {
     if (regex.test(price)) {
       setPriceError(false);
@@ -48,13 +51,14 @@ const SellNFT = () => {
   useEffect(() => {
     if (nftId) {
       var myHeaders = new Headers();
-      myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+      myHeaders.append('Authorization', 'Bearer ' +JWTtoken);
       myHeaders.append('Content-Type', 'application/json');
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
       };
+
       setLoading(true);
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNftById/${nftId}`,
@@ -86,9 +90,6 @@ const SellNFT = () => {
     const addr = await signer.getAddress();
     let errorMessage;
 
-    // console.log(signer);
-    // console.log(addr);
-
     if (typeof window.ethereum !== 'undefined') {
       if (window.ethereum.networkVersion == '80001') {
         const contractAddress = '0x3a428CF5a53da4D6B475c785A83b7279c9c591Bf';
@@ -97,6 +98,7 @@ const SellNFT = () => {
           Nft_marketplace_ABI,
           signer
         );
+
         setLoading(true);
         try {
           // console.log(data[0].tokenId);
@@ -120,7 +122,7 @@ const SellNFT = () => {
 
               setLoading(false);
               errorMessage = error.toString();
-              console.log(errorMessage);
+              // console.log(errorMessage);
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')

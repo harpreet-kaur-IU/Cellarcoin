@@ -117,7 +117,7 @@ export default function Purple() {
         }
       }else{
         toast.warning("Please sign in",{
-            toastId:"2"
+          toastId:"2"
         });
       }
     }
@@ -128,18 +128,18 @@ export default function Purple() {
                 <MarketPlaceBanner></MarketPlaceBanner>
                 <ActivityTable></ActivityTable>
                 <div>
-                    <h3 className='f-600 l-137 text-center'>You may also like</h3>
-                    <div className={`container ${styles["purple-market-container"]}`}>
-                        <div className={`mt-32 d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
-                            {data && data.map((item)=>(
-                              <WineCard
-                                key={item._id}
-                                data={item}
-                                handler = {favoriteHandler}
-                              ></WineCard>
-                            ))}
-                        </div>
+                  <h3 className='f-600 l-137 text-center'>You may also like</h3>
+                  <div className={`container ${styles["purple-market-container"]}`}>
+                    <div className={`mt-32 d-grid grid-col-3 gap-3 ${styles["purple-market-card-wrapper"]}`}>
+                      {data && data.map((item)=>(
+                        <WineCard
+                          key={item._id}
+                          data={item}
+                          handler = {favoriteHandler}
+                        ></WineCard>
+                      ))}
                     </div>
+                  </div>
                 </div>
                 <BackgroundImageBanner></BackgroundImageBanner>
                 <Newsletter></Newsletter>
