@@ -15,7 +15,7 @@ const NFTCard = (props) => {
             <div className='p-16'>
                 <div className='d-flex d-align-center d-justify-space-between text-light-gray mb-16'>
                     <h6 className='f-500'>Name</h6>
-                    <h6 className={`d-flex ${styles["wine-card-content-view"]}`}>
+                    <div className={`h6 d-flex ${styles["wine-card-content-view"]}`}>
                         <span className='rounded-8 d-flex d-align-center l-137 f-500 bg-white'>
                             <span>{props.data.views}</span>
                             <img src="images/view-primary.svg"></img>
@@ -24,7 +24,7 @@ const NFTCard = (props) => {
                             <span>{props.data.favourites}</span>
                             <img src="images/heart.png"></img>
                         </span>
-                    </h6>
+                    </div>
                 </div>
                 <div className={`d-flex d-justify-space-between ${styles["nft-name"]}`}>
                     <h6 className='word-break l-137 f-500'>{props.data.name}</h6>
@@ -34,11 +34,11 @@ const NFTCard = (props) => {
                     <h6 className='l-137 f-500'>Owned by</h6>
                 </div>
                 <div className={`d-flex d-align-center d-justify-space-between text-dark ${styles["wine-card-content-row-2"]}`}>
-                    <h5 className='l-137 f-500'>
+                    <span className='h5 l-137 f-500'>
                         <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
                         {props.data.price} 
-                    </h5>
-                    <h5 className='l-137 f-500'>@Odule</h5>
+                    </span>
+                    <h5 className='l-137 f-500'>{props.data.ownedByUserId?props.data.ownedByUserId.userName:(props.data.ownerId && props.data.ownerId.name)}</h5>
                 </div>
             </div>
             {props.status==="Sell NFT" &&

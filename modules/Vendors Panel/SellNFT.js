@@ -97,7 +97,6 @@ const SellNFT = () => {
           Nft_marketplace_ABI,
           signer
         );
-
         setLoading(true);
         try {
           // console.log(data[0].tokenId);
@@ -201,7 +200,7 @@ const SellNFT = () => {
       walletAddressTo: '',
       hash: hash,
       tokenId: data[0].tokenId,
-      transactionType: 'listed',
+      transactionType: 'listed'
     });
 
     var requestOptions = {
