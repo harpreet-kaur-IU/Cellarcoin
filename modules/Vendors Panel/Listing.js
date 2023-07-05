@@ -172,7 +172,7 @@ const Listing = () => {
   //         .then((response) => response.json())
   //         .then((results) => {
   //           setData(results.data);
-  // addTransaction(response.hash, deleteUserId, walletAddress);
+  //           addTransaction(response.hash, deleteUserId, walletAddress);
   //         });
   //       setDelete((prev) => !prev);
   //       setLoading(false).catch((error) => console.log('error', error));
@@ -180,38 +180,42 @@ const Listing = () => {
   //     .catch((error) => console.log('error', error));
   // };
 
-  // const addTransaction = (hash, id, walletAddress) => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
-  //   myHeaders.append('Content-Type', 'application/json');
+  const deleteNFT = (response, walletAddress) => {
+    addTransaction(response.hash, nftId, walletAddress);
+  };
 
-  //   var raw = JSON.stringify({
-  //     walletAddressFrom: walletAddress,
-  //     walletAddressTo: '',
-  //     hash: hash,
-  //     tokenId: data[0].tokenId,
-  //     transactionType: 'Cancel Listing', // todo -> need to set correct state in back-end
-  //   });
+  const addTransaction = (hash, id, walletAddress) => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+    myHeaders.append('Content-Type', 'application/json');
 
-  //   var requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: 'follow',
-  //   };
+    var raw = JSON.stringify({
+      walletAddressFrom: walletAddress,
+      walletAddressTo: '',
+      hash: hash,
+      tokenId: data[0].tokenId,
+      transactionType: 'cancelled',
+    });
 
-  //   fetch(
-  //     `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => response.text())
-  //     .then((result) => {
-  //       toast.success('NFT Deleted Successfully', {
-  //         toastId: '2',
-  //       });
-  //     })
-  //     .catch((error) => console.log('error', error));
-  // };
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        toast.success('NFT Deleted Successfully', {
+          toastId: '2',
+        });
+      })
+      .catch((error) => console.log('error', error));
+  };
 
   return (
     <div>
