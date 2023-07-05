@@ -182,15 +182,16 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error);
-      });
+    .then((response) => response.json())
+    .then((result) => {
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error);
+    });
   };
+  
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
     var myHeaders = new Headers();
@@ -216,16 +217,17 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => {
-        setLoading(false);
-        Router.push('/allnftlist');
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error);
-      });
+    .then((response) => response.text())
+    .then((result) => {
+      setLoading(false);
+      Router.push('/allnftlist');
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error);
+    });
   };
+
   return (
     <>
       <Header></Header>

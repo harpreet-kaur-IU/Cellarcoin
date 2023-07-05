@@ -120,6 +120,7 @@ const NavBar = () => {
       handleClick()
     }
   }
+
   //dropdown Handler
   const dropdownHandler = () =>{
     if(JWTToken){
@@ -137,6 +138,7 @@ const NavBar = () => {
   const collectionHandler = () =>{
     router.push("/usernft")
   }
+
   const logHandler = () =>{
     signOut()
     .then(()=>{
@@ -164,8 +166,7 @@ const NavBar = () => {
   }
 
   const searchHandler = (e) =>{
-    if(e.target.value.length>2){
-      
+    if(e.target.value.length>2){  
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -219,8 +220,7 @@ const NavBar = () => {
   const connectWallet = async () => {
     if(JWTToken){
       try {
-        await getSignerOrProvider();
-                
+        await getSignerOrProvider();          
       } catch (error) {
         console.log(" error", error);
       }
@@ -231,7 +231,6 @@ const NavBar = () => {
       });
     }
   };
-
   async function getAddress() {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -344,7 +343,7 @@ const NavBar = () => {
           </div>
           <div onClick={navBarHandler} role="button" className={`cursor-pointer d-none ml-24 ${style["bar-cross"]}`}>
             <Hamburger color="#000000"></Hamburger>
-          </div>
+          </div>  
           {dropdown && 
             <div className={`p-absolute d-flex d-flex-column d-align-center ${style["profile-dropdown"]}`}>
               <h6 onClick={profileHandler} className='cursor-pointer d-flex d-align-center d-justify-center font-14 f-500 l-22'>Profile</h6>
@@ -361,12 +360,12 @@ const NavBar = () => {
             <SignUp handler={handleClick}></SignUp>
           </Modal>
         }
-          {noti &&
-            <Modal modalClass="modal-verify">
-              <NotificationModal handler={notificationHandler}></NotificationModal>
-            </Modal>
-          }
-          <ToastContainer></ToastContainer>
+        {noti &&
+          <Modal modalClass="modal-verify">
+            <NotificationModal handler={notificationHandler}></NotificationModal>
+          </Modal>
+        }
+        <ToastContainer></ToastContainer>
       </nav>  
     </>
   )
