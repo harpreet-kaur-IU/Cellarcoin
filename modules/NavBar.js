@@ -107,7 +107,7 @@ const NavBar = () => {
       setNoti(prev=>!prev);
     }else{
       toast.warning("Please Sign in",{
-          toastId:"2"
+        toastId:"2"
       });
     }
   }
@@ -183,18 +183,18 @@ const NavBar = () => {
 
       setSearchLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/searchNFT`, requestOptions)
-        .then(response => response.text())
-        .then(result => {
-          const parseResult = JSON.parse(result);
-          setBrand(parseResult.data2)
-          setNft(parseResult.data);
-          setSearchLoading(false)
-          setSearchBar(true)
-        })
-        .catch(error => {
-          console.log('error', error)
-          setSearchLoading(false)
-        });
+      .then(response => response.text())
+      .then(result => {
+        const parseResult = JSON.parse(result);
+        setBrand(parseResult.data2)
+        setNft(parseResult.data);
+        setSearchLoading(false)
+        setSearchBar(true)
+      })
+      .catch(error => {
+        console.log('error', error)
+        setSearchLoading(false)
+      });
     }else{
       setSearchBar(false)
     }
@@ -231,6 +231,7 @@ const NavBar = () => {
       });
     }
   };
+  
   async function getAddress() {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);

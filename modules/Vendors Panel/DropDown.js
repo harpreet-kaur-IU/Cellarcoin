@@ -16,7 +16,7 @@ export default function DropDown(props){
         }else if(value === "20 days"){
             props.handler("20")
         }else if(value === "1 day"){
-            props.handler("1")
+             props.handler("1")
         }else{
             props.handler("30")
         }

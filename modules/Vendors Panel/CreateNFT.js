@@ -103,11 +103,11 @@ const CreateNFT = () => {
         setCoverError(true);
         var inputfile = document.getElementById('file-input-field');
         inputfile.value = '';
-      } else {
+      }else {
         setCoverError(false);
         if (e.target.files[0].size < 10e6) {
           setCover(e.target.files[0]);
-        } else {
+        }else{
           setCoverError(true);
           var inputfile = document.getElementById('file-input-field');
           inputfile.value = '';
@@ -115,6 +115,7 @@ const CreateNFT = () => {
       }
     }
   };
+  
   const additionalPropertyHandler = (data, data1) => {
     setAdd(!add);
     setAdditionalProps(data);
@@ -186,7 +187,7 @@ const CreateNFT = () => {
 
   useEffect(() => {
     if (JWTtoken) {
-      if (nftId) {
+      if(nftId){
         var myHeaders = new Headers();
         myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
         myHeaders.append('Content-Type', 'application/json');
@@ -206,7 +207,7 @@ const CreateNFT = () => {
           })
           .catch((error) => console.log('error', error));
       }
-      if (cover) {
+      if(cover){
         var formdata = new FormData();
         formdata.append('image', cover);
         var requestOptions = {
@@ -224,14 +225,14 @@ const CreateNFT = () => {
           })
           .catch((error) => console.log('error', error));
       }
-    } else {
+    }else{
       router.push('/vendorlogin');
     }
-  }, [cover, nftId]);
+  },[cover, nftId]);
 
   useEffect(() => {
-    if (JWTtoken) {
-      if (data) {
+    if(JWTtoken){
+      if(data){
         setEdit(true);
         setUrl(data[0].imageUrl);
         setName(data[0].name);
@@ -292,11 +293,11 @@ const CreateNFT = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/getBrandList`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => {
-          setBrandData(result.data);
-        })
-        .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        setBrandData(result.data);
+      })
+      .catch((error) => console.log('error', error));
     } else {
       router.push('/vendorlogin');
     }
@@ -308,7 +309,6 @@ const CreateNFT = () => {
   //form submit
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log('in form submit');
     walletConnected(); // first call
   };
   //walletConnected
@@ -323,7 +323,6 @@ const CreateNFT = () => {
     };
     await isMetaMaskConnected().then((connected) => {
       if (connected) {
-        console.log('in wallet connected');
         checkValidation(); // second call
       } else {
         toast.warning('Please Connect Your Wallet', {
@@ -366,7 +365,6 @@ const CreateNFT = () => {
         external_url: 'https://bigfatcats.io',
         attributes: attributes,
       });
-      console.log('before ipfs upload');
       // get token and mint function call
       getToken(tokenBody); // third call
     }
@@ -387,14 +385,11 @@ const CreateNFT = () => {
         setLoading(false);
 
         mint(results.data);
-        console.log(results);
-        console.log(results.data);
       }) // fourth call
       .catch((error) => console.log('error', error));
   };
   //web3 mint
   const mint = async (tokenURI) => {
-    console.log('test');
     const ethers = require('ethers');
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -423,7 +418,6 @@ const CreateNFT = () => {
                   response.events[0].topics[3].toString(),
                   16
                 );
-                console.log(tokId);
                 let web3Response = response;
                 createNFT(web3Response, addr, tokId);
               });
@@ -436,7 +430,7 @@ const CreateNFT = () => {
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
               ) {
-                console.log('error message', errorMessage);
+                // console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'create-error-10',
                 });
@@ -447,7 +441,7 @@ const CreateNFT = () => {
                     toastId: 'sell-error-6',
                   });
                 } else {
-                  console.log(error);
+                  // console.log(error);
                   setLoading(false);
                   toast.error('Not enough user funds in the wallet.', {
                     toastId: 'sell-error-7',
@@ -464,9 +458,15 @@ const CreateNFT = () => {
           });
         }
       } else {
-        alert('Please switch to polygon chain');
+        toast.error('Please switch to polygon chain', {
+          toastId: 'poygon-chain-error-1',
+        });
+        // alert('Please switch to polygon chain');
       }
     } else {
+      toast.error('Please install MetaMask', {
+        toastId: 'metamsk-error-1',
+      });
       console.log('Please install MetaMask');
     }
   };
@@ -519,14 +519,14 @@ const CreateNFT = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.data);
-          setLoading(false);
-          router.push('/allnftlist');
-        })
-        .catch((error) => console.log('error', error));
-    } else {
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+        router.push('/allnftlist');
+      })
+      .catch((error) => console.log('error', error));
+    }else{
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -534,31 +534,31 @@ const CreateNFT = () => {
       };
       setLoading(true);
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/addNft`, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          setLoading(false);
-          setName('');
-          setDesc('');
-          setWallet('');
-          setBrand('');
-          setUrl('');
-          setBrand('');
-          setPremiumDrops(false);
-          setBottleSize('');
-          setVolumn('');
-          setRegion('');
-          setSpirit('');
-          setCover('');
-          var inputfile = document.getElementById('file-input-field');
-          inputfile.value = '';
-          addTransaction(
-            response.hash,
-            result.data._id,
-            walletAddress,
-            web3tokenID
-          );
-        })
-        .catch((error) => console.log('error', error));
+      .then((response) => response.json())
+      .then((result) => {
+        setLoading(false);
+        setName('');
+        setDesc('');
+        setWallet('');
+        setBrand('');
+        setUrl('');
+        setBrand('');
+        setPremiumDrops(false);
+        setBottleSize('');
+        setVolumn('');
+        setRegion('');
+        setSpirit('');
+        setCover('');
+        var inputfile = document.getElementById('file-input-field');
+        inputfile.value = '';
+        addTransaction(
+          response.hash,
+          result.data._id,
+          walletAddress,
+          web3tokenID
+        );
+      })
+      .catch((error) => console.log('error', error));
     }
   };
   //create order API
@@ -587,11 +587,11 @@ const CreateNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => {
-        setLoading(false);
-      })
-      .catch((error) => console.log('error', error));
+    .then((response) => response.text())
+    .then((result) => {
+      setLoading(false);
+    })
+    .catch((error) => console.log('error', error));
   };
   return (
     <div>
@@ -658,8 +658,7 @@ const CreateNFT = () => {
               <div className={`d-flex d-flex-column ${styles['desc-input']}`}>
                 <h5 className="font-24 f-600 l-33">Description</h5>
                 <h6 className="font-18 f-400 l-25">
-                  The description will be included on the item's detail page
-                  underneath its image.
+                  The description will be included on the item's detail page underneath its image.
                 </h6>
                 <input
                   value={desc}
@@ -687,7 +686,7 @@ const CreateNFT = () => {
                     onClick={modalHandler}
                     className={`cursor-pointer d-flex d-align-center d-justify-center ${styles['property-add-btn']}`}
                   >
-                    <img src="images/plus-icon.png"></img>
+                  <img src="images/plus-icon.png"></img>
                   </div>
                 </div>
                 <div

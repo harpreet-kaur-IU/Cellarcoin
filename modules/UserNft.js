@@ -1,14 +1,11 @@
 import {useEffect, useState} from 'react'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
 import style from './css/WineCollection1.module.css'
-import Filter from './Filter';
 import NFTCard from './NFTCard';
 import UserNftCards from './UserNftCards';
 import UserTable from './UserTable';
 import Loader from './Vendors Panel/Loader';
 import WineCard from './WineCard';
-import Web3Modal from "web3modal";
-import { providers } from "ethers";
 const UserNft = () => {
     const [data,setData] = useState("");
     const [fav,setFav] = useState("");
@@ -23,7 +20,6 @@ const UserNft = () => {
         setActiveTab(e.target.id);
     };
 
-    
     async function getAddress() {
         // const ethers = require("ethers");
         // const provider = new ethers.providers.Web3Provider(window.ethereum);
