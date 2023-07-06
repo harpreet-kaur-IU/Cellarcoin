@@ -22,6 +22,8 @@ const Listing = () => {
   const [loading, setLoading] = useState(false);
   const [activity, setActivity] = useState('');
   const [cancelModal, setCancelModal] = useState(false);
+  const [currency, setCurrency] = useState('MATIC');
+
   var JWTtoken = getOnBoardFromCookie();
 
   if (hasMount) {
@@ -107,7 +109,7 @@ const Listing = () => {
             .RemoveNFTfromSale(data[0].tokenId)
             .then((result) => {
               result.wait().then((response) => {
-                deleteNFT(response, addr);
+                cancelListingNft(response, addr);
               });
             })
             .catch((error) => {
@@ -172,7 +174,7 @@ const Listing = () => {
   //         .then((response) => response.json())
   //         .then((results) => {
   //           setData(results.data);
-  // addTransaction(response.hash, deleteUserId, walletAddress);
+  //           addTransaction(response.hash, deleteUserId, walletAddress);
   //         });
   //       setDelete((prev) => !prev);
   //       setLoading(false).catch((error) => console.log('error', error));
@@ -180,38 +182,70 @@ const Listing = () => {
   //     .catch((error) => console.log('error', error));
   // };
 
-  // const addTransaction = (hash, id, walletAddress) => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
-  //   myHeaders.append('Content-Type', 'application/json');
+  const cancelListingNft = (response, walletAddress) => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+    myHeaders.append('Content-Type', 'application/json');
 
-  //   var raw = JSON.stringify({
-  //     walletAddressFrom: walletAddress,
-  //     walletAddressTo: '',
-  //     hash: hash,
-  //     tokenId: data[0].tokenId,
-  //     transactionType: 'Cancel Listing', // todo -> need to set correct state in back-end
-  //   });
+    var raw = JSON.stringify({
+      price: 0,
+      currency: currency,
+    });
 
-  //   var requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: 'follow',
-  //   };
+    var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
 
-  //   fetch(
-  //     `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
-  //     requestOptions
-  //   )
-  //     .then((response) => response.text())
-  //     .then((result) => {
-  //       toast.success('NFT Deleted Successfully', {
-  //         toastId: '2',
-  //       });
-  //     })
-  //     .catch((error) => console.log('error', error));
-  // };
+    setLoading(true);
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        addTransaction(response.hash, nftId, walletAddress);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error);
+      });
+  };
+
+  const addTransaction = (hash, id, walletAddress) => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      walletAddressFrom: walletAddress,
+      walletAddressTo: '',
+      hash: hash,
+      tokenId: data[0].tokenId,
+      transactionType: 'cancelled',
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        toast.success('NFT Deleted Successfully', {
+          toastId: '2',
+        });
+      })
+      .catch((error) => console.log('error', error));
+  };
 
   return (
     <div>
