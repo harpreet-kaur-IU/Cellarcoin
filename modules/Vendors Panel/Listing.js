@@ -22,6 +22,8 @@ const Listing = () => {
   const [loading, setLoading] = useState(false);
   const [activity, setActivity] = useState('');
   const [cancelModal, setCancelModal] = useState(false);
+  const [currency, setCurrency] = useState('MATIC');
+
   var JWTtoken = getOnBoardFromCookie();
 
   if (hasMount) {
@@ -107,7 +109,7 @@ const Listing = () => {
             .RemoveNFTfromSale(data[0].tokenId)
             .then((result) => {
               result.wait().then((response) => {
-                deleteNFT(response, addr);
+                cancelListingNft(response, addr);
               });
             })
             .catch((error) => {
@@ -180,8 +182,36 @@ const Listing = () => {
   //     .catch((error) => console.log('error', error));
   // };
 
-  const deleteNFT = (response, walletAddress) => {
-    addTransaction(response.hash, nftId, walletAddress);
+  const cancelListingNft = (response, walletAddress) => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      price: 0,
+      currency: currency,
+    });
+
+    var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    setLoading(true);
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        addTransaction(response.hash, nftId, walletAddress);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error);
+      });
   };
 
   const addTransaction = (hash, id, walletAddress) => {
