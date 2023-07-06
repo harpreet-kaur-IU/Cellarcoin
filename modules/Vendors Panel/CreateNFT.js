@@ -26,8 +26,8 @@ const CreateNFT = () => {
   const [desc, setDesc] = useState('');
   //regex starts
   const regex = /^[^\s]+(\s+[^\s]+)*$/;
-  const pattern = /[0-9]/g;
-  const decimal = /^\d+(\.\d{1,2})?$/;
+  const pattern = /^[0-9]*$/;
+  const decimal = /^\d+(\.\d{1,8})?$/;
   const string = /^[a-zA-Z]*$/;
   //regex ends
   const [bottle, setBottleSize] = useState('');
@@ -123,12 +123,12 @@ const CreateNFT = () => {
   };
 
   const validator = () => {
-    if (regex.test(name)) {
+    if (regex.test(name.trim())){
       setNameError(false);
     } else {
       setNameError(true);
     }
-    if (regex.test(desc)) {
+    if (regex.test(desc.trim())) {
       setDescError(false);
     } else {
       setDescError(true);
@@ -334,9 +334,9 @@ const CreateNFT = () => {
   //check validation
   const checkValidation = () => {
     const result = validator();
-    console.log('after validation');
-    console.log(result);
-    if (result) {
+    // console.log('after validation');
+    // console.log(result);
+    if(result) {
       const attributes = [
         {
           trait_type: 'Bottle Size',
@@ -380,13 +380,12 @@ const CreateNFT = () => {
       headers: myHeaders,
       body: raw,
     })
-      .then((response) => response.json())
-      .then((results) => {
-        setLoading(false);
-
-        mint(results.data);
-      }) // fourth call
-      .catch((error) => console.log('error', error));
+    .then((response) => response.json())
+    .then((results) => {
+      setLoading(false);
+      mint(results.data);
+    }) // fourth call
+    .catch((error) => console.log('error', error));
   };
   //web3 mint
   const mint = async (tokenURI) => {
@@ -410,7 +409,7 @@ const CreateNFT = () => {
             .nftMint(`ipfs://${tokenURI}`)
             .then((result) => {
               result.wait().then((response) => {
-                console.log(response);
+                // console.log(response);
                 setTokenID(
                   parseInt(response.events[0].topics[3].toString(), 16)
                 );
@@ -425,7 +424,6 @@ const CreateNFT = () => {
             .catch((error) => {
               setLoading(false);
               errorMessage = error.toString();
-
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
@@ -451,7 +449,6 @@ const CreateNFT = () => {
             });
         } catch (error) {
           console.log('error', error);
-
           setLoading(false);
           toast.error(error.message, {
             toastId: 'create-error-6',
@@ -560,7 +557,7 @@ const CreateNFT = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log('error', error)
+        console.log('error', error);
       });
     }
   };
@@ -593,6 +590,7 @@ const CreateNFT = () => {
     .then((response) => response.text())
     .then((result) => {
       setLoading(false);
+      router.push('/allnftlist');
     })
     .catch((error) => {
       setLoading(false);
