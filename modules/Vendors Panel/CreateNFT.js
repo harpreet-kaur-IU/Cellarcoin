@@ -537,20 +537,20 @@ const CreateNFT = () => {
       .then((response) => response.json())
       .then((result) => {
         setLoading(false);
-        setName('');
-        setDesc('');
-        setWallet('');
-        setBrand('');
-        setUrl('');
-        setBrand('');
-        setPremiumDrops(false);
-        setBottleSize('');
-        setVolumn('');
-        setRegion('');
-        setSpirit('');
-        setCover('');
-        var inputfile = document.getElementById('file-input-field');
-        inputfile.value = '';
+        // setName('');
+        // setDesc('');
+        // setWallet('');
+        // setBrand('');
+        // setUrl('');
+        // setBrand('');
+        // setPremiumDrops(false);
+        // setBottleSize('');
+        // setVolumn('');
+        // setRegion('');
+        // setSpirit('');
+        // setCover('');
+        // var inputfile = document.getElementById('file-input-field');
+        // inputfile.value = '';
         addTransaction(
           response.hash,
           result.data._id,
@@ -558,7 +558,10 @@ const CreateNFT = () => {
           web3tokenID
         );
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+        console.log('error', error)
+      });
     }
   };
   //create order API
@@ -591,7 +594,10 @@ const CreateNFT = () => {
     .then((result) => {
       setLoading(false);
     })
-    .catch((error) => console.log('error', error));
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error)
+    });
   };
   return (
     <div>

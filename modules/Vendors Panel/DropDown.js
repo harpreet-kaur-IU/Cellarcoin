@@ -32,7 +32,7 @@ export default function DropDown(props) {
           <li value="7 days" onClick={selectHandler}>
             7 days
           </li>
-          <li value="20 days" onClick={selectHandler}>
+          <li value="21 days" onClick={selectHandler}>
             21 days
           </li>
           <li value="30 days" onClick={selectHandler}>
