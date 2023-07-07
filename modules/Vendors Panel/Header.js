@@ -8,7 +8,7 @@ import useFirebaseAuth from '../../auth/useFirebaseAuth'
 import {getOnBoardFromCookie,removeOnBoardCookie} from '../../auth/userCookies';
 import Web3Modal from "web3modal";
 import { providers } from "ethers";
-
+import { useMetaMask } from 'metamask-react'
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
     function handleClickOutside(event) {
@@ -25,6 +25,8 @@ function useOutsideAlerter(ref,handler) {
 
 const Header = (props) => {
   const wrapperRef = useRef(null);
+  const { status, connect, account, chainId, ethereum } = useMetaMask();
+
   const handler = ()=>{
     setDropdown(prev =>!prev)
   }
@@ -242,7 +244,7 @@ const Header = (props) => {
       <div className={`d-flex d-align-center d-justify-space-between col-12 ${styles["header-bar-wrapper"]}`}>
         <div className='p-relative d-flex d-align-center gap-3'>
           <div className="text-center">
-            <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{connectedWallet?"Connected":"Connect"}</button>
+            <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{status=="connected"?"Connected":"Connect Wallet"}</button>
           </div>
           
           <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>

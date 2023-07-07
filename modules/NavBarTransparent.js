@@ -18,6 +18,7 @@ import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
 import Search from '../icons/Search';
+import { useMetaMask } from 'metamask-react';
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
     function handleClickOutside(event) {
@@ -47,6 +48,7 @@ const NavBarTransparent = () => {
   const [nft,setNft] = useState("")
   const [searchLoading,setSearchLoading] = useState(false)
   const [connectedWallet, setConnectedWallet] = useState(false);
+  const { status } = useMetaMask();
 
   var JWTToken = getUserOnBoardFromCookie();
 
@@ -328,7 +330,7 @@ const NavBarTransparent = () => {
               <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
               {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
             </ul>
-            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}  onClick={() => connectWallet()}>{connectedWallet?"Connected":"Connect Wallet"}</button>
+            <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`}  onClick={() => connectWallet()}>{status=="connected"?"Connected":"Connect Wallet"}</button>
             <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`}  onClick={() => connectWallet()}>
               <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
             </div>

@@ -17,7 +17,7 @@ import Web3Modal from "web3modal";
 import ProfileIcon from '../icons/ProfileIcon';
 import { SearchLoader } from './SearchLoader';
 import Search from '../icons/Search';
-
+import { useMetaMask } from 'metamask-react';
 function useOutsideAlerter(ref,handler) {
   useEffect(() => {
     function handleClickOutside(event) {
@@ -55,7 +55,8 @@ const NavBar = () => {
   const [searchLoading,setSearchLoading] = useState(false)
   const [connectedWallet, setConnectedWallet] = useState(false);
   var JWTToken = getUserOnBoardFromCookie();
-
+  const { status } = useMetaMask();
+  
   useEffect(()=>{
     if(!JWTToken){
       setToken(false)
@@ -81,6 +82,7 @@ const NavBar = () => {
         // Router.push("/vendorlogin")
     }
     updateWalletActivity()
+    
   },[])
 
     //this function is called when there is any changes in wallet state
@@ -273,13 +275,11 @@ const NavBar = () => {
     // window.ethereum.on("accountsChanged", function (accounts) {
     //   window.location.replace(location.pathname);
     // });
-
     web3ModalRef.current = new Web3Modal({
       network: "rinkeby",
       providerOptions: {},
     });
   },[]);
-
   return (
     <>
       <nav className={`p-fixed col-12 ${style["navbar"]}`}>
@@ -334,7 +334,7 @@ const NavBar = () => {
             <li className='ml-32 font-16 f-500 l-137'><Link href="/about">About us</Link></li> */}
             {!token && <li onClick={handleClick} className='cursor-pointer ml-32 font-16 f-500 l-137'>Sign In</li>}
           </ul>
-          <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connectWallet()}>{connectedWallet?"Connected":"Connect Wallet"}</button>
+          <button className={`b-none cursor-pointer btn-primary font-13 ml-32 f-500 l-137 ${style["btn-connect-wallet"]}`} onClick={() => connectWallet()}>{status=="connected"?"Connected":"Connect Wallet"}</button>
           <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connectWallet()}>
             <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
           </div>

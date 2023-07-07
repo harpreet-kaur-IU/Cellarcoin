@@ -118,7 +118,6 @@ const SellNFT = () => {
             })
             .catch((error) => {
               console.log('error', error);
-
               setLoading(false);
               errorMessage = error.toString();
               // console.log(errorMessage);
@@ -227,6 +226,7 @@ const SellNFT = () => {
       console.log('error', error);
     });
   };
+
   return (
     <>
       <Header></Header>

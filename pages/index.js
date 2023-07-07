@@ -7,9 +7,8 @@ import BannerSlider from "../modules/BannerSlider"
 import WineCardSlider from "../modules/WineCardSlider"
 import Base from "../layout/Base"
 import Partner from "../modules/Partner"
-
 export default function Home() {
-  
+
   return (
     <Fragment>
       <Base>

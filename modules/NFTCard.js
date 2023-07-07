@@ -4,11 +4,10 @@ import {useRouter} from 'next/router';
 
 const NFTCard = (props) => {
     const router = useRouter();
-
     const sellNftHandler = () =>{
         router.push(`/resellNft/${props.data._id}`)
     }
-    
+
   return (
     <>
         <div className={`bg-card-dark ${styles["user-nft-cards-container"]}`}>
