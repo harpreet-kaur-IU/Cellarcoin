@@ -227,7 +227,6 @@ const SellNFT = () => {
       console.log('error', error);
     });
   };
-
   return (
     <>
       <Header></Header>

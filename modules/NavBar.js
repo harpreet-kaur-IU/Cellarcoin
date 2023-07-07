@@ -202,7 +202,6 @@ const NavBar = () => {
   }
 
   const web3ModalRef = useRef();
-
   const getSignerOrProvider = async (needSigner = false) => {
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);

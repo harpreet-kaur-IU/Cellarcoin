@@ -5,6 +5,9 @@
 .main-image{
     height: 282px;
 }
+.inner-content-div{
+    z-index: 99;
+}
 .back-home-btn{
     padding: 20px 49px;
 }
