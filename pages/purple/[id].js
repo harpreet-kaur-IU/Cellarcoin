@@ -53,6 +53,7 @@ export default function Purple() {
         var raw = JSON.stringify({
           "favourite":value
         });
+        
         var requestOptions = {
           method:'PATCH',
           headers: myHeaders,
@@ -121,6 +122,7 @@ export default function Purple() {
         });
       }
     }
+
     return (
         <Fragment>  
             {loading && <Loader></Loader>}

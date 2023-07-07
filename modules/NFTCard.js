@@ -8,7 +8,6 @@ const NFTCard = (props) => {
     const sellNftHandler = () =>{
         router.push(`/resellNft/${props.data._id}`)
     }
-    
   return (
     <>
         <div className={`bg-card-dark ${styles["user-nft-cards-container"]}`}>

@@ -1,5 +1,9 @@
 .pagenotfound-section{
-    padding-top:140px;
+    /* padding-top:140px; */
+    height: 100vh;
+}
+.main-image{
+    height: 282px;
 }
 .back-home-btn{
     padding: 20px 49px;
@@ -14,9 +18,17 @@
 }
 .vertical-line{
     border-right: 1px solid #fff;
-    height: 246px;
+    height: 196px;
 }
 .page-vector-3{
     left: 0;
     bottom:0;
+}
+.primary-image{
+    position: absolute;
+    bottom: 0;
+}
+.text-div{
+    width: 100%;
+    top: 40%;
 }

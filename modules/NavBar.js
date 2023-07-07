@@ -129,6 +129,7 @@ const NavBar = () => {
       handleClick()
     }
   }
+  
   const profileHandler = () =>{
     router.push(`/editprofile/${userId}`)
   }
@@ -231,7 +232,7 @@ const NavBar = () => {
       });
     }
   };
-  
+
   async function getAddress() {
     const ethers = require("ethers");
     const provider = new ethers.providers.Web3Provider(window.ethereum);

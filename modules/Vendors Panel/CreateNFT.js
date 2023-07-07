@@ -561,6 +561,7 @@ const CreateNFT = () => {
       });
     }
   };
+  
   //create order API
   const addTransaction = (hash, id, walletAddress, web3tokenID) => {
     var myHeaders = new Headers();
@@ -597,6 +598,7 @@ const CreateNFT = () => {
       console.log('error', error)
     });
   };
+
   return (
     <div>
       {loading && <Loader></Loader>}
