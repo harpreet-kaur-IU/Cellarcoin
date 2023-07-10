@@ -6,6 +6,7 @@ import UserNftCards from './UserNftCards';
 import UserTable from './UserTable';
 import Loader from './Vendors Panel/Loader';
 import WineCard from './WineCard';
+import { useRouter } from 'next/router';
 const UserNft = () => {
     const [data,setData] = useState("");
     const [fav,setFav] = useState("");
@@ -13,9 +14,11 @@ const UserNft = () => {
     const [activity,setActivity] = useState("");
     const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
-    const[loading,setLoading] = useState(false)
-    const[walletAddress,setWalletAddress] = useState("")
+    const [loading,setLoading] = useState(false)
+    const [walletAddress,setWalletAddress] = useState("")
     const JWTToken = getUserOnBoardFromCookie();
+    const router = useRouter();
+    const activeTabId = router.query["resell"]
     const handleClick = (e) => {
         setActiveTab(e.target.id);
     };
@@ -30,6 +33,9 @@ const UserNft = () => {
 
     useEffect(()=>{
         //fetch user name from jwt token
+        if(activeTabId == 1)
+            setActiveTab("tab2")
+            
         getAddress()
         function parseJwt() {
             if (!JWTToken) {return}
@@ -112,10 +118,9 @@ const UserNft = () => {
 
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
-            const parseResult = JSON.parse(result)
-            setActivity(parseResult)
+            setActivity(result.data)
             setLoading(false)
         })
         .catch(error => console.log('error', error));
@@ -244,7 +249,7 @@ const UserNft = () => {
                      <div className={`offset-4 col-8 ${style["wine-tab-3"]}`}>
                         <UserNftCards></UserNftCards>
                      </div>
-                     <UserTable></UserTable>
+                     <UserTable data={activity}></UserTable>
                  </>
                 }
             </>

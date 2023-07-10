@@ -131,12 +131,13 @@ const OwnedBy = () => {
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
         setLoading(false);
         // setAdd(prev=>!prev);
         updateUserCollection(hashResponse, walletAddress);
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
   //update collection API
@@ -150,16 +151,19 @@ const OwnedBy = () => {
       redirect: 'follow',
     };
 
+    setLoading(true);
     fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}user/updateUserCollection/${nftId}`,
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        setLoading(false);
         addTransaction(hashResponse.hash, nftId, walletAddress);
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
   //create order API for adding transaction history
@@ -183,15 +187,19 @@ const OwnedBy = () => {
       redirect: 'follow',
     };
 
+    setLoading(true);
     fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
       .then((response) => response.text())
       .then((result) => {
+        setLoading(false);
         router.push('/usernft');
       })
-      .catch((error) => console.log('error', error));
+      .catch((error) => {
+        setLoading(false);
+      });
   };
 
   const continueHandler = () => {
@@ -234,7 +242,9 @@ const OwnedBy = () => {
           setData(result.nft);
           setLoading(false);
         })
-        .catch((error) => console.log('error', error));
+        .catch((error) => {
+          setLoading(false);
+        });
     }
   }, [nftId]);
 

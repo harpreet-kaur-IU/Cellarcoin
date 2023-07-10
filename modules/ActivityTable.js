@@ -74,7 +74,7 @@ const ActivityTable = () => {
                     <StatusDropdown handler={statusHandler}></StatusDropdown>
                 </div>
             </div>
-            <div className={`${styles["table-section-scroll"]}`} style={{overflow:"hidden",marginBottom:"100px",height:"auto"}}>
+            <div className={`${styles["table-section-scroll"]}`} style={{marginBottom:"100px"}}>
                 <div className={`${styles["table-wrapper"]}`}>
                     <div className={` ${styles["table-headers"]}`}>
                         <span className='font-18 f-500 d-flex'>Event</span>
