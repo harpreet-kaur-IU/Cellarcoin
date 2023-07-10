@@ -3,7 +3,10 @@ import style from "./css/PaymentMethodContent.module.css"
 import { ethers } from "ethers";
 import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 import Web3Modal from "web3modal";
+import { useMetaMask } from 'metamask-react';
 const PaymentMethodContent = () => {
+  const { status } = useMetaMask();
+
     // connect wallet web3 code starts here
     let web3Modal;
     const providerOptions = {
@@ -76,25 +79,23 @@ const PaymentMethodContent = () => {
     <div className={` ${style["payment-method-wrapper"]}`}>
         <div className='text-center'>
           <div>
-            {hasMetamask ? (
+            {/* {hasMetamask ? (
               isConnected ? (
                 ""
               ) : (
                 <>
                   <button className={`b-nonecursor-pointer mt-40 btn-primary b-none font-20 f-500 l-137 ${style["connect-wallet-btn"]}`} onClick={() => connect()}>Connect to Wallet</button>
-                  {/* <div className={`cursor-pointer d-none ml-32 ${style["connect-wallet-icon"]}`} onClick={() => connect()}>
-                    <img className='rounded-16 cursor-pointer' src='images/web3-wallet-icon.svg'></img>
-                  </div> */}
+                 
                 </>
               )
             ) : (
               "Please install metamask"
-            )}
-            {isConnected ? <button className={`b-none cursor-pointer mt-40 btn-primary b-none font-20 f-500 l-137 ${style["connect-wallet-btn"]}`} onClick={() => execute()}>Connected</button> : ""}
+            )} */}
+            <button className={`b-none cursor-pointer mt-40 btn-primary b-none font-20 f-500 l-137 ${style["connect-wallet-btn"]}`} onClick={() => execute()}>{status=="connected"?"Connected":"Connect Wallet"}</button>
           </div>
           {/* <button className={`cursor-pointer mt-40 btn-primary b-none font-20 f-500 l-137 ${style["connect-wallet-btn"]}`}>Connect to Wallet</button> */}
         </div>
-        <h3 className='f-500 l-137'>Connected Wallet</h3>
+        {/* <h3 className='f-500 l-137'>Connected Wallet</h3> */}
     </div>
   )
 }

@@ -7,6 +7,7 @@ import UserTable from './UserTable';
 import Loader from './Vendors Panel/Loader';
 import WineCard from './WineCard';
 import { useRouter } from 'next/router';
+import { useMetaMask } from 'metamask-react';
 const UserNft = () => {
     const [data,setData] = useState("");
     const [fav,setFav] = useState("");
@@ -15,28 +16,20 @@ const UserNft = () => {
     const [user,setUser] = useState("");
     const [activeTab, setActiveTab] = useState("tab1");
     const [loading,setLoading] = useState(false)
-    const [walletAddress,setWalletAddress] = useState("")
     const JWTToken = getUserOnBoardFromCookie();
     const router = useRouter();
     const activeTabId = router.query["resell"]
+    const { status, account} = useMetaMask();
     const handleClick = (e) => {
         setActiveTab(e.target.id);
     };
 
-    async function getAddress() {
-        // const ethers = require("ethers");
-        // const provider = new ethers.providers.Web3Provider(window.ethereum);
-        // const signer = provider.getSigner();
-        // const addr = await signer.getAddress();
-        // setWalletAddress(addr)
-    }
 
     useEffect(()=>{
         //fetch user name from jwt token
         if(activeTabId == 1)
             setActiveTab("tab2")
-            
-        getAddress()
+
         function parseJwt() {
             if (!JWTToken) {return}
             const base64Url = JWTToken.split('.')[1];
@@ -200,8 +193,11 @@ const UserNft = () => {
                     <div className={`d-flex d-flex-column gap-2 ${style["user-name-wallet-address"]}`}>
                         <h3 className={`text-center cursor-pointer f-700 l-137`}>{user}</h3>
                         <div className={`d-flex d-align-center gap-1`}>
-                            <img src='images/polygon-icon.svg'></img>
-                            <h5 className='font-16 f-400 l-137 word-break'>{walletAddress}</h5>
+                            {status == "connected" &&
+                            <>
+                                <img src='images/polygon-icon.svg'></img>
+                                <h5 className='font-16 f-400 l-137 word-break'>{account}</h5>
+                            </>}
                         </div>
                     </div>
                     {/* <h5 className='text-center f-400 l-137'>
