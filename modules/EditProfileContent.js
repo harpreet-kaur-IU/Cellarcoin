@@ -46,8 +46,9 @@ const EditProfileContent = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getProfile`, requestOptions)
     .then(response => response.json())
     .then(result =>{
-      console.log(result)
       setCover(result.user.coverImage)
+      console.log("coverImage "+result.user.coverImage)
+      console.log("profileImage "+result.user.profileImage)
       setUrl(result.user.coverImage)
       setProfileUrl(result.user.profileImage)
       setProfile(result.user.profileImage)
@@ -59,21 +60,8 @@ const EditProfileContent = () => {
 
   const coverHandler = (e) =>{
     setCover(e.target.files[0]);
-  }
-  const profileHandler = (e) =>{
-    setProfile(e.target.files[0]);
-  }
-  const userNameHandler = (e) =>{
-    setUserName(e.target.value)
-  }
-  const locationHandler = (e) =>{
-    setLocation(e.target.value)
-  }
-  //cover upload
-  useEffect(()=>{
-    if(cover || !url){
-      var formdata = new FormData();
-      formdata.append("image",cover);
+    var formdata = new FormData();
+      formdata.append("image",e.target.files[0]);
       
       var requestOptions = {
         method: 'POST',
@@ -86,34 +74,80 @@ const EditProfileContent = () => {
       .then(result => {
         var results = (JSON.parse(result))
         setUrl(results.imageUrl)
-        
         setLoadingImg(false)
       })
       .catch(error => console.log('error', error));
-    }
-  },[cover])
-
-  useEffect(()=>{
-    if(profile || !profileUrl){
-      var formdata = new FormData();
-      formdata.append("image",profile);
+  }
+  const profileHandler = (e) =>{
+    setProfile(e.target.files[0]);
+    var formdata = new FormData();
+    formdata.append("image",e.target.files[0]);
+    
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+    setLoadingImg2(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      var results = (JSON.parse(result))
+      setProfileUrl(results.imageUrl)
+      setLoadingImg2(false)
+    })
+    .catch(error => console.log('error', error));
+  }
+  const userNameHandler = (e) =>{
+    setUserName(e.target.value)
+  }
+  const locationHandler = (e) =>{
+    setLocation(e.target.value)
+  }
+  //cover upload
+  // useEffect(()=>{
+  //   if(cover || !url){
+  //     var formdata = new FormData();
+  //     formdata.append("image",cover);
       
-      var requestOptions = {
-        method: 'POST',
-        body: formdata,
-        redirect: 'follow'
-      };
-      setLoadingImg2(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        var results = (JSON.parse(result))
-        setProfileUrl(results.imageUrl)
-        setLoadingImg2(false)
-      })
-      .catch(error => console.log('error', error));
-    }
-  },[profile])
+  //     var requestOptions = {
+  //       method: 'POST',
+  //       body: formdata,
+  //       redirect: 'follow'
+  //     };
+  //     setLoadingImg(true)
+  //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+  //     .then(response => response.text())
+  //     .then(result => {
+  //       var results = (JSON.parse(result))
+  //       setUrl(results.imageUrl)
+  //       setLoadingImg(false)
+  //     })
+  //     .catch(error => console.log('error', error));
+  //   }
+  // },[cover])
+
+  // useEffect(()=>{
+  //   if(profile || !profileUrl){
+  //     var formdata = new FormData();
+  //     formdata.append("image",profile);
+      
+  //     var requestOptions = {
+  //       method: 'POST',
+  //       body: formdata,
+  //       redirect: 'follow'
+  //     };
+  //     setLoadingImg2(true)
+  //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+  //     .then(response => response.text())
+  //     .then(result => {
+  //       var results = (JSON.parse(result))
+  //       setProfileUrl(results.imageUrl)
+  //       setLoadingImg2(false)
+  //     })
+  //     .catch(error => console.log('error', error));
+  //   }
+  // },[profile])
   //form submit
   const formSubmit = (e) =>{
     e.preventDefault();
@@ -161,7 +195,7 @@ const EditProfileContent = () => {
       <h4 className="f-400 l-137">You have signed in using: <span className='f-500'>{email}</span></h4>
       <h4 className={`f-400 l-137 mb-24 ${style["change-cover-text"]}`}>Change Cover picture and profile picture</h4>
       <form onSubmit={formSubmit}>
-        <div className={`p-relative ${style["cover-img-wrapper"]} ${imgLoading ? style["cover-img-wrapper-opacity"]:"" }`}>
+        <div className={`p-relative ${style["cover-img-wrapper"]} ${imgLoading? style["cover-img-wrapper-opacity"]:"" }`}>
           <input 
             className='cursor-pointer'
             id='file-input-field'
