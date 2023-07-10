@@ -71,7 +71,7 @@ const ActivityTable = () => {
             <div className={`d-flex d-align-center d-justify-space-between ${styles["table-heading"]}`}>
                 <h3 className={`f-600 text-primary`}>Activity</h3>
                 <div className='p-relative'>
-                    <StatusDropdown handler={statusHandler}></StatusDropdown>
+                    <StatusDropdown placeholder="All" type="activity" icon={false} handler={statusHandler}></StatusDropdown>
                 </div>
             </div>
             <div className={`${styles["table-section-scroll"]}`} style={{marginBottom:"100px"}}>

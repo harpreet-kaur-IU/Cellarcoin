@@ -213,16 +213,26 @@ const NavBarTransparent = () => {
   };
 
   const connectWallet = async () => {
-    try {
-      await getSignerOrProvider();
-      setConnectedWallet(true);
-      console.log("ghg")
+    if(status!= "connected"){
+      if(JWTToken){
+        try {
+          await getSignerOrProvider();          
+        } catch (error) {
+          console.log(" error", error);
+        }
+        getAddress()
+      }else{
+        toast.warning("Please Sign in",{
+          toastId:"2"
+        });
+      }
+    }else{
+      toast.error("Your wallet is already Connected",{
+        toastId:"alredy-connected"
+      });
     }
-    catch(e){
-     
-    }
-    getAddress()
   };
+
 
   async function getAddress() {
     const ethers = require("ethers");

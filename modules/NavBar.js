@@ -220,16 +220,22 @@ const NavBar = () => {
   };
 
   const connectWallet = async () => {
-    if(JWTToken){
-      try {
-        await getSignerOrProvider();          
-      } catch (error) {
-        console.log(" error", error);
+    if(status!= "connected"){
+      if(JWTToken){
+        try {
+          await getSignerOrProvider();          
+        } catch (error) {
+          console.log(" error", error);
+        }
+        getAddress()
+      }else{
+        toast.warning("Please Sign in",{
+          toastId:"2"
+        });
       }
-      getAddress()
     }else{
-      toast.warning("Please Sign in",{
-        toastId:"2"
+      toast.error("Your wallet is already Connected",{
+        toastId:"alredy-connected"
       });
     }
   };
