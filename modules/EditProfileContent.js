@@ -34,6 +34,10 @@ const EditProfileContent = () => {
       setEmail(user.user.email) 
       setUserName(user.user.userName)
     }
+    getUserProfile()
+  },[])
+
+  const getUserProfile = () =>{
     var myHeaders = new Headers();
     myHeaders.append("Authorization","Bearer "+JWTToken);
     myHeaders.append("Content-Type","application/json");
@@ -47,8 +51,6 @@ const EditProfileContent = () => {
     .then(response => response.json())
     .then(result =>{
       setCover(result.user.coverImage)
-      // console.log("coverImage "+result.user.coverImage)
-      // console.log("profileImage "+result.user.profileImage)
       setUrl(result.user.coverImage)
       setProfileUrl(result.user.profileImage)
       setProfile(result.user.profileImage)
@@ -56,8 +58,7 @@ const EditProfileContent = () => {
       setLocation(result.user.location)
     })
     .catch(error => console.log('error', error));
-  },[])
-
+  }
   const coverHandler = (e) =>{
     setCover(e.target.files[0]);
     var formdata = new FormData();

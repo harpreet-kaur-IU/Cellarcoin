@@ -30,14 +30,7 @@ const UserNft = () => {
         if(activeTabId == 1)
             setActiveTab("tab2")
 
-        function parseJwt() {
-            if (!JWTToken) {return}
-            const base64Url = JWTToken.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(window.atob(base64));
-        }
-        var user = parseJwt();
-        setUser(user.user.name)
+        getUserProfile()
 
         //get collection list API
         var myHeaders = new Headers();
@@ -51,10 +44,9 @@ const UserNft = () => {
 
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getCollection`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
-            const parseResult = JSON.parse(result)
-            setData(parseResult.nft[0].nftId)
+            setData(result.nft[0].nftId)
             setLoading(false)
         })
         .catch(error => console.log('error', error));
@@ -71,10 +63,9 @@ const UserNft = () => {
 
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getFavourites`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
-            const parseResult = JSON.parse(result)
-            setFav(parseResult.favourites)
+            setFav(result.favourites)
             setLoading(false)
         })
         .catch(error => console.log('error', error));
@@ -91,10 +82,9 @@ const UserNft = () => {
 
         setLoading(true)
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/userOnSale`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
-            const parseResult = JSON.parse(result)
-            setOnSale(parseResult.data)
+            setOnSale(result.data)
             setLoading(false)
         })
         .catch(error => console.log('error', error));
@@ -178,6 +168,24 @@ const UserNft = () => {
                 toastId:"2"
             });
         }
+      }
+
+      const getUserProfile = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization","Bearer "+JWTToken);
+        myHeaders.append("Content-Type","application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+        };
+
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getProfile`, requestOptions)
+        .then(response => response.json())
+        .then(result =>{
+            setUser(result.user.userName)
+        })
+        .catch(error => console.log('error', error));
       }
   return (
     <>

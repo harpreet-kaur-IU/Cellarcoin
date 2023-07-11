@@ -41,11 +41,14 @@
 }
 .favorite-icon{
    width: 100%;
+   /* border-radius: 50%; */
+}
+.favorite-icon div:first-child{
+    border-radius: 50%;
+    background-color:var(--inactive-pink);
 }
 .favorite-icon img{
-    padding: 13px;
-    background-color:var(--inactive-pink);
-    border-radius: 50%;
+    padding: 20px 10px;
 }
 .buy-now-btn{
     transition: 0.8s;
