@@ -9,14 +9,12 @@ const StatusDropdown = (props) => {
 
     const selectHandler = (e) => {
         setValue(e.currentTarget.getAttribute("value"));
-        // console.log(e.currentTarget.getAttribute("textContent"))
 
         if(e.currentTarget.getAttribute("value") == "All")
             props.handler(e.currentTarget.getAttribute("null"))
         else
             props.handler(e.currentTarget.getAttribute("value"))
     }
-
     return (
         <div className={`f-500 ${styles["drop-down"]}`} onClick={handler}>
             <h6 className='l-22'>{value}</h6>

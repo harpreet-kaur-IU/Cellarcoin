@@ -12,54 +12,54 @@ import TopPerformingNFT from './TopPerformingNFT';
 import NewNFTTable from './NewNFTTable';
 import StatusDropdown from '../StatusDropdown';
 const Reports = () => {
-    const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-    const [sales,setSales] = useState("")
-    const [topNft,setTopNft] = useState("");
-    const[dashboard,setDashboard] = useState('');
-    const[nft,setNft] = useState('')
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    var JWTtoken = getOnBoardFromCookie();
+  const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+  const [sales,setSales] = useState("")
+  const [topNft,setTopNft] = useState("");
+  const[dashboard,setDashboard] = useState('');
+  const[nft,setNft] = useState('')
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  var JWTtoken = getOnBoardFromCookie();
 
-    useEffect(()=>{
-      if(JWTtoken){
-        salesGraph()
-        getDashboardStats()
-        getNewNFT()
-        topPerformingNFT()
-      }else{
-        router.push("/vendorlogin")
-      }
-    
-    },[])
+  useEffect(()=>{
+    if(JWTtoken){
+      salesGraph()
+      getDashboardStats()
+      getNewNFT()
+      topPerformingNFT()
+    }else{
+      router.push("/vendorlogin")
+    }
+  
+  },[])
 
     /**
    * This function is responsible for calling dashboard stats API
    * and we are using this in dashboard cards
    */
-  const getDashboardStats = ( ) =>{
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization","Bearer "+JWTtoken);
-    myHeaders.append("Content-Type","application/json");
+    const getDashboardStats = ( ) =>{
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization","Bearer "+JWTtoken);
+      myHeaders.append("Content-Type","application/json");
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders
-    };
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders
+      };
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
-    .then(response => response.json())
-    .then(result =>{
-      setDashboard(result)
-    })
-    .catch(error => console.log('error', error));
-}
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
+      .then(response => response.json())
+      .then(result =>{
+        setDashboard(result)
+      })
+      .catch(error => console.log('error', error));
+    }
 
-/**
- * This function will fetch the new nft via getlatestNft APi call
- * we are passing this data to NewNFTTable componet
- */
-const getNewNFT = () =>{
+  /**
+   * This function will fetch the new nft via getlatestNft APi call
+   * we are passing this data to NewNFTTable componet
+   */
+  const getNewNFT = () =>{
     var myHeaders = new Headers();
     myHeaders.append("Authorization","Bearer "+JWTtoken);
     myHeaders.append("Content-Type","application/json");
@@ -75,36 +75,34 @@ const getNewNFT = () =>{
       setNft(result.nft)
     })
     .catch(error => console.log('error', error));
-}
+  }
 
-/**
- * This method is used to call top performing nft 
- * that we are passing to top performing nft component
- */
-const topPerformingNFT = () =>{
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization","Bearer "+JWTtoken);
-  myHeaders.append("Content-Type","application/json");
+  /**
+   * This method is used to call top performing nft 
+   * that we are passing to top performing nft component
+   */
+  const topPerformingNFT = () =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
 
-  var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-  };
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
 
-  setLoading(true)
-  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
-  .then(response => response.text())
-  .then(result => {
-    const parseResult = JSON.parse(result)
-    setTopNft(parseResult.data)
-    setLoading(false)
-    
-  })
-  .catch(error =>{
-    setLoading(false)
-  });
-}
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      setTopNft(result.data)
+      setLoading(false)
+    })
+    .catch(error =>{
+      setLoading(false)
+    });
+  }
 
 const statusHandler = (val) =>{
   // if(nftId){

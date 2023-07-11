@@ -16,8 +16,8 @@ const ActivityTable = () => {
         setToggle(prev => !prev)
     }
 
-    const navigationHandler = () =>{
-        if(JWTToken){
+    const navigationHandler = (value) =>{
+        if(JWTToken && value){
             router.push("/usernft")
         }
     }
@@ -87,8 +87,8 @@ const ActivityTable = () => {
                         <div className={`${styles["table-column"]}`}>
                             <span className='font-18 f-500 d-flex'>{item.transactionType}</span>
                             <span className='text-primary font-18 f-600 d-flex'>{item.price === 0?" ":item.price}</span>
-                            <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>{item.from!= null?(item.from.name === null?"-":item.from.name):""}</span>
-                            <span onClick={navigationHandler} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>{item.to === null?"":item.to.name}</span>
+                            <span onClick={()=>navigationHandler(item.from!= null?(item.from.name === null?"-":item.from.name):"")} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>{item.from!= null?(item.from.name === null?"-":item.from.name):""}</span>
+                            <span onClick={()=>navigationHandler(item.to === null?"":item.to.name)} className='cursor-pointer a-underline text-primary font-18 f-500 d-flex'>{item.to === null?"":item.to.name}</span>
                             <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
                         </div> 
                     ))}                   
@@ -99,11 +99,11 @@ const ActivityTable = () => {
                             <div className='d-flex d-justify-space-between'>
                                 <div className='d-flex d-flex-column gap-1 mt-8'>
                                     <span className='font-12 f-400 text-dark-gray l-137'>From</span>
-                                    <span onClick={navigationHandler} className='a-underline text-black font-16 f-500 l-137'>{item.from!=null?(item.from.name === null?"-":item.from.name):" "}</span>
+                                    <span onClick={()=>navigationHandler(item.from!=null?(item.from.name === null?"-":item.from.name):" ")} className='a-underline text-black font-16 f-500 l-137'>{item.from!=null?(item.from.name === null?"-":item.from.name):" "}</span>
                                 </div>
                                 <div className='d-flex d-flex-column gap-1 mt-8'>
                                     <span className='font-12 f-400 text-dark-gray l-137'>To</span>
-                                    <span onClick={navigationHandler} className='a-underline text-black font-16 f-500 l-137'>{item.to === null?"":item.to.name}</span>
+                                    <span onClick={()=>navigationHandler(item.to === null?"":item.to.name)} className='a-underline text-black font-16 f-500 l-137'>{item.to === null?"":item.to.name}</span>
                                 </div>
                             </div>
                         </div> 

@@ -101,25 +101,7 @@ const Dashboard = () => {
       setLoading(false)
     });
   }
-  // const deleteHandler = (e) =>{
-  //     var myHeaders = new Headers();
-  //     myHeaders.append("Authorization","Bearer "+JWTtoken);
-  //     myHeaders.append("Content-Type","application/json");
 
-  //     var requestOptions = {
-  //       method: 'PATCH',
-  //       headers: myHeaders
-  //     };
-
-  //     setLoading(true)
-  //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/deleteNft/${e.target.id}`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(result =>{
-  //       setData(result.data);
-  //       setLoading(false)
-  //     })
-  //     .catch(error => console.log('error', error));
-  // }
   return (
     <>
       <Header></Header>

@@ -47,8 +47,8 @@ const EditProfileContent = () => {
     .then(response => response.json())
     .then(result =>{
       setCover(result.user.coverImage)
-      console.log("coverImage "+result.user.coverImage)
-      console.log("profileImage "+result.user.profileImage)
+      // console.log("coverImage "+result.user.coverImage)
+      // console.log("profileImage "+result.user.profileImage)
       setUrl(result.user.coverImage)
       setProfileUrl(result.user.profileImage)
       setProfile(result.user.profileImage)
@@ -61,22 +61,23 @@ const EditProfileContent = () => {
   const coverHandler = (e) =>{
     setCover(e.target.files[0]);
     var formdata = new FormData();
-      formdata.append("image",e.target.files[0]);
-      
-      var requestOptions = {
-        method: 'POST',
-        body: formdata,
-        redirect: 'follow'
-      };
-      setLoadingImg(true)
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        var results = (JSON.parse(result))
-        setUrl(results.imageUrl)
-        setLoadingImg(false)
-      })
-      .catch(error => console.log('error', error));
+    formdata.append("image",e.target.files[0]);
+    
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    setLoadingImg(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      var results = (JSON.parse(result))
+      setUrl(results.imageUrl)
+      setLoadingImg(false)
+    })
+    .catch(error => console.log('error', error));
   }
   const profileHandler = (e) =>{
     setProfile(e.target.files[0]);
@@ -148,6 +149,7 @@ const EditProfileContent = () => {
   //     .catch(error => console.log('error', error));
   //   }
   // },[profile])
+
   //form submit
   const formSubmit = (e) =>{
     e.preventDefault();
@@ -167,6 +169,7 @@ const EditProfileContent = () => {
       headers: myHeaders,
       body: raw
     };
+
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/editProfile/${userId}`,requestOptions)
     .then(response => response.json())
     .then(result=>{
@@ -174,7 +177,6 @@ const EditProfileContent = () => {
         method: 'GET', 
         headers: myHeaders,
       })
-      
       .then(response => response.json())
       .then(results =>{
         setUrl(results.user.coverImage)
@@ -203,7 +205,7 @@ const EditProfileContent = () => {
             ref={fileRef}
             multiple={false}
             onChange={coverHandler}
-            >
+          >
           </input>
           <div className={`${style["small-loader"]}`}>
             {imgLoading && <SmallLoader></SmallLoader>}
@@ -226,7 +228,7 @@ const EditProfileContent = () => {
               ref={fileRef2}
               multiple={false}
               onChange={profileHandler}
-              >
+            >
             </input>
             <button className={`cursor-pointer font-20 f-500 l-137 btn-primary b-none ${style["editprofile-upload-btn"]}`}>Upload new picture</button>
             {/* <button className={`cursor-pointer font-20 f-500 l-137 btn-secondary ${style["editprofile-delete-btn"]}`}>Delete</button> */}

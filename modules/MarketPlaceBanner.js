@@ -38,7 +38,23 @@ const MarketPlaceBanner = () => {
         }
     },[nftId])
 
+    const getUserId = () =>{
+        if(JWTToken){
+            function parseJwt() {
+                if(!JWTToken){
+                return
+                }
+                const base64Url = JWTToken.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
+            }
+            var user = parseJwt();
+        
+            return user.user._id
+        }
+    }
     const getNFTDetails = () =>{
+        let userId = getUserId()
         var myHeaders = new Headers();
         myHeaders.append("Content-Type","application/json");
     
@@ -47,7 +63,7 @@ const MarketPlaceBanner = () => {
             headers: myHeaders,
         };
         // setLoading(true)
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=null`, requestOptions)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=${userId}`, requestOptions)
         .then(response => response.json())
         .then(result =>{
             setFavorite(result.favourite)
@@ -56,14 +72,16 @@ const MarketPlaceBanner = () => {
         .catch(error => console.log('error', error));
     }
     const favoriteHandler = () =>{
+        
         if(JWTToken){  
           //add favourite
+          
           var myHeaders = new Headers();
           myHeaders.append("Authorization", "Bearer "+JWTToken);
           myHeaders.append("Content-Type", "application/json");
   
           var raw = JSON.stringify({
-            "favourite":true,
+            "favourite":favorite?false:true,
           });
           var requestOptions = {
             method:'PATCH',
@@ -71,22 +89,22 @@ const MarketPlaceBanner = () => {
             body: raw,
             redirect: 'follow'
           };
-          
-        //   if(favorite){
+          var currentFavorite = favorite?false:true;
+          if(currentFavorite){
             fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${nftId}`, requestOptions)
             .then(response => response.text())
             .then(result =>{
                 getNFTDetails()
             })
             .catch(error => console.log('error', error));
-        //   }else{
-        //     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${nftId}`, requestOptions)
-        //     .then(response => response.text())
-        //     .then(result =>{
-        //         getNFTDetails()
-        //     })
-        //     .catch(error => console.log('error', error));
-        //   }
+          }else{
+            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${nftId}`, requestOptions)
+            .then(response => response.text())
+            .then(result =>{
+                getNFTDetails()
+            })
+            .catch(error => console.log('error', error));
+          }
         }else{
           toast.warning("Please sign in",{
               toastId:"2"
