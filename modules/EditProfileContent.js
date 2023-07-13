@@ -192,7 +192,6 @@ const EditProfileContent = () => {
     })
     .catch(error=>console.log("error "+error))
   }
-
   return (
     <div className={`${style["edit-profile-wrapper"]}`}>
       <h4 className="f-400 l-137">You have signed in using: <span className='f-500'>{email}</span></h4>

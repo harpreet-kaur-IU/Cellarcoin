@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import style from './css/SignUp.module.css'
 import useFirebaseAuth from '../auth/useFirebaseAuth';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {getAuth,signInWithPopup,GoogleAuthProvider} from 'firebase/auth';
 import {firebaseApp} from '../auth/firebaseConfig';
+import Router from 'next/router'
 const SignUp = (props) => {
     const {createUserWithEmailAndPassword,signInWithEmailAndPassword,sendPasswordResetEmail,signOut} = useFirebaseAuth(); 
     const [loading,setLoading] = useState(false);
@@ -30,7 +31,6 @@ const SignUp = (props) => {
 
     const [errorName,setErrorName] = useState(false)
     const [errorUserName,setErrorUserName] = useState(false)
-    const [errorEmail,setErrorEmail] = useState(false)
     const [errorPass,setErrorPass] = useState(false)
     const [errorRePass,setErrorRePass] = useState(false)
     const [errorPolicy,setErrorPolicy] = useState(false)
@@ -41,6 +41,8 @@ const SignUp = (props) => {
     const [emailError,setEmailError] = useState(false);
     const [passwordError,setPasswordError] = useState(false);
     const [toggle, setToggle] = useState(true);
+
+    const [path,setPath] = useState("")
 
     const nameHandler = (e) =>{
         setName(e.target.value)
@@ -75,6 +77,11 @@ const SignUp = (props) => {
     const handleClick = () =>{
         setToggle(prev => !prev)
     }
+
+    useEffect(()=>{
+        console.log(Router.route)
+        setPath(Router.route)
+    },[])
     const forgetPasswordHandler = () =>{
         const result = validator3();
         if(result){
@@ -114,7 +121,7 @@ const SignUp = (props) => {
     const provider = new GoogleAuthProvider();
 
     const googleSignIn = () =>{
-        // console.log("in google sign")
+
         signInWithPopup(firebaseAuth, provider)
         .then(authUser=>{
             var myHeaders = new Headers();
@@ -142,12 +149,11 @@ const SignUp = (props) => {
                             });
                         }
                         else{
-                            // console.log("new user registration")
                             removeUserOnBoardCookie();
                             setUserOnBoardCookie(result.token);
-                            // props.confirm()
+                            if(path == "/purple/[id]")
+                                window.location.reload(true);
                             props.handler()
-                            // window.location.reload(true);
                             setLoading(false);
                         }
                     })
@@ -168,6 +174,9 @@ const SignUp = (props) => {
                     .then(response => response.json()) 
                     .then(result => {
                         // console.log("user already exist")
+                        if(path == "/purple/[id]")
+                            window.location.reload(true);
+
                         removeUserOnBoardCookie();
                         setUserOnBoardCookie(result.token);
                         props.handler();
@@ -372,7 +381,8 @@ const SignUp = (props) => {
                             setUserOnBoardCookie(result.token);
                             // props.confirm()
                             props.handler()
-                            // window.location.reload(true);
+                            if(path === "/purple/[id]")
+                                window.location.reload(true);
                             setLoading(false)
                         }
                     })

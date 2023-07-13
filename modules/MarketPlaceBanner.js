@@ -15,6 +15,8 @@ const MarketPlaceBanner = () => {
     const [toggle,setToggle] = useState(false)
     const [loading,setLoading] = useState(false)
     const[favorite,setFavorite] = useState(false)
+    // const [expirydate,setDate] = useState("")
+
     const navigationHandler = () =>{
         router.push(`/profile/${data.brand._id}`)
     }
@@ -31,7 +33,7 @@ const MarketPlaceBanner = () => {
     const handleClick = () =>{
         setToggle(prev => !prev);
     }
-    const [expirydate,setDate] = useState("")
+
     useEffect(()=>{
         if(nftId){
            getNFTDetails()
@@ -42,7 +44,7 @@ const MarketPlaceBanner = () => {
         if(JWTToken){
             function parseJwt() {
                 if(!JWTToken){
-                    return
+                    return;
                 }
                 const base64Url = JWTToken.split('.')[1];
                 const base64 = base64Url.replace('-', '+').replace('_', '/');
@@ -52,6 +54,7 @@ const MarketPlaceBanner = () => {
             return user.user._id
         }
     }
+
     const getNFTDetails = () =>{
         let userId = getUserId()
         var myHeaders = new Headers();
@@ -70,8 +73,8 @@ const MarketPlaceBanner = () => {
         })
         .catch(error => console.log('error', error));
     }
+
     const favoriteHandler = () =>{
-        
         if(JWTToken){  
           //add favourite
             var myHeaders = new Headers();
@@ -106,9 +109,9 @@ const MarketPlaceBanner = () => {
                 .catch(error => console.log('error', error));
             }
         }else{
-          toast.warning("Please sign in",{
-              toastId:"2"
-          });
+            toast.warning("Please sign in",{
+                toastId:"2"
+            });
         }
     }
     

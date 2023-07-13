@@ -28,27 +28,26 @@ const Dashboard = () => {
   
   },[])
 
-
   /**
    * This function is responsible for calling dashboard stats API
    * and we are using this in dashboard cards
    */
   const getDashboardStats = ( ) =>{
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization","Bearer "+JWTtoken);
-      myHeaders.append("Content-Type","application/json");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
 
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders
-      };
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders
+    };
 
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard?brandId=null`, requestOptions)
-      .then(response => response.json())
-      .then(result =>{
-        setDashboard(result)
-      })
-      .catch(error => console.log('error', error));
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard?brandId=null`, requestOptions)
+    .then(response => response.json())
+    .then(result =>{
+      setDashboard(result)
+    })
+    .catch(error => console.log('error', error));
   }
 
   /**
@@ -56,21 +55,21 @@ const Dashboard = () => {
    * we are passing this data to NewNFTTable componet
    */
   const getNewNFT = () =>{
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization","Bearer "+JWTtoken);
-      myHeaders.append("Content-Type","application/json");
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
 
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders
-      };
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders
+    };
 
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getLatestNft`, requestOptions)
-      .then(response => response.json())
-      .then(result =>{
-        setNft(result.nft)
-      })
-      .catch(error => console.log('error', error));
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getLatestNft`,requestOptions)
+    .then(response => response.json())
+    .then(result =>{
+      setNft(result.nft)
+    })
+    .catch(error => console.log('error', error));
   }
 
   /**
@@ -92,10 +91,8 @@ const Dashboard = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/topPerformingNFT`, requestOptions)
     .then(response => response.text())
     .then(result => {
-      const parseResult = JSON.parse(result)
-      setTopNft(parseResult.data)
-      setLoading(false)
-      
+      setTopNft(result.data)
+      setLoading(false)  
     })
     .catch(error =>{
       setLoading(false)
@@ -116,9 +113,7 @@ const Dashboard = () => {
         </div>
         <div className={`d-flex ${styles["nfts-wrapper"]}`}>
           <TopPerformingNFT topNft={topNft}></TopPerformingNFT>
-         
           <NewNFTTable nft={nft}></NewNFTTable>
-         
         </div>
       </div>
     </>

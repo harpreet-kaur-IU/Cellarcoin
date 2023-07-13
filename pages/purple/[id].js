@@ -9,6 +9,8 @@ import styles from '../../modules/css/MarketPlaceBanner.module.css'
 import ActivityTable from '../../modules/ActivityTable';
 import Loader from '../../modules/Vendors Panel/Loader';
 import { getUserOnBoardFromCookie } from '../../auth/userCookies';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Purple() {
     const [data,setData] = useState("")
     const [loading,setLoading] = useState(false)
@@ -22,6 +24,7 @@ export default function Purple() {
         method: 'POST',
         headers: myHeaders,
       };
+      
       setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getAllNft`, requestOptions)
       .then(response => response.json())
@@ -147,6 +150,7 @@ export default function Purple() {
                 <Newsletter></Newsletter>
             </Base>
             <Footer></Footer>
+            <ToastContainer/>
         </Fragment>
     );
 }

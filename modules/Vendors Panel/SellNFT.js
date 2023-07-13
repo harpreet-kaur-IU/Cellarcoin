@@ -202,7 +202,8 @@ const SellNFT = () => {
       walletAddressTo: '',
       hash: hash,
       tokenId: data[0].tokenId,
-      transactionType: 'listed'
+      transactionType: 'listed',
+      price : price
     });
 
     var requestOptions = {
