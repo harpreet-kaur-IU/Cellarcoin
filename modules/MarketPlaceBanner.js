@@ -111,6 +111,7 @@ const MarketPlaceBanner = () => {
           });
         }
     }
+    
   return (
     <>
         {loading && <Loader></Loader>}

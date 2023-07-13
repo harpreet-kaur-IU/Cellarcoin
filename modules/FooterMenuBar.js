@@ -19,6 +19,7 @@ const FooterMenuBar = () => {
     //         toastId:"2"
     //     });
     // }
+    
     const profileHandler = () =>{
         if(JWTToken){
             function parseJwt() {

@@ -43,7 +43,7 @@ const Dashboard = () => {
         headers: myHeaders
       };
 
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard?brandId=null`, requestOptions)
       .then(response => response.json())
       .then(result =>{
         setDashboard(result)

@@ -19,14 +19,15 @@ const Reports = () => {
   const[nft,setNft] = useState('')
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const[salesData,setSalesDta] = useState("")
   var JWTtoken = getOnBoardFromCookie();
 
   useEffect(()=>{
     if(JWTtoken){
-      salesGraph()
       getDashboardStats()
       getNewNFT()
       topPerformingNFT()
+      getSalesData()
     }else{
       router.push("/vendorlogin")
     }
@@ -34,9 +35,9 @@ const Reports = () => {
   },[])
 
     /**
-   * This function is responsible for calling dashboard stats API
-   * and we are using this in dashboard cards
-   */
+     * This function is responsible for calling dashboard stats API
+     * and we are using this in dashboard cards
+    */
     const getDashboardStats = ( ) =>{
       var myHeaders = new Headers();
       myHeaders.append("Authorization","Bearer "+JWTtoken);
@@ -50,7 +51,7 @@ const Reports = () => {
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/dashboard`, requestOptions)
       .then(response => response.json())
       .then(result =>{
-        setDashboard(result)
+        setDashboard(result);
       })
       .catch(error => console.log('error', error));
     }
@@ -128,9 +129,13 @@ const statusHandler = (val) =>{
 
 
 
-const salesGraph = () =>{
-  let arr= ["mon","tue","wed","thu","fri","sat","sun"]
-  let arra= ["10","40","56","60","20","66","70"];
+const salesGraph = (data) =>{
+  let arr= [];
+  let arra= [];
+  for(let i=0; i<data.length; i++){
+    arr.push(data[i].month)
+    arra.push(data[i].count)
+  }
 
   setSales({
     options : {
@@ -149,6 +154,31 @@ const salesGraph = () =>{
       data:arra
     }]
   })
+}
+
+const getSalesData = () =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization","Bearer "+JWTtoken);
+    myHeaders.append("Content-Type","application/json");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/salesdata`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      salesGraph(result.data.monthly)
+      // setSalesDta(result.data.monthly)
+      console.log(result.data)
+      setLoading(false)
+    })
+    .catch(error =>{
+      setLoading(false)
+    });
 }
   return (
     <>

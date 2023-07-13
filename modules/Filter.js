@@ -94,6 +94,7 @@ const Filter = (props) => {
         //         </div>
         //     </div>
         // </div>
+
         <div className='col-12 d-flex d-justify-end gap-2 mb-32'>
             <div className={`f-500 ${style["drop-down"]}`} onClick={handler} >
                 <span> {value} </span>
@@ -126,6 +127,7 @@ const Filter = (props) => {
                     </svg>
                 </span>
             </div>
+            
             {/* <div className={`p-relative`}>
                 <div onClick={sortHandler} className={`rounded-8 bg-pink d-flex d-align-center d-justify-space-between ${style["sort-heading-wrapper"]}`}>
                     <a className='f-500 font-16 l-134'>Sort</a>

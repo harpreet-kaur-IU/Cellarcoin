@@ -186,16 +186,15 @@ const NavBar = () => {
 
       setSearchLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/searchNFT`, requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(result => {
-        const parseResult = JSON.parse(result);
-        setBrand(parseResult.data2)
-        setNft(parseResult.data);
+        setBrand(result.data2)
+        setNft(result.data);
         setSearchLoading(false)
         setSearchBar(true)
       })
       .catch(error => {
-        console.log('error', error)
+        // console.log('error', error)
         setSearchLoading(false)
       });
     }else{
@@ -225,7 +224,7 @@ const NavBar = () => {
         try {
           await getSignerOrProvider();          
         } catch (error) {
-          console.log(" error", error);
+          // console.log(" error", error);
         }
         getAddress()
       }else{

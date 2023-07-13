@@ -59,6 +59,7 @@ const EditProfileContent = () => {
     })
     .catch(error => console.log('error', error));
   }
+
   const coverHandler = (e) =>{
     setCover(e.target.files[0]);
     var formdata = new FormData();
@@ -72,14 +73,14 @@ const EditProfileContent = () => {
 
     setLoadingImg(true)
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
-      var results = (JSON.parse(result))
-      setUrl(results.imageUrl)
+      setUrl(result.imageUrl)
       setLoadingImg(false)
     })
     .catch(error => console.log('error', error));
   }
+
   const profileHandler = (e) =>{
     setProfile(e.target.files[0]);
     var formdata = new FormData();
@@ -92,10 +93,9 @@ const EditProfileContent = () => {
     };
     setLoadingImg2(true)
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}uploadImage`, requestOptions)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(result => {
-      var results = (JSON.parse(result))
-      setProfileUrl(results.imageUrl)
+      setProfileUrl(result.imageUrl)
       setLoadingImg2(false)
     })
     .catch(error => console.log('error', error));
