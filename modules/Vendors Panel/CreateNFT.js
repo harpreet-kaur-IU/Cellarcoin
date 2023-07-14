@@ -449,7 +449,7 @@ const CreateNFT = () => {
               }
             });
         } catch (error) {
-          console.log('error', error);
+          // console.log('error', error);
           setLoading(false);
           toast.error(error.message, {
             toastId: 'create-error-6',
@@ -465,7 +465,7 @@ const CreateNFT = () => {
       toast.error('Please install MetaMask', {
         toastId: 'metamsk-error-1',
       });
-      console.log('Please install MetaMask');
+      // console.log('Please install MetaMask');
     }
   };
 
@@ -504,7 +504,7 @@ const CreateNFT = () => {
       brand: brand,
       isPremiumDrop: premiumDrops,
       walletAddress: walletAddress,
-      tokenId: web3tokenID,
+      tokenId: web3tokenID
     });
     if (nftId) {
       var requestOptions = {
@@ -512,6 +512,7 @@ const CreateNFT = () => {
         headers: myHeaders,
         body: raw,
       };
+
       setLoading(true);
       fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`,
@@ -535,6 +536,7 @@ const CreateNFT = () => {
       .then((response) => response.json())
       .then((result) => {
         setLoading(false);
+
         // setName('');
         // setDesc('');
         // setWallet('');
@@ -549,6 +551,7 @@ const CreateNFT = () => {
         // setCover('');
         // var inputfile = document.getElementById('file-input-field');
         // inputfile.value = '';
+
         addTransaction(
           response.hash,
           result.data._id,
@@ -611,13 +614,9 @@ const CreateNFT = () => {
         <div className={`col-9 vendor-container ${styles['vendor-container']}`}>
           <h4 className="l-50 f-600 text-primary mt-24">Create NFT</h4>
           <form onSubmit={formSubmit}>
-            <div
-              className={`d-flex d-flex-column ${styles['create-nft-wrapper']}`}
-            >
+            <div className={`d-flex d-flex-column ${styles['create-nft-wrapper']}`}>
               <h5 className="l-33 f-600">Image, Video, Audio, or 3D Model</h5>
-              <h6 className={`f-400 l-25 ${styles['create-nft-file-format']}`}>
-                File types supported: JPG, PNG, GIF. Max size: 10 MB
-              </h6>
+              <h6 className={`f-400 l-25 ${styles['create-nft-file-format']}`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</h6>
               <div
                 className={`d-flex d-flex-column d-align-center d-justify-center ${styles['image-input-wrapper']}`}
                 style={{
@@ -690,11 +689,8 @@ const CreateNFT = () => {
                       Textual traits that show up as rectangles.
                     </h6>
                   </div>
-                  <div
-                    onClick={modalHandler}
-                    className={`cursor-pointer d-flex d-align-center d-justify-center ${styles['property-add-btn']}`}
-                  >
-                  <img src="images/plus-icon.png"></img>
+                  <div onClick={modalHandler} className={`cursor-pointer d-flex d-align-center d-justify-center ${styles['property-add-btn']}`}>
+                    <img src="images/plus-icon.png"></img>
                   </div>
                 </div>
                 <div
@@ -716,24 +712,18 @@ const CreateNFT = () => {
                   <div
                     className={`col-5 offset-2 ${styles['properties-name-wrapper']}`}
                   >
-                    <h5 className="font-24 f-600 l-33">
-                      Alcohol by volume(ABV)
-                    </h5>
+                    <h5 className="font-24 f-600 l-33">Alcohol by volume(ABV)</h5>
                     <input
                       value={volume}
                       onChange={volumeHandler}
                       className="col-12"
                     ></input>
                     {isVolumn && (
-                      <h6 className={`mt-24 font-14 f-700 text-danger`}>
-                        Please enter numbers only.
-                      </h6>
+                      <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter numbers only.</h6>
                     )}
                   </div>
                 </div>
-                <div
-                  className={`d-flex d-flex-wrap ${styles['properties-wrapper']}`}
-                >
+                <div className={`d-flex d-flex-wrap ${styles['properties-wrapper']}`}>
                   <div className={`col-5 ${styles['properties-name-wrapper']}`}>
                     <h5 className="font-24 f-600 l-33">Region</h5>
                     <input
@@ -747,9 +737,7 @@ const CreateNFT = () => {
                       </h6>
                     )}
                   </div>
-                  <div
-                    className={`col-5 offset-2 ${styles['properties-name-wrapper']}`}
-                  >
+                  <div className={`col-5 offset-2 ${styles['properties-name-wrapper']}`}>
                     <h5 className="font-24 f-600 l-33">Spirit</h5>
                     <input
                       value={spirit}
@@ -757,9 +745,7 @@ const CreateNFT = () => {
                       className="col-12"
                     ></input>
                     {isSpirit && (
-                      <h6 className={`mt-24 font-14 f-700 text-danger`}>
-                        Please enter string only.
-                      </h6>
+                      <h6 className={`mt-24 font-14 f-700 text-danger`}>Please enter string only.</h6>
                     )}
                   </div>
                 </div>
@@ -805,11 +791,7 @@ const CreateNFT = () => {
                 </div>
               </div>
               <div className="d-flex d-justify-end">
-                <button
-                  className={`cursor-pointer font-18 f-700 l-27 bg-primary ${styles['submit-btn']}`}
-                >
-                  Submit
-                </button>
+                <button className={`cursor-pointer font-18 f-700 l-27 bg-primary ${styles['submit-btn']}`}>Submit</button>
               </div>
             </div>
           </form>
