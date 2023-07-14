@@ -489,8 +489,9 @@ const CreateNFT = () => {
         value: spirit,
       },
       { ...additionalProps },
-      { ...additionalProps1 },
+      { ...additionalProps1 }
     ];
+
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
@@ -506,6 +507,7 @@ const CreateNFT = () => {
       walletAddress: walletAddress,
       tokenId: web3tokenID
     });
+
     if (nftId) {
       var requestOptions = {
         method: 'PATCH',
@@ -588,28 +590,23 @@ const CreateNFT = () => {
       redirect: 'follow',
     };
 
-    setLoading(true);
-    fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
-      requestOptions
-    )
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      setLoading(false);
-      router.push('/allnftlist');
+      setLoading(false)
+      router.push('/allnftlist')
     })
     .catch((error) => {
-      setLoading(false);
+      setLoading(false)
       console.log('error', error)
     });
   };
-
   return (
     <div>
       {loading && <Loader></Loader>}
       <Header signerData={signerResult}></Header>
       <ToastContainer></ToastContainer>
-
       <div style={{ height: '100vh', overflow: 'scroll' }}>
         <div className={`col-9 vendor-container ${styles['vendor-container']}`}>
           <h4 className="l-50 f-600 text-primary mt-24">Create NFT</h4>
@@ -623,7 +620,7 @@ const CreateNFT = () => {
                   backgroundImage: `url(${url})`,
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'contain',
-                  backgroundPosition: 'center',
+                  backgroundPosition: 'center'
                 }}
               >
                 <input
@@ -639,14 +636,10 @@ const CreateNFT = () => {
                 {loadingImg && <SmallLoader></SmallLoader>}
               </div>
               {coverError && (
-                <h6 className={`mt-24 font-14 f-700 text-danger`}>
-                  File types supported: JPG, PNG, GIF. Max size: 10 MB
-                </h6>
+                <h6 className={`mt-24 font-14 f-700 text-danger`}>File types supported: JPG, PNG, GIF. Max size: 10 MB</h6>
               )}
               {isUrl && (
-                <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>
-                  Please upload NFT Image.
-                </span>
+                <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please upload NFT Image.</span>
               )}
               <div className={`d-flex d-flex-column ${styles['name-input']}`}>
                 <h5 className="font-24 f-600 l-33">Name</h5>
@@ -658,9 +651,7 @@ const CreateNFT = () => {
                 ></input>
               </div>
               {isNameError && (
-                <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>
-                  Please Enter NFT Name.
-                </span>
+                <span className={`mt-24 mb-8 font-14 f-700 text-danger`}>Please Enter NFT Name.</span>
               )}
               <div className={`d-flex d-flex-column ${styles['desc-input']}`}>
                 <h5 className="font-24 f-600 l-33">Description</h5>
@@ -685,9 +676,7 @@ const CreateNFT = () => {
                 <div className="d-flex d-align-center d-justify-space-between">
                   <div className="d-flex d-flex-column">
                     <h5 className="font-24 f-600 l-33">Properties</h5>
-                    <h6 className="font-18 f-400 l-25">
-                      Textual traits that show up as rectangles.
-                    </h6>
+                    <h6 className="font-18 f-400 l-25">Textual traits that show up as rectangles.</h6>
                   </div>
                   <div onClick={modalHandler} className={`cursor-pointer d-flex d-align-center d-justify-center ${styles['property-add-btn']}`}>
                     <img src="images/plus-icon.png"></img>

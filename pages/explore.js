@@ -28,12 +28,13 @@ export default function Explore() {
         body: raw,
         redirect: 'follow'
       };
+
       setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/filterNFT`, requestOptions)
       .then(response => response.json())
       .then(result =>{
-          setData(result.data)
-          setLoading(false)
+        setData(result.data)
+        setLoading(false)
       })
       .catch(error => {
         setLoading(false)
@@ -77,7 +78,7 @@ export default function Explore() {
       .catch(error =>{
         setLoading(false)
         toast.warning("Unable to get NFT List",{
-            toastId:"1"
+          toastId:"1"
         });
       });
     },[])
@@ -134,9 +135,15 @@ export default function Explore() {
               setData(result.data)
               setLoading(false)
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {
+              setLoading(false)
+              console.log('error', error)
+            });
           })
-          .catch(error => console.log('error', error));
+          .catch(error => {
+            setLoading(false)
+            console.log('error', error)
+          });
         }else{
           fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
           .then(response => response.text())
@@ -161,13 +168,16 @@ export default function Explore() {
               setData(result.data)
               setLoading(false)
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {
+              setLoading(false)
+              console.log('error', error)
+            });
           })
           .catch(error => console.log('error', error));
         }
       }else{
         toast.warning("Please sign in",{
-            toastId:"2"
+          toastId:"2"
         });
       }
     }
@@ -175,19 +185,19 @@ export default function Explore() {
         <Fragment>
             {loading && <Loader></Loader>}
             <Base>
-                <div className={`container mt-144 ${styles["wine-card-page-container"]}`}>
-                    <Filter handler={filterHandler}></Filter>
-                    <div className={`d-grid grid-col-3 gap-3 ${styles["wine-card-wrapper"]}`}>
-                    {data && data.map((item)=>(
-                        <WineCard
-                          key={item._id}
-                          data = {item}
-                          handler = {favoriteHandler}
-                        ></WineCard>
-                    ))}
-                    </div>
+              <div className={`container mt-144 ${styles["wine-card-page-container"]}`}>
+                <Filter handler={filterHandler}></Filter>
+                <div className={`d-grid grid-col-3 gap-3 ${styles["wine-card-wrapper"]}`}>
+                {data && data.map((item)=>(
+                  <WineCard
+                    key={item._id}
+                    data = {item}
+                    handler = {favoriteHandler}
+                  ></WineCard>
+                ))}
                 </div>
-                <Newsletter></Newsletter>
+              </div>
+              <Newsletter></Newsletter>
             </Base>
             <Footer></Footer>
             <ToastContainer/>
