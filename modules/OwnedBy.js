@@ -65,7 +65,7 @@ const OwnedBy = () => {
             .buynft(
               data.tokenId,
               {
-                value: ethers.utils.parseEther(data.price.toString()),
+                value: ethers.utils.parseEther(data.price.toFixed(18)),
               }
               // const price = ethers.utils.parseUnits(data.price.toString(), 'ether')
             )
