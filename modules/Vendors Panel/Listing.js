@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Moment from 'react-moment';
 import CancelListingModal from './CancelListingModal';
 import Nft_marketplace_ABI from './Nft_marketplace_ABI.json';
+import dayjs from 'dayjs';
+import { useMetaMask } from 'metamask-react'
 
 const Listing = () => {
   const router = useRouter();
@@ -23,6 +25,7 @@ const Listing = () => {
   const [activity, setActivity] = useState('');
   const [cancelModal, setCancelModal] = useState(false);
   const [currency, setCurrency] = useState('MATIC');
+  const { status, connect, account, chainId, ethereum } = useMetaMask();
 
   var JWTtoken = getOnBoardFromCookie();
 
@@ -75,7 +78,13 @@ const Listing = () => {
   }, [nftId]);
 
   const cancelListing = () => {
-    setCancelModal((prev) => !prev);
+    if(status=="connected")
+      setCancelModal((prev) => !prev);
+    else{
+      toast.warning('Please Connect your wallet', {
+        toastId: 'connect-wallet-warning',
+      });
+    }
   };
 
   const handlerCancelListing = async () => {

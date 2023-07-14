@@ -173,7 +173,7 @@ const getSalesData = () =>{
     .then(result => {
       salesGraph(result.data.monthly)
       // setSalesDta(result.data.monthly)
-      console.log(result.data)
+      // console.log(result.data)
       setLoading(false)
     })
     .catch(error =>{

@@ -98,6 +98,7 @@ const CreateNFT = () => {
     setPremiumDrops((prev) => !prev);
   };
   const coverHandler = (e) => {
+    const maxSize = 10 * 1024 * 1024;
     if (e.target.files[0]) {
       if (!e.target.files[0].name.match(/\.(jpg|png|gif|jpeg)$/)) {
         setCoverError(true);
@@ -105,7 +106,7 @@ const CreateNFT = () => {
         inputfile.value = '';
       }else {
         setCoverError(false);
-        if (e.target.files[0].size < 10e6) {
+        if (e.target.files[0].size < maxSize) {
           setCover(e.target.files[0]);
         }else{
           setCoverError(true);
@@ -378,7 +379,7 @@ const CreateNFT = () => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/mintNFT`, {
       method: 'POST',
       headers: myHeaders,
-      body: raw,
+      body: raw
     })
     .then((response) => response.json())
     .then((results) => {
@@ -499,7 +500,7 @@ const CreateNFT = () => {
       imageUrl: url,
       description: desc,
       attributes: attributes,
-      walletAddress: wallet,
+      // walletAddress: wallet,
       brand: brand,
       isPremiumDrop: premiumDrops,
       walletAddress: walletAddress,
@@ -551,6 +552,7 @@ const CreateNFT = () => {
         addTransaction(
           response.hash,
           result.data._id,
+          result.data.walletAddress,
           walletAddress,
           web3tokenID
         );
@@ -573,7 +575,7 @@ const CreateNFT = () => {
       walletAddressTo: '',
       hash: hash,
       tokenId: web3tokenID,
-      transactionType: 'minted',
+      transactionType: 'minted'
     });
 
     var requestOptions = {
@@ -588,7 +590,7 @@ const CreateNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((result) => {
       setLoading(false);
       router.push('/allnftlist');

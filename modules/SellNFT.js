@@ -148,15 +148,15 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        setLoading(false);
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error)
-      });
+    .then((response) => response.json())
+    .then((result) => {
+      setLoading(false);
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error)
+    });
   };
   //add order API
   const addTransaction = (hash, id, walletAddress) => {

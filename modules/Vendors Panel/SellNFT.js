@@ -121,10 +121,10 @@ const SellNFT = () => {
               setLoading(false);
               errorMessage = error.toString();
               // console.log(errorMessage);
-              if (
+              if(
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
-              ) {
+              ){
                 console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'sell-error-10',
@@ -166,7 +166,7 @@ const SellNFT = () => {
     var raw = JSON.stringify({
       price: price,
       currency: currency,
-      expireAfter: expire,
+      expireAfter: expire
     });
 
     var requestOptions = {
@@ -194,7 +194,7 @@ const SellNFT = () => {
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
     var myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
+    myHeaders.append('Authorization', 'Bearer ' +JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
@@ -213,10 +213,7 @@ const SellNFT = () => {
       redirect: 'follow',
     };
 
-    fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
-      requestOptions
-    )
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,requestOptions)
     .then((response) => response.text())
     .then((result) => {
       setLoading(false);
