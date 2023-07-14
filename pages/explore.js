@@ -30,13 +30,15 @@ export default function Explore() {
       };
       setLoading(true)
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}nft/filterNFT`, requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(result =>{
-          const parseResult = JSON.parse(result)
-          setData(parseResult.data)
+          setData(result.data)
           setLoading(false)
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        setLoading(false)
+        console.log('error', error)
+      });
     }
 
     useEffect(()=>{
