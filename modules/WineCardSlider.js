@@ -140,7 +140,7 @@ const WineCardSlider = () => {
       <ToastContainer></ToastContainer>
       {loading && <Loader></Loader>}
       <div className={`container ${style["wine-card-slider-container"]}`}>
-        <WineBottleHeader></WineBottleHeader>
+        {data.length>0 && <WineBottleHeader></WineBottleHeader>}
         <Swiper
           spaceBetween={24}
           grabCursor={true}

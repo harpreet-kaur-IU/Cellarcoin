@@ -452,7 +452,7 @@ const CreateNft = () => {
 
     var raw = JSON.stringify({
       walletAddressFrom: walletAddress,
-      walletAddressTo: '',
+      walletAddressTo: null,
       hash: hash,
       tokenId: web3tokenID,
       transactionType: 'minted',

@@ -184,7 +184,7 @@ const OwnedBy = () => {
     myHeaders.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
-      walletAddressFrom: '',
+      walletAddressFrom: null,
       walletAddressTo: userId,
       hash: hash,
       tokenId: data.tokenId,

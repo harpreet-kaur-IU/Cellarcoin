@@ -248,7 +248,7 @@ const AllNFT = () => {
 
     var raw = JSON.stringify({
       walletAddressFrom: userId,
-      walletAddressTo: '',
+      walletAddressTo: null,
       hash: hash,
       tokenId: '4t57y7u8i9o0op',
       transactionType: 'listed',

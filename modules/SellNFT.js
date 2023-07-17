@@ -180,7 +180,7 @@ const SellNFT = () => {
 
     var raw = JSON.stringify({
       walletAddressFrom: userId,
-      walletAddressTo: '',
+      walletAddressTo: null,
       hash: hash,
       tokenId: data.tokenId,
       transactionType: 'listed',

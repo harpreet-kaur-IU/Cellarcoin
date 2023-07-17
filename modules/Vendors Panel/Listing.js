@@ -241,7 +241,7 @@ const Listing = () => {
 
     var raw = JSON.stringify({
       walletAddressFrom: userId,
-      walletAddressTo: '',
+      walletAddressTo: null,
       hash: hash,
       tokenId: data[0].tokenId,
       transactionType: 'cancelled',
