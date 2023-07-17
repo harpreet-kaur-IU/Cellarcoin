@@ -501,7 +501,6 @@ const CreateNFT = () => {
       imageUrl: url,
       description: desc,
       attributes: attributes,
-      walletAddress: wallet,
       brand: brand,
       isPremiumDrop: premiumDrops,
       walletAddress: walletAddress,
@@ -557,7 +556,6 @@ const CreateNFT = () => {
         addTransaction(
           response.hash,
           result.data._id,
-          result.data.walletAddress,
           walletAddress,
           web3tokenID
         );
