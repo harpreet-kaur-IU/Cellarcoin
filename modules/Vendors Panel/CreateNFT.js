@@ -265,7 +265,7 @@ const CreateNFT = () => {
 
   const signerResult = (val) => {
     console.log(val);
-    // setSignerResult(val)
+
   };
 
   useEffect(() => {
@@ -501,7 +501,7 @@ const CreateNFT = () => {
       imageUrl: url,
       description: desc,
       attributes: attributes,
-      // walletAddress: wallet,
+      walletAddress: wallet,
       brand: brand,
       isPremiumDrop: premiumDrops,
       walletAddress: walletAddress,

@@ -25,6 +25,7 @@ const WineCard = (props) => {
             props.handler(true,e.currentTarget.id)
         }
     }
+    
   return (
     <>
         {loading && <Loader></Loader>}

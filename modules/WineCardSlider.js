@@ -9,6 +9,8 @@ import Loader from './Vendors Panel/Loader';
 import Modal from './Modal';
 import SignUp from './SignUp';
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const WineCardSlider = () => {
 
   const [data,setData] = useState("")
@@ -62,62 +64,33 @@ const WineCardSlider = () => {
         body: raw,
         redirect: 'follow'
       };
+
       if(value){
-        console.log(value)
+        setLoading(true);
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result =>{
-          var myHeaders1 = new Headers();
-          myHeaders1.append("Content-Type","application/json");
+          console.log("before API call")
+          getPremiumNft(userId);
+          console.log("after API call")
 
-          var raw = JSON.stringify({
-            "user": userId
-          });
-
-          var requestOptions = {
-            method: 'GET',
-            headers: myHeaders1,
-            body: raw
-          };
-
-          setLoading(true)
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
-          .then(response => response.json())
-          .then(result =>{
-            setData(result.data)
-            setLoading(false)
-          })
-          .catch(error => console.log('error', error));
+          setLoading(false);
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          setLoading(false);
+        });
       }else{
-        console.log(value)
+        setLoading(true);
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result =>{
-          var myHeaders1 = new Headers();
-          myHeaders1.append("Content-Type","application/json");
-
-          var raw = JSON.stringify({
-            "user": userId
-          });
-
-          var requestOptions = {
-            method: 'GET',
-            headers: myHeaders1,
-            body: raw
-          };
-
-          setLoading(true)
-          fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
-          .then(response => response.json())
-          .then(result =>{
-            setData(result.data)
-            setLoading(false)
-          })
-          .catch(error => console.log('error', error));
+          getPremiumNft(userId)
+          setLoading(false);
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+          setLoading(false);
+
+        });
       }
     }else{
       toast.warning("Please sign in",{
@@ -125,8 +98,37 @@ const WineCardSlider = () => {
       });
     }
   }
+
+  const getPremiumNft = (userId) =>{
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Bearer "+JWTToken);
+    myHeaders.append("Content-Type","application/json");
+    
+    var raw = JSON.stringify({
+      "user": userId
+    });
+    
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      body: raw
+    };
+    
+    setLoading(true)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
+    .then(response => response.json())
+    .then(result =>{
+      setData(result.data)
+      setLoading(false)
+    })
+    .catch(error => {    
+      console.log(error)  
+      setLoading(false)
+    });
+  }
   return (
     <>  
+      <ToastContainer></ToastContainer>
       {loading && <Loader></Loader>}
       <div className={`container ${style["wine-card-slider-container"]}`}>
         <WineBottleHeader></WineBottleHeader>
