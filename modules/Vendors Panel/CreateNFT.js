@@ -419,6 +419,7 @@ const CreateNFT = () => {
                   16
                 );
                 let web3Response = response;
+                console.log(web3Response)
                 createNFT(web3Response, addr, tokId);
               });
             })
@@ -470,7 +471,7 @@ const CreateNFT = () => {
   };
 
   //create nft with backend API
-  const createNFT = (response, walletAddress, web3tokenID) => {
+  const createNFT = (web3response, walletAddress, web3tokenID) => {
     const attributes = [
       {
         trait_type: 'Bottle Size',
@@ -554,7 +555,7 @@ const CreateNFT = () => {
         // inputfile.value = '';
 
         addTransaction(
-          response.hash,
+          web3response.transactionHash,
           result.data._id,
           walletAddress,
           web3tokenID
@@ -568,7 +569,7 @@ const CreateNFT = () => {
   };
   
   //create order API
-  const addTransaction = (hash, id, walletAddress, web3tokenID) => {
+  const addTransaction = (hashId, id, walletAddress, web3tokenID) => {
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
@@ -576,7 +577,7 @@ const CreateNFT = () => {
     var raw = JSON.stringify({
       walletAddressFrom: walletAddress,
       walletAddressTo: '',
-      hash: hash,
+      hash: hashId,
       tokenId: web3tokenID,
       transactionType: 'minted'
     });
