@@ -88,12 +88,11 @@ const SellNFT = () => {
             .catch((error) => {
               setLoading(false);
               errorMessage = error.toString();
-
               if (
                 errorMessage &&
                 errorMessage.includes('user rejected transaction')
               ) {
-                console.log('error message', errorMessage);
+                // console.log('error message', errorMessage);
                 toast.error('User rejected transaction', {
                   toastId: 'create-error-10',
                 });
@@ -118,10 +117,14 @@ const SellNFT = () => {
           });
         }
       } else {
-        alert('Please switch to polygon chain');
+        toast.warning('Please switch to polygon chain', {
+          toastId: 'polygon-chain-error-1',
+        });
       }
     } else {
-      console.log('Please install MetaMask');
+      toast.warning('Please install MetaMask', {
+        toastId: 'metmask-error-1',
+      });
     }
   };
   //sell nft API
@@ -160,12 +163,23 @@ const SellNFT = () => {
   };
   //add order API
   const addTransaction = (hash, id, walletAddress) => {
+    function parseJwt() {
+      if(!JWTtoken){
+        return
+      }
+      const base64Url = JWTtoken.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+    }
+    var user = parseJwt();
+    var userId = (user.user._id)
+
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTToken);
     myHeaders.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
-      walletAddressFrom: walletAddress,
+      walletAddressFrom: userId,
       walletAddressTo: '',
       hash: hash,
       tokenId: data.tokenId,
@@ -217,27 +231,27 @@ const SellNFT = () => {
 
   const getNFTDetails = (userId) =>{
     var myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Content-Type', 'application/json');
 
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-      };
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+    };
 
-      setLoading(true);
-      fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=${userId}`,
-        requestOptions
-      )
-      .then((response) => response.json())
-      .then((result) => {
-        setData(result.nft);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log('error', error)
-      });
+    setLoading(true);
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=${userId}`,
+      requestOptions
+    )
+    .then((response) => response.json())
+    .then((result) => {
+      setData(result.nft);
+      setLoading(false);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log('error', error)
+    });
   }
   return (
     <>

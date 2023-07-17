@@ -4,7 +4,6 @@ import {useRouter} from 'next/router'
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from './Vendors Panel/Loader';
 const WineCard = (props) => {
-
     useEffect(()=>{
        setData(props.data)
     },[props.data])
@@ -25,7 +24,6 @@ const WineCard = (props) => {
             props.handler(true,e.currentTarget.id)
         }
     }
-    
   return (
     <>
         {loading && <Loader></Loader>}

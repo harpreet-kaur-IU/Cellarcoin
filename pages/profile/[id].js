@@ -22,9 +22,9 @@ export default function Profile() {
         if(JWTtoken){
             function parseJwt() {
             if (!JWTtoken) {return}
-            const base64Url = JWTtoken.split('.')[1];
-            const base64 = base64Url.replace('-', '+').replace('_', '/');
-            return JSON.parse(window.atob(base64));
+                const base64Url = JWTtoken.split('.')[1];
+                const base64 = base64Url.replace('-', '+').replace('_', '/');
+                return JSON.parse(window.atob(base64));
             }
             var user = parseJwt();
             var id=user.user._id;
@@ -38,35 +38,36 @@ export default function Profile() {
 
     const getNFTByBrand = (nftId,id) =>{
         var myHeaders = new Headers();
-            myHeaders.append("Content-Type","application/json");
+        myHeaders.append("Content-Type","application/json");
 
-            var raw = JSON.stringify({
-                "brandId":nftId,
-                "userId": id
-            });
+        var raw = JSON.stringify({
+            "brandId":nftId,
+            "userId": id
+        });
 
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
 
-            setLoading(true);
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNftByBrand`, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                const parseResult = JSON.parse(result)
-                setNft(parseResult.data)
-                setLoading(false)
-            })
-            .catch(error => {
-                setLoading(false)
-                console.log('error', error)
-            });
+        setLoading(true);
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getNftByBrand`, requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            const parseResult = JSON.parse(result)
+            setNft(parseResult.data)
+            setLoading(false)
+        })
+        .catch(error => {
+            setLoading(false)
+            console.log('error', error)
+        });
     }
 
     const favoriteHandler = (value,id) =>{
+
         if(JWTtoken){  
           //add favourite
           var myHeaders = new Headers();
@@ -102,7 +103,6 @@ export default function Profile() {
             .then(result =>{
                 getNFTByBrand(nftId,id)
                 setLoading(false)
-
             })
             .catch(error => {
                 setLoading(false)

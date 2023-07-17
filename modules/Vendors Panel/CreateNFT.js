@@ -97,6 +97,7 @@ const CreateNFT = () => {
   const premiumHandler = () => {
     setPremiumDrops((prev) => !prev);
   };
+  
   const coverHandler = (e) => {
     const maxSize = 10 * 1024 * 1024;
     if (e.target.files[0]) {
@@ -326,7 +327,7 @@ const CreateNFT = () => {
     await isMetaMaskConnected().then((connected) => {
       if (connected) {
         checkValidation(); // second call
-      } else {
+      }else{
         toast.warning('Please Connect Your Wallet', {
           toastId: '2',
         });
@@ -384,8 +385,8 @@ const CreateNFT = () => {
     })
     .then((response) => response.json())
     .then((results) => {
-      setLoading(false);
-      mint(results.data);
+      setLoading(false)
+      mint(results.data)
     }) // fourth call
     .catch((error) => console.log('error', error));
   };
@@ -420,7 +421,7 @@ const CreateNFT = () => {
                   16
                 );
                 let web3Response = response;
-                console.log(web3Response)
+                // console.log(web3Response)
                 createNFT(web3Response, addr, tokId);
               });
             })
@@ -517,10 +518,7 @@ const CreateNFT = () => {
       };
 
       setLoading(true);
-      fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`,
-        requestOptions
-      )
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/editNft/${nftId}`,requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setData(result.data);
@@ -571,12 +569,24 @@ const CreateNFT = () => {
   
   //create order API
   const addTransaction = (hashId, id, walletAddress, web3tokenID) => {
+   
+    function parseJwt() {
+      if(!JWTtoken){
+        return
+      }
+      const base64Url = JWTtoken.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+    }
+    var user = parseJwt();
+    var userId = (user.user._id)
+    
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
-      walletAddressFrom: walletAddress,
+      walletAddressFrom: userId,
       walletAddressTo: '',
       hash: hashId,
       tokenId: web3tokenID,
@@ -587,7 +597,7 @@ const CreateNFT = () => {
       method: 'POST',
       headers: myHeaders,
       body: raw,
-      redirect: 'follow',
+      redirect: 'follow'
     };
 
     setLoading(true)
@@ -599,7 +609,7 @@ const CreateNFT = () => {
     })
     .catch((error) => {
       setLoading(false)
-      console.log('error', error)
+      // console.log('error', error)
     });
   };
 

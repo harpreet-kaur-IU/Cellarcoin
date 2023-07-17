@@ -235,6 +235,7 @@ const Header = (props) => {
   // provider.on("accountsChanged", (accounts: string[]) => {
   //   console.log(accounts);
   // });
+  
   return (
     <div className={`p-relative d-flex d-align-center d-justify-space-between ${styles["header-wrapper"]}`}>
       <div role="button" onClick={sideBarHandler} className={`${styles["bar-cross"]}`}>

@@ -224,12 +224,23 @@ const Listing = () => {
   };
 
   const addTransaction = (hash, id, walletAddress) => {
+    function parseJwt() {
+      if(!JWTtoken){
+        return
+      }
+      const base64Url = JWTtoken.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+    }
+    var user = parseJwt();
+    var userId = (user.user._id)
+
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
 
     var raw = JSON.stringify({
-      walletAddressFrom: walletAddress,
+      walletAddressFrom: userId,
       walletAddressTo: '',
       hash: hash,
       tokenId: data[0].tokenId,

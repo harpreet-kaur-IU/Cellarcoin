@@ -100,7 +100,6 @@ const SellNFT = () => {
         );
         setLoading(true);
         try {
-          // console.log(data[0].tokenId);
           // console.log('price', ethers.utils.parseEther(price.toString()));
           contract
             .placeNFTForSale(
@@ -135,7 +134,7 @@ const SellNFT = () => {
                   toast.error(error.reason, {
                     toastId: "sell-error-6",
                   });
-                }else {
+                }else{
                   setLoading(false);
                   toast.error("Not enough user funds in the wallet.", {
                     toastId: "sell-error-7",
@@ -181,24 +180,35 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/setPrice/${nftId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        addTransaction(response.hash, nftId, walletAddress);
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log("error", error);
-      });
+    .then((response) => response.json())
+    .then((result) => {
+      addTransaction(response.hash, nftId, walletAddress);
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log("error", error);
+    });
   };
 
   //create order API
   const addTransaction = (hash, id, walletAddress) => {
+    function parseJwt() {
+      if(!JWTtoken){
+        return
+      }
+      const base64Url = JWTtoken.split('.')[1];
+      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      return JSON.parse(window.atob(base64));
+    }
+    var user = parseJwt();
+    var userId = (user.user._id)
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + JWTtoken);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      walletAddressFrom: walletAddress,
+      walletAddressFrom: userId,
       walletAddressTo: "",
       hash: hash,
       tokenId: data[0].tokenId,
@@ -217,15 +227,15 @@ const SellNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => {
-        setLoading(false);
-        Router.push("/allnftlist");
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log("error", error);
-      });
+    .then((response) => response.text())
+    .then((result) => {
+      setLoading(false);
+      Router.push("/allnftlist");
+    })
+    .catch((error) => {
+      setLoading(false);
+      console.log("error", error);
+    });
   };
   return (
     <>
