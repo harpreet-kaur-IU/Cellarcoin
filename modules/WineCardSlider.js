@@ -1,133 +1,142 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import WineCard from './WineCard';
-import WineBottleHeader from './WineBottleHeader';
-import style from './css/WineCard.module.css';
-import Loader from './Vendors Panel/Loader';
-import Modal from './Modal';
-import SignUp from './SignUp';
-import { getUserOnBoardFromCookie } from '../auth/userCookies';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import WineCard from "./WineCard";
+import WineBottleHeader from "./WineBottleHeader";
+import style from "./css/WineCard.module.css";
+import Loader from "./Vendors Panel/Loader";
+import Modal from "./Modal";
+import SignUp from "./SignUp";
+import { getUserOnBoardFromCookie } from "../auth/userCookies";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const WineCardSlider = () => {
-
-  const [data,setData] = useState("")
-  const [loading,setLoading] = useState(false)
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(false);
   const JWTToken = getUserOnBoardFromCookie();
-  useEffect(()=>{
+  useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type","application/json");
+    myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
     };
-    setLoading(true)
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
-    .then(response => response.json())
-    .then(result =>{
-      setData(result.data)
-      setLoading(false)
-    })
-    .catch(error => {
-      setLoading(false)
-      console.log('error', error)
-    });
-  },[])
+    setLoading(true);
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log("error", error);
+      });
+  }, []);
 
-  const favoriteHandler = (value,id) =>{
-    if(JWTToken){
+  const favoriteHandler = (value, id) => {
+    if (JWTToken) {
       function parseJwt() {
-        if(!JWTToken){
-          return
+        if (!JWTToken) {
+          return;
         }
-        const base64Url = JWTToken.split('.')[1];
-        const base64 = base64Url.replace('-', '+').replace('_', '/');
+        const base64Url = JWTToken.split(".")[1];
+        const base64 = base64Url.replace("-", "+").replace("_", "/");
         return JSON.parse(window.atob(base64));
       }
       var user = parseJwt();
-      var userId = (user.user._id)
+      var userId = user.user._id;
 
       //add favourite
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer "+JWTToken);
+      myHeaders.append("Authorization", "Bearer " + JWTToken);
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-        "favourite":value
+        favourite: value,
       });
-      
+
       var requestOptions = {
-        method:'PATCH',
+        method: "PATCH",
         headers: myHeaders,
         body: raw,
-        redirect: 'follow'
+        redirect: "follow",
       };
 
-      if(value){
+      if (value) {
         setLoading(true);
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`, requestOptions)
-        .then(response => response.json())
-        .then(result =>{
-          console.log("before API call")
+        fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}user/updateFavourites/${id}`,
+          requestOptions
+        )
+        .then((response) => response.json())
+        .then((result) => {
+          // console.log("before API call");
           getPremiumNft(userId);
-          console.log("after API call")
-
+          // console.log("after API call");
           setLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           setLoading(false);
         });
-      }else{
+      } else {
         setLoading(true);
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`, requestOptions)
-        .then(response => response.json())
-        .then(result =>{
-          getPremiumNft(userId)
+        fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}user/removeItem/${id}`,
+          requestOptions
+        )
+        .then((response) => response.json())
+        .then((result) => {
+          getPremiumNft(userId);
           setLoading(false);
         })
-        .catch(error => {
+        .catch((error) => {
           setLoading(false);
-
         });
       }
-    }else{
-      toast.warning("Please sign in",{
-          toastId:"2"
+    } else {
+      toast.warning("Please sign in", {
+        toastId: "2",
       });
     }
-  }
+  };
 
-  const getPremiumNft = (userId) =>{
+  const getPremiumNft = (userId) => {
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer "+JWTToken);
-    myHeaders.append("Content-Type","application/json");
-    
+    myHeaders.append("Authorization", "Bearer " + JWTToken);
+    myHeaders.append("Content-Type", "application/json");
+
     var raw = JSON.stringify({
-      "user": userId
+      user: userId,
     });
-    
+
     var requestOptions = {
-      method: 'GET',
+      method: "GET",
       headers: myHeaders,
-      body: raw
+      body: raw,
     };
-    
-    setLoading(true)
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`, requestOptions)
-    .then(response => response.json())
-    .then(result =>{
-      setData(result.data)
-      setLoading(false)
-    })
-    .catch(error => {    
-      console.log(error)  
-      setLoading(false)
-    });
-  }
+
+    setLoading(true);
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}user/getPremiumNft`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
   return (
-    <>  
+    <>
       <ToastContainer></ToastContainer>
       {loading && <Loader></Loader>}
       <div className={`container ${style["wine-card-slider-container"]}`}>
@@ -142,7 +151,7 @@ const WineCardSlider = () => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-           breakpoints={{
+          breakpoints={{
             320: {
               slidesPerView: 1,
               spaceBetween: 0,
@@ -158,14 +167,12 @@ const WineCardSlider = () => {
           }}
           className="mySwiper"
         >
-          {data && data.map((item)=>(
-            <SwiperSlide>
-              <WineCard
-                handler = {favoriteHandler}
-                data = {item}
-              ></WineCard>
-            </SwiperSlide>
-           ))}
+          {data &&
+            data.map((item) => (
+              <SwiperSlide>
+                <WineCard handler={favoriteHandler} data={item}></WineCard>
+              </SwiperSlide>
+            ))}
           {/* <SwiperSlide>slide 2</SwiperSlide>
           <SwiperSlide>slide 3</SwiperSlide>
           <SwiperSlide>slide 4</SwiperSlide>
@@ -173,7 +180,7 @@ const WineCardSlider = () => {
         </Swiper>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default WineCardSlider
+export default WineCardSlider;

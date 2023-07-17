@@ -28,7 +28,7 @@ const CreateNFT = () => {
   const regex = /^[^\s]+(\s+[^\s]+)*$/;
   const pattern = /^[0-9]*$/;
   const decimal = /^\d+(\.\d{1,8})?$/;
-  const string = /^[a-zA-Z]*$/;
+  const string = /^([A-Za-z]+( [a-zA-Z]+)*)?$/;
   //regex ends
   const [bottle, setBottleSize] = useState('');
 
@@ -124,6 +124,7 @@ const CreateNFT = () => {
   };
 
   const validator = () => {
+    
     if (regex.test(name.trim())){
       setNameError(false);
     } else {
@@ -601,6 +602,7 @@ const CreateNFT = () => {
       console.log('error', error)
     });
   };
+
   return (
     <div>
       {loading && <Loader></Loader>}
