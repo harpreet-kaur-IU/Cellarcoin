@@ -44,6 +44,7 @@ const SellNFT = () => {
       return true;
     }
   };
+
   //on form submit
   const formSubmit = (e) => {
     e.preventDefault();
@@ -52,6 +53,7 @@ const SellNFT = () => {
       sellNftWeb3();
     }
   };
+
   //web3 function for sell nft
   const sellNftWeb3 = async () => {
     const ethers = require('ethers');
@@ -136,7 +138,7 @@ const SellNFT = () => {
     var raw = JSON.stringify({
       price: price,
       currency: currency,
-      expireAfter: expire,
+      expireAfter: expire
     });
 
     var requestOptions = {
@@ -161,7 +163,7 @@ const SellNFT = () => {
       console.log('error', error)
     });
   };
-  
+
   //add order API
   const addTransaction = (hash, id) => {
     function parseJwt() {

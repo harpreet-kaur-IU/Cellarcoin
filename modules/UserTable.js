@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import style from './css/UserTable.module.css'
 import { getUserOnBoardFromCookie } from '../auth/userCookies';
+
 const UserTable = (props) => {
     const JWTToken = getUserOnBoardFromCookie();
+    
     // useEffect(()=>{
     //     var myHeaders = new Headers();
     //     myHeaders.append("Authorization", "Bearer "+JWTToken);

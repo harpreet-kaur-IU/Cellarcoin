@@ -64,34 +64,34 @@ const Listing = () => {
         <div className='vendor-container' style={{paddingTop:"24px",height:"100vh",overflow:"scroll"}}>
             <h4 className='l-50 f-600 text-primary'>Listings</h4>
             
-                <div className={`mt-32 d-flex ${styles["listing-body-wrapper"]}`}>
-                    <img  loading='lazy' className={`${styles["listing-img"]}`} src={data.imageUrl}></img>
-                    <div className={`col-5 ${styles["listing-content-wrapper"]}`}>
-                        <h4 className={`f-500 l-39 ${styles["listing-name"]}`}>NFT Name</h4>
-                        {data.name && <h5 className={`f-400 l-39 ${styles["listing-name"]}`}>{data.name}</h5>}
-                        <h5 className={`f-500 ${styles["listing-content-brands"]}`}>{data.description}</h5>
-                        <div className={`d-flex d-align-center d-justify-space-between ${styles["listing-price-and-vendor-wrapper"]}`}>
-                            <div className={`d-flex d-flex-column`}>
-                                <h5 className={`f-500 ${styles["listing-price-h5"]}`}>Price</h5>
-                                <div className={`d-flex d-align-center ${styles["listing-price-img-and-content"]}`}>
-                                    <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
-                                    <h5 className='f-500'>{data.price}</h5>
-                                </div>
+            <div className={`mt-32 d-flex ${styles["listing-body-wrapper"]}`}>
+                <img  loading='lazy' className={`${styles["listing-img"]}`} src={data.imageUrl}></img>
+                <div className={`col-5 ${styles["listing-content-wrapper"]}`}>
+                    <h4 className={`f-500 l-39 ${styles["listing-name"]}`}>NFT Name</h4>
+                    {data.name && <h5 className={`f-400 l-39 ${styles["listing-name"]}`}>{data.name}</h5>}
+                    <h5 className={`f-500 ${styles["listing-content-brands"]}`}>{data.description}</h5>
+                    <div className={`d-flex d-align-center d-justify-space-between ${styles["listing-price-and-vendor-wrapper"]}`}>
+                        <div className={`d-flex d-flex-column`}>
+                            <h5 className={`f-500 ${styles["listing-price-h5"]}`}>Price</h5>
+                            <div className={`d-flex d-align-center ${styles["listing-price-img-and-content"]}`}>
+                                <img className={`${styles["polygon-icon-img"]}`} src='images/polygon-icon.svg'></img>
+                                <h5 className='f-500'>{data.price}</h5>
                             </div>
-                            <div className={`d-flex d-flex-column`}>
-                                <h5 className={`f-500 ${styles["listing-vendor-h5"]}`}>Wallet Address</h5>
-                                <div className={`${styles["listing-vendor-content"]}`}>
-                                    {data.walletAddress && 
-                                        <h5 className='f-400'>{data.walletAddress}</h5>
-                                    }
-                                    {!data.walletAddress && 
-                                        <h5 className='f-400'>not added</h5>
-                                    }
-                                </div>
+                        </div>
+                        <div className={`d-flex d-flex-column`}>
+                            <h5 className={`f-500 ${styles["listing-vendor-h5"]}`}>Wallet Address</h5>
+                            <div className={`${styles["listing-vendor-content"]}`}>
+                                {data.walletAddress && 
+                                    <h5 className='f-400'>{data.walletAddress}</h5>
+                                }
+                                {!data.walletAddress && 
+                                    <h5 className='f-400'>not added</h5>
+                                }
                             </div>
-                        </div> 
-                    </div>
+                        </div>
+                    </div> 
                 </div>
+            </div>
             
             <div className={`${styles["table-section-scroll"]}`} style={{paddingBottom:"100px"}}>
                 <div className={`${styles["table-wrapper"]}`}>
