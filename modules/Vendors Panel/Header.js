@@ -98,7 +98,6 @@ const Header = (props) => {
     return provider;
   };
 
-  
   const connectWallet = async () => {
     try {
       await getSignerOrProvider();
@@ -247,7 +246,6 @@ const Header = (props) => {
           <div className="text-center">
             <button className={`cursor-pointer ${styles["header-buttons"]}`} onClick={connectWallet}>{status=="connected"?"Connected":"Connect Wallet"}</button>
           </div>
-          
           <button onClick={createNftNavigation} className={`cursor-pointer ${styles["header-buttons"]}`}>
             Create NFT
           </button>

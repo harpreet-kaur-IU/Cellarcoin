@@ -537,7 +537,6 @@ const CreateNFT = () => {
       .then((response) => response.json())
       .then((result) => {
         setLoading(false);
-
         // setName('');
         // setDesc('');
         // setWallet('');
@@ -552,7 +551,6 @@ const CreateNFT = () => {
         // setCover('');
         // var inputfile = document.getElementById('file-input-field');
         // inputfile.value = '';
-
         addTransaction(
           web3response.transactionHash,
           result.data._id,
