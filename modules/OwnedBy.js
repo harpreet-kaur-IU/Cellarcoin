@@ -71,7 +71,8 @@ const OwnedBy = () => {
             )
             .then((result) => {
               result.wait().then((response) => {
-                buyNft(response, addr);
+                updateUserCollection(response, addr);
+                // buyNft(response, addr);
               });
             })
             .catch((error) => {
@@ -114,31 +115,50 @@ const OwnedBy = () => {
   };
 
   //web3 code ends here
-  const buyNft = (hashResponse, walletAddress) => {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', 'Bearer ' + JWTToken);
-    myHeaders.append('Content-Type', 'application/json');
+  // const buyNft = (hashResponse, walletAddress) => {
+  //   function parseJwt() {
+  //     if(!JWTToken){
+  //       return
+  //     }
+  //     const base64Url = JWTToken.split('.')[1];
+  //     const base64 = base64Url.replace('-', '+').replace('_', '/');
+  //     return JSON.parse(window.atob(base64));
+  //   }
+  //   var user = parseJwt();
+  //   var userId = (user.user._id)
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-    setLoading(true);
-    fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${nftId}`,
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => {
-        setLoading(false);
-        // setAdd(prev=>!prev);
-        updateUserCollection(hashResponse, walletAddress);
-      })
-      .catch((error) => {
-        setLoading(false);
-      });
-  };
+  //   var myHeaders = new Headers();
+  //   myHeaders.append('Authorization', 'Bearer ' + JWTToken);
+  //   myHeaders.append('Content-Type', 'application/json');
+
+  //   var raw = JSON.stringify({
+  //     walletAddressFrom: userId,
+  //     walletAddressTo: null,
+  //     hash: hashResponse,
+  //     tokenId: '4t57y7u8i9o0op',
+  //     transactionType: 'listed',
+  //   });
+  //   var requestOptions = {
+  //     method: 'POST',
+  //     headers: myHeaders,
+  //     redirect: 'follow',
+  //   };
+  //   setLoading(true);
+  //   fetch(
+  //     `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${nftId}`,
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => {
+  //       setLoading(false);
+  //       // setAdd(prev=>!prev);
+
+        
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //     });
+  // };
 
   //update collection API
   const updateUserCollection = (hashResponse, walletAddress) => {
@@ -159,7 +179,7 @@ const OwnedBy = () => {
       .then((response) => response.text())
       .then((result) => {
         setLoading(false);
-        addTransaction(hashResponse.hash, nftId, walletAddress);
+        addTransaction(hashResponse.transactionHash, nftId);
       })
       .catch((error) => {
         setLoading(false);
@@ -167,12 +187,12 @@ const OwnedBy = () => {
   };
 
   //create order API for adding transaction history
-  const addTransaction = (hash, id, walletAddress) => {
+  const addTransaction = (hash, id) => {
     function parseJwt() {
-      if(!JWTtoken){
+      if(!JWTToken){
         return
       }
-      const base64Url = JWTtoken.split('.')[1];
+      const base64Url = JWTToken.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64));
     }
@@ -248,14 +268,14 @@ const OwnedBy = () => {
         `${process.env.NEXT_PUBLIC_BASE_URL}user/getNft?nftId=${nftId}&&userId=${userId}`,
         requestOptions
       )
-        .then((response) => response.json())
-        .then((result) => {
-          setData(result.nft);
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-        });
+      .then((response) => response.json())
+      .then((result) => {
+        setData(result.nft);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+      });
     }
   }, [nftId]);
 

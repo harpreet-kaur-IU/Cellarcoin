@@ -245,7 +245,6 @@ const ListNFT = () => {
       body: raw,
       redirect: 'follow',
     };
-
     fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
       requestOptions

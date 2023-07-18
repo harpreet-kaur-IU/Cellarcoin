@@ -68,6 +68,7 @@ const SellNow = () => {
         .catch((error) => console.log('error', error));
     }
   }, [nftId]);
+  
   //web3 code starts here
   const sellNftWeb3 = async (tokenURI) => {
     const ethers = require('ethers');

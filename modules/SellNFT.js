@@ -154,7 +154,7 @@ const SellNFT = () => {
     .then((response) => response.json())
     .then((result) => {
       setLoading(false);
-      addTransaction(response.hash, nftId, walletAddress);
+      addTransaction(response.transactionHash, nftId, walletAddress);
     })
     .catch((error) => {
       setLoading(false);
@@ -162,15 +162,16 @@ const SellNFT = () => {
     });
   };
   //add order API
-  const addTransaction = (hash, id, walletAddress) => {
+  const addTransaction = (hash, id) => {
     function parseJwt() {
-      if(!JWTtoken){
+      if(!JWTToken){
         return
       }
-      const base64Url = JWTtoken.split('.')[1];
+      const base64Url = JWTToken.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64));
     }
+    
     var user = parseJwt();
     var userId = (user.user._id)
 
@@ -195,10 +196,7 @@ const SellNFT = () => {
     };
 
     setLoading(true);
-    fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,
-      requestOptions
-    )
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}user/createOrder/${id}`,requestOptions)
     .then((response) => response.text())
     .then((result) => {
       setLoading(false);

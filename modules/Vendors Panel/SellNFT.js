@@ -200,6 +200,7 @@ const SellNFT = () => {
       const base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64));
     }
+    
     var user = parseJwt();
     var userId = (user.user._id)
 

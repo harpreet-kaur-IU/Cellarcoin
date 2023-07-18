@@ -178,6 +178,7 @@ const AllNFT = () => {
     if (data === 'All') {
       data = null;
     }
+
     var myHeaders = new Headers();
     myHeaders.append('Authorization', 'Bearer ' + JWTtoken);
     myHeaders.append('Content-Type', 'application/json');
@@ -213,21 +214,21 @@ const AllNFT = () => {
       `${process.env.NEXT_PUBLIC_BASE_URL}vendor/deleteNft/${deleteUserId}`,
       requestOptions
     )
-      .then((response) => response.json())
-      .then((result) => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
-          method: 'GET',
-          headers: myHeaders,
-        })
-          .then((response) => response.json())
-          .then((results) => {
-            setData(results.data);
-            addTransaction(response.hash, deleteUserId, walletAddress);
-          });
-        setDelete((prev) => !prev);
+    .then((response) => response.json())
+    .then((result) => {
+      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}vendor/getNft?status=null`, {
+        method: 'GET',
+        headers: myHeaders,
+      })
+        .then((response) => response.json())
+        .then((results) => {
+          setData(results.data);
+          addTransaction(response.hash, deleteUserId, walletAddress);
+        });
+      setDelete((prev) => !prev);
         setLoading(false).catch((error) => console.log('error', error));
       })
-      .catch((error) => console.log('error', error));
+    .catch((error) => console.log('error', error));
   };
 
   const addTransaction = (hash, id, walletAddress) => {
@@ -239,6 +240,7 @@ const AllNFT = () => {
       const base64 = base64Url.replace('-', '+').replace('_', '/');
       return JSON.parse(window.atob(base64));
     }
+
     var user = parseJwt();
     var userId = (user.user._id)
 
