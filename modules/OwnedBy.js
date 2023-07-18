@@ -9,7 +9,6 @@ import Nft_marketplace_ABI from '../modules/Vendors Panel/Nft_marketplace_ABI.js
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ethers } from 'ethers';
-import web3 from 'web3';
 const OwnedBy = () => {
   const [add, setAdd] = useState(false);
   const router = useRouter();

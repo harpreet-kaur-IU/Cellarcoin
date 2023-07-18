@@ -93,7 +93,7 @@ const Listing = () => {
                     </div>
                 </div>
             
-            <div className={`${styles["table-section-scroll"]}`} style={{overflow:"hidden",paddingBottom:"100px",height:"auto"}}>
+            <div className={`${styles["table-section-scroll"]}`} style={{paddingBottom:"100px"}}>
                 <div className={`${styles["table-wrapper"]}`}>
                     <h3 className={`f-600 text-primary ${styles["table-heading"]}`}>Activity</h3>
                     <div className={` ${styles["table-column"]}`}>
@@ -111,8 +111,8 @@ const Listing = () => {
                                 <span className='text-primary font-18 f-600'>{item.price === 0?" ":item.price}</span>
                             </div>
 
-                            <span className='text-primary font-18 f-500 d-flex'>{item.from && (item.from.name === null?"-":item.from.name)}</span>
-                            <span className='text-primary font-18 f-500 d-flex'>{item.to == null?"-":item.to.name}</span>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.from && (item.from.userName === null?"-":item.from.userName)}</span>
+                            <span className='text-primary font-18 f-500 d-flex'>{item.to == null?"-":item.to.userName}</span>
                             <span className='font-18 f-500 d-flex'><Moment fromNow>{item.createdAt}</Moment></span>
                         </div> 
                     ))}  

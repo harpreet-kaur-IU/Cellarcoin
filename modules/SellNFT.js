@@ -161,6 +161,7 @@ const SellNFT = () => {
       console.log('error', error)
     });
   };
+  
   //add order API
   const addTransaction = (hash, id) => {
     function parseJwt() {

@@ -34,6 +34,7 @@ const NotificationModal = (props) => {
             .catch(error => console.log('error', error));
         }
     },[])
+    
   return (
     <div className={`p-absolute bg-pink rounded-16 ${style["modal-wrapper"]}`}>
         <div className='d-flex d-justify-end'>
